@@ -1,0 +1,22 @@
+\section{Errori di convergenza}
+
+\begin{exercise}[1.3]
+Dimostrare che il metodo iterativo $$x_{n+1}=\phi(x_{n})$$ convergente a x*,
+deve verificare la condizione di \textbf{consistenza} $$x^{*}=\phi(x^{*})$$
+ovvero la soluzione cercata deve essere un punto fisso per la funzione di
+iterazione che definisce il metodo.
+\begin{proof}
+Suppongo che il metodo $\phi$ sia monotono e convergente a $x^{*}$. Definisco
+il preordine $\rightarrow$ per catturare la convergenza:
+\begin{displaymath}
+\rightarrow = \lbrace (x_{n}, x_{n+1}) : x_{n+1} = \phi(x_{n}) \wedge \lim_{n
+\rightarrow \infty}{x_{n}} = x^{*}
+\rbrace
+\end{displaymath}
+Suppongo \emph{per assurdo} che $$\phi(x^{*}) = x^{\triangle} \not = x^{*}$$
+Per l' ipotesi $x_{n} \rightarrow x^{*}$ (grazie alla transitivit\`a di
+$\rightarrow$), posso applicare la monotonia di $\phi$ rispetto a $\rightarrow$:
+$$\phi(x_{n}) \rightarrow \phi(x^{*}) = x^{\triangle}$$ ma questo contraddice 
+l'ipotesi che $\phi$ converge a $x^{*}$.
+\end{proof}
+\end{exercise}
