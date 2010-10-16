@@ -1,10 +1,9 @@
 \documentclass[12pt, a4paper]{report}
 
-\usepackage{charter}
-\usepackage{makeidx}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage{hyperref}
-\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
 \usepackage{graphicx}
 \usepackage[left=2cm, right=2cm]{geometry}
 \usepackage{latexsym}
@@ -16,12 +15,11 @@
 \usepackage{listings}
 
 % If you want to generate a toc for each chapter (use with book)
-\usepackage{minitoc}
+% \usepackage{minitoc}
 
 \begin{titlepage}
 \title{Calcolo Numerico} 
 \author{Massimo Nocentini}
-\date{\today \\Firenze\\ \small{release 0.3}}
 \end{titlepage}
 % My Theorem
 \newtheorem{exercise}{Exercise}[section]
@@ -31,9 +29,21 @@
 
 
 % page settings
-\pagestyle{fancy}
+\pagestyle{headings}
 
 \begin{document}
+
+\lstset{
+	language = octave
+	, numbers = left 
+	, basicstyle=\footnotesize
+	, frame=single
+	, tabsize=2
+	, captionpos=b
+	, breaklines=true
+	, showspaces=false
+	, showstringspaces=false
+}
 
 \maketitle
 
@@ -45,25 +55,9 @@
 \input{ErroriAritmeticaFinita/ErroriConvergenza.tex}
 \input{ErroriAritmeticaFinita/ErroriRoundOff.tex}
 
-\lstset{language = java, numbers = left} 
-\begin{lstlisting}
-	private int a = 0; 
-\end{lstlisting}
+\chapter{Sorgenti Octave}
 
-\chapter{Ciao}
 
-\begin{exercise}[cio]
-	Riferendosi all'esercizio precedente, dimostrare le stesse richieste, usando come passi di integrazione due quantit\`a $w, k > 0, w \not = k$. 
-\end{exercise}
+\input{listings/chapterOne/listings.tex}
 
-\begin{proof}
-	Riferendosi all'esercizio precedente, dimostrare le stesse richieste, usando come passi di integrazione due quantit\`a $w, k > 0, w \not = k$. 
-\end{proof}
-
-\begin{thm}theo \end{thm}
-\begin{cor} cor \end{cor}
-\begin{lem}lem \end{lem}
-
-\subsection{sub}
-\begin{thm}theo \end{thm}
 \end{document} 

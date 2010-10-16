@@ -1,1 +1,69 @@
-\section{Errori di round-off}
+\section{Round-off}
+
+\begin{exercise}[1.5]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Scrivo le rappresentazioni in formato stringa:
+\begin{displaymath}
+	\begin{split}
+		\alpha_{0}\alpha_{1}\ldots\alpha_{15} = 0\underbrace{1\ldots1}_{13}01 & 
+			\rightarrow  32765 \\
+		\alpha_{0}\alpha_{1}\ldots\alpha_{15} = 0\underbrace{1\ldots1}_{13}10 & 
+			\rightarrow  32766 \\
+		\alpha_{0}\alpha_{1}\ldots\alpha_{15} = 0\underbrace{1\ldots1}_{13}11 & 
+			\rightarrow  32767 \\
+		\alpha_{0}\alpha_{1}\ldots\alpha_{15} = 1\underbrace{0\ldots0}_{15} & 
+			\rightarrow  -32768 \\
+	\end{split}
+\end{displaymath}
+Ad ogni passo incremento di uno, questo comporta che incrementando la rappresentazione
+di $32767$ si "invade" il bit del segno $\alpha_{0}$. Per la definizione della funzione di 
+valutazione ottengo $val(1\underbrace{0\ldots0}_{15}) = -2^{16} = -32768$.
+
+\begin{exercise}[1.6]
+$\mathbb{M}$ ha un numero finito di elementi.
+\end{exercise}
+\begin{proof}
+Per far vedere che $\mathbb{M}$ ha un numero finito di elementi posso far \\
+vedere che vale
+$equinumerous(\mathbb{M}, \lbrace 1, \ldots, n\rbrace)$, con $n \in \mathbb{N}$.
+Per la definizione della relazione $equinumerous$ posso costruire una funzione $f$
+\emph{one-to-one} tale che $f: \mathbb{M} \rightarrow \mathbb{N}$.
+
+Considerare la rappresentazione in formato stringa 
+$x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s}$, $\forall x \in \mathbb{M}$.
+
+Per ogni rappresentazione costruisco una nuova rappresentazione che astrae da $\alpha$ e $\beta$, 
+ovvero $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s} = \delta_{0} \ldots \delta_{m + s} = x'$
+con $\alpha_{0} = \delta_{0}, \ldots, \alpha_{m} = \delta_{m}, \beta_{1} = \delta_{m + 1}, \ldots, \beta_{s} = \delta_{m + s}$.
+
+Adesso posso costruire la funzione:
+\begin{displaymath}
+f(\delta_{0} \ldots \delta_{m + s}) = \sum_{i = 0}^{m + s}{\delta{i} * b^{m + s - i}}
+\end{displaymath}
+In questo modo ho costruito una biezione tra le rappresentazioni ed un sottoinsieme 
+dei numeri naturali. \\\\
+Adesso devo far vedere che $|\mathbb{M}| = n, n \in \mathbb{N}$.
+
+Ragiono per assurdo. Suppongo che $\not \exists n \in \mathbb{N}: |\mathbb{M}| = n$.
+Considero la rappresentazione con massimo valore della funzione $f$ costruita in precedenza,
+ovvero sia $x = \delta_{0} \ldots \delta_{m + s} = \underbrace{1 \ldots 1}_{m+s+1}$.
+Per le ipotesi di assurdo, allora posso trovare una rappresentazione $x':f(x') \geq f(x)$.
+Quindi la rappresentazione di $x'$ dovr\`a essere della forma $x' = \delta_{0}' \delta_{0} \ldots \delta_{m + s}$,
+ovvero devo aggiungere un bit $\alpha_{0}'$ affinch\`e possa rappresentare 
+$x' = 1 \underbrace{0 \ldots 0}_{m+s+1}$. Ma \`e impossibile costruire una rappresentazione
+con $m+s+2$ simboli in quanto la dimensione delle rappresentazioni \`e fissata, uguale a $m+s+1$ 
+e questo termina la prova.
+
+\end{proof}
+
+\begin{exercise}[1.6]
+$r_{1} = b^{-\nu} \wedge r_{2} = (1 - b^{-m})b^{\varphi}$, con $\varphi = b^{s} - \nu$.
+\end{exercise}
+Suppongo che $x$ sia normalizzato:
+\begin{displaymath}
+	1.\underbrace{0 \ldots 0}_{m - 1}b^{-\nu} \leq 
+		x = \alpha_{0}\alpha_{1}.\alpha_{2}\ldots\alpha_{m} b^{e-\nu} \leq
+	(b - 1).\underbrace{(b - 1)}_{m - 1}b^{e_{max} - \nu}, \quad e_{max} = \underbrace{(b-1)\ldots(b-1)}_{s}
+\end{displaymath}
+

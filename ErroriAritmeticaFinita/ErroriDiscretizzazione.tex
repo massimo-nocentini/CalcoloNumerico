@@ -1,8 +1,8 @@
-\section{Errori di discretizzazione} 
+\section{Discretizzazione} 
 
 Questi errori sorgono tutte le volte che si vuole modellare un problema 
 matematico (formulato nel continuo) con un sistema discreto. Per ottenere 
-questo uso dei processi di discretizzazione, dei quali mi interessa controllare
+questo, uso dei processi di discretizzazione, dei quali mi interessa controllare
 quanto ``bene'' approssimano il problema che voglio modellare.
 
 Pi\`u specificamente, l'errore di troncamento \emph{locale} corrisponde 
@@ -13,7 +13,7 @@ l'effetto di tutti gli errori precedenti.
 Per i seguenti due esercizi si utilizza la formula di Taylor-Peano, con il 
 resto ''infinitesimo di ordine superiore'' rispetto al massimo grado $n$ a cui 
 si arresta lo sviluppo e quindi consente di ottenere una approssimazione
-locale, cioè in un intorno di $x_{0}$.
+locale, cio\`e in un intorno di $x_{0}$.
 
 \begin{exercise}[1.1]
 	Sia $x = \pi \approx 3.14159265$. Considero come valore approssimato 
@@ -33,26 +33,58 @@ Adesso considero
 	-\log_{10}{|-2.9491*10^{-5}|} = -\left (\log_{10}{2.9491} +
 	\log_{10}{10^{-5}} \right ) = -\log_{10}{2.9491} + 5\log_{10}{10} \approx 4.53
 \end{equation*}
-Voglio dimostrare che $-\log_{10}{|\varepsilon_{x}|}$ d\'a il numero di cifre 
-decimali di $\tilde{x}$, con cui approssimo $x$. 
+Infatti l'approssimazione $\tilde{x}$ ha 4 cifre decimali.
+
+\begin{exercise}
+Dimostrare che $-\log_{10}{|\varepsilon_{x}|}$ d\'a all'incirca il numero 
+di cifre decimali di $\tilde{x}$, con cui approssimo $x$. 
+\end{exercise}
 \begin{proof}
-Scrivo in forma normalizzata:
+Sia $r$ il numero di cifre decimali \emph{esatte}, tale che 
+$r = -\log_{10}{|\varepsilon_{x}|}$. Passando agli esponenti ottengo 
+$|\varepsilon_{x}| = 10^{-r}$.
+
+Dato che cerco un'approssimazione del numero di cifre decimali a partire dall'
+errore relativo, imposto due disequazioni per trovare un intervallo in cui $r$
+pu\`o variare.
+
+Scrivo in forma normalizzata il valore esatto $x$ e la sua appossimazione 
+$\tilde{x}$, fissando $\beta = 10$ e $M \not = m$ perch\`e sto approssimando:
 \begin{equation*}
 	\begin{split}
-		x \in \mathbb{R}, x \geq 0, x = m*10^{e}, 1 \leq m < 10 \\
-		\tilde{x} \in \mathbb{R}, \tilde{x} \geq 0, \tilde{x} = M*10^{e}, 1 \leq M
-		< 10
+		x \in \mathbb{R}, x \geq 0, x = m*10^{e} \\
+		\tilde{x} \in \mathbb{R}, \tilde{x} \geq 0, \tilde{x} = M*10^{e}
 	\end{split}
 \end{equation*}
-Adesso voglio trovare sia una maggiorazione che una minorazione dell'errore 
-relativo per avere $r$ cifre esatte:
+Per il \emph{teorema 1.2} vale $ 1 \leq m < 10 \wedge  1 \leq M < 10$.
+
+Adesso voglio trovare sia una maggiorazione che una minorazione di 
+$\varepsilon_{x}$:
 \begin{equation*}
-	\begin{split}
-		\left | \varepsilon_{x} \right | = \left | \frac{(M - m) * 10^{e}} {m*10^{e}}
-		\right | \\
-		10^{-r-1} \leq |\varepsilon_{x}| < 10^{-r+1}
-	\end{split}
-\end{equation*}\footnote{describe this step}
+	\left | \varepsilon_{x} \right | = \left | \frac{(M - m) * 10^{e}} 
+		{m*10^{e}}
+	\right | = \left | \frac{M - m}{m} \right |
+\end{equation*}
+Maggioro con:
+\begin{equation*}
+	\left | \frac{M - m}{m} \right | < 10 = max
+\end{equation*}
+In quanto il massimo lo ottengo quando $M = 9, m = 1$.
+
+Minoro con:
+\begin{equation*}
+	min = \frac{1}{10} \le \left | \frac{M - m}{m} \right | 
+\end{equation*}
+In quanto il minimo lo ottengo quando $M = 8, m = 9$.
+
+Adesso posso impostare le due disequazioni:
+\begin{equation*}
+	10^{-r -1} = \frac{\left | \varepsilon_{x} \right |}{10} \le 
+		\left | \varepsilon_{x} \right | <
+	10 \left | \varepsilon_{x} \right | = 10^{-r +1}
+\end{equation*}
+Le uguaglianze esterne valgono per quanto detto ad inizio prova.
+%10^{-r-1} \leq |\varepsilon_{x}| < 10^{-r+1}
 Passo ai logaritmi:
 \begin{equation*}
 	\begin{split}
@@ -60,7 +92,8 @@ Passo ai logaritmi:
 		r+1 \geq -\log_{10}{|\varepsilon_{x}|} > r-1
 	\end{split}
 \end{equation*}
-Considero le due disuguaglianze per avere l'intervallo di variazione di $r$:
+Considero i rami $-r-1 \leq  \log_{10}{|\varepsilon_{x}|}$ dalla prima e 
+$-\log_{10}{|\varepsilon_{x}|} > r-1$ dalla seconda per avere l'intervallo di variazione di $r$:
 \begin{equation*}
 	-1 - \log_{10}{|\varepsilon_{x}|} \leq r < 1 - \log_{10}{|\varepsilon_{x}|}
 \end{equation*}
@@ -88,10 +121,10 @@ Per entrambe considero gli sviluppi di Taylor di $f(x_{0}+h)$ e $f(x_{0}-h)$:
 Devo prestare attenzione al segno di alcuni termini dello sviluppo
 \footnote{Attenzione: nello sviluppo di Taylor di una funzione $f(x)$,  le
 derivate $n$-esime vengono calcolate nel punto $x_{0}$ in cui si vuole 
-centrare lo sviluppo, e non nell'argomento della funzione}
+centrare lo sviluppo, e non nell'argomento della funzione}:
 \begin{itemize}
 	\item nel primo sviluppo, la combinazione lineare ammette tutti segni 
-	positivi in quanto il passo di discretizzazione è positivo, ovvero si  cerca
+	positivi in quanto il passo di discretizzazione \`e positivo, ovvero si cerca
 	di approssimare con valori $ > x_{0}$.
 	\item nel secondo invece, il fattore $((x - x_{0}) (=h))^{k} < 0, 
 	\forall{k=2n+1, n \in \mathbb{N}}$ fa si che i termini dello sviluppo di 
@@ -121,6 +154,7 @@ ottenendo:
 \end{equation*}
 ovvero la quantit\`a al primo membro approssima la $f''(x_{0})$ con un errore 
 dell'ordine $O(h^{2})$.
+
 \begin{exercise}
 	Riferendosi all'esercizio precedente, dimostrare le stesse richieste, usando 
 	come passi di integrazione due quantit\`a $w, k > 0, w \not = k$.

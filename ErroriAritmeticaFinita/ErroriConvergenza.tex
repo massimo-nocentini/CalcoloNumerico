@@ -1,10 +1,12 @@
 \section{Errori di convergenza}
 
-\begin{exercise}[1.3]
+\begin{exercise}[1.3] 
+\label{exercise:exerciseIterativeMethodFixedPoint}
 Dimostrare che il metodo iterativo $$x_{n+1}=\phi(x_{n})$$ convergente a x*,
 deve verificare la condizione di \textbf{consistenza} $$x^{*}=\phi(x^{*})$$
 ovvero la soluzione cercata deve essere un punto fisso per la funzione di
 iterazione che definisce il metodo.
+\end{exercise}
 \begin{proof}
 Suppongo che il metodo $\phi$ sia monotono e convergente a $x^{*}$. Definisco
 il preordine $\rightarrow$ per catturare la convergenza:
@@ -14,9 +16,54 @@ il preordine $\rightarrow$ per catturare la convergenza:
 \rbrace
 \end{displaymath}
 Suppongo \emph{per assurdo} che $$\phi(x^{*}) = x^{\triangle} \not = x^{*}$$
-Per l' ipotesi $x_{n} \rightarrow x^{*}$ (grazie alla transitivit\`a di
+Per l' ipotesi $x_{n} \rightarrow x^{*}$ (per la transitivit\`a di
 $\rightarrow$), posso applicare la monotonia di $\phi$ rispetto a $\rightarrow$:
 $$\phi(x_{n}) \rightarrow \phi(x^{*}) = x^{\triangle}$$ ma questo contraddice 
 l'ipotesi che $\phi$ converge a $x^{*}$.
 \end{proof}
+
+\begin{exercise}
+Considerare il metodo iterativo:
+\begin{displaymath}
+	x_{n+1} = \phi(x_{n}) = \frac{1}{2} \left ( x_{n} + \frac{2}{x_{n}} \right ), 
+		\quad x_{0} = 2
+\end{displaymath}
+dimostrare che il metodo genera una successione di approssimazioni tale che 
+$x_{n} \rightarrow \sqrt{2}$.
 \end{exercise}
+\begin{proof}
+Questo metodo \`e a passo \emph{singolo} in quanto usa un solo innesto per calcolare
+$x_{n + 1}$.
+Affinch\`e il metodo iterativo sia convergente, per l'esercizio 
+\ref{exercise:exerciseIterativeMethodFixedPoint} posso costruire
+un'equazione per trovare il punto fisso di $\phi$:
+\begin{displaymath}
+\phi(x) = \frac{1}{2} \left ( x + \frac{2}{x} \right ) = x
+\end{displaymath}
+Manipolando: $x + \frac{2}{x} = 2x \Rightarrow x^{2} + 2 = 2x^{2} \Rightarrow 
+	2 = x^{2}$
+\end{proof}
+
+\begin{exercise}[1.4] Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Eseguendo il codice riportato nella sezione \nameref{sec:iterativeMethodToSQRT2}, 
+questo \`e l'output di Octave sulla mia macchina:
+\begin{lstlisting}
+octave:8> iterative(2, 1.5)
+next =  1.42857142857143e+00
+Difference with last step:0.0714285714285714
+next =  1.41463414634146e+00
+Difference with last step:0.0139372822299655
+next =  1.41421568627451e+00
+Difference with last step:0.000418460066953008
+next =  1.41421356268887e+00
+Difference with last step:2.12358564088966e-06
+next =  1.41421356237310e+00
+Difference with last step:3.15774073555986e-10
+Difference with sqrt(2):0
+\end{lstlisting}
+In 5 passi si raggiunge la precisione richiesta, uno in pi\`u rispetto ai risultati
+mostrati in \emph{Tabella 1.1} del libro.
+
+
+
