@@ -34,8 +34,10 @@ Considerare la rappresentazione in formato stringa
 $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s}$, $\forall x \in \mathbb{M}$.
 
 Per ogni rappresentazione costruisco una nuova rappresentazione che astrae da $\alpha$ e $\beta$, 
-ovvero $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s} = \delta_{0} \ldots \delta_{m + s} = x'$
-con $\alpha_{0} = \delta_{0}, \ldots, \alpha_{m} = \delta_{m}, \beta_{1} = \delta_{m + 1}, \ldots, \beta_{s} = \delta_{m + s}$.
+ovvero $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s} = \delta_{0} \ldots 
+\delta_{m + s} = x'$
+con $\alpha_{0} = \delta_{0}, \ldots, \alpha_{m} = \delta_{m}, \beta_{1} = \delta_{m + 1}, \ldots, 
+\beta_{s} = \delta_{m + s}$.
 
 Adesso posso costruire la funzione:
 \begin{displaymath}
@@ -49,7 +51,8 @@ Ragiono per assurdo. Suppongo che $\not \exists n \in \mathbb{N}: |\mathbb{M}| =
 Considero la rappresentazione con massimo valore della funzione $f$ costruita in precedenza,
 ovvero sia $x = \delta_{0} \ldots \delta_{m + s} = \underbrace{1 \ldots 1}_{m+s+1}$.
 Per le ipotesi di assurdo, allora posso trovare una rappresentazione $x':f(x') \geq f(x)$.
-Quindi la rappresentazione di $x'$ dovr\`a essere della forma $x' = \delta_{0}' \delta_{0} \ldots \delta_{m + s}$,
+Quindi la rappresentazione di $x'$ dovr\`a essere della forma $x' = \delta_{0}' \delta_{0} 
+\ldots \delta_{m + s}$,
 ovvero devo aggiungere un bit $\alpha_{0}'$ affinch\`e possa rappresentare 
 $x' = 1 \underbrace{0 \ldots 0}_{m+s+1}$. Ma \`e impossibile costruire una rappresentazione
 con $m+s+2$ simboli in quanto la dimensione delle rappresentazioni \`e fissata, uguale a $m+s+1$ 
@@ -60,10 +63,64 @@ e questo termina la prova.
 \begin{exercise}[1.6]
 $r_{1} = b^{-\nu} \wedge r_{2} = (1 - b^{-m})b^{\varphi}$, con $\varphi = b^{s} - \nu$.
 \end{exercise}
-Suppongo che $x$ sia normalizzato:
+Suppongo che $x$ sia normalizzato.
+\begin{itemize}
+\item La configurazione che rappresenta il minimo
+numero in valore assoluto (non considero il simbolo $\alpha_{0}$) \`e:
 \begin{displaymath}
-	1.\underbrace{0 \ldots 0}_{m - 1}b^{-\nu} \leq 
-		x = \alpha_{0}\alpha_{1}.\alpha_{2}\ldots\alpha_{m} b^{e-\nu} \leq
-	(b - 1).\underbrace{(b - 1)}_{m - 1}b^{e_{max} - \nu}, \quad e_{max} = \underbrace{(b-1)\ldots(b-1)}_{s}
+	r_{1} = \alpha_{1}.\alpha_{2} \ldots \alpha_{m} \beta_{1} \ldots \beta_{s} = 
+		1.\underbrace{0 \ldots 0}_{m - 1} \underbrace{0 \ldots 0}_{s}
+\end{displaymath}
+A cui corrisponde la valutazione $val(r_{1}) = b^{-\nu}$.
+
+\item La configurazione che rappresenta il massimo numero in valore assoluto
+(non considero il simbolo $\alpha_{0}$) \`e:
+\begin{displaymath}
+	r_{2} = \alpha_{1}.\alpha_{2} \ldots \alpha_{m} \beta_{1} \ldots \beta_{s} =
+		(b - 1).\underbrace{(b - 1)}_{m - 1}\underbrace{(b - 1)}_{s}
+\end{displaymath}
+Calcolo adesso la valutazione di $r_{2} = \rho b^{e - \nu}$. Ricavo $e$:
+\begin{displaymath}
+		e = (b-1)\sum_{i = 1}^{s}{b^{s-i}} = (b-1)\sum_{i = 0}^{s-1}{b^{i}} =
+			 (b-1)\frac{b^{s}-1}{b-1} = b^{s}-1
+\end{displaymath}
+Ricavo $r_{2}$:
+\begin{displaymath}
+	\begin{split}
+		r_{2} 	&= \left ( (b-1)\sum_{i = 1}^{m}{b^{1 - i}} \right)b^{b^{s}-1-\nu} = 
+ 			\left ( (b-1)\sum_{i = 1}^{m}{b^{-(i - 1)}} \right)b^{b^{s}-1-\nu} = \\
+	 			&= \left ( (b-1)\sum_{i = 1}^{m}{\left ( \frac{1}{b} \right ) ^{i - 1}} 
+					\right)b^{b^{s}-1-\nu} = 
+					\left ( (b-1)\frac{\left ( \frac{1}{b} \right ) ^{m} - 1}{
+						\left ( \frac{1}{b} \right ) - 1}
+					\right)b^{b^{s}-1-\nu} = \\
+				&= \left ( (b-1) \frac{b \left( b^{-m} - 1 \right )}{
+						b \left ( \left ( \frac{1}{b} \right ) - 1 \right ) }
+					\right)b^{b^{s}-1-\nu} = 
+					\left ( (b-1) \frac{b \left( b^{-m} - 1 \right )}{1 - b} 
+						\right)b^{b^{s}-1-\nu} = \\
+				&= \left ( (b-1) \frac{b \left( 1 - b^{-m} \right )}{b - 1} 
+					\right)b^{b^{s}-1-\nu} = 
+					\left ( b \left( 1 - b^{-m} \right ) \right)b^{b^{s}-1-\nu} = 
+					\left( 1 - b^{-m} \right ) b^{b^{s} - \nu}
+	\end{split}
 \end{displaymath}
 
+\begin{exercise}[1.6]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Dato che rappresento mediante arrotondamento:
+\begin{displaymath}
+\begin{split}
+u &= \frac{1}{2}b^{1-m} \quad , b = 10 \\
+\log_{10}{u} &= \log_{10}{\left ( \frac{1}{2}10^{1-m} \right )} = -\log_{10}{2} + (1 - m) \\
+m &= 1 - \log_{10}{2} - \log_{10}{u} \quad , u = 4.66 * 10^{-10}
+\end{split}
+\end{displaymath}
+\begin{lstlisting}
+octave:10> 1 - log10(2) - log10(4.66e-10)
+ans =  1.00305840876460e+01
+\end{lstlisting}
+
+
+\end{itemize}
