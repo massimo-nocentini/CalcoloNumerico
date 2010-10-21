@@ -17,7 +17,7 @@ Scrivo le rappresentazioni in formato stringa:
 	\end{split}
 \end{displaymath}
 Ad ogni passo incremento di uno, questo comporta che incrementando la rappresentazione
-di $32767$ si "invade" il bit del segno $\alpha_{0}$. Per la definizione della funzione di 
+di $32767$ si riporta sul bit del segno $\alpha_{0}$. Per la definizione della funzione di 
 valutazione ottengo $val(1\underbrace{0\ldots0}_{15}) = -2^{16} = -32768$.
 
 \begin{exercise}[1.6]
@@ -105,8 +105,9 @@ Ricavo $r_{2}$:
 					\left( 1 - b^{-m} \right ) b^{b^{s} - \nu}
 	\end{split}
 \end{displaymath}
+\end{itemize}
 
-\begin{exercise}[1.6]
+\begin{exercise}[1.8]
 Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
 Dato che rappresento mediante arrotondamento:
@@ -114,7 +115,7 @@ Dato che rappresento mediante arrotondamento:
 \begin{split}
 u &= \frac{1}{2}b^{1-m} \quad , b = 10 \\
 \log_{10}{u} &= \log_{10}{\left ( \frac{1}{2}10^{1-m} \right )} = -\log_{10}{2} + (1 - m) \\
-m &= 1 - \log_{10}{2} - \log_{10}{u} \quad , u = 4.66 * 10^{-10}
+m &= 1 - \log_{10}{2} - \log_{10}{u} \quad , u = 4.66 \times 10^{-10}
 \end{split}
 \end{displaymath}
 \begin{lstlisting}
@@ -122,5 +123,47 @@ octave:10> 1 - log10(2) - log10(4.66e-10)
 ans =  1.00305840876460e+01
 \end{lstlisting}
 
+\begin{oss}
+Moltiplicare e dividere per la base $b$ di lavoro \`e ad errore zero se c'\`e 
+"posto" sufficiente nell'esponente.
+\end{oss}
+Cerco di spiegare il significato della precedente osservazione con un esempio.
+Sia $n = 1.1111 \times b^{-\nu}$, il quale ha il minimo esponente rappresentabile. Se 
+moltiplico e successivamente divido per $10^{-4}$ devo dapprima denormalizzare, 
+in quanto non posso rappresentare $b^{-(\nu + 4)}$, ottengo quindi:
+\begin{displaymath}
+	\frac{10^{-4} \times n}{10^{-4}} = \frac{0.0001 \times b^{-\nu}}{10^{-4}} = 
+		10^{4} \times 0.0001 \times b^{-\nu} = 1.0000 \times b^{-\nu}
+\end{displaymath}
+Perdendo informazione sulle 4 cifre decimali di $n$.
 
-\end{itemize}
+\begin{exercise}[1.9]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Formalizzo la richiesta: $-\log_{10}{u} = r$, con $r$ uguale al numero di cifre
+esattamente rappresentate nella mantissa. Per definizione di $u$ segue che $u > 0$,
+questo mi permette di non considerare i valori assoluti.
+
+Distinguo i due casi, relativamente al metodo di rappresentazione usato:
+\begin{description}
+	\item[per troncamento] 
+		\begin{displaymath}
+		\begin{split}
+			u &= b^{1-m} \\
+			-\log_{10}{b^{1-m}} &= r \\
+			(m-1)\log_{10}{b} &= r
+		\end{split}
+		\end{displaymath}
+
+	\item[per arrotondamento] 
+		\begin{displaymath}
+		\begin{split}
+			u &= \frac{b^{1-m}}{2} \\
+			-\log_{10}{\frac{b^{1-m}}{2}} &= r \\
+			-\left( -\log_{10}{2} + (1-m)\log_{10}{b} \right) &= r \\
+			\log_{10}{2} + (m-1)\log_{10}{b} &= r
+		\end{split}
+		\end{displaymath}
+\end{description}
+
+

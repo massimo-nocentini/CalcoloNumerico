@@ -26,17 +26,20 @@ locale, cio\`e in un intorno di $x_{0}$.
 	approssimata di $x$ mediante $\tilde{x}$ all'incirca \`e dato da $-\log_{10}
 	{|\varepsilon_{x}|}$.
 \end{exercise}
-Ottengo $$\varepsilon_{x} = \frac{\tilde{x}-x}{x} = -2.9491*10^{-5}$$
+Ottengo:
+\begin{displaymath}
+	\varepsilon_{x} = \frac{\tilde{x}-x}{x} = -2.9491 \times 10^{-5}
+\end{displaymath}
 
-Adesso considero
+Adesso considero:
 \begin{equation*}
-	-\log_{10}{|-2.9491*10^{-5}|} = -\left (\log_{10}{2.9491} +
+	-\log_{10}{|-2.9491 \times 10^{-5}|} = -\left (\log_{10}{2.9491} +
 	\log_{10}{10^{-5}} \right ) = -\log_{10}{2.9491} + 5\log_{10}{10} \approx 4.53
 \end{equation*}
-Infatti l'approssimazione $\tilde{x}$ ha 4 cifre decimali.
+L'approssimazione $\tilde{x}$ ha 4 cifre decimali.
 
 \begin{exercise}
-Dimostrare che $-\log_{10}{|\varepsilon_{x}|}$ d\'a all'incirca il numero 
+Dimostrare che $-\log_{10}{|\varepsilon_{x}|}$ d\`a all'incirca il numero 
 di cifre decimali di $\tilde{x}$, con cui approssimo $x$. 
 \end{exercise}
 \begin{proof}
@@ -52,8 +55,8 @@ Scrivo in forma normalizzata il valore esatto $x$ e la sua appossimazione
 $\tilde{x}$, fissando $\beta = 10$ e $M \not = m$ perch\`e sto approssimando:
 \begin{equation*}
 	\begin{split}
-		x \in \mathbb{R}, x \geq 0, x = m*10^{e} \\
-		\tilde{x} \in \mathbb{R}, \tilde{x} \geq 0, \tilde{x} = M*10^{e}
+		x \in \mathbb{R}, x \geq 0, x = m \times 10^{e} \\
+		\tilde{x} \in \mathbb{R}, \tilde{x} \geq 0, \tilde{x} = M \times 10^{e}
 	\end{split}
 \end{equation*}
 Per il \emph{teorema 1.2} vale $ 1 \leq m < 10 \wedge  1 \leq M < 10$.
@@ -61,8 +64,8 @@ Per il \emph{teorema 1.2} vale $ 1 \leq m < 10 \wedge  1 \leq M < 10$.
 Adesso voglio trovare sia una maggiorazione che una minorazione di 
 $\varepsilon_{x}$:
 \begin{equation*}
-	\left | \varepsilon_{x} \right | = \left | \frac{(M - m) * 10^{e}} 
-		{m*10^{e}}
+	\left | \varepsilon_{x} \right | = \left | \frac{(M - m) \times 10^{e}} 
+		{m \times 10^{e}}
 	\right | = \left | \frac{M - m}{m} \right |
 \end{equation*}
 Maggioro con:
