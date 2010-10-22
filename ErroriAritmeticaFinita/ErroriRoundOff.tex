@@ -60,6 +60,10 @@ e questo termina la prova.
 
 \end{proof}
 
+\begin{oss}
+
+\end{oss}
+
 \begin{exercise}[1.6]
 $r_{1} = b^{-\nu} \wedge r_{2} = (1 - b^{-m})b^{\varphi}$, con $\varphi = b^{s} - \nu$.
 \end{exercise}
@@ -151,7 +155,8 @@ Distinguo i due casi, relativamente al metodo di rappresentazione usato:
 		\begin{split}
 			u &= b^{1-m} \\
 			-\log_{10}{b^{1-m}} &= r \\
-			(m-1)\log_{10}{b} &= r
+			(m-1)\log_{10}{b} &= r \Rightarrow \lbrace \text{fix } b = 10 \rbrace \\
+			\Rightarrow m = 1 - \log_{10}{u}			
 		\end{split}
 		\end{displaymath}
 
@@ -161,9 +166,41 @@ Distinguo i due casi, relativamente al metodo di rappresentazione usato:
 			u &= \frac{b^{1-m}}{2} \\
 			-\log_{10}{\frac{b^{1-m}}{2}} &= r \\
 			-\left( -\log_{10}{2} + (1-m)\log_{10}{b} \right) &= r \\
-			\log_{10}{2} + (m-1)\log_{10}{b} &= r
+			\log_{10}{2} + (m-1)\log_{10}{b} &= r \Rightarrow 
+				\lbrace \text{fix } b = 10 \rbrace \\
+			\Rightarrow m = 1 - (\log_{10}{u} + \log_{10}{2}) = 1 - (\log_{10}{2u})
 		\end{split}
 		\end{displaymath}
 \end{description}
+
+\begin{exercise}[1.10]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+\begin{enumerate}
+	\item per il \emph{pi\`u grande numero di macchina} $x$ considero la mantissa normalizzata,
+	quindi per la definizione dello standard IEEE754 valgono: il massimo esponente che posso
+	usare \`e $e = 2046$, $\nu = 1023$ e $b = 2$.
+	La mantissa massima che posso fissare \`e $\alpha_{1}.\alpha_{2} \ldots \alpha_{m}$:
+	sempre per la definizione dello standard segue che $m = 53$ e preso $x$ normalizzato,
+	segue $\alpha_{1} = 1$. Ottengo la rappresentazione $x = 1.\alpha_{2} \ldots \alpha_{53}$, con:
+	\begin{displaymath}
+	\begin{split}
+		\rho &= \sum_{i = 1}^{m}{b^{1-i}} = \sum_{i = 0}^{m-1}{b^{-i}} = 
+			\sum_{i = 0}^{52}{b^{-i}} = 
+			\frac{b\left( b^{-m} - 1 \right)}{1 - b} = \frac{b^{1-m} - b}{1 - b} = \\
+			&= \lbrace b = 2 \text{ by IEEE754 definition} \rbrace = -2(2^{-m}-1) = 
+			2(1 - 2^{-m}) \\ \\
+		val(x) &= \rho \times b^{2046-1023} = 2(1-2^{-53})2^{1023}
+	\end{split}
+	\end{displaymath}
+	\begin{lstlisting}
+		octave:18> 2*(1-2^-53)*2^1023
+		ans =  1.79769313486232e+308
+		octave:19> realmax
+		ans =  1.79769313486232e+308
+	\end{lstlisting}
+
+
+\end{enumerate}
 
 
