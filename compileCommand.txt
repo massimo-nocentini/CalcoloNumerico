@@ -1,1 +1,2 @@
+# programma da eseguire all'interno della cartella "Elaborato"
 > latex Elaborato.tex && dvips -t a4 -Ppdf Elaborato.dvi 
