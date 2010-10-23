@@ -60,10 +60,6 @@ e questo termina la prova.
 
 \end{proof}
 
-\begin{oss}
-
-\end{oss}
-
 \begin{exercise}[1.6]
 $r_{1} = b^{-\nu} \wedge r_{2} = (1 - b^{-m})b^{\varphi}$, con $\varphi = b^{s} - \nu$.
 \end{exercise}
@@ -110,6 +106,38 @@ Ricavo $r_{2}$:
 	\end{split}
 \end{displaymath}
 \end{itemize}
+
+\begin{exercise}
+Dimostrare che vale $|\mathbb{M}| = b^{m+1}(exp_{max} - exp_{min} + 1) + 1$.
+\end{exercise}
+\begin{proof}
+Il fattore $b^{m+1}$ contiene $+1$ nell'esponente in quanto ho $m$ simboli per
+rappresentare una mantissa in valore assoluto, per\`o posso avere sia simboli positivi
+che simboli negativi, quindi devo aggiungere il simbolo del segno $\alpha_{0}$.
+Usando i risultati dell'esercizio precedente posso riscrivere:
+\begin{displaymath}
+\begin{split}
+	exp_{max} = b^{s} - 1 - \nu, \quad exp_{min} = -\nu \\
+	|\mathbb{M}| = b^{m+1}(b^{s} - 1 - \nu + \nu + 1) + 1 = b^{m+s+1} + 1
+\end{split}
+\end{displaymath}
+Cerco adesso di dare una spiegazione meno formale, fissando come parametri per
+la rappresentazione che uso in questo piccolo esempio $b = 2, m = 3, s = 2, \nu = 2$,
+con mantisse normalizzate (implica $\alpha_{1} = 1$).
+Segue quindi $exp_{max} = 1, exp_{min} = -2$. 
+
+Per quanto riguarda le mantisse che posso rappresentare sono 
+$$mantisse = \lbrace 1.00, 1.01, 1.10, 1.11 \rbrace$$
+
+Per quanto riguarda i possibili esponenti, ottenuti partendo da $exp_{min}$ sommando
+uno fino a $exp_{max}$ (sommo uno per la definizione dell'esponente per la rappresentazione
+di numeri reali $-\nu + \sum_{i = 1}^{s}{\beta_{i} b^{s - i}}$):
+$$esponenti = \left \lbrace 2^{-2} = \frac{1}{4}, 2^{-1} = \frac{1}{2},
+		2^{0} = 1, 2^{1} = 2 \right \rbrace$$
+
+Per cui posso rappresentare $|mantisse \times esponenti| = 16$ numeri positivi, 
+a cui vanno aggiunti i $16$ opposti e lo zero, per un totale di $33 = 2^{5} + 1$.
+\end{proof}
 
 \begin{exercise}[1.8]
 Per il testo dell'esercizio consultare il libro di testo.
