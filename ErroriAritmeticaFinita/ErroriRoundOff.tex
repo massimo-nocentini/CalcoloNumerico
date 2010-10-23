@@ -207,10 +207,11 @@ Per il testo dell'esercizio consultare il libro di testo.
 \begin{enumerate}
 	\item per il \emph{pi\`u grande numero di macchina} $x$ considero la mantissa normalizzata,
 	quindi per la definizione dello standard IEEE754 valgono: il massimo esponente che posso
-	usare \`e $e = 2046$, $\nu = 1023$ e $b = 2$.
+	usare $e = 2046$, $\nu = 1023$.
 	La mantissa massima che posso fissare \`e $\alpha_{1}.\alpha_{2} \ldots \alpha_{m}$:
 	sempre per la definizione dello standard segue che $m = 53$ e preso $x$ normalizzato,
-	segue $\alpha_{1} = 1$. Ottengo la rappresentazione $x = 1.\alpha_{2} \ldots \alpha_{53}$, con:
+	segue $\alpha_{1} = 1$. Ottengo la rappresentazione 
+		$mantissa(x) = 1.\underbrace{1 \ldots 1}_{52}$, con:
 	\begin{displaymath}
 	\begin{split}
 		\rho &= \sum_{i = 1}^{m}{b^{1-i}} = \sum_{i = 0}^{m-1}{b^{-i}} = 
@@ -228,6 +229,48 @@ Per il testo dell'esercizio consultare il libro di testo.
 		ans =  1.79769313486232e+308
 	\end{lstlisting}
 
+	\item per il \emph{pi\`u piccolo numero di macchina} $x$ considero la mantissa normalizzata,
+	quindi per la definizione dello standard IEEE754 valgono: il minimo esponente che posso
+	usare $e = 1$, $\nu = 1023$.
+	La mantissa minima che posso fissare \`e $\alpha_{1}.\alpha_{2} \ldots \alpha_{m}$:
+	sempre per la definizione dello standard segue che $m = 53$ e preso $x$ normalizzato,
+	segue $\alpha_{1} = 1$. Ottengo la rappresentazione 
+		$mantissa(x) = 1.\underbrace{0 \ldots 0}_{52}$, con:
+	\begin{displaymath}
+		val(x) = b^{0} \times b^{1-1023} = 2^{-1022}
+	\end{displaymath}
+	\begin{lstlisting}
+		octave:4> 2^-1022
+		ans =  2.22507385850720e-308
+		octave:5> realmin
+		ans =  2.22507385850720e-308
+	\end{lstlisting}
+
+	\item per il \emph{pi\`u piccolo numero di macchina denormalizzato} $x$ considero la 
+	mantissa denormalizzata,
+	quindi per la definizione dello standard IEEE754 valgono: il minimo esponente che posso
+	usare $e = 0$, $\nu = 1022$.
+	La mantissa minima che posso fissare \`e $\alpha_{1}.\alpha_{2} \ldots \alpha_{m}$:
+	sempre per la definizione dello standard segue che $m = 53$ e preso $x$ denormalizzato,
+	segue $\alpha_{1} = 0$. Ottengo la rappresentazione 
+		$mantissa(x) = 0.\underbrace{0 \ldots 0}_{51} 1$, con:
+	\begin{displaymath}
+		val(x) = b^{-52} \times b^{-1022} = 2^{-1074}
+	\end{displaymath}
+	\begin{lstlisting}
+		octave:10> 2^-1074
+		ans =  4.94065645841247e-324
+	\end{lstlisting}
+	
+	\item per la \emph{precisione di macchina} considero la definizione dello 
+		standard IEEE754; segue quindi  $m = 53$ e $b = 2$.
+	\begin{displaymath}
+		u = \frac{b^{1-m}}{2} = \frac{2^{1-53}}{2} = 2^{-53}
+	\end{displaymath}
+	\begin{lstlisting}
+		octave:11> 2^-53
+		ans =  1.11022302462516e-16
+	\end{lstlisting}
 
 \end{enumerate}
 
