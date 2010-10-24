@@ -28,14 +28,21 @@ locale, cio\`e in un intorno di $x_{0}$.
 \end{exercise}
 Ottengo:
 \begin{displaymath}
-	\varepsilon_{x} = \frac{\tilde{x}-x}{x} = -2.9491 \times 10^{-5}
+	\varepsilon_{x} = \frac{\tilde{x}-x}{x} = \frac{3.1415-3.14159265358979}{3.14159265358979}
 \end{displaymath}
-
+\begin{lstlisting}
+octave:19> (3.1415-pi)/pi
+ans = -2.94925536215087e-05
+\end{lstlisting}
 Adesso considero:
 \begin{equation*}
 	-\log_{10}{|-2.9491 \times 10^{-5}|} = -\left (\log_{10}{2.9491} +
-	\log_{10}{10^{-5}} \right ) = -\log_{10}{2.9491} + 5\log_{10}{10} \approx 4.53
+	\log_{10}{10^{-5}} \right ) = -\log_{10}{2.9491} + 5\log_{10}{10}
 \end{equation*}
+\begin{lstlisting}
+octave:18> -log10(2.9491) + 5*log10(10)
+ans =  4.53031050085890e+00
+\end{lstlisting}
 L'approssimazione $\tilde{x}$ ha 4 cifre decimali.
 
 \begin{exercise}
