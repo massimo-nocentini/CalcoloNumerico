@@ -21,17 +21,17 @@ di $32767$ si riporta sul bit del segno $\alpha_{0}$. Per la definizione della f
 valutazione ottengo $val(1\underbrace{0\ldots0}_{15}) = -2^{16} = -32768$.
 
 \begin{exercise}[1.6]
-$\mathbb{M}$ ha un numero finito di elementi.
+$\mathcal{M}$ ha un numero finito di elementi.
 \end{exercise}
 \begin{proof}
-Per far vedere che $\mathbb{M}$ ha un numero finito di elementi posso far \\
+Per far vedere che $\mathcal{M}$ ha un numero finito di elementi posso far \\
 vedere che vale
-$equinumerous(\mathbb{M}, \lbrace 1, \ldots, n\rbrace)$, con $n \in \mathbb{N}$.
+$equinumerous(\mathcal{M}, \lbrace 1, \ldots, n\rbrace)$, con $n \in \mathbb{N}$.
 Per la definizione della relazione $equinumerous$ posso costruire una funzione $f$
-\emph{one-to-one} tale che $f: \mathbb{M} \rightarrow \mathbb{N}$.
+\emph{one-to-one} tale che $f: \mathcal{M} \rightarrow \mathbb{N}$.
 
 Considerare la rappresentazione in formato stringa 
-$x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s}$, $\forall x \in \mathbb{M}$.
+$x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s}$, $\forall x \in \mathcal{M}$.
 
 Per ogni rappresentazione costruisco una nuova rappresentazione che astrae da $\alpha$ e $\beta$, 
 ovvero $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s} = \delta_{0} \ldots 
@@ -45,9 +45,9 @@ f(\delta_{0} \ldots \delta_{m + s}) = \sum_{i = 0}^{m + s}{\delta{i} * b^{m + s 
 \end{displaymath}
 In questo modo ho costruito una biezione tra le rappresentazioni ed un sottoinsieme 
 dei numeri naturali. \\\\
-Adesso devo far vedere che $|\mathbb{M}| = n, n \in \mathbb{N}$.
+Adesso devo far vedere che $|\mathcal{M}| = n, n \in \mathbb{N}$.
 
-Ragiono per assurdo. Suppongo che $\not \exists n \in \mathbb{N}: |\mathbb{M}| = n$.
+Ragiono per assurdo. Suppongo che $\not \exists n \in \mathbb{N}: |\mathcal{M}| = n$.
 Considero la rappresentazione con massimo valore della funzione $f$ costruita in precedenza,
 ovvero sia $x = \delta_{0} \ldots \delta_{m + s} = \underbrace{1 \ldots 1}_{m+s+1}$.
 Per le ipotesi di assurdo, allora posso trovare una rappresentazione $x':f(x') \geq f(x)$.
@@ -108,7 +108,7 @@ Ricavo $r_{2}$:
 \end{itemize}
 
 \begin{exercise}
-Dimostrare che vale $|\mathbb{M}| = b^{m+1}(exp_{max} - exp_{min} + 1) + 1$.
+Dimostrare che vale $|\mathcal{M}| = b^{m+1}(exp_{max} - exp_{min} + 1) + 1$.
 \end{exercise}
 \begin{proof}
 Il fattore $b^{m+1}$ contiene $+1$ nell'esponente in quanto ho $m$ simboli per
@@ -118,7 +118,7 @@ Usando i risultati dell'esercizio precedente posso riscrivere:
 \begin{displaymath}
 \begin{split}
 	exp_{max} = b^{s} - 1 - \nu, \quad exp_{min} = -\nu \\
-	|\mathbb{M}| = b^{m+1}(b^{s} - 1 - \nu + \nu + 1) + 1 = b^{m+s+1} + 1
+	|\mathcal{M}| = b^{m+1}(b^{s} - 1 - \nu + \nu + 1) + 1 = b^{m+s+1} + 1
 \end{split}
 \end{displaymath}
 Cerco adesso di dare una spiegazione meno formale, fissando come parametri per
@@ -215,7 +215,7 @@ Per il testo dell'esercizio consultare il libro di testo.
 	\begin{displaymath}
 	\begin{split}
 		\rho &= \sum_{i = 1}^{m}{b^{1-i}} = \sum_{i = 0}^{m-1}{b^{-i}} = 
-			\sum_{i = 0}^{52}{b^{-i}} = 
+			%\sum_{i = 0}^{52}{b^{-i}} = % non ha molto senso fissare qui l'indice di arrivo
 			\frac{b\left( b^{-m} - 1 \right)}{1 - b} = \frac{b^{1-m} - b}{1 - b} = \\
 			&= \lbrace b = 2 \text{ by IEEE754 definition} \rbrace = -2(2^{-m}-1) = 
 			2(1 - 2^{-m}) \\ \\
@@ -273,5 +273,96 @@ Per il testo dell'esercizio consultare il libro di testo.
 	\end{lstlisting}
 
 \end{enumerate}
+
+\begin{exercise}[1.11]
+ Spiegare il non funzionamento delle seguenti istruzioni:
+\end{exercise}
+\begin{lstlisting}
+	x = 0; 
+	delta = 0.1;
+	while x ~= 1
+		x = x + delta 
+	end
+\end{lstlisting}
+Questo programma non termina, produce un ciclo infinito. Si ha questo comportamento
+perch\`e non \`e possibile rappresentare correttamente il numero $0.1$ in macchina. 
+Scrivo la sua rappresentazione in base 2:
+\begin{displaymath}
+\begin{split}
+	0.1 \times 2 &= 0.2 \\
+	0.2 \times 2 &= 0.4 \\
+	0.4 \times 2 &= 0.8 \\
+	0.8 \times 2 &= 1.6 \\
+	0.6 \times 2 &= 1.2 \\
+	0.2 \times 2 &= 0.4 \\
+\end{split}
+\end{displaymath}
+Quindi $delta = (0.1)_{10} = (0.0\overline{0011})_{2}$, posso normalizzare e ottengo
+$delta = 1.1\underbrace{0011 0011\ldots}_{51} \times 2^{-4}$. 
+
+Sommando $delta$ ripetutamente ad $x$ non sar\`a possibile raggiungere l'uguaglianza
+$x = 1$, quindi la guardia del while sar\`a sempre vera.
+
+Una possibile soluzione \`e di irrobustire la guardia con $x \leq 1$, produce una 
+computazione finita, ma non esegue lo stesso numero di passi della versione originale
+del problema.
+
+\begin{exercise}[1.12]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Calcolare $\sqrt{x^{2} + y^{2}}$ usando l'uguaglianza dell'aritmetica classica 
+$x^{2} = x \times x$ non \`e una buona strategia in quanto potrebbe non produrre
+un output valido ($\forall x \geq \frac{realmax}{2}, x \times x = \infty$) 
+in aritmetica finita.
+Questo lo dimostra il seguente codice:
+\begin{lstlisting}
+octave:16> x = realmax/2
+x =  8.9885e+307
+octave:17> x*x
+ans = Inf
+\end{lstlisting}
+Posso quindi riformulare il problema introducendo una variabile $m$ tale che:
+\begin{displaymath}
+\begin{split}
+	m &= max \lbrace |x|, |y| \rbrace \\
+	\sqrt{x^{2} + y^{2}} &= m \sqrt{{\left |\frac{x}{m} \right |}^{2} + 
+		{\left |\frac{y}{m} \right |}^{2}}
+\end{split}
+\end{displaymath}
+Posso osservare che:
+\begin{displaymath}
+ \sqrt{x^{2} + y^{2}} = \left \lbrace
+		\begin{array}{lc}
+			|x| \sqrt{1 + {\left |\frac{y}{m} \right |}^{2}} & \text{se } m = |x| \\ 
+			|y| \sqrt{1 + {\left |\frac{x}{m} \right |}^{2}} & \text{se } m = |y|
+		\end{array} \right .
+\end{displaymath}
+Lo schema che posso costruire da questo esempio \`e di utilizzare una buona approssimazione
+($\sqrt{1 + \ldots}$) sommando poi un errore "piccolo" (il termine quadratico). Questo aspetto 
+verr\`a approfondito nelle osservazioni successive.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
