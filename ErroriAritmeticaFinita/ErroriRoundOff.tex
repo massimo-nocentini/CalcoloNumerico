@@ -402,7 +402,7 @@ ans = Inf
 Osservo che \emph{octave:50} riesce ad eseguire la computazione in quanto $1e300 \in \mathcal{M}$,
 mentre \emph{octave:51} restituisce \emph{NaN} perch\`e $1e300\times1e300 \not \in \mathcal{M}$
 (\emph{overflow}) e operazioni che coinvolgono \emph{Inf} restituiscono \emph{NaN} 
-per l'implementazione di Octave. Riporto l'help di Octave:
+per l'implementazione di Octave. Non vale la propriet\`a distributiva, riporto l'help di Octave:
 \begin{lstlisting}
 octave:53> help NaN
 `NaN' is a built-in function
