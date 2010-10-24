@@ -268,8 +268,10 @@ Per il testo dell'esercizio consultare il libro di testo.
 		u = \frac{b^{1-m}}{2} = \frac{2^{1-53}}{2} = 2^{-53}
 	\end{displaymath}
 	\begin{lstlisting}
-		octave:11> 2^-53
+		octave:27> 2^-53
 		ans =  1.11022302462516e-16
+		octave:28> eps
+		ans =  2.22044604925031e-16
 	\end{lstlisting}
 
 \end{enumerate}
@@ -312,13 +314,15 @@ Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
 Calcolare $\sqrt{x^{2} + y^{2}}$ usando l'uguaglianza dell'aritmetica classica 
 $x^{2} = x \times x$ non \`e una buona strategia in quanto potrebbe non produrre
-un output valido ($\forall x \geq \frac{realmax}{2}, x \times x = \infty$) 
+un output valido ($\forall x \geq \frac{realmax}
+	{.9 \times 10^{154}} = \frac{1.8 \times 10^{308}}
+	{.9 \times 10^{154}}, x \times x = \infty$) 
 in aritmetica finita.
 Questo lo dimostra il seguente codice:
 \begin{lstlisting}
-octave:16> x = realmax/2
-x =  8.9885e+307
-octave:17> x*x
+octave:9> x = .9*(10e154)
+x =  9.0000e+154
+octave:10> x*x
 ans = Inf
 \end{lstlisting}
 Posso quindi riformulare il problema introducendo una variabile $m$ tale che:
@@ -340,6 +344,82 @@ Posso osservare che:
 Lo schema che posso costruire da questo esempio \`e di utilizzare una buona approssimazione
 ($\sqrt{1 + \ldots}$) sommando poi un errore "piccolo" (il termine quadratico). Questo aspetto 
 verr\`a approfondito nelle osservazioni successive.
+
+\begin{exercise}[1.13]
+Implementare i seguenti programmi:
+\begin{displaymath}
+\begin{split}
+	\left ( \left ( \frac{eps}{2} + 1 \right ) - 1 \right ) \left ( \frac{2}{frac} \right ) \\
+	\left ( \frac{eps}{2}  + \left ( 1 - 1 \right ) \right ) \left ( \frac{2}{frac} \right )
+\end{split}
+\end{displaymath}
+\end{exercise}
+Questo l'help della funzione $eps$:
+\begin{lstlisting}
+octave:31> help eps
+	`eps' is a built-in function
+
+     Return a scalar, matrix or N-dimensional array whose elements are
+     all eps, the machine precision.  More precisely, `eps' is the
+     relative spacing between any two adjacent numbers in the machine's
+     floating point system.  This number is obviously system dependent.
+     On machines that support IEEE floating point arithmetic, `eps' is
+     approximately 2.2204e-16 for double precision and 1.1921e-07 for
+     single precision.
+\end{lstlisting}
+Questo il codice che implementa:
+\begin{lstlisting}
+octave:30> ((eps/2 + 1) - 1) * (2/eps)
+ans =  0.00000000000000e+00
+octave:31> (eps/2 + (1 - 1)) * (2/eps)
+ans =  1.00000000000000e+00
+\end{lstlisting}
+Perch\`e:
+\begin{lstlisting}
+octave:46> 2/eps
+ans =  9.00719925474099e+15
+octave:47> eps/2
+ans =  1.11022302462516e-16
+octave:48> eps/2 + 1
+ans =  1.00000000000000e+00
+\end{lstlisting}
+
+\begin{exercise}[1.14]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Questo il codice che implementa:
+\begin{lstlisting}
+octave:50> (1e300-1e300)*1e300
+ans =  0.00000000000000e+00
+octave:51> (1e300*1e300)-(1e300*1e300)
+ans = NaN
+\end{lstlisting}
+Perch\`e:
+\begin{lstlisting}
+octave:52> (1e300*1e300)
+ans = Inf
+\end{lstlisting}
+Osservo che \emph{octave:50} riesce ad eseguire la computazione in quanto $1e300 \in \mathcal{M}$,
+mentre \emph{octave:51} restituisce \emph{NaN} perch\`e $1e300\times1e300 \not \in \mathcal{M}$
+(\emph{overflow}) e operazioni che coinvolgono \emph{Inf} restituiscono \emph{NaN} 
+per l'implementazione di Octave. Riporto l'help di Octave:
+\begin{lstlisting}
+octave:53> help NaN
+`NaN' is a built-in function
+
+     Return a scalar, matrix, or N-dimensional array whose elements are
+     all equal to the IEEE symbol NaN (Not a Number).  NaN is the
+     result of operations which do not produce a well defined numerical
+     result.  Common operations which produce a NaN are arithmetic with
+     infinity (Inf - Inf), zero divided by zero (0/0), and any
+     operation involving another NaN value (5 + NaN).
+
+     Note that NaN always compares not equal to NaN (NaN != NaN).  This
+     behavior is specified by the IEEE standard for floating point
+     arithmetic.  To find NaN values, use the `isnan' function.
+
+\end{lstlisting}
+
 
 
 
