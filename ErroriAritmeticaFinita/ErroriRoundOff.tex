@@ -517,6 +517,42 @@ con $a = 2.000 \times 10^{-4}, b = 4.000 \times 10^{-4}, c = 7.000 \times 10^{0}
 Nei precedenti passaggi \`e sbagliato calcolare $fl(a), fl(b), fl(c)$ in quanto, per ipotesi,
 $a, b, c$ sono gi\`a un numeri di macchina (e quindi gi\`a affetti da errore).
 
+\begin{exercise}[1.16]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+\begin{proof}
+Formalmente devo studiare:
+\begin{displaymath}
+	\tilde{y} = f(\tilde{x}), \quad \quad y = f(x) = \sqrt{x}
+\end{displaymath}
+Posso riscrivere $\tilde{y}, \tilde{x}$ introducendo gli errori relativi e, per 
+la definizione di errore relativo, vale:
+\begin{displaymath}
+	y(1 + \varepsilon_{y}) = f(x(1 + \varepsilon_{x}))
+\end{displaymath}
+La precedente relazione utilizza l'implementazione esatta di $f$, quindi considero
+lo sviluppo di $f$ al primo ordine centrato in x:
+\begin{displaymath}
+\begin{split}
+	y(1 + \varepsilon_{y}) & = f(x) + f'(x)(x + x\varepsilon_{x} - x) + O(\varepsilon_{x}^{2}) \\
+	y\varepsilon_{y} & = f'(x)x\varepsilon_{x} + O(\varepsilon_{x}^{2})
+\end{split}
+\end{displaymath}
+Per le ipotesi del problema, usando per la sostituzione quanto detto ad inizio prova, vale:
+\begin{displaymath}
+f(x) = x^{\frac{1}{2}} \quad \quad f'(x) = \frac{1}{2}x^{-\frac{1}{2}} 
+= \frac{1}{2\sqrt{x}}
+\end{displaymath}
+Posso approssimare:
+\begin{displaymath}
+|\varepsilon_{y}| \approx \left | \frac{1}{2\sqrt{x}} \frac{x}{y} \right||\varepsilon_{x}|= 
+\left | \frac{1}{2\sqrt{x}} \frac{x}{\sqrt{x}} \right||\varepsilon_{x}| = 
+\frac{|\varepsilon_{x}|}{2}
+\end{displaymath}
+Ottengo $k = \frac{1}{2}$ come richiesto, la funzione $f(x) = \sqrt{x}$
+\`e sempre ben condizionata, la prova \`e conclusa.
+\end{proof}
+
 \begin{exercise}[1.17]
 Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
@@ -570,9 +606,58 @@ epsilon_Max =  3.50082028706699e-04
 octave:15> ((abs(1.2345678e-1)+abs(1.2341234e-1))/abs(1.2345678e-1 - 1.2341234e-1))*max(abs(x1),abs(x2))
 ans =  1.94474442742179e+00
 \end{lstlisting}
-Torna infatti la stima dell'errore fatta considerando l'errore sull'intera operazione $|\varepsilon_{y}| = 1.2502$ con quella fatta considerando il condizionamento sui dati in ingresso
-$|\varepsilon_{y}| \leq 1.94474442742179$.
+Torna infatti la stima dell'errore fatta considerando l'errore sull'intera 
+operazione $|\varepsilon_{y}| = 1.2502$ con quella fatta considerando il 
+condizionamento sui dati in ingresso$|\varepsilon_{y}| \leq 1.94474442742179$.
 
+\begin{exercise}[1.18]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Implemento:
+\begin{lstlisting}
+octave:1> format long e
+octave:2> a = 0.1
+a =  1.00000000000000e-01
+octave:3> b = 0.099999999999
+b =  9.99999999990000e-02
+octave:4> a-b
+ans =  1.00000563385549e-12
+\end{lstlisting}
+Eseguo lo studio sul condizionamento. Per il \emph{Teorema 1.4} il massimo errore
+che posso commettere usando il metodo di arrotondamento \`e $u = \frac{1}{2}b^{1-m}$.
+Lo standard IEEE754 fissa $b = 2, m = 53$, quindi $u = 2^{-53}$. Questo errore
+\`e comune per entrambi in quanto non devo applicare la funzione $fl$ ai due numeri $a, b$,
+quindi $\varepsilon_{max} = \varepsilon_{a} = \varepsilon_{b} = 2^{-53} = 
+1.11022302462516 \times 10^{-16}$.
+
+Per l'equazione 1.23 vale:
+\begin{displaymath}
+\begin{split}
+	\varepsilon_{y} & \leq \frac{|1.00000000000000 \times 10^{-1}| + 
+			|9.99999999990000 \times 10^{-2}|}
+		{|1.00000000000000 \times 10^{-1} - 
+			9.99999999990000 \times 10^{-2}|}\varepsilon_{max} \\
+	\varepsilon_{y} & \leq \frac{1.99999999999000\times 10^{-1}}
+		{1.00000563385549\times 10^{-12}}\varepsilon_{max} = 
+		(1.99998873234249\times 10^{11})\varepsilon_{max} = \\
+	& = 2.22043353963751\times 10^{-5}
+\end{split}
+\end{displaymath}
+Si osserva che $k \in O(10^{11})$, il problema \`e mal condizionato.
+
+Queste le giustificazioni dei valori precedenti:
+\begin{lstlisting}
+octave:15> epsilon_Max = 2^-53
+epsilon_Max =  1.11022302462516e-16
+octave:16> a+b
+ans =  1.99999999999000e-01
+octave:17> abs(a-b)
+ans =  1.00000563385549e-12
+octave:18> (a+b)/(abs(a-b))
+ans =  1.99998873234249e+11
+octave:19> (a+b)/(abs(a-b))*epsilon_Max
+ans =  2.22043353963751e-05
+\end{lstlisting}
 
 
 
