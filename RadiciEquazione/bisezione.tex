@@ -1,0 +1,23 @@
+\section{Metodo di bisezione}
+\label{sec:metodoDiBisezione}
+Riporto il codice di pagina 23:
+\begin{lstlisting}
+octave:12> p = poly([1.1*ones(1,20) pi])
+p =
+ Columns 1 through 6:
+   1.0000e+00  -2.5142e+01   2.9902e+02  -2.2396e+03   1.1860e+04  -4.7254e+04
+ Columns 7 through 12:
+   1.4711e+05  -3.6678e+05   7.4461e+05  -1.2444e+06   1.7234e+06  -1.9847e+06
+ Columns 13 through 18:
+   1.9008e+06  -1.5096e+06   9.8794e+05  -5.2718e+05   2.2572e+05  -7.5702e+04
+ Columns 19 through 22:
+   1.9159e+04  -3.4410e+03   3.9100e+02  -2.1135e+01
+octave:13> polyval(p,pi)
+ans =  2.0207e-04
+\end{lstlisting}
+Lo scopo della funzione $poly(r)$ \`e quello di creare un vettore di coefficienti
+di un polinomio $p$, tale che le radici di $p$ appartengono al vettore $r$ 
+($poly: Root[] \rightarrow PolynomialCoefficient[]$).
+Valutando quindi il polinomio in una sua radice (\emph{octave:13}) in aritmetica
+esatta dovrei ottenere 0, mentre in aritmetica finita non \`e vero 
+($p(\pi) = ans =  2.0207e-04 \not = 0$).

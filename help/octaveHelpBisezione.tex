@@ -1,0 +1,82 @@
+\section{Helps for \nameref{sec:metodoDiBisezione} section}
+
+Riporto qui alcune righe di help per le funzioni che verranno utilizzate 
+pi\`u spesso in questo capitolo:
+
+\begin{lstlisting}
+octave:1> help poly
+`poly' is a function from the file /usr/share/octave/3.2.3/m/polynomial/poly.m
+
+ -- Function File:  poly (A)
+     If A is a square N-by-N matrix, `poly (A)' is the row vector of
+     the coefficients of `det (z * eye (N) - a)', the characteristic
+     polynomial of A.  As an example we can use this to find the
+     eigenvalues of A as the roots of `poly (A)'.
+          roots(poly(eye(3)))
+          => 1.00000 - 0.00000i
+          => 1.00000 + 0.00000i
+     In real-life examples you should, however, use the `eig' function
+     for computing eigenvalues.
+
+     If X is a vector, `poly (X)' is a vector of coefficients of the
+     polynomial whose roots are the elements of X.  That is, of C is a
+     polynomial, then the elements of `D = roots (poly (C))' are
+     contained in C.  The vectors C and D are, however, not equal due
+     to sorting and numerical errors.
+
+     See also: eig, roots
+\end{lstlisting}
+
+\begin{lstlisting}
+octave:1> help ones
+`ones' is a built-in function
+
+ -- Built-in Function:  ones (X)
+ -- Built-in Function:  ones (N, M)
+ -- Built-in Function:  ones (N, M, K, ...)
+ -- Built-in Function:  ones (..., CLASS)
+     Return a matrix or N-dimensional array whose elements are all 1.
+     The arguments are handled the same as the arguments for `eye'.
+
+     If you need to create a matrix whose values are all the same, you
+     should use an expression like
+
+          val_matrix = val * ones (n, m)
+\end{lstlisting}
+
+\begin{lstlisting}
+octave:1> help polyval
+`polyval' is a function from the file /usr/share/octave/3.2.3/m/polynomial/polyval.m
+
+ -- Function File: Y = polyval (P, X)
+ -- Function File: Y = polyval (P, X, [], MU)
+     Evaluate the polynomial at of the specified values for X.  When MU
+     is present evaluate the polynomial for (X-MU(1))/MU(2).  If X is a
+     vector or matrix, the polynomial is evaluated for each of the
+     elements of X.
+
+ -- Function File: [Y, DY] = polyval (P, X, S)
+ -- Function File: [Y, DY] = polyval (P, X, S, MU)
+     In addition to evaluating the polynomial, the second output
+     represents the prediction interval, Y +/- DY, which contains at
+     least 50% of the future predictions.  To calculate the prediction
+     interval, the structured variable S, originating form `polyfit',
+     must be present.
+
+     See also: polyfit, polyvalm, poly, roots, conv, deconv, residue,
+     filter, polyderiv, polyinteg
+\end{lstlisting}
+
+\begin{lstlisting}
+octave:14> help ceil
+`ceil' is a built-in function
+
+ -- Mapping Function:  ceil (X)
+     Return the smallest integer not less than X.  This is equivalent to
+     rounding towards positive infinity.  If X is complex, return `ceil
+     (real (X)) + ceil (imag (X)) * I'.
+          ceil ([-2.7, 2.7])
+            =>  -2   3
+
+     See also: floor, round, fix
+\end{lstlisting}
