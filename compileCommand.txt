@@ -1,2 +1,5 @@
 # programma da eseguire all'interno della cartella "Elaborato"
 > latex Elaborato.tex && dvips -t a4 -Ppdf Elaborato.dvi 
+
+# programma Octave per stampare l'output su di un file
+> print 'file.tex' '-dTex' '-S640, 480'
