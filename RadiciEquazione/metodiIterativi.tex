@@ -1,0 +1,111 @@
+\section{Metodi iterativi}
+
+\begin{exercise}[2.2]
+	Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Il metodo da trovare deve convergere a $x^{*} = \sqrt[m]{a}$ che, per l'esercizio
+\ref{exercise:exerciseIterativeMethodFixedPoint}, deve verificare la condizione 
+di consistenza:
+\begin{displaymath}
+	x^{*}=\phi(x^{*}), \quad \quad \phi(x^{*}) = x^{*} - 
+		\frac{f(x^{*})}{f'(x^{*})}
+\end{displaymath}
+Implementando con $\phi$ il metodo di Newton che si chiede di usare.
+Unendo le due uguaglianze sopra si ottiene:
+\begin{equation}
+\label{equation:equalsToZeroRequirement}
+\begin{split}
+	x^{*} &= x^{*} - \frac{f(x^{*})}{f'(x^{*})} \\
+	0 &= f(x^{*})
+\end{split}
+\end{equation}
+La (\ref{equation:equalsToZeroRequirement}) mi da un vincolo per la ricerca
+della $f$. Posso adesso sfruttare la richiesta di convergenza:
+\begin{equation}
+\begin{split}
+	x &= \sqrt[m]{a} \\
+	f(x) = x^{m} - a &= 0
+\end{split}
+\end{equation}
+Ho quindi costruito una funzione che rispetta il vincolo espresso nella
+(\ref{equation:equalsToZeroRequirement}). Scrivo il metodo iterativo:
+\begin{displaymath}
+\begin{split}
+	x_{i+1} &=\phi(x_{i}) \\
+	\phi(x_{i}) &= x_{i} - 
+		\frac{x_{i}^{m} - a}{m x_{i}^{m - 1}} = 
+		\frac{m x_{i}^{m} - x_{i}^{m} + a}{m x_{i}^{m - 1}} = \\
+	&= 	\frac{(m - 1) x_{i}^{m} + a}{m x_{i}^{m - 1}} = 
+			\frac{m - 1}{m} x_{i} + \frac{a}{m x_{i}^{m - 1}}
+\end{split}
+\end{displaymath}
+Verifico adesso che il metodo rispetti la condizione necessaria per la convergenza.
+\begin{proof}
+Per l'esercizio \ref{exercise:exerciseIterativeMethodFixedPoint} vale:
+\begin{equation}
+\begin{split}
+	x &= \frac{m - 1}{m} x + \frac{a}{m x^{m - 1}} \\
+	m x^{m} &= (m - 1) x^{m} + a \\
+	x^{m} (m + 1 - m) &= a \\
+	x^{m} &= a \\
+\end{split}
+\end{equation}
+Il metodo $\phi$ soddisfa la condizione necessaria, converge al valore
+richiesto e questo termina la prova.
+\end{proof}
+
+\begin{exercise}[2.3]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Per la definizione del metodo delle secanti vale:
+\begin{displaymath}
+	x_{i + 1} = \frac{f(x_{i})x_{i-1} - f(x_{i-1})x_{i}}{f(x_{i}) - f(x_{i-1})}
+\end{displaymath}
+Come per l'esercizio precedente, devo verificare che il metodo soddisfi la
+condizione necessaria di convergenza \footnote{qui mi \`e difficile far vedere
+che vale la condizione necessaria, in quanto si annulla il denominatore}.
+La verifica fornisce un vincolo per la funzione $f$ da ricercare: $f(x) = 0$, 
+quindi agisco come nell'esercizio precedente, considerando la richiesta di
+convergenza:
+\begin{equation}
+\begin{split}
+	x &= \sqrt{a} \\
+	f(x) = x^{2} - a &= 0
+\end{split}
+\end{equation}
+Posso adesso sostituire nella definizione del metodo:
+\begin{displaymath}
+\begin{split}
+	x_{i + 1} &= \frac{(x_{i}^{2} - a)x_{i-1} - (x_{i-1}^{2} - a)x_{i}}
+		{x_{i}^{2} - a - (x_{i-1}^{2} - a)}
+			  = \frac{x_{i}^{2} x_{i-1} - a x_{i-1} - 
+						x_{i-1}^{2} x_{i} + a x_{i}}
+					{x_{i}^{2} - x_{i-1}^{2}} = \\
+			  &= \frac{a(x_{i} - x_{i-1}) + x_{i}x_{i-1}(x_{i} - x_{i-1})}
+					{(x_{i} - x_{i-1})(x_{i} + x_{i-1})} 
+			  = \frac{(x_{i} - x_{i-1})(a + x_{i}x_{i-1})}
+					{(x_{i} - x_{i-1})(x_{i} + x_{i-1})} 
+			  = \frac{a + x_{i}x_{i-1}}{x_{i} + x_{i-1}}
+\end{split}
+\end{displaymath}
+Verifico che il metodo caratterizzato soddisfi la condizione necessaria di
+convergenza.
+\begin{proof}
+Per l'esercizio \ref{exercise:exerciseIterativeMethodFixedPoint} vale:
+\begin{displaymath}
+\begin{split}
+\lim_{i\rightarrow\infty}{x_{i}} = x^{*} & = \sqrt{a} \quad\Rightarrow \quad
+x_{i+1} = x_{i} = x_{i-1} = x, \quad \text{segue che} \\
+x &= \frac{a + x^{2}}{2x} \\ 
+2x^{2} &= a + x^{2} \\
+x^{2} &= a
+\end{split}
+\end{displaymath}
+E questo termina la prova.
+\end{proof}
+Comparando con l'\emph{Esercizio 1.4} del libro di testo si vede che il metodo
+proposto in tale esercizio \`e la caratterizzazione del metodo delle secanti 
+qui discusso con la caratterizzazione di $a = 2$:
+\begin{displaymath}
+x_{i + 1} = \frac{2 + x_{i}x_{i-1}}{x_{i} + x_{i-1}}
+\end{displaymath}
