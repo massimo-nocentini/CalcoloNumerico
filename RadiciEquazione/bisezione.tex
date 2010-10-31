@@ -21,3 +21,43 @@ di un polinomio $p$, tale che le radici di $p$ appartengono al vettore $r$
 Valutando quindi il polinomio in una sua radice (\emph{octave:13}) in aritmetica
 esatta dovrei ottenere 0, mentre in aritmetica finita non \`e vero 
 ($p(\pi) = ans =  2.0207e-04 \not = 0$).
+
+\begin{exercise}
+Implementare il metodo di bisezione ed applicarlo alla funzione $\sin(x)$ 
+con intervallo iniziale $[2, 5]$ ed una tollerenza $tolX = 10^{-14}$.
+\end{exercise}
+Per l'implementazione del codice vedere \nameref{sec:bisectionIterativeMethod}.
+\begin{lstlisting}
+octave:45> [x, i, imax, ascisse] = bisectionMethod('sin', 2, 5, e^-14)
+x =  3.14159250259399e+00
+i =  2.10000000000000e+01
+imax =  2.20000000000000e+01
+ascisse =
+ Columns 1 through 3:
+   3.50000000000000e+00   2.75000000000000e+00   3.12500000000000e+00
+ Columns 4 through 6:
+   3.31250000000000e+00   3.21875000000000e+00   3.17187500000000e+00
+ Columns 7 through 9:
+   3.14843750000000e+00   3.13671875000000e+00   3.14257812500000e+00
+ Columns 10 through 12:
+   3.13964843750000e+00   3.14111328125000e+00   3.14184570312500e+00
+ Columns 13 through 15:
+   3.14147949218750e+00   3.14166259765625e+00   3.14157104492188e+00
+ Columns 16 through 18:
+   3.14161682128906e+00   3.14159393310547e+00   3.14158248901367e+00
+ Columns 19 through 21:
+   3.14158821105957e+00   3.14159107208252e+00   3.14159250259399e+00
+
+octave:46> xsin = min(ascisse):0.01:max(ascisse)
+octave:47> ysin = feval('sin', xsin)
+octave:48> plot(xsin, ysin, ascisse, feval('sin', ascisse), '+')
+octave:49> print 'bisectionPlotOutput.tex' '-dTex' '-S700, 500'
+\end{lstlisting}
+Si raggiunge la tolleranza richiesta in 21 passi, uno in meno delle iterazioni
+massime possibili. Questo l'output del comando \emph{octave:49}:
+\begin{center}
+\input{RadiciEquazione/bisectionPlotOutput.tex}
+\end{center}
+Ho rappresentato con la curva in blu la rappresentazione della funzione 
+$\sin(x)$, mentre con tanti simboli $+$ i punti calcolati dal metodo di
+bisezione per convergere alla soluzione $\pi$.
