@@ -93,10 +93,12 @@ ascisse =
    6.28313140869141e+00   6.28318557739258e+00
 octave:52> xsin = min(ascisse):0.01:max(ascisse)
 octave:53> ysin = feval('sin', xsin)
-octave:54> plot(xsin, ysin, ascisse, feval('sin', ascisse), '+')
-octave:55> print 'bisectionWithTwoRootsPlotOutput.tex' '-dTex' '-S700, 500'
+octave:54> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'sin')
+octave:54> plot(xsin, ysin, "c", ascisse, feval('sin', ascisse), "b+", prepX, prepY, "r")
+octave:55> print 'bisectionWithTwoRootsPlotOutput.tex' '-dTex' '-S800, 600'
 \end{lstlisting}
-Si raggiunge la tolleranza richiesta in 17 passi, sette in meno delle iterazioni massime possibili. Questo l'output del comando \emph{octave:55}:
+Si raggiunge la tolleranza richiesta in 17 passi, sette in meno delle iterazioni massime possibili. 
+Questo l'output del comando \emph{octave:55}:
 \begin{center}
 \input{RadiciEquazione/bisectionWithTwoRootsPlotOutput.tex}
 \end{center}
