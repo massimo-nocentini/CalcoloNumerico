@@ -49,17 +49,23 @@ ascisse =
    3.14158821105957e+00   3.14159107208252e+00   3.14159250259399e+00
 octave:46> xsin = min(ascisse):0.01:max(ascisse)
 octave:47> ysin = feval('sin', xsin)
-octave:48> plot(xsin, ysin, ascisse, feval('sin', ascisse), '+')
-octave:49> print 'bisectionPlotOutput.tex' '-dTex' '-S700, 500'
+octave:48> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'sin')
+octave:49> plot(xsin, ysin, "c", ascisse, feval('sin', ascisse), "b+", prepX, prepY, "r")
+octave:50> print 'bisectionPlotOutput.tex' '-dTex' '-S800, 600'
 \end{lstlisting}
 Si raggiunge la tolleranza richiesta in 21 passi, uno in meno delle iterazioni
-massime possibili. Questo l'output del comando \emph{octave:49}:
+massime possibili. Questo l'output del comando \emph{octave:50}:
 \begin{center}
 \input{RadiciEquazione/bisectionPlotOutput.tex}
 \end{center}
-Ho rappresentato con la curva in blu la rappresentazione della funzione 
-$\sin(x)$, mentre con tanti simboli '$+$' in verde i punti calcolati dal
-metodo di bisezione per convergere allo zero $\pi$.
+Ho rappresentato nel grafico tre curve: 
+\begin{itemize}
+  \item con la curva cyan la rappresentazione della funzione $\sin(x)$
+  \item con la curva blu, composta da pochi simboli '$+$', i punti
+  calcolati dal metodo di bisezione per convergere allo zero $\pi$
+  \item con la curva rossa il metodo di bisezione per visualizzare
+  la sequenza con cui si procede per convergere alla soluzione.
+\end{itemize}
 
 \begin{exercise}
 Implementare il metodo di bisezione ed applicarlo alla funzione $\sin(x)$ 
@@ -94,9 +100,14 @@ Si raggiunge la tolleranza richiesta in 17 passi, sette in meno delle iterazioni
 \begin{center}
 \input{RadiciEquazione/bisectionWithTwoRootsPlotOutput.tex}
 \end{center}
-Ho rappresentato con la curva in blu la rappresentazione della funzione 
-$\sin(x)$, mentre con tanti simboli '$+$' in verde i punti calcolati dal
-metodo di bisezione per convergere allo zero $2\pi$.
+Ho rappresentato nel grafico tre curve: 
+\begin{itemize}
+  \item con la curva cyan la rappresentazione della funzione $\sin(x)$
+  \item con la curva blu, composta da pochi simboli '$+$', i punti
+  calcolati dal metodo di bisezione per convergere allo zero $2\pi$
+  \item con la curva rossa il metodo di bisezione per visualizzare
+  la sequenza con cui si procede per convergere alla soluzione.
+\end{itemize}
 
 Da questo esercizio si vede che il metodo di bisezione converge comunque
 ad una radice, anche nel caso in cui nell'intervallo di confidenza ci sono
