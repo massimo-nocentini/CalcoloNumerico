@@ -7,6 +7,7 @@ con innesco iniziale $x_{0} = 7$, una tollerenza assoluta e relativa
 $tol_{X} = rTol_{X} = 10^{-14}$ ed un numero massimo di iterazioni
 $i_{max} = 10^{2}$.
 \end{exercise}
+Per l'implementazione del codice vedere \nameref{sec:newtonIterativeMethod}.
 \begin{lstlisting}
 octave:112> [x, i, ascisse] = newtonMethod('singleZero', 'singleZeroDerivative', 7, e^(2), e^(-14), e^(-14))
 x =  3.40512483795333e+00
