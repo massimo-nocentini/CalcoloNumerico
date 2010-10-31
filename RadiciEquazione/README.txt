@@ -38,3 +38,13 @@ di ogni "octave:x>", in questo modo posso sempre rieseguire il metodo.
 
 OSSERVAZIONE: e' importante riportare qualsiasi modifica fatta al sorgente
 altrimenti si riproduce un metodo zoppo! 
+
+-------------------------------------------------------------------------------
+
+Per avviare Octave permettendo di poter lavorare correttamente con le invocazioni
+dei delegati e' necessario portarsi nella cartella degli script desiderata
+(i.e. Elaborato/listings/chapterTwo/) ed avviare Octave, adesso abbiamo a disposizione
+tutte le funzioni necessarie per poter rieseguire gli esempi del testo. 
+
+-------------------------------------------------------------------------------
+

@@ -11,14 +11,21 @@
 ## (per riferirmi sempre all'asse delle ascisse) ed una coordinata
 ## la valutazione della funzione.
 
-function [ preparedXs, preparedYs ] = prepareForPlottingMethodSegments(ascisse, f_name)
+function [ preparedXs, preparedYs ] = prepareForPlottingMethodSegments(ascisse, f_name, f_argument)
 preparedXs = [];
 preparedYs = [];
+%if f_name == 'invokeDelegate'
+%	ascisse = feval(f_name, f_argument, ascisse);
+%end
 for i = 1:length(ascisse)
 	preparedXs = [preparedXs ascisse(i)];
 	preparedXs = [preparedXs ascisse(i)];
-	
+
 	preparedYs = [preparedYs 0];
-	preparedYs = [preparedYs feval(f_name, ascisse(i))];
+	if f_name == 'invokeDelegate'
+		preparedYs = [preparedYs feval(f_name, f_argument, ascisse(i))];
+	else
+		preparedYs = [preparedYs feval(f_name, ascisse(i))];
+	end
 end
 endfunction

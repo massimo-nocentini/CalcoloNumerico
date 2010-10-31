@@ -1,0 +1,30 @@
+\section{Metodo di Newton}
+\label{sec:metodoDiNewton}
+
+\begin{exercise}
+Implementare il metodo di newton ed applicarlo alla funzione \emph{singleZero},
+con innesco iniziale $x_{0} = 7$, una tollerenza assoluta e relativa
+$tol_{X} = rTol_{X} = 10^{-14}$ ed un numero massimo di iterazioni
+$i_{max} = 10^{2}$.
+\end{exercise}
+\begin{lstlisting}
+octave:112> [x, i, ascisse] = newtonMethod('singleZero', 'singleZeroDerivative', 7, e^(2), e^(-14), e^(-14))
+x =  3.40512483795333e+00
+i =  4.00000000000000e+00
+ascisse =
+ Columns 1 through 3:
+   7.00000000000000e+00   4.26666666666667e+00   3.48298368298368e+00
+ Columns 4 through 6:
+   3.40588582522216e+00   3.40512491208525e+00   3.40512483795333e+00
+octave:113> xSingleZero = min(ascisse)-1:0.1:max(ascisse)+1
+octave:114> ySingleZero = invokeDelegate('singleZero', xSingleZero)
+octave:115> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'invokeDelegate', 'singleZero')
+octave:116> plot(xSingleZero, ySingleZero, "c", ascisse, invokeDelegate('singleZero', ascisse), "b+", prepX, prepY, "r")
+octave:117> grid
+octave:118> print 'newtonPlotOutput.tex' '-dTex' '-S800, 600'
+\end{lstlisting}
+Si raggiunge la tolleranza richiesta in 4 passi. Questo l'output del comando
+\emph{octave:118}:
+\begin{center}
+\input{RadiciEquazione/newton/newtonPlotOutput.tex}
+\end{center}
