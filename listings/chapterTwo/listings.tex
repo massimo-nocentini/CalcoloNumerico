@@ -19,3 +19,18 @@ vale $i = length(ascisse) + 2$ in quanto nel ciclo \emph{while} colleziono
 $length(ascisse)$ valori, pi\`u uno per il valore di innesco iniziale, pi\`u uno
 per l'ultimo valore appena usciti dal ciclo \emph{while}.
 \lstinputlisting{listings/chapterTwo/newtonMethod.m}
+
+\section{Varianti del metodo di Newton}
+\subsection{Molteplicit\`a dello zero nota}
+\label{subsec:newtonMethodMultKnown}
+Questa implementazione utilizza il criterio di arresto esposto nell'
+\emph{Osservazione 2.3} nel caso di radici multiple, ovvero il criterio di
+arresto sar\`a dato da:
+\begin{displaymath}
+	|x_{i+1} - x_{i}| \leq \frac{1-c}{c}tol_{X}
+\end{displaymath}
+Ricavo in modo dinamico la costante $c$, usando le tre iterate pi\`u recenti:
+\begin{displaymath}
+	c \approx \frac{|x_{i} - x_{i-1}|}{|x_{i-1} - x_{i-2}|}
+\end{displaymath}
+\lstinputlisting{listings/chapterTwo/newtonMethodMoltKnown.m}
