@@ -21,8 +21,15 @@ per l'ultimo valore appena usciti dal ciclo \emph{while}.
 \lstinputlisting{listings/chapterTwo/newtonMethod.m}
 
 \section{Varianti del metodo di Newton}
+
 \subsection{Molteplicit\`a dello zero nota}
 \label{subsec:newtonMethodMultKnown}
+Questa implementazione utilizza il criterio di arresto esposto nell'
+\emph{Osservazione 2.3} nel caso di radici multiple.
+\lstinputlisting{listings/chapterTwo/newtonMethodMoltKnown.m}
+
+\subsection{Molteplicit\`a dello zero nota con criterio di arresto lineare}
+\label{subsec:newtonMethodMultKnownLinearStopCriteria}
 Questa implementazione utilizza il criterio di arresto esposto nell'
 \emph{Osservazione 2.3} nel caso di radici multiple, ovvero il criterio di
 arresto sar\`a dato da:
@@ -37,4 +44,4 @@ Posso usare questa approssimazione in quanto $m > 1$ per ipotesi del problema,
 quindi per il \emph{Teorema 2.2}, il metodo di Newton converge linearmente verso zeri
 multipli, 
 condizione necessaria per applicare questo criterio di arresto.
-\lstinputlisting{listings/chapterTwo/newtonMethodMoltKnown.m}
+\lstinputlisting{listings/chapterTwo/newtonMethodMoltKnownLinearCriteria.m}
