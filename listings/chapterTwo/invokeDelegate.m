@@ -61,3 +61,21 @@ endfunction
 function [ ret ] = functionNewtonRecursionDerivative (x)
 	ret = 3 * x^(2) - 5;
 endfunction
+
+# funzione relativa all'esercizio 2.5
+function [ ret ] = function25first (x)
+	ret = (x - 1)^(10);
+endfunction
+
+function [ ret ] = function25firstDerivative (x)
+	ret = 10 * (x - 1)^(9);
+endfunction
+
+# funzione relativa all'esercizio 2.5
+function [ ret ] = function25second (x)
+	ret = (x - 1)^(10) * exp(x);
+endfunction
+
+function [ ret ] = function25secondDerivative (x)
+	ret = exp(x) * (10 * (x - 1)^(9) + (x - 1)^(10));
+endfunction
