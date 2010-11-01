@@ -51,3 +51,47 @@ dei passi fissati dal parametro $i_{max}$. Questo l'output del comando \emph{oct
 \begin{center}
 \input{RadiciEquazione/newton/newtonNoZeroPlotOutput.tex}
 \end{center}
+
+\begin{exercise}[2.4]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Per l'implementazione del codice vedere \nameref{sec:newtonIterativeMethod}.
+
+Nel primo caso studio il punto di innesco $x_{0} = 10$:
+\begin{lstlisting}
+octave:112> [x, i, ascisse] = newtonMethod('functionNewtonRecursion','functionNewtonRecursionDerivative', 10, 5e1, 1e-14, 1e-14)
+x =  2.23606797749979e+00
+i =  9.00000000000000e+00
+ascisse = [too long to report here]
+octave:113> xNoZero = min(ascisse)-1:0.1:max(ascisse)+1
+octave:114> yNoZero = invokeDelegate('functionNewtonRecursion', xNoZero)
+octave:115> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'invokeDelegate', 'functionNewtonRecursion')
+octave:116> plot(xNoZero, yNoZero, "c", ascisse,invokeDelegate('functionNewtonRecursion', ascisse), "b+", prepX, prepY, "r")
+octave:117> grid
+octave:118> print 'newtonRecursivePlotOutput.tex' '-dTex' '-S800, 600'
+\end{lstlisting}
+Si raggiunge la convergenza con 9 passi. Questo l'output del comando
+\emph{octave:118}:
+\begin{center}
+\input{RadiciEquazione/newton/newtonRecursivePlotOutput.tex}
+\end{center}
+
+Nel secondo caso studio il punto di innesco $x_{0} = 1$:
+\begin{lstlisting}
+octave:112> [x, i, ascisse] = newtonMethod('functionNewtonRecursion','functionNewtonRecursionDerivative', 1, 5e1, 1e-14, 1e-14)
+Il metodo non converge.
+x = -1.00000000000000e+00
+i =  5.00000000000000e+01
+ascisse = [too long to report here]
+octave:113> xNoZero = min(ascisse)-1:0.1:max(ascisse)+1
+octave:114> yNoZero = invokeDelegate('functionNewtonRecursion', xNoZero)
+octave:115> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'invokeDelegate', 'functionNewtonRecursion')
+octave:116> plot(xNoZero, yNoZero, "c", ascisse,invokeDelegate('functionNewtonRecursion', ascisse), "b+", prepX, prepY, "r")
+octave:117> grid
+octave:118> print 'newtonRecursiveNotConvergencePlotOutput.tex' '-dTex' '-S800,600'
+\end{lstlisting}
+Il metodo non converge creando una finestra come si vede nel grafico. Questo
+l'output del comando \emph{octave:118}:
+\begin{center}
+\input{RadiciEquazione/newton/newtonRecursiveNotConvergencePlotOutput.tex}
+\end{center}

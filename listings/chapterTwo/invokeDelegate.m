@@ -53,3 +53,11 @@ endfunction
 function [ ret ] = functionWithNoRealZeroDerivative (x)
 	ret = 2*x + 1;
 endfunction
+
+function [ ret ] = functionNewtonRecursion (x)
+	ret = x^(3) - 5 * x;
+endfunction
+
+function [ ret ] = functionNewtonRecursionDerivative (x)
+	ret = 3 * x^(2) - 5;
+endfunction
