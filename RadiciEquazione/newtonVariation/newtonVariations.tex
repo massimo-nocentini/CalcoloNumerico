@@ -7,8 +7,8 @@ Per il testo dell'esercizio consultare il libro di testo.
 
 Per l'implementazione del codice vedere \nameref{sec:newtonIterativeMethod},
 \nameref{subsec:newtonMethodMultKnown},
-\\\nameref{subsec:newtonMethodMultKnownLinearStopCriteria}, \footnote{inserire
-qui anche il riferimento al metodo di Aitken}.
+\\\nameref{subsec:newtonMethodMultKnownLinearStopCriteria},
+\nameref{subsec:newtonMethodAitken}.
 
 I seguenti risultati sono stati generati invocando lo script
 \nameref{subsec:ScriptEser25}:
@@ -16,125 +16,98 @@ I seguenti risultati sono stati generati invocando lo script
 octave:221> scriptExercise25
 \end{lstlisting}
 
-\begin{description}
-\item[metodo di Newton standard] Applicazione alla funzione $function25first$:
-\begin{lstlisting}
-application with tolx =0.01
-x =  1.18248003631401e+00
-i =  3.60000000000000e+01
-application with tolx =0.0001
-x =  1.00176964345428e+00
-i =  8.00000000000000e+01
-application with tolx =1e-06
-x =  1.00001716153733e+00
-i =  1.24000000000000e+02
-application with tolx =1e-08
-x =  1.00000016642808e+00
-i =  1.68000000000000e+02
-application with tolx =1e-10
-x =  1.00000000179331e+00
-i =  2.11000000000000e+02
-application with tolx =1e-12
-x =  1.00000000001739e+00
-i =  2.55000000000000e+02
-application with tolx =1e-14
-x =  1.00000000000017e+00
-i =  2.99000000000000e+02
-application with tolx =1e-16
-x =  1.00000000000000e+00
-i =  3.48000000000000e+02
-\end{lstlisting}
+Nella seguente tabella riporto l'applicazione dei metodi richiesti:
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|}
+ \multicolumn{1}{c}{} & 
+ \multicolumn{2}{c}{function25first} &
+ \multicolumn{2}{c}{function25second}
+ \\
+\cline{2-5}
+	\multicolumn{5}{c}{\textbf{Newton standard}} \\
+\hline
+	$tol_{X}$ & steps & x & steps & x \\
+\hline
+	$0.01$ & $3.60000000000000e+01$ & $1.18248003631401e+00$ &
+	$4.50000000000000e+01$ & $1.18529447118482e+00$ \\
+		
+	$0.0001$ & $8.00000000000000e+01$ & $1.00176964345428e+00$ & 
+	$9.00000000000000e+01$ & $1.00165056388247e+00$ \\
 
-Applicazione alla funzione $function25second$:
-\begin{lstlisting}
-application with tolx =0.01
-x =  1.18529447118482e+00
-i =  4.50000000000000e+01
-application with tolx =0.0001
-x =  1.00165056388247e+00
-i =  9.00000000000000e+01
-application with tolx =1e-06
-x =  1.00001778848790e+00
-i =  1.33000000000000e+02
-application with tolx =1e-08
-x =  1.00000017250842e+00
-i =  1.77000000000000e+02
-application with tolx =1e-10
-x =  1.00000000167294e+00
-i =  2.21000000000000e+02
-application with tolx =1e-12
-x =  1.00000000001622e+00
-i =  2.65000000000000e+02
-application with tolx =1e-14
-x =  1.00000000000017e+00
-i =  3.08000000000000e+02
-application with tolx =1e-16
-x =  1.00000000000000e+00
-i =  3.56000000000000e+02
-\end{lstlisting}
+	$1e-06$ & $1.24000000000000e+02$ & $1.00001716153733e+00$ &
+	$1.33000000000000e+02$ & $1.00001778848790e+00$ \\
 
-\item[metodo di Newton modificato] Applicazione alla funzione $function25first$:
-\begin{lstlisting}
-application with tolx =0.01
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-application with tolx =0.0001
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-application with tolx =1e-06
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-application with tolx =1e-08
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-application with tolx =1e-10
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-application with tolx =1e-12
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-application with tolx =1e-14
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-application with tolx =1e-16
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  1.00000000000000e+00
-\end{lstlisting}
+	$1e-08$ & $1.68000000000000e+02$ & $1.00000016642808e+00$ & 
+	$1.77000000000000e+02$ & $1.00000017250842e+00$ \\ 
 
-Applicazione alla funzione $function25second$:
-\begin{lstlisting}
-application with tolx =0.01
-x =  1.00000041794715e+00
-i =  4.00000000000000e+00
-application with tolx =0.0001
-x =  1.00000000000002e+00
-i =  5.00000000000000e+00
-application with tolx =1e-06
-x =  1.00000000000002e+00
-i =  5.00000000000000e+00
-application with tolx =1e-08
-x =  1.00000000000000e+00
-i =  6.00000000000000e+00
-application with tolx =1e-10
-x =  1.00000000000000e+00
-i =  6.00000000000000e+00
-application with tolx =1e-12
-x =  1.00000000000000e+00
-i =  6.00000000000000e+00
-application with tolx =1e-14
-x =  1.00000000000000e+00
-i =  6.00000000000000e+00
-application with tolx =1e-16
-f(x) = f1(x) = 0
-x =  1.00000000000000e+00
-i =  7.00000000000000e+00
-\end{lstlisting}
-\end{description}
+	$1e-10$ & $2.11000000000000e+02$ & $1.00000000179331e+00$ & 
+	$2.21000000000000e+02$ & $1.00000000167294e+00$ \\
+
+	$1e-12$ & $2.55000000000000e+02$ & $1.00000000001739e+00$ & 
+	$2.65000000000000e+02$ & $1.00000000001622e+00$ \\
+
+	$1e-14$ & $2.99000000000000e+02$ & $1.00000000000017e+00$ &
+	$3.08000000000000e+02$ & $1.00000000000017e+00$ \\
+
+	$1e-16$ & $3.48000000000000e+02$ & $1.00000000000000e+00$ & 
+	$3.56000000000000e+02$ & $1.00000000000000e+00$ \\ 
+\hline
+	\multicolumn{5}{c}{\textbf{Newton modificato}} \\
+\hline
+	$tol_{X}$ & steps & x & steps & x \\
+\hline
+	$0.01$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$4.00000000000000e+00$ & $1.00000041794715e+00$ \\
+		
+	$0.0001$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ & 
+	$5.00000000000000e+00$ & $1.00000000000002e+00$ \\
+
+	$1e-06$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$5.00000000000000e+00$ & $1.00000000000002e+00$ \\
+
+	$1e-08$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ & 
+	$6.00000000000000e+00$ & $1.00000000000000e+00$ \\ 
+
+	$1e-10$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$6.00000000000000e+00$ & $1.00000000000000e+00$ \\ 
+
+	$1e-12$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ & 
+	$6.00000000000000e+00$ & $1.00000000000000e+00$ \\ 
+
+	$1e-14$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$6.00000000000000e+00$ & $1.00000000000000e+00$ \\ 
+
+	$1e-16$ & $1.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$7.00000000000000e+00$ & $1.00000000000000e+00$ \\ 
+\hline
+	\multicolumn{5}{c}{\textbf{Newton Aitken}} \\
+\hline
+	$tol_{X}$ & steps & x & steps & x \\
+\hline
+	$0.01$ & $2.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$6.00000000000000e+00$ & $9.99999983328898e-01$ \\
+		
+	$0.0001$ & $2.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$7.00000000000000e+00$ & $1.00000000000000e+00$ \\
+
+	$1e-06$ & $2.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$7.00000000000000e+00$ & $1.00000000000000e+00$ \\
+
+	$1e-08$ & $2.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$7.00000000000000e+00$ & $1.00000000000000e+00$ \\
+
+	$1e-10$ & $2.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$8.00000000000000e+00$ & $1.00000000000000e+00$ \\
+
+	$1e-12$ & $2.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$8.00000000000000e+00$ & $1.00000000000000e+00$ \\
+
+	$1e-14$ & $3.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$8.00000000000000e+00$ & $1.00000000000000e+00$ \\
+
+	$1e-16$ & $3.00000000000000e+00$ & $1.00000000000000e+00$ &
+	$8.00000000000000e+00$ & $1.00000000000000e+00$ \\
+\hline
+\end{tabular}
+\end{center}
+
