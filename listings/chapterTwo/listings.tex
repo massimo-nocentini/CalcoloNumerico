@@ -11,4 +11,11 @@
 
 \section{Metodo di Newton}
 \label{sec:newtonIterativeMethod}
+Questa implementazione utilizza il criterio di arresto esposto nell'
+\emph{Osservazione 2.3} nel caso di radici semplici.
+
+Una osservazione sul numero di passi effettuati: per la mia implementazione
+vale $i = length(ascisse) + 2$ in quanto nel ciclo \emph{while} colleziono
+$length(ascisse)$ valori, pi\`u uno per il valore di innesco iniziale, pi\`u uno
+per l'ultimo valore appena usciti dal ciclo \emph{while}.
 \lstinputlisting{listings/chapterTwo/newtonMethod.m}

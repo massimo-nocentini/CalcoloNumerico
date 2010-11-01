@@ -28,33 +28,22 @@ con intervallo iniziale $[2, 5]$ ed una tollerenza $tol_{X} = 10^{-14}$.
 \end{exercise}
 Per l'implementazione del codice vedere \nameref{sec:bisectionIterativeMethod}.
 \begin{lstlisting}
-octave:45> [x, i, imax, ascisse] = bisectionMethod('sin', 2, 5, e^-14)
-x =  3.14159250259399e+00
-i =  2.10000000000000e+01
-imax =  2.20000000000000e+01
-ascisse =
- Columns 1 through 3:
-   3.50000000000000e+00   2.75000000000000e+00   3.12500000000000e+00
- Columns 4 through 6:
-   3.31250000000000e+00   3.21875000000000e+00   3.17187500000000e+00
- Columns 7 through 9:
-   3.14843750000000e+00   3.13671875000000e+00   3.14257812500000e+00
- Columns 10 through 12:
-   3.13964843750000e+00   3.14111328125000e+00   3.14184570312500e+00
- Columns 13 through 15:
-   3.14147949218750e+00   3.14166259765625e+00   3.14157104492188e+00
- Columns 16 through 18:
-   3.14161682128906e+00   3.14159393310547e+00   3.14158248901367e+00
- Columns 19 through 21:
-   3.14158821105957e+00   3.14159107208252e+00   3.14159250259399e+00
-octave:46> xsin = min(ascisse):0.01:max(ascisse)
-octave:47> ysin = feval('sin', xsin)
-octave:48> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, "sin", "")
-octave:49> plot(xsin, ysin, "c", ascisse, feval('sin', ascisse), "b+", prepX, prepY, "r")
-octave:50> print 'bisectionPlotOutput.tex' '-dTex' '-S800, 600'
+octave:45> [x, i, imax, ascisse] = bisectionMethod('sin', 2, 5, 1e-14)
+x =  3.14159265358980e+00
+i =  4.60000000000000e+01
+imax =  4.90000000000000e+01
+ascisse = [too long to report here]
+octave:46> length(ascisse)
+ans =  4.60000000000000e+01
+octave:47> xsin = min(ascisse):0.01:max(ascisse)
+octave:48> ysin = feval('sin', xsin)
+octave:49> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, "sin", "")
+octave:50> plot(xsin, ysin, "c", ascisse, feval('sin', ascisse), "b+", prepX,prepY, "r") 
+octave:51> grid
+octave:52> print 'bisectionPlotOutput.tex' '-dTex' '-S800, 600'
 \end{lstlisting}
-Si raggiunge la tolleranza richiesta in 21 passi, uno in meno delle iterazioni
-massime possibili. Questo l'output del comando \emph{octave:50}:
+Si raggiunge la tolleranza richiesta in 46 passi, tre in meno delle iterazioni
+massime possibili. Questo l'output del comando \emph{octave:52}:
 \begin{center}
 \input{RadiciEquazione/bisection/bisectionPlotOutput.tex}
 \end{center}
@@ -66,32 +55,22 @@ intervallo di confidenza, ed una tollerenza $tol_{X} = 10^{-14}$.
 \end{exercise}
 Per l'implementazione del codice vedere \nameref{sec:bisectionIterativeMethod}.
 \begin{lstlisting}
-octave:51> [x, i, imax, ascisse] = bisectionMethod('sin', -0.1, 7, e^-14)
-x =  6.28318557739258e+00
-i =  1.70000000000000e+01
-imax =  2.40000000000000e+01
-ascisse =
- Columns 1 through 3:
-   3.45000000000000e+00   5.22500000000000e+00   6.11250000000000e+00
- Columns 4 through 6:
-   6.55625000000000e+00   6.33437500000000e+00   6.22343750000000e+00
- Columns 7 through 9:
-   6.27890625000000e+00   6.30664062500000e+00   6.29277343750000e+00
- Columns 10 through 12:
-   6.28583984375000e+00   6.28237304687500e+00   6.28410644531250e+00
- Columns 13 through 15:
-   6.28323974609375e+00   6.28280639648438e+00   6.28302307128906e+00
- Columns 16 and 17:
-   6.28313140869141e+00   6.28318557739258e+00
-octave:52> xsin = min(ascisse):0.01:max(ascisse)
-octave:53> ysin = feval('sin', xsin)
-octave:54> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, "sin", "")
-octave:55> plot(xsin, ysin, "c", ascisse, feval('sin', ascisse), "b+", prepX,
-prepY, "r") 
-octave:56> print 'bisectionWithTwoRootsPlotOutput.tex' '-dTex' '-S800, 600'
+octave:51> [x, i, imax, ascisse] = bisectionMethod('sin', -0.1, 7, 1e-14)
+x =  6.28318530717958e+00
+i =  4.70000000000000e+01
+imax =  5.00000000000000e+01
+ascisse = [too long to report here]
+octave:52> length(ascisse)
+ans =  4.70000000000000e+01
+octave:53> xsin = min(ascisse):0.01:max(ascisse)
+octave:54> ysin = feval('sin', xsin)
+octave:55> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, "sin", "")
+octave:56> plot(xsin, ysin, "c", ascisse, feval('sin', ascisse), "b+", prepX,prepY, "r") 
+octave:57> grid
+octave:58> print 'bisectionWithTwoRootsPlotOutput.tex' '-dTex' '-S800, 600'
 \end{lstlisting}
-Si raggiunge la tolleranza richiesta in 17 passi, sette in meno delle iterazioni massime possibili. 
-Questo l'output del comando \emph{octave:56}:
+Si raggiunge la tolleranza richiesta in 47 passi, tre in meno delle iterazioni
+massime possibili. Questo l'output del comando \emph{octave:58}:
 \begin{center}
 \input{RadiciEquazione/bisection/bisectionWithTwoRootsPlotOutput.tex}
 \end{center}

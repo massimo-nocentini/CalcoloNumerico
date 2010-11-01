@@ -9,7 +9,9 @@
 ## Per evitare di costruire un file per ogni funzione che viene usata dalle 
 ## applicazioni, ho costruito questo oggetto come un "invocatore" di funzioni mono-
 ## parametro, in modo da inserire in questo file tutte le funzioni di cui ho 
-## bisogno nelle applicazioni dei vari metodi.
+## bisogno nelle applicazioni dei vari metodi. Questo oggetto rappresenta un 
+## entry-point per le funzioni successive alla sua dichiarazione, le quali vengono
+## nascoste da invokeDelegate.
 ##
 ## Input: 
 ## 	- function_name: nome della funzione che si vuole invocare, in formato stringa
@@ -42,4 +44,12 @@ endfunction
 
 function [ ret ] = singleZeroDerivative (x)
 	ret = (x + 4) + (x - 3);
+endfunction
+
+function [ ret ] = functionWithNoRealZero (x)
+	ret = x^(2) + x + 1;
+endfunction
+
+function [ ret ] = functionWithNoRealZeroDerivative (x)
+	ret = 2*x + 1;
 endfunction
