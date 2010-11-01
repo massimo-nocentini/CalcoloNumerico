@@ -33,4 +33,8 @@ Ricavo in modo dinamico la costante $c$, usando le tre iterate pi\`u recenti:
 \begin{displaymath}
 	c \approx \frac{|x_{i} - x_{i-1}|}{|x_{i-1} - x_{i-2}|}
 \end{displaymath}
+Posso usare questa approssimazione in quanto $m > 1$ per ipotesi del problema,
+quindi per il \emph{Teorema 2.2}, il metodo di Newton converge linearmente verso zeri
+multipli, 
+condizione necessaria per applicare questo criterio di arresto.
 \lstinputlisting{listings/chapterTwo/newtonMethodMoltKnown.m}
