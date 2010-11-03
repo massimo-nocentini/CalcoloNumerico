@@ -32,6 +32,13 @@ if f1x==0
 end
 
 x= x0-(fx/f1x);
+# la condizione del while utilizza una sottrazione, mal condizionata quando
+# x e x0 sono vicini (ovvero quando il passo tende alla soluzione ricercata).
+# provare a sostituire questo algoritmo usando invece il rapporto tra funzione
+# e derivata. Non importa nessun controllo se la derivata e' null in quanto
+# vengono eseguiti gia all'interno dell'algoritmo (righe 30 e 51)
+# utilizzare il pattern strategy e passare un argomento al metodo per indicare
+# quale strategia si desidera utilizzare.
 while (i<itmax) & ((abs(x-x0)/(tolx+rtolx*(abs(x))))>1)
 	i = i+1;
 	x0 = x;
