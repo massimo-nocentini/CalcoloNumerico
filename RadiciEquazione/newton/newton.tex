@@ -9,7 +9,7 @@ $i_{max} = 10^{2}$.
 \end{exercise}
 Per l'implementazione del codice vedere \nameref{sec:newtonIterativeMethod}.
 \begin{lstlisting}
-octave:112> [x, i, ascisse] = newtonMethod('singleZero', 'singleZeroDerivative',7, 1e2, 1e-14, 1e-14) 
+octave:112> [x, i, ascisse] = newtonMethod('singleZero','singleZeroDerivative',7, 1e2, 1e-14, 1e-14, 'incrementCriterion') 
 x =  3.40512483795333e+00
 i =  5.00000000000000e+00
 ascisse = [too long to report here]
@@ -25,6 +25,36 @@ Si raggiunge la tolleranza richiesta in 5 passi. Questo l'output del comando
 \begin{center}
 \input{RadiciEquazione/newton/newtonPlotOutput.tex}
 \end{center}
+\begin{paragraph}{Osservazione}
+Per l'applicazione eseguita sopra ho utilizzato il criterio di arresto
+\emph{incremento}, il metodo converge, ma posso studiare il condizionamento che
+affetta ogni valutazione della precisione richiesta. Questo il codice che
+dimostra questo condizionamento, comparando l'applicazione del metodo usando il
+criterio di arresto per \emph{residuo}:
+\begin{lstlisting}
+[x, i, incAscisse, incChecked] = newtonMethod('singleZero','singleZeroDerivative', 7, 1e2, 10^(-14), 10^(-14), 'incrementCriterion');
+octave:138> i
+i =  5.00000000000000e+00
+octave:139> errors = errorMonitor(incAscisse)
+errors =
+   4.12195121951219e+00   9.88875669244497e+00   8.93522817393261e+01   8.95110152113953e+03   9.18666331414061e+07   7.66765947567831e+15
+octave:140> incChecked 
+incChecked =
+   2.73333333333333e+00   7.83682983682984e-01   7.70978577615202e-02   7.60913136916397e-04   7.41319183816813e-08   8.88178419700125e-16
+octave:141> [x, i, resAscisse, resChecked] = newtonMethod('singleZero','singleZeroDerivative', 7, 1e2, 10^(-14), 10^(-14), 'residueCriterion');
+octave:142> resChecked 
+resChecked =
+   2.73333333333333e+00   7.83682983682984e-01   7.70978577615201e-02   7.60913136916414e-04   7.41319183470686e-08   6.82317562092805e-16
+octave:143> i
+i =  5.00000000000000e+00
+\end{lstlisting}
+Si osserva che i valori utilizzati nel controllo per il raggiungimento della
+precisione richiesta sono uguali tranne l'ultimo, il metodo che usa il criterio
+\emph{residueCriterion} \`e pi\`u accurato, in quanto non \`e affetto dalla
+cancellazione numerica (per l'ultima coppia di ascisse trovata il fattore di
+amplificazione \`e $k = 7.66765947567831e+15$). I due metodi utilizzano comunque
+lo stesso numero di passi per convergere alla soluzione.
+\end{paragraph}
 
 \begin{exercise}
 Implementare il metodo di newton ed applicarlo alla funzione \emph{functionWithNoRealZero},

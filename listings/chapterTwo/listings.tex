@@ -5,6 +5,9 @@
 \subsection{prepareForPlottingMethodSegments}
 \lstinputlisting{listings/chapterTwo/prepareForPlottingMethodSegments.m}
 
+\subsection{errorMonitor}
+\lstinputlisting{listings/chapterTwo/errorMonitor.m}
+
 \section{Metodo di bisezione}
 \label{sec:bisectionIterativeMethod}
 \lstinputlisting{listings/chapterTwo/bisectionMethod.m}
@@ -18,6 +21,30 @@ Una osservazione sul numero di passi effettuati: per la mia implementazione
 vale $i = length(ascisse) + 2$ in quanto nel ciclo \emph{while} colleziono
 $length(ascisse)$ valori, pi\`u uno per il valore di innesco iniziale, pi\`u uno
 per l'ultimo valore appena usciti dal ciclo \emph{while}.
+
+L'implementazione di questo oggetto matematico permette di specificare il
+criterio di arresto da utilizzare. Sono disponibili due criteri, quello per
+\emph{incremento} e per \emph{residuo}. Ho introdotto la possibilit\`a di
+scegliere fra due criteri di arresto in quanto se si utilizza l'implementazione
+proposta (criterio del \emph{residuo}) si va in contro al fenomeno della
+cancellazione numerica, in quanto $x_{i+1} \approx x_{i}$ per $i \rightarrow
+\infty$ (vedere esercizio \ref{exercise:numericalEraseExercise}). Per questo
+motivo implemento un secondo criterio di arresto, per \emph{residuo}, basandomi
+sull'idea dell'equazione $(2.14)$ e sull'\emph{Osservazione 2.3}, ottengo:
+\begin{displaymath}
+\frac{\frac{f(x_{i})}{f'(x_{i})}}{rtol_{X}|x_{i + 1}| + tol_{X}} \leq 1
+\end{displaymath}
+Questo criterio risulta essere pi\`u robusto dal punto di vista implementativo:
+\begin{itemize}
+  \item usando il rapporto $\frac{f}{f'}$ si ha un'operazione di macchina sempre
+  ben condizionata ($k = 2$ per l'equazione del testo $(1.25)$), mentre usando
+  la differenza introdurrei nella valutazione del criterio di arresto un errore
+  con un alto fattore di amplificazione.
+  \item la somma al denominatore risulta sempre ben condizionata, per\`o \`e
+  importante eseguire la somma con l'ordine degli addendi scritto nella
+  precedente equazione. Questo permette di perdere cifre significative quando il
+  primo operando \`e molto piccolo.
+\end{itemize}
 \lstinputlisting{listings/chapterTwo/newtonMethod.m}
 
 \section{Varianti del metodo di Newton}

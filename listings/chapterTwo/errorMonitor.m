@@ -5,9 +5,6 @@
 ## I fattori di amplificazione sono calcolati tra valori adiacenti, per questo
 ## motivo vale questa legge length(array) = length(error) + 1.
 
-## Author: Massimo Nocentini <mnocentini@mnocentini-ws>
-## Created: 2010-11-03
-
 function [ errors ] = errorMonitor (array)
 errors = [];
 for i = 1:length(array) - 1
