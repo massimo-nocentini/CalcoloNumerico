@@ -32,7 +32,7 @@ if f1x==0
 	error('La derivata prima ha assunto valore zero nel punto di innesco, impossibile continuare')
 end
 
-x1= x0-(m*fx/f1x);
+x1= x0-(fx/f1x);
 ascisse = [ascisse x1]; # colleziono la prima iterata
 fx1 = invokeDelegate(f,x1); # applico la funzione
 if fx1==0
@@ -40,7 +40,7 @@ if fx1==0
 	return
 end
 
-x= x1-(m*fx1/f1x); # non colleziono qui in ascisse perche' viene fatto subito dopo il while se non ci sono iterazioni.
+x= x1-(fx1/f1x); # non colleziono qui in ascisse perche' viene fatto subito dopo il while se non ci sono iterazioni.
 
 c = abs(x - x1) / abs(x1 - x0);
 

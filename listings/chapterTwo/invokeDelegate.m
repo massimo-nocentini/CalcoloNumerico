@@ -76,6 +76,15 @@ function [ ret ] = function25second (x)
 	ret = (x - 1)^(10) * exp(x);
 endfunction
 
+# funzione relativa all'esercizio 2.5
 function [ ret ] = function25secondDerivative (x)
 	ret = exp(x) * (10 * (x - 1)^(9) + (x - 1)^(10));
+endfunction
+
+function [ ret ] = chordConvergenceFunction (x)
+	ret = (x - 3)^(3) + x;
+endfunction
+
+function [ ret ] = chordConvergenceFunctionDerivative (x)
+	ret = 3 * (x - 3)^(2) + 1;
 endfunction

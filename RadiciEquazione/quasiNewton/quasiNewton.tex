@@ -1,0 +1,29 @@
+\section{Metodo di Newton}
+\label{sec:metodoDiNewton}
+
+\begin{exercise}
+Implementare il metodo di newton ed applicarlo alla funzione \emph{chordConvergenceFunction},
+con innesco iniziale $x_{0} = 5.3$, una tollerenza assoluta e relativa
+$tol_{X} = rTol_{X} = 10^{-14}$ ed un numero massimo di iterazioni
+$i_{max} = 10^{5}$.
+\end{exercise}
+Per l'implementazione del codice vedere \nameref{subsec:chordMethodLinearCriteria}.
+\begin{lstlisting}
+octave:112> [x, i, ascisse] =
+chordMethodLinearCriteria('chordConvergenceFunction','chordConvergenceFunctionDerivative',5.3, 1e5, 1e-14, 1e-14) 
+x =  1.78658833723778e+00
+i =  9.40000000000000e+01
+ascisse = [too long to report here]
+octave:113> xSingleZero = min(ascisse)-1:0.1:max(ascisse)+1
+octave:114> ySingleZero = invokeDelegate('chordConvergenceFunction', xSingleZero)
+octave:115> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'invokeDelegate', 'chordConvergenceFunction')
+octave:116> plot(xSingleZero, ySingleZero, "c", ascisse, invokeDelegate('chordConvergenceFunction', ascisse), "b+", prepX, prepY, "r")
+octave:117> axis([1.3, 5.5, -5, 20])
+octave:118> grid
+octave:119> print 'chordPlotOutput.tex' '-dTex' '-S800, 600'
+\end{lstlisting}
+Si raggiunge la tolleranza richiesta in 94 passi. Questo l'output del comando
+\emph{octave:119}:
+\begin{center}
+\input{RadiciEquazione/quasiNewton/chordPlotOutput.tex}
+\end{center}
