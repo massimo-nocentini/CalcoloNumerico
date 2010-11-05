@@ -27,3 +27,31 @@ Si raggiunge la tolleranza richiesta in 94 passi. Questo l'output del comando
 \begin{center}
 \input{RadiciEquazione/quasiNewton/chordPlotOutput.tex}
 \end{center}
+
+
+\begin{exercise}
+Applicare il metodo delle corde in riferimentoa all'esercizio
+\ref{exercise:newtonLoopStartingPoint} 
+Usare una tollerenza assoluta e relativa
+$tol_{X} = rTol_{X} = 10^{-14}$ ed un numero massimo di iterazioni
+$i_{max} = 10^{5}$ e punto di innesco $x_{0} = 10$.
+\end{exercise}
+Per l'implementazione del codice vedere \nameref{subsec:chordMethodLinearCriteria}.
+\begin{lstlisting}
+octave:112> [x, i, ascisse] = chordMethodLinearCriteria('functionNewtonRecursion','functionNewtonRecursionDerivative',10,1e5, 1e-10, 1e-10)
+x =  2.23606797759911e+00
+i =  6.67000000000000e+02
+ascisse = [too long to report here]
+octave:113> xSingleZero = min(ascisse)-1:0.1:max(ascisse)+1
+octave:114> ySingleZero = invokeDelegate('functionNewtonRecursion', xSingleZero)
+octave:115> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'invokeDelegate', 'functionNewtonRecursion')
+octave:116> plot(xSingleZero, ySingleZero, "c", ascisse, invokeDelegate('functionNewtonRecursion', ascisse), "b+", prepX, prepY, "r")
+octave:117> axis([2, 5, -25, 100])
+octave:118> grid
+octave:119> print 'chordNewtonRecursionPlotOutput.tex' '-dTex' '-S800, 600'
+\end{lstlisting}
+Si raggiunge la tolleranza richiesta in 667 passi. Questo l'output del comando
+\emph{octave:119}:
+\begin{center}
+\input{RadiciEquazione/quasiNewton/chordNewtonRecursionPlotOutput.tex}
+\end{center}
