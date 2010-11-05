@@ -25,7 +25,8 @@ Si raggiunge la tolleranza richiesta in 5 passi. Questo l'output del comando
 \begin{center}
 \input{RadiciEquazione/newton/newtonPlotOutput.tex}
 \end{center}
-\begin{paragraph}{Osservazione}
+
+\begin{oss}
 Per l'applicazione eseguita sopra ho utilizzato il criterio di arresto
 \emph{incremento}, il metodo converge, ma posso studiare il condizionamento che
 affetta ogni valutazione della precisione richiesta. Questo il codice che
@@ -52,9 +53,29 @@ Si osserva che i valori utilizzati nel controllo per il raggiungimento della
 precisione richiesta sono uguali tranne l'ultimo, il metodo che usa il criterio
 \emph{residueCriterion} \`e pi\`u accurato, in quanto non \`e affetto dalla
 cancellazione numerica (per l'ultima coppia di ascisse trovata il fattore di
-amplificazione \`e $k = 7.66765947567831e+15$). I due metodi utilizzano comunque
+amplificazione \`e $k = 7.66765947567831e+15$). 
+
+I due metodi utilizzano comunque
 lo stesso numero di passi per convergere alla soluzione.
-\end{paragraph}
+\end{oss}
+
+\begin{oss}
+Posso effettuare una nuova comparazione: se chiedo una precisione di $tol_{X}
+= 1e-16$, si osserva che il metodo non converge se si utilizza il criterio di 
+arresto per \emph{incremento}, mentre converge usando il criterio per
+\emph{residuo}. Questo il codice che dimostra quanto detto:
+\begin{lstlisting}
+octave:5> [x, i]=newtonMethod('singleZero','singleZeroDerivative', 7, 1e2, 10^(-16), 10^(-16),'incrementCriterion');
+Il metodo non converge.
+octave:6> [x, i]=newtonMethod('singleZero','singleZeroDerivative', 7, 1e2, 10^(-16), 10^(-16),'residueCriterion');
+octave:7> i
+i =  6
+octave:8>
+\end{lstlisting}
+A parit\`a di numero massimo di passi, il secondo criterio permette al metodo di
+convergere.
+\end{oss}
+
 
 \begin{exercise}
 Implementare il metodo di newton ed applicarlo alla funzione \emph{functionWithNoRealZero},
@@ -64,7 +85,8 @@ $i_{max} = 7$.
 \end{exercise}
 Per l'implementazione del codice vedere \nameref{sec:newtonIterativeMethod}.
 \begin{lstlisting}
-octave:112> [x, i, ascisse] = newtonMethod('functionWithNoRealZero','functionWithNoRealZeroDerivative', 2.5, 7, 1e-14, 1e-14)
+octave:112> [x, i, ascisse] =
+newtonMethod('functionWithNoRealZero','functionWithNoRealZeroDerivative', 2.5, 7, 1e-14, 1e-14, 'incrementCriterion') 
 Il metodo non converge.
 x = -3.18786023393994e+00
 i =  7.00000000000000e+00
@@ -89,7 +111,8 @@ Per l'implementazione del codice vedere \nameref{sec:newtonIterativeMethod}.
 
 Nel primo caso studio il punto di innesco $x_{0} = 10$:
 \begin{lstlisting}
-octave:112> [x, i, ascisse] = newtonMethod('functionNewtonRecursion','functionNewtonRecursionDerivative', 10, 5e1, 1e-14, 1e-14)
+octave:112> [x, i, ascisse] =
+newtonMethod('functionNewtonRecursion','functionNewtonRecursionDerivative', 10, 5e1, 1e-14, 1e-14, 'incrementCriterion') 
 x =  2.23606797749979e+00
 i =  9.00000000000000e+00
 ascisse = [too long to report here]
@@ -108,7 +131,8 @@ Si raggiunge la convergenza con 9 passi. Questo l'output del comando
 
 Nel secondo caso studio il punto di innesco $x_{0} = 1$:
 \begin{lstlisting}
-octave:112> [x, i, ascisse] = newtonMethod('functionNewtonRecursion','functionNewtonRecursionDerivative', 1, 5e1, 1e-14, 1e-14)
+octave:112> [x, i, ascisse] =
+newtonMethod('functionNewtonRecursion','functionNewtonRecursionDerivative', 1, 5e1, 1e-14, 1e-14, 'incrementCriterion') 
 Il metodo non converge.
 x = -1.00000000000000e+00
 i =  5.00000000000000e+01

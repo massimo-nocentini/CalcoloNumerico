@@ -113,3 +113,130 @@ Nella seguente tabella riporto l'applicazione dei metodi richiesti:
 \hline
 \end{tabular}
 \end{center}
+
+\newpage
+% questa osservazione \`e necessario scriverla in una nuova pagina altrimenti
+% non si riesce a visualizzare le due colonne.
+\begin{oss}
+Ho costruito lo script \nameref{subsec:ScriptEser25NewtonStopCriteriaComparison}
+per effettuare un confronto tra i due metodi, nel momento in cui ho compilato la
+precedente tabella non avevo ancora implementato il metodo di Newton con la
+possibilit\`a di specificare il criterio di arresto, pertanto questa
+osservazione \`e da ritenersi una aggiunta alla tabella precedente.
+\begin{lstlisting}
+octave:13> scriptExercise25NewtonComparison
+\end{lstlisting}
+Ottengo:	
+\begin{multicols}{2}	
+\begin{lstlisting}
+application of the Newton method with increment stop criteria
+application with tolx =0.01
+x =  1.18248003631401e+00
+i =  3.60000000000000e+01
+application with tolx =0.0001
+x =  1.00176964345428e+00
+i =  8.00000000000000e+01
+application with tolx =1e-06
+x =  1.00001716153733e+00
+i =  1.24000000000000e+02
+application with tolx =1e-08
+x =  1.00000016642808e+00
+i =  1.68000000000000e+02
+application with tolx =1e-10
+x =  1.00000000179331e+00
+i =  2.11000000000000e+02
+application with tolx =1e-12
+x =  1.00000000001739e+00
+i =  2.55000000000000e+02
+application with tolx =1e-14
+x =  1.00000000000017e+00
+i =  2.99000000000000e+02
+application with tolx =1e-16
+x =  1.00000000000000e+00
+i =  3.48000000000000e+02
+
+application of the second function
+application with tolx =0.01
+x =  1.18529447118482e+00
+i =  4.50000000000000e+01
+application with tolx =0.0001
+x =  1.00165056388247e+00
+i =  9.00000000000000e+01
+application with tolx =1e-06
+x =  1.00001778848790e+00
+i =  1.33000000000000e+02
+application with tolx =1e-08
+x =  1.00000017250842e+00
+i =  1.77000000000000e+02
+application with tolx =1e-10
+x =  1.00000000167294e+00
+i =  2.21000000000000e+02
+application with tolx =1e-12
+x =  1.00000000001622e+00
+i =  2.65000000000000e+02
+application with tolx =1e-14
+x =  1.00000000000017e+00
+i =  3.08000000000000e+02
+application with tolx =1e-16
+x =  1.00000000000000e+00
+i =  3.56000000000000e+02
+\end{lstlisting}
+\columnbreak
+\begin{lstlisting}
+application of the Newton method with residue stop criteria
+application with tolx =0.01
+x =  1.18248003631401e+00
+i =  3.60000000000000e+01
+application with tolx =0.0001
+x =  1.00176964345428e+00
+i =  8.00000000000000e+01
+application with tolx =1e-06
+x =  1.00001716153733e+00
+i =  1.24000000000000e+02
+application with tolx =1e-08
+x =  1.00000016642808e+00
+i =  1.68000000000000e+02
+application with tolx =1e-10
+x =  1.00000000179331e+00
+i =  2.11000000000000e+02
+application with tolx =1e-12
+x =  1.00000000001739e+00
+i =  2.55000000000000e+02
+application with tolx =1e-14
+x =  1.00000000000017e+00
+i =  2.99000000000000e+02
+application with tolx =1e-16
+x =  1.00000000000000e+00
+i =  3.43000000000000e+02
+
+application of the second function
+application with tolx =0.01
+x =  1.18529447118482e+00
+i =  4.50000000000000e+01
+application with tolx =0.0001
+x =  1.00165056388247e+00
+i =  9.00000000000000e+01
+application with tolx =1e-06
+x =  1.00001778848790e+00
+i =  1.33000000000000e+02
+application with tolx =1e-08
+x =  1.00000017250842e+00
+i =  1.77000000000000e+02
+application with tolx =1e-10
+x =  1.00000000167294e+00
+i =  2.21000000000000e+02
+application with tolx =1e-12
+x =  1.00000000001622e+00
+i =  2.65000000000000e+02
+application with tolx =1e-14
+x =  1.00000000000017e+00
+i =  3.08000000000000e+02
+application with tolx =1e-16
+x =  1.00000000000000e+00
+i =  3.52000000000000e+02
+\end{lstlisting}
+\end{multicols}
+L'esecuzione dello script permette di evidenziare che il metodo con criterio di
+arresto per \emph{residuo} permette di convergere pi\`u velocemente alla
+soluzione, infatti si guadagnano 5 passi per prima funzione e 4 per la seconda.
+\end{oss}

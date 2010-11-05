@@ -52,7 +52,9 @@ Questo criterio risulta essere pi\`u robusto dal punto di vista implementativo:
 \subsection{Molteplicit\`a dello zero nota}
 \label{subsec:newtonMethodMultKnown}
 Questa implementazione utilizza il criterio di arresto esposto nell'
-\emph{Osservazione 2.3} nel caso di radici semplici.
+\emph{Osservazione 2.3} nel caso di radici semplici. 
+
+Utilizza il criterio di arresto per \emph{incremento}.
 \lstinputlisting{listings/chapterTwo/newtonMethodMoltKnown.m}
 
 \subsection{Molteplicit\`a dello zero nota con criterio di arresto lineare}
@@ -77,9 +79,15 @@ condizione necessaria per applicare questo criterio di arresto.
 \label{subsec:newtonMethodAitken}
 Questa implementazione utilizza il criterio di arresto esposto nell'
 \emph{Osservazione 2.3} nel caso di radici semplici.
+
+Utilizza il criterio di arresto per \emph{incremento}.
 \lstinputlisting{listings/chapterTwo/newtonMethodAitken.m}
 
 \section{Script}
 \subsection{Script eser 2.5}
 \label{subsec:ScriptEser25}
 \lstinputlisting{listings/chapterTwo/scriptExercise25.m}
+
+\subsection{Script eser 2.5 - Newton Stop Criteria Comparison}
+\label{subsec:ScriptEser25NewtonStopCriteriaComparison}
+\lstinputlisting{listings/chapterTwo/scriptExercise25NewtonComparison.m}
