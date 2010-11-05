@@ -1,23 +1,23 @@
-## newtonMethodMoltKnownLinearCriteria
+## chordMethodLinearCriteria
 ##
-## Questo oggetto matematico implementa il metodo di Newton con molteplicita'
-## dello zero nota. Questa implementazione utilizza il criterio di arresto lineare di
+## Questo oggetto matematico implementa il metodo delle corde. 
+## Questa implementazione utilizza il criterio di arresto lineare di
 ## pag. 36.
 ## 
 ## Input:
 ##		f: nome della funzione di cui si vuole approssimare lo zero
 ##		f1: derivata della f
 ##		x0: punto di innesco del metodo
+##		itmax: numero massimo di iterazioni per fermare la computazione nel caso il metodo non converge.
 ##		tolx: tolleranza assoluta accettata sull'approssimazione trovata
 ##		rtolx: tolleranza relativa accettata sull'approssimazione trovata
-##		m: molteplicita' dello zero
 ##
 ## Output: 	
 ##		x: approssimazione che rispetta la tolleranza richiesta
 ##		i: passi effettivamente eseguiti per ricavare l'approssimazione
 ##		ascisse: vettore di ascisse calcolate durante i passi del metodo
 
-function [x, i, ascisse]=newtonMethodMoltKnownLinearCriteria(f,f1,x0,itmax,tolx,rtolx,m)
+function [x, i, ascisse]=chordMethodLinearCriteria(f,f1,x0,itmax,tolx,rtolx)
 
 ascisse = [];
 ascisse = [ascisse x0]; # colleziono il punto di innesco
@@ -39,39 +39,27 @@ if fx1==0
 	x=x1;
 	return
 end
-f1x1 = invokeDelegate(f1,x1); # applico la derivata
-if f1x1==0
-	error('La derivata prima ha assunto valore zero nella prima iterata, impossibile continuare')
-end
 
-x= x1-(m*fx1/f1x1); # non colleziono qui in ascisse perche' viene fatto subito dopo il while se non ci sono iterazioni.
+x= x1-(m*fx1/f1x); # non colleziono qui in ascisse perche' viene fatto subito dopo il while se non ci sono iterazioni.
+
+c = abs(x - x1) / abs(x1 - x0);
 
 # while initialization
-x0 = x1; # mi riporto nella condizione per poter far lavorare correttamente la condizione del while
 i=2; # ho gia calcolato due passi x1 ed x
-c = abs(x - x1) / abs(x1 - x0);
+# non importa resettare le due variabili x0 ed x1 in quanto vengono settate (solo x0)
+# all'interno del ciclo
 while (i<itmax) & ((abs(x-x0) / abs(tolx*((1-c)/c)))>1)
 	i = i+1;
 	x0 = x;
 	ascisse = [ascisse x0]; # colleziono la nuova ascissa
 	
 	fx = invokeDelegate(f,x0);
-	f1x = invokeDelegate(f1,x0);
 	
-	%Se la derivata vale zero non possiamo continuare:
-	% controllo che non si abbia raggiunto una soluzione
-	% rispettando le tolleranze richieste.
-	if f1x==0
-		if fx == 0
-			disp('f(x) = f1(x) = 0');
-			return
-		elseif ((abs(x-x0) / abs(tolx*((1-c)/c)))<=1)
-			disp('f1(x) = 0 & stopCriterion reached');
-			return
-		end
-		disp('La derivata prima ha assunto valore zero, impossibile continuare')
-	end
-	x = x0-(m*fx/f1x);
+	% qui non ha senso controllare se la derivata si annulla in quanto questo
+	% controllo viene fatto alla riga 30.
+	
+	x = x0-(fx/f1x);
+	
 	# posso considerare ascisse(length(ascisse)) = x(i-1) perche' ancora non ho collezionato x
 	c = abs(x - ascisse(length(ascisse))) / abs(ascisse(length(ascisse)) - ascisse(length(ascisse) - 1));
 end
