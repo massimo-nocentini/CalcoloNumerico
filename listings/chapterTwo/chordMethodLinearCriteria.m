@@ -61,7 +61,7 @@ while (i<itmax) & ((abs(x-x0) / abs(tolx*((1-c)/c)))>1)
 	x = x0-(fx/f1x);
 	
 	# posso considerare ascisse(length(ascisse)) = x(i-1) perche' ancora non ho collezionato x
-	c = abs(x - ascisse(length(ascisse))) / abs(ascisse(length(ascisse)) - ascisse(length(ascisse) - 1)
+	c = abs(x - ascisse(length(ascisse))) / abs(ascisse(length(ascisse)) - ascisse(length(ascisse) - 1));
 end
 
 # altrimenti l'ultima computazione di x (riga 54 ed eventualmente riga 34 nel caso

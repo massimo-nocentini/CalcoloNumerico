@@ -55,3 +55,22 @@ Si raggiunge la tolleranza richiesta in 667 passi. Questo l'output del comando
 \begin{center}
 \input{RadiciEquazione/quasiNewton/chordNewtonRecursionPlotOutput.tex}
 \end{center}
+
+Se invece voglio trovare la soluzione negativa:
+\begin{lstlisting}
+octave:112> [x, i, ascisse] = chordMethodLinearCriteria('functionNewtonRecursion','functionNewtonRecursionDerivative',-5,1e5, 1e-5, 1e-5)
+i =  7.30000000000000e+01
+ascisse = [too long to report here]
+octave:113> xSingleZero = min(ascisse)-1:0.1:max(ascisse)+1
+octave:114> ySingleZero = invokeDelegate('functionNewtonRecursion', xSingleZero)
+octave:115> [prepX, prepY] = prepareForPlottingMethodSegments(ascisse, 'invokeDelegate', 'functionNewtonRecursion')
+octave:116> plot(xSingleZero, ySingleZero, "c", ascisse, invokeDelegate('functionNewtonRecursion', ascisse), "b+", prepX, prepY, "r")
+octave:117> axis([-4, -2, -10, 5])
+octave:118> grid
+octave:119> print 'chordNewtonRecursionNegativePlotOutput.tex' '-dTex' '-S800,600'
+\end{lstlisting}
+Si raggiunge la tolleranza richiesta in 73 passi. Questo l'output del comando
+\emph{octave:119}:
+\begin{center}
+\input{RadiciEquazione/quasiNewton/chordNewtonRecursionNegativePlotOutput.tex}
+\end{center}
