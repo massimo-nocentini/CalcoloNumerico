@@ -1,0 +1,40 @@
+\section{Consigli per operazioni di macchina}
+La seguente lista porta dei cosigli su come eseguire le operazioni di macchina a
+quando si deve implementare un problema formulato in aritmetica esatta.
+
+\begin{enumerate}
+\item \emph{good approximation plus a small correction term} ecco alcuni
+esempi
+\begin{displaymath}
+\begin{split}
+a + \frac{b - a}{2} \quad & \text{\`e migliore di} \quad \frac{a + b}{2} \quad
+\text{hint: } a - \frac{a}{2} = \frac{a}{2} \\ 
+x - \frac{x^{2} - a}{2x} \quad & \text{\`e migliore di} \quad \frac{1}{2}\left
+(x + \frac{a}{x} \right ) \quad \text{hint: } x - \frac{x}{2} = \frac{x}{2} \\
+x_{2} - y_{2} \frac{x_{2} - x_{1}}{y_{2} - y_{1}} \quad & \text{\`e migliore di}
+\quad \frac{y_{2}x_{1} - x_{2}y_{1}}{y_{2} - y_{1}} \quad
+\text{hint: add } x_{2} - x_{2} \text{ and factor } -x_{2}
+\end{split}
+\end{displaymath}
+\item \emph{add the small term first} quando devo sommare una collezione di
+valori alla quale appartengono valori relativamente piccoli \`e una buona idea ordinare
+i valori in modo decrescente ed iniziare a sommare dai valori pi\`u piccoli ai
+valori pi\`u grandi.
+\item \emph{be careful when substracting almost equals numbers} la differenza
+\`e una operazione di macchina mal condizionata, quindi deve essere utilizzata con
+cautela. \`E utile nei termini di correzione (vedi due punti sopra) nella
+riformulazione di un problema, mentre \`e causa di cancellazione numerica se
+utilizzata nel calcolare informazioni essenziali come una prima approssimazione
+(vedi esercizio \ref{exercise:numericalEraseExercise}).
+\item \emph{avoid large partial result on the road to a small final answer}
+prendiamo come esempio la funzione $f(x) = e^{x}$ ed il suo sviluppo di
+MacLaurin  $Ml(x)$. Se applico ad $x = -10$, ottengo $f(-10) = 4.54e-5, Ml(-10) 
+\approx 2700$. Una soluzione potrebbe essere riformulare il problema, calcolando
+$Ml(10)$ al posto di $Ml(-10)$ e prendendo il reciproco.
+\item \emph{use mathematical reformulation to avoid 3. and 4.}
+\item \emph{series expansion can supplement 5.}
+\item \emph{use integer calculation when possible} come fatto nel metodo
+\nameref{sec:metodoDiBisezione}, \`e migliore impostare un ciclo di dimensione
+finita e conosciuta al posto di utilizzare una guardia che deve essere ogni
+volta valutata.
+\end{enumerate}
