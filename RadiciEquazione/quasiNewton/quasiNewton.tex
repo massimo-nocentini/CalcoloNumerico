@@ -1,5 +1,5 @@
-\section{Metodo di Newton}
-\label{sec:metodoDiNewton}
+\section{Metodo quasi Newton}
+\label{sec:metodiQuasiNewton}
 
 \begin{exercise}
 Implementare il metodo delle corde ed applicarlo alla funzione
@@ -74,6 +74,12 @@ Si raggiunge la tolleranza richiesta in 73 passi. Questo l'output del comando
 \begin{center}
 \input{RadiciEquazione/quasiNewton/chordNewtonRecursionNegativePlotOutput.tex}
 \end{center}
+\begin{oss}
+Il metodo delle secanti converge pi\`u rapidamente quando la derivata non \`e
+molto ripida: in questo esempio accade il contrario, ovvero la derivata \`e
+molto ripida, il metodo converge lentamente ma si guadagna in precisione per
+l'approssimazione fornita.
+\end{oss}
 
 \begin{exercise}
 Implementare il metodo delle corde ed applicarlo alla funzione
@@ -111,3 +117,131 @@ i =  8.00000000000000e+00
 \end{lstlisting}
 Pi\`u veloce di tre passi.
 \end{oss}
+
+\newpage
+\begin{exercise}[2.7 e 2.8]
+Per i testi degli esercizi consultare il libro di testo.
+\end{exercise}
+Ho costruito lo script \nameref{subsec:ScriptEser27}, lanciandolo
+\begin{lstlisting}
+octave:13> scriptExercise27
+\end{lstlisting}
+ottengo:	
+\begin{multicols}{2}	
+\begin{lstlisting}
+bisection method
+tol_x =0.01
+x =  7.34375000000000e-01
+i =  6.00000000000000e+00
+tol_x =0.0001
+x =  7.39013671875000e-01
+i =  1.20000000000000e+01
+tol_x =1e-06
+x =  7.39084243774414e-01
+i =  1.90000000000000e+01
+tol_x =1e-08
+x =  7.39085137844086e-01
+i =  2.40000000000000e+01
+tol_x =1e-10
+x =  7.39085133187473e-01
+i =  3.00000000000000e+01
+tol_x =1e-12
+x =  7.39085133214758e-01
+i =  3.90000000000000e+01
+tol_x =1e-14
+x =  7.39085133215156e-01
+i =  4.40000000000000e+01
+tol_x =1e-16
+x =  7.39085133215161e-01
+i =  5.20000000000000e+01
+\end{lstlisting}
+
+\begin{lstlisting}
+Newton method
+tol_x =0.01
+x =  7.39112890911362e-01
+i =  2.00000000000000e+00
+tol_x =0.0001
+x =  7.39085133385284e-01
+i =  3.00000000000000e+00
+tol_x =1e-06
+x =  7.39085133215161e-01
+i =  4.00000000000000e+00
+tol_x =1e-08
+x =  7.39085133215161e-01
+i =  4.00000000000000e+00
+tol_x =1e-10
+x =  7.39085133215161e-01
+i =  4.00000000000000e+00
+tol_x =1e-12
+x =  7.39085133215161e-01
+i =  5.00000000000000e+00
+tol_x =1e-14
+x =  7.39085133215161e-01
+i =  5.00000000000000e+00
+tol_x =1e-16
+x =  7.39085133215161e-01
+i =  5.00000000000000e+00
+\end{lstlisting}
+
+\columnbreak
+
+\begin{lstlisting}
+chord method
+tol_x =0.01
+x =  7.37506890513243e-01
+i =  1.40000000000000e+01
+tol_x =0.0001
+x =  7.39071365298945e-01
+i =  2.60000000000000e+01
+tol_x =1e-06
+x =  7.39085311606762e-01
+i =  3.70000000000000e+01
+tol_x =1e-08
+x =  7.39085134772174e-01
+i =  4.90000000000000e+01
+tol_x =1e-10
+x =  7.39085133228750e-01
+i =  6.10000000000000e+01
+tol_x =1e-12
+x =  7.39085133214985e-01
+i =  7.20000000000000e+01
+tol_x =1e-14
+x =  7.39085133215159e-01
+i =  8.40000000000000e+01
+tol_x =1e-16
+x =  7.39085133215161e-01
+i =  9.40000000000000e+01
+\end{lstlisting}
+
+\begin{lstlisting}
+secant method
+tol_x =0.01
+x =  7.39119361911629e-01
+i =  3.00000000000000e+00
+tol_x =0.0001
+x =  7.39085112127464e-01
+i =  4.00000000000000e+00
+tol_x =1e-06
+x =  7.39085133215001e-01
+i =  5.00000000000000e+00
+tol_x =1e-08
+x =  7.39085133215161e-01
+i =  6.00000000000000e+00
+tol_x =1e-10
+x =  7.39085133215161e-01
+i =  6.00000000000000e+00
+tol_x =1e-12
+x =  7.39085133215161e-01
+i =  6.00000000000000e+00
+tol_x =1e-14
+x =  7.39085133215161e-01
+i =  7.00000000000000e+00
+tol_x =1e-16
+x =  7.39085133215161e-01
+i =  7.00000000000000e+00
+\end{lstlisting}
+\end{multicols}
+Per l'ultima iterazione del metodo delle corde ho ottenuto uno warning di
+divionse per zero.
+

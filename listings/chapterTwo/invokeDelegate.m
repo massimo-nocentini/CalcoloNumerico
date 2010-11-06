@@ -96,3 +96,11 @@ endfunction
 function [ ret ] = secantConvergenceFunctionDerivative (x)
 	ret = 2 * x - 1;
 endfunction
+
+function [ ret ] = exercise27Function (x)
+	ret = x - cos(x);
+endfunction
+
+function [ ret ] = exercise27FunctionDerivative (x)
+	ret = 1 + sin(x);
+endfunction
