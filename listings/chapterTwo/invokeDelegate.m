@@ -88,3 +88,11 @@ endfunction
 function [ ret ] = chordConvergenceFunctionDerivative (x)
 	ret = 3 * (x - 3)^(2) + 1;
 endfunction
+
+function [ ret ] = secantConvergenceFunction (x)
+	ret = x^(2) - 5 * x;
+endfunction
+
+function [ ret ] = secantConvergenceFunctionDerivative (x)
+	ret = 2 * x - 5;
+endfunction

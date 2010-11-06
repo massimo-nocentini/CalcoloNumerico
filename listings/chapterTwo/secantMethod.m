@@ -64,7 +64,7 @@ while (i<itmax) & (tolXToCheck/(rtolx*abs(x) + tolx)>1)
 	end
 	x1 = ((fx* x0) - (fx0 * x))/t;
 	x0 = x;
-	x = x1
+	x = x1;
 	tolXToCheck = feval(stopCriterion, x, x0, fx, f1x);
 end
 
