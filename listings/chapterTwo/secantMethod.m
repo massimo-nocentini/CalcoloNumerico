@@ -1,6 +1,6 @@
-## newtonMethod
+## secantMethod
 ##
-## Questo oggetto matematico implementa il metodo di Newton.
+## Questo oggetto matematico implementa il metodo delle secanti.
 ## 
 ## Input:
 ##		f: nome della funzione di cui si vuole approssimare lo zero
@@ -9,7 +9,6 @@
 ##		itmax: numero massimo di iterazioni per fermare la computazione nel caso il metodo non converge.
 ##		tolx: tolleranza assoluta accettata sull'approssimazione trovata
 ##		rtolx: tolleranza relativa accettata sull'approssimazione trovata
-##		stopCriterion: nome del criterio che si vuole utilizzare criterio di arresto.
 ##
 ## Output: 	
 ##		x: approssimazione che rispetta la tolleranza richiesta
@@ -17,7 +16,10 @@
 ##		ascisse: vettore di ascisse calcolate durante i passi del metodo
 ##		checkedTolXs: vettore di tolleranze che sono state controllate nel criterio di arresto.
 
-function [x, i, ascisse, checkedTolXs]=newtonMethod(f,f1,x0,itmax,tolx,rtolx,stopCriterion)
+function [x, i, ascisse, checkedTolXs]=secantMethod(f,f1,x0,itmax,tolx,rtolx)
+# fisso il criterio di arresto in quanto questo metodo non calcola la derivata
+# ad ogni passo come invece viene fatto nel metodo di Newton.
+stopCriterion = "incrementCriterion"; 
 i=0;
 ascisse = [];
 ascisse = [ascisse x0];
@@ -41,18 +43,18 @@ tolXToCheck = feval(stopCriterion, x, x0, fx, f1x);
 while (i<itmax) & (tolXToCheck/(rtolx*abs(x) + tolx)>1)
 	checkedTolXs = [checkedTolXs tolXToCheck];
 	i = i+1;
-	x0 = x;
-	ascisse = [ascisse x0]; # colleziono la nuova ascissa
+	fx0 = fx;
+	ascisse = [ascisse x]; # colleziono la nuova ascissa
 	
-	fx = invokeDelegate(f,x0);
-	f1x = invokeDelegate(f1,x0);
+	fx = invokeDelegate(f,x);
+	t = fx - fx0;
 	
-	%Se la derivata vale zero non possiamo continuare:
+	%Se t vale zero non possiamo continuare in quanto la divisione non sarebbe definita:
 	% controllo che non si abbia raggiunto una soluzione
 	% rispettando le tolleranze richieste.
-	if f1x==0
+	if t==0
 		if fx == 0
-			disp('f(x) = f1(x) = 0');
+			disp('f(x) = t = 0');
 			return
 		elseif (feval(stopCriterion, x, x0, fx, f1x)/(rtolx*abs(x) + tolx)<=1)
 			disp('f1(x) = 0 & stopCriterion reached');
@@ -60,7 +62,9 @@ while (i<itmax) & (tolXToCheck/(rtolx*abs(x) + tolx)>1)
 		end
 		disp('La derivata prima ha assunto valore zero, impossibile continuare')
 	end
-	x = x0-fx/f1x;
+	x1 = ((fx* x0) - (fx0 * x))/t;
+	x0 = x;
+	x = x1
 	tolXToCheck = feval(stopCriterion, x, x0, fx, f1x);
 end
 

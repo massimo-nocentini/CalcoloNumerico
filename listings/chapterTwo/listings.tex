@@ -79,6 +79,28 @@ Ricavo in modo dinamico la costante $c$, usando le tre iterate pi\`u recenti:
 	c \approx \frac{|x_{i} - x_{i-1}|}{|x_{i-1} - x_{i-2}|}
 \end{displaymath}
 \lstinputlisting{listings/chapterTwo/chordMethodLinearCriteria.m}
+\begin{oss}
+Questa implementazione non \`e molto robusta in quanto mancano molti controlli
+per garantire il significato di tutte le operazioni di divisione. Dovrebbero
+essere aggiunti. Se si prova ad eseguire questa applicazione:
+\begin{lstlisting}
+[x, i, ascisse] =
+chordMethodLinearCriteria('functionNewtonRecursion','functionNewtonRecursionDerivative',1-1e-10,1e5, 1e-15, 1e-15)
+\end{lstlisting}
+si ottiene una serie infinita di messaggi ``\emph{Warning: division by zero}''.
+\\
+Inoltre sarebbe interessante confrontare il criterio di arresto usato
+nell'implementazione con il criterio di arresto usato invece per
+l'implementazione del metodo \nameref{sec:newtonIterativeMethod}.
+\end{oss}
+
+\subsection{Metodo delle secanti}
+\label{subsec:secantMethod}
+Questa implementazione utilizza il criterio di arresto esposto nell'
+\emph{Osservazione 2.3} nel caso di radici semplici.
+
+Utilizza il criterio di arresto per \emph{incremento}.
+\lstinputlisting{listings/chapterTwo/secantMethod.m}
 
 \section{Script}
 \subsection{Script eser 2.5}
