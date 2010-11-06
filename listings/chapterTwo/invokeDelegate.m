@@ -90,9 +90,9 @@ function [ ret ] = chordConvergenceFunctionDerivative (x)
 endfunction
 
 function [ ret ] = secantConvergenceFunction (x)
-	ret = x^(2) - 5 * x;
+	ret = x^(2) - x;
 endfunction
 
 function [ ret ] = secantConvergenceFunctionDerivative (x)
-	ret = 2 * x - 5;
+	ret = 2 * x - 1;
 endfunction
