@@ -22,6 +22,38 @@ $$\phi(x_{n}) \rightarrow \phi(x^{*}) = x^{\triangle}$$ ma questo contraddice
 l'ipotesi che $\phi$ converge a $x^{*}$.
 \end{proof}
 
+\begin{oss}
+La prova precedente \`e stata scritta da me per\`o rivedendola ad un ricevimento
+con la professoressa Sestini, abbiamo visto che richiede che $\phi$ sia
+monotona. Questa richiesta \`e pi\`u restrittiva rispetto agli argomenti
+trattati nel testo. Una prova pi\`u semplice \`e la seguente:
+\end{oss}
+\begin{proof}
+Sia $\phi$ continua, per l'equazione $(1.2)$ del testo, vale $x_{n} \rightarrow
+x^{*}$ e $x_{n + 1} \rightarrow x^{*}$. Per la definizione del metodo iterativo
+si ha:
+\begin{displaymath}
+x_{n + 1} = \phi(x_{n})
+\end{displaymath}
+Dato che $\phi$ si assume continua e per l'equazione $(1.2)$ allora vale
+\begin{displaymath}
+\begin{split}
+x_{n + 1} &= \phi(x_{n}) \\
+\downarrow & \quad \downarrow \\
+x^{*} &= \phi(x^{*})
+\end{split}
+\end{displaymath}
+E questo dimostra che se il metodo \`e convergente allora soddisfa la condizione
+necessaria di consistenza.
+\end{proof}
+
+\begin{oss}
+L'ultima frase della precedente prova \`e importante, ovvero se un metodo
+converge alla soluzione esatta $x^{*}$ allora soddisfa la condizione necessaria,
+non \`e vero il contrario. Infatti un metodo potrebbe soddisfare la condizione
+necessaria alla convergenza ma non convergere alla soluzione esatta.
+\end{oss}
+
 \begin{exercise}
 Considerare il metodo iterativo:
 \begin{displaymath}

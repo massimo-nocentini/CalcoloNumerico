@@ -661,6 +661,18 @@ octave:19> (a+b)/(abs(a-b))*epsilon_Max
 ans =  2.22043353963751e-05
 \end{lstlisting}
 
+Calcolo adesso l'errore relativo, considerando come valore esatto la differenza
+$a - b = 1 \times 10^{-12}$:
+\begin{displaymath}
+	\varepsilon_{x} = \frac{(1.00000563385549 \times 10^{-12} - 1 \times
+	10^{-12})}{1 \times 10^{-12}}
+\end{displaymath}
+Ottengo:
+\begin{lstlisting}
+octave:4> (1.00000563385549e-12 - 1e-12)/1e-12
+ans =  5.63385549010602e-06
+\end{lstlisting}
+
 
 
 
