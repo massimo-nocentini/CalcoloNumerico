@@ -105,6 +105,7 @@ questo termina la prova.
 \end{proof}
 
 \begin{exercise}[3.11]
+\label{exercise:311}
 Se $A$ \`e non singolare allora $A^{T}A$ e $AA^{T}$ sono sdp.
 \end{exercise}
 \begin{proof}
@@ -144,4 +145,127 @@ questo \`e quanto richiesta dalla definizione di sdp, quindi $B$ \`e sdp.
 Dato che ho dimostrato che $B$ \`e simmetrica allora anche $B^{T}$ \`e sdp e
 questo termina la prova.
 \end{itemize}
+\end{proof}
+
+\begin{exercise}[3.12]
+Se $A \in \mathbb{R}^{m \times n}$, con $m \geq n = rank(A)$ allora $A^{T}A$ \`e
+sdp.
+\end{exercise}
+\begin{proof}
+Devo dimostrare che $B = A^{T}A$ \`e sdp.
+\begin{itemize}
+  \item $B$ \`e simmetrica per l'esercizio \ref{exercise:311}.
+  \item $\forall \vect{x} \in \mathbb{R}^{n}, \vect{x} \not = \vect{0}$ allora
+  posso costruire un vettore (come fatto nell'esercizio precedente) $\vect{y} =
+  A\vect{x}, \vect{y} \in \mathbb{R}^{m}$ ed il rispettivo $\vect{y}^{T} = 
+  \vect{x}^{T}A^{T}, \vect{y}^{T} \in \mathbb{R}^{1 \times m}$ e costruire il 
+  prodotto richiesto dalla definizione
+  \begin{displaymath}
+  	\sum_{i = 1}^{m}{y_{i}^{2}} \geq 0
+  \end{displaymath}
+  Dato che in $A$ ci sono $m-n$ linearmente dipendenti, allora alcuni termini
+  della sommatoria $y_{i}$ possono essere nulli. Ma per le ipotesi, $n =
+  rank(A)$, quindi esiste un minore principale $\det(A_{k}) \not = 0$. Per come
+  \`e costruito $\vect{y}$ allora $\exists i \in \mathbb{N}: y_{i} \not = 0$
+  perch\`e $\det(A_{k}) \not = 0$ per ipotesi e $\vect{x} \not = \vect{0}$ per
+  la definizione di sdp. Quindi la somma \`e strettamente positiva e questo
+  termina la prova.
+\end{itemize}
+\end{proof}
+
+\begin{exercise}[3.13]
+Se $A \in \mathbb{R}^{n \times n}$ allora $A = \frac{1}{2}(A + A^{T}) +
+\frac{1}{2}(A - A^{T})$
+\end{exercise}
+\begin{proof}
+\begin{displaymath}
+\begin{split}
+\frac{1}{2}
+\left (
+\begin{bmatrix}
+a_{11} & \cdots & \cdots &\cdots & a_{1n} \\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix} + 
+\begin{bmatrix}
+a_{11} & \cdots & \cdots &\cdots & a_{n1} \\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{1n} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix} \right ) = \\
+= \frac{1}{2} 
+\begin{bmatrix}
+2a_{11} & \cdots & \cdots &\cdots & a_{1n} + a_{n1} \\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} + a_{1n} & \cdots & \cdots &\cdots & 2a_{nn}
+\end{bmatrix} = A^{s}
+\end{split}
+\end{displaymath}
+La matrice $A_{s}$ \`e una matrice simmetrica.
+
+Analogamente per la differenza:
+\begin{displaymath}
+\begin{split}
+\frac{1}{2}
+\left (
+\begin{bmatrix}
+a_{11} & \cdots & \cdots &\cdots & a_{1n} \\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix} - 
+\begin{bmatrix}
+a_{11} & \cdots & \cdots &\cdots & a_{n1} \\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{1n} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix} \right ) = \\
+= \frac{1}{2} 
+\begin{bmatrix}
+0 & \cdots & \cdots &\cdots & a_{1n} - a_{n1} \\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} - a_{1n}& \cdots & \cdots &\cdots & 0
+\end{bmatrix} = A^{a}
+\end{split}
+\end{displaymath}
+Verifico che $A_{s} + A_{a} = A$:
+\begin{displaymath}
+\begin{split}
+A_{s} + A_{a} = 
+\frac{1}{2}
+\begin{bmatrix}
+2a_{11} & \cdots & \cdots &\cdots & a_{1n} + a_{n1} + a_{1n} - a_{n1}\\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} + a_{1n} + a_{n1} - a_{1n} & \cdots & \cdots &\cdots & 2a_{nn}
+\end{bmatrix} = \\
+= \frac{1}{2}
+\begin{bmatrix}
+2a_{11} & \cdots & \cdots &\cdots & 2a_{1n}\\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+2a_{n1}& \cdots & \cdots &\cdots & 2a_{nn}
+\end{bmatrix} = 
+\begin{bmatrix}
+a_{11} & \cdots & \cdots &\cdots & a_{1n} \\
+\vdots & \ddots &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix} = A
+\end{split}
+\end{displaymath}
+In generale vale $a'_{ij} = a_{ij} + a_{ji} + a_{ij} - a_{ji} = 2a_{ij}$.
+L'uguaglianza \`e verificata e questo termina la prova.
 \end{proof}
