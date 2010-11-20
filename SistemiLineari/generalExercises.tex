@@ -1,0 +1,376 @@
+\section{Esercizi preliminari}
+
+\begin{exercise}[3.2]
+\label{exercise:32}
+Se $A, B \in \mathbb{R}^{n \times n}$ triangolari inferiori valgono
+rispettivamente:
+\begin{displaymath}
+A + B = C \quad \wedge \quad AB = D
+\end{displaymath}
+con $C, D \in \mathbb{R}^{n \times n}$ triangolari inferiori.
+\end{exercise}
+\begin{proof}[Proof of A+B=C]
+Per definizione di triangolare inferiore devo dimostrare che $c_{ij} = 0$ se $i
+< j$.
+
+Per la definizione dell'operatore $+(,)$ tra matrici ottengo
+\begin{displaymath}
+c_{ij} = a_{ij} + b_{ij} 
+\end{displaymath}
+Per ipotesi $A,B$ sono triangolari inferiori, quindi $a_{ij} = b_{ij} = 0$ se
+$i < j$, quindi $c_{ij} = 0$ se $i < j$ e questo termina la prova.
+\end{proof}
+
+\begin{proof}[Proof of AB=D]
+Per definizione di triangolare inferiore devo dimostrare che $c_{ij} = 0$ se $i
+< j$.
+
+Per definizione dell'operatore $\cdot(,)$ tra matrici, $d_{ij}$ \`e dato dal
+prodotto dell'$i$-esima riga con la $j$-esima colonna, formalmente se $i < j$
+\begin{displaymath}
+d_{ij} = \left ( \vect{e}_{i}^{T}A \right ) \left ( B \vect{e}_{j} \right) = 
+\begin{bmatrix}
+a_{i1} \cdots a_{ii} \underbrace{0 \cdots 0}_{n-i}
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+\vdots \\
+0 \\
+b_{i+1,j}
+\\
+\vdots \\
+b_{nj}
+\end{bmatrix} = 0
+\end{displaymath}
+Svolgendo il prodotto riga-colonna si osserva che le prime $i$ componenti della
+colonna annullano le prime $i$ componenti della riga e le ultime $n-i$
+componenti della riga annullano le ultime $n-i$ componenti della colonna, quindi
+si sommano tutti elementi nulli, per cui
+\begin{displaymath}
+d_{ij} = \sum_{k = 1}^{n}{a_{ik}b_{kj}} = 0 \quad \text{ se } i < j
+\end{displaymath} e questo termina la prova.
+\end{proof}
+
+Con argomento simmetrico si dimostra che vale lo stesso asserto se $A,B,C,D \in
+\mathbb{R}^{n \times n}$ triangolari superiori.
+
+\begin{exercise}[3.3]
+Se $A,B \in \mathbb{R}^{n \times n}$ triangolari inferiori a diagonale unitaria
+allora $AB=C$, con $C \in \mathbb{R}^{n \times n}$ triangolare inferiore a
+diagonale unitaria.
+\end{exercise}
+\begin{proof}
+$A,B$ sono triangolari inferiori, quindi per l'esercizio \ref{exercise:32},
+anche $C$ \`e triangolare inferiore. Rimane da dimostrare che $c_{ii} = 1$ per
+$i \in \lbrace 1, \ldots, n\rbrace$.
+
+Posso scrivere $c_{ii}$ come prodotto dell'$i$-esima riga con la $i$-esima
+colonna, formalmente se $i \geq j$
+\begin{displaymath}
+\begin{split}
+c_{ii} = \left ( \vect{e}_{i}^{T}A \right ) \left ( B \vect{e}_{i} \right) & =
+\begin{bmatrix}
+a_{11} \\
+\vdots & \ddots \\
+a_{i1} & \cdots & a_{ii} \\
+\vdots & 		&		& \ddots\\
+a_{n1} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix} %times 
+\begin{bmatrix}
+b_{11} \\
+\vdots & \ddots \\
+b_{i1} & \cdots & b_{ii} \\
+\vdots & 		&		& \ddots\\
+b_{n1} & \cdots & \cdots &\cdots & b_{nn}
+\end{bmatrix} = \\ %split  
+&= \begin{bmatrix}
+a_{i1} & \cdots & a_{i,i-1} & a_{ii} & 0 & \cdots & 0
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+\vdots \\
+0 \\
+b_{i,i} \\
+b_{i+1,i} \\
+\vdots \\
+b_{ni}
+\end{bmatrix} = \sum_{k = 1}^{n}{a_{in}b_{ni}} = a_{ii}b_{ii} = 1
+\end{split}
+\end{displaymath}
+Svolgendo il prodotto riga-colonna si osserva che le prime $i-1$ componenti
+della colonna annullano le prime $i-1$ componenti della riga e le ultime $n-i$
+componenti della riga annullano le ultime $n-i$ componenti della colonna, rimane
+solo il termine $a_{ii}b_{ii}$, ma per ipotesi $a_{ii}=b_{ii}=1$ perch\`e $A, B$
+sono a diagonale unitaria, quindi $c_{ii} = 1$ e questo termina la prova.
+\end{proof}
+
+\begin{exercise}[3.4]
+\label{exercise:341}
+Se $A$ \`e triangolare inferiore allora $A^{-1}$ \`e triangolare inferiore.
+\end{exercise}
+\begin{proof}
+Prova per assurdo.
+
+Le ipotesi di assurdo sono: $A$ triangolare inferiore ed $A^{-1}$ non
+triangolare inferiore. 
+
+Per definizione di matrice inversa, chiamo $B = A^{-1}$, $B$ non triangolare
+inferiore, vale:
+\begin{displaymath}
+\begin{bmatrix}
+a_{11} \\
+\vdots & \ddots \\
+a_{i1} & \cdots & a_{ii} \\
+\vdots & 		&		& \ddots\\
+a_{n1} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix} %times 
+\begin{bmatrix}
+b_{11} & \cdots & \cdots &\cdots & b_{1n} \\
+\vdots & \ddots &		&		& \vdots\\
+b_{i1} & \cdots & b_{ii} &		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+b_{n1} & \cdots & \cdots &\cdots & b_{nn}
+\end{bmatrix} =
+\begin{bmatrix}
+1 \\
+ & \ddots \\
+ & 		& \ddots \\
+ & 		&		& \ddots\\
+ &  	&  		&		& 1
+\end{bmatrix}
+\end{displaymath}
+Studio come si ottiene la prima riga della matrice identit\`a:
+\begin{displaymath}
+\vect{e}_{i}^{T} I = 
+\begin{bmatrix}
+1 & 0 & \ldots & 0
+\end{bmatrix} = 
+\begin{array}{c}
+a_{11}
+	\begin{bmatrix}
+	b_{11} & \ldots & b_{1n}
+	\end{bmatrix} \\
++ 0
+	\begin{bmatrix}
+	b_{21} & \ldots & b_{2n}
+	\end{bmatrix}  \\
+\vdots \\
++ 0
+	\begin{bmatrix}
+	b_{n1} & \ldots & b_{nn}
+	\end{bmatrix}
+\end{array} =
+a_{11}
+	\begin{bmatrix}
+	b_{11} & \ldots & b_{1n}
+	\end{bmatrix} 
+\end{displaymath}
+Per ipotesi di assurdo $B = A^{-1}$, quindi $b_{11} = \frac{1}{a_{11}}$, e dato
+che $A$ \`e triangolare inferiore, allore $a_{11}$ rendendo sensata la
+divisione.
+
+Per ipotesi di assurdo $B$ non \`e triangolare inferiore, quindi $\exists k:
+b_{1k} \not = 0$ e quindi anche $a_{11}b_{1k} \not = 0$. Ma questo \`e assurdo
+perch\`e deve valere 
+\begin{displaymath}
+\begin{split}
+\begin{bmatrix}
+1 & 0 & \ldots & 0
+\end{bmatrix} \vect{e}_{k} &= 
+\begin{bmatrix}
+a_{11}b_{11} & \ldots & a_{11}b_{1n}
+\end{bmatrix} \vect{e}_{k} \\
+0 &= a_{11}b_{1k}
+\end{split}
+\end{displaymath}
+Ma $a_{11}b_{1k} \not = 0$, cado in assurdo, quindi $B=A^{-1}$ deve essere
+triangolare inferiore.
+\end{proof}
+
+\begin{exercise}[3.4]
+Se $A$ \`e triangolare inferiore a diagonale unitaria allora $A^{-1}$ \`e
+triangolare inferiore a diagonale unitaria.
+\end{exercise}
+\begin{proof}
+Per ipotesi $A$ \`e triangolare inferiore, per l'esercizio \ref{exercise:341},
+anche $A^{-1}$ \`e triangolare inferiore. Rimane da dimostrare che $b_{ii} = 1$
+con $b_{ij} \in B = A^{-1}$.
+
+Per definizione di matrice inversa, chiamo $B = A^{-1}$, vale:
+\begin{displaymath}
+\begin{bmatrix}
+1 \\
+\vdots & \ddots \\
+a_{i1} & \cdots & 1 \\
+\vdots & 		&		& \ddots\\
+a_{n1} & \cdots & \cdots &\cdots & 1
+\end{bmatrix} %times 
+\begin{bmatrix}
+b_{11} \\
+\vdots & \ddots \\
+b_{i1} & \cdots & b_{ii} \\
+\vdots & 		&		& \ddots \\
+b_{n1} & \cdots & \cdots &\cdots & b_{nn}
+\end{bmatrix} =
+\begin{bmatrix}
+1 \\
+ & \ddots \\
+ & 		& \ddots \\
+ & 		&		& \ddots\\
+ &  	&  		&		& 1
+\end{bmatrix}
+\end{displaymath}
+Prova per assurdo. Suppongo che $B$ non sia a diagonale unitaria, quindi
+$b_{ii} \not = 1$.
+Studio come si ottiene la prima riga della matrice identit\`a:
+\begin{displaymath}
+\vect{e}_{i}^{T} I = 
+\begin{bmatrix}
+1 & 0 & \ldots & 0
+\end{bmatrix} = 
+\begin{array}{c}
+1
+	\begin{bmatrix}
+	b_{11} & 0 & \ldots & 0
+	\end{bmatrix} \\
++ 0
+	\begin{bmatrix}
+	b_{21} & b_{22} & 0 & \ldots & 0
+	\end{bmatrix}  \\
+\vdots \\
++ 0
+	\begin{bmatrix}
+	b_{n1} & \ldots & b_{nn}
+	\end{bmatrix}
+\end{array} =
+	\begin{bmatrix}
+	b_{11} & 0 & \ldots & 0
+	\end{bmatrix} 
+\end{displaymath}
+Affinch\`e sia vera l'uguaglianza deve valere $1 = b_{11}$. Ma questo \`e
+assurdo perch\`e per ipotesi di assurdo $b_{11} \not = 1$, quindi $B=A^{-1}$ \`e
+triangolare inferiore a diagonale unitaria.
+\end{proof}
+
+\begin{exercise}
+Se $A$ \`e triangolare allora $\det(A) = a_{11} \cdots a_{nn}$
+\end{exercise}
+\begin{proof}
+Suppongo che $A$ sia triangolare inferiore, lo stesso argomento si dimostra in
+modo simmetrico per le matrici triangolari superiori $B$: considerando $B^{T}$
+si torna ad una triangolare inferiore e quindi si pu\`o usare questa prova.
+Quindi $A$ \`e della forma:
+\begin{displaymath}
+\begin{bmatrix}
+a_{11} \\
+\vdots & \ddots \\
+a_{i1} & \cdots & a_{ii} \\
+\vdots & 		&		& \ddots\\
+a_{n1} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix}
+\end{displaymath}
+Calcolo il determinante rispetto alla prima riga:
+\begin{displaymath}
+\det(A) = a_{11}A_{11} + a_{12}A_{12}\cdots + a_{1n}A_{1n}
+\end{displaymath}
+Per ipotesi $A$ \`e tringolare inferiore, quindi $a_{ij} = 0$ se $i < j$, quindi
+\begin{displaymath}
+\det(A) = a_{11}A_{11}
+\end{displaymath}
+Calcolare $A_{11}$ equivale a calcolare la funzione $\det$ della matrice
+$B$ ottenuta da $A$ cancellando la prima riga e la prima colonna:
+\begin{displaymath}
+B = \begin{bmatrix}
+a_{22} \\
+\vdots & \ddots \\
+a_{i2} & \cdots & a_{ii} \\
+\vdots & 		&		& \ddots\\
+a_{n2} & \cdots & \cdots &\cdots & a_{nn}
+\end{bmatrix}
+\end{displaymath}
+Ma anche questa matrice \`e una tringolare inferiore, posso riapplicare lo
+stesso ragionamento per il calcolo del determinante, ottenendo $\det(B) =
+a_{22}B_{11}$, considerare una nuova matrice $C$ ottenuta da $B$ cancellando la
+prima riga e la prima colonna. \footnote{si cancella sempre la prima riga e la
+prima colonna, in quanto calcolando il determinante di una tringolare inferiore
+rispetto alla prima riga, rimane solo il primo elemento $b_{11}, c_{11}, \ldots$
+che coincidono rispettivamente con $a_{22}, a_{33}, \ldots$ perch\`e gli
+elementi della matrice non vengono modificati nel calcolo del determinante}
+Il procedimento ricorsivo si ferma quando si arriva alla sotto-matrice $X$ con
+il solo elemento $x_{11} = a_{nn}$ e, per la definizione di $\det$ vale
+$\det(a_{nn}) = a_{nn}$. Ricomponenti i pezzi si ottiene $\det(A) = a_{11}
+\cdots a_{nn}$ e questo termina la prova.
+\end{proof}
+
+\begin{exercise}[3.5, Lemma 3.2]
+$A \in \mathbb{R}^{n \times n}$ triangolare. \\
+$A$ \`e non singolare sse tutti i suoi
+minori principali sono non nulli. 
+\end{exercise}
+\begin{proof}[Proof of $\Rightarrow$]
+Per ipotesi $A$ \`e tringolare e $\det(A) \not = 0$.
+Devo dimostrare che $\det(A_{k}) \not = 0, \forall k \in \lbrace 1,\ldots, n
+\rbrace$.
+
+Prova per induzione completa su $k$.
+\begin{description}
+\item[base] per $k = 1$ ottengo $\det{A_{1}} = a_{11}$. Per ipotesi $A$ \`e
+triangolare quindi $a_{11} \not = 0$, la base \`e dimostrata.
+\item[ipotesi induttiva] suppongo vero $\det(A_{j}) \not = 0, \forall j \in
+\lbrace 1,\ldots, k-1 \rbrace$.
+\item[passo induttivo] devo dimostrare che $\det(A_{k}) \not = 0$.
+Per la definizione della funzione $\det$:
+\begin{displaymath}
+\det(A) = a_{r1}A_{r1} + \ldots + a_{rn}A_{rn}, \quad \forall r \in {1,\ldots,n}
+\end{displaymath}
+con $A_{ij} = (-1)^{i+j}M_{ij}(A)$ e $M_{ij}(A)$ restituisce il determinante
+della matrice ottenuta non considerando l'$i$-esima riga e la $j$-esima colonna
+della matrice $A$ passata come parametro.
+\end{description}
+
+Applico la definizione della funzione $\det$ alla sotto-matrice $A_{k}$: per
+ipotesi $\det(A) \not = 0$, quindi posso fissare l'indice $r = 1$ della riga
+rispetto a cui calcolo il determinante in quanto $\det(A)$ non cambia rispetto
+alla riga (e anche alle colonne) rispetto a cui viene calcolato. Ottengo:
+\begin{displaymath}
+\det(A_{k}) = a_{11}A_{k_{11}} + \ldots + a_{1n}A_{k_{1n}}
+\end{displaymath}
+Per ipotesi $A$ \`e triangolare quindi $a_{ij} = 0$ per $i < j$, quindi:
+\begin{displaymath}
+\det(A_{k}) = a_{11}A_{k_{11}}
+\end{displaymath}
+Ancora usando l'ipotesi che $A$ \`e triangolare, la struttura di triangolare
+viene preservata da ogni sua sotto-matrice principale, ovvero $A_{o}$ \`e
+tringolare $\forall o \in {1,\ldots,n}$, quindi anche $A_{k}$ \`e tringolare.
+Per questo motivo il calcolo di $A_{k_{11}} = (-1)^{1+1}M_{11}(A_{k})$. Dato che
+devo calcolare il determinante della nuova matrice $A'$ ottenuta da $A_{k}$ non
+considerando la prima riga e la prima colonna, devo calcolare il determinante di
+una nuova matrice triangolare. Calcolandolo sempre $\det(A')$ sulla prima riga
+ottengo $det(A') = a_{22}A'_{22}$. Ripetendo il ragionamento fino ad arrivare
+alla sotto-matrice degenere ad un elemento $A^{k-1} = a_{kk}$, ottengo che: 
+\begin{displaymath}
+\det(A_{k}) = a_{11}\cdots a_{kk}
+\end{displaymath}
+Dato che $\det(A) = a_{11} \cdots a_{nn} \not = 0$ per
+ipotesi, allora anche $\det(A_{k}) \not = 0$ e questo completa il passo induttivo.
+\end{proof}
+
+\begin{proof}[Proof of $\Leftarrow$]
+Per ipotesi vale $\det(A_{k}) \not = 0, \forall k \in \lbrace 1, \ldots,
+n\rbrace$. Considero la sotto-matrice con $k = n$, quindi $A_{n} = A$.
+Applicando la funzione $\det$ ad entrambi i membri, per l'ipotesi si
+ottiene l'asserto.
+\end{proof}
+
+
+
+\begin{exercise}[3.5, Lemma 3.3]
+Se $A = LU$ allora 
+$\det(A_{k}) = \det(U_{k}), \forall k \in \lbrace 1,\ldots,n \rbrace$
+\end{exercise}
+\begin{proof}
+$\det(A_{k}) = \det(L_{k}U_{k}) = \det(L_{k}) \det(U_{k})$ perch\`e $L_{k}$ e
+$U_{k}$ hanno la stessa dimensione. Ma $L_{k}$ \`e tringolare inferiore a
+diagonale unitaria per costruzione della \emph{fattorizzazione LU}, quindi
+$\det(L_{k}) = 1$, quindi si ottiene l'asserto.
+\end{proof}
