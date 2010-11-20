@@ -1,0 +1,50 @@
+\section{Before Partial Pivoting}
+
+\begin{exercise}[3.6]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+\begin{proof}
+Il numero di operazioni che compio \`e dato da:
+\begin{displaymath}
+\sum_{i = 1}^{n - i}{\left( (n-i) + 2(n-i) \right)} =
+\sum_{k = 1}^{n - 1}{\left( k + 2k^{2} \right)} = \frac{n(n-1)}{2} +
+\frac{2(n-1)n(2n-1)}{6} \approx \frac{2}{3}n^{3}
+\end{displaymath}
+\end{proof}
+
+\begin{exercise}[3.9, Lemma 3.4]
+Se $A$ \`e diagonale dominante per righe allora lo sono anche tutte le sue
+sotto-matrici principali.
+\end{exercise}
+\begin{proof}
+Per ipotesi $A$ \`e diagonale dominante per righe, quindi posso costruire questa 
+disuguaglianza:
+\begin{displaymath}
+|a_{ii}| > \sum_{j = 1 \\j \not = i}^{n}{|a_{ij}|} \geq \sum_{j = 1 \\j \not =
+i}^{k}{|a_{ij}|}, \quad k \leq n
+\end{displaymath}
+con $k$ indice della sotto-matrice di ordine $k$. La disuguaglianza a destra
+dimostra l'asserto e la prova \`e terminata.
+\end{proof}
+
+\begin{exercise}[3.9, Lemma 3.5]
+$A$ \`e diagonale dominante per righe sse $A^{T}$ \`e diagonale dominante per
+colonne.
+\end{exercise}
+\begin{proof}[Proof of $\Rightarrow$]
+Per ipotesi $A$ \`e diagonale dominante per righe, ovvero:
+\begin{displaymath}
+|a_{ii}| > \sum_{j = 1 \\j \not = i}^{n}{|a_{ij}|}
+\end{displaymath}
+Costruisco la trasposta: se $a_{ij} \in A$ allora $a_{ji} \in A^{T}$. Riscrivo
+la definizione precedente:
+\begin{displaymath}
+|a_{ii}| > \sum_{j = 1 \\j \not = i}^{n}{|a_{ji}|}
+\end{displaymath}
+Ma questa \`e la definizione di matrice diagonale dominante per colonne e questo
+termina la prova.
+\end{proof}
+
+\begin{proof}[Proof of $\Leftarrow$]
+Con argomento simmetrico si dimostra anche l'implicazione inversa.
+\end{proof}
