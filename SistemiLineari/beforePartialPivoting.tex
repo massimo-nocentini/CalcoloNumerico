@@ -48,3 +48,58 @@ termina la prova.
 \begin{proof}[Proof of $\Leftarrow$]
 Con argomento simmetrico si dimostra anche l'implicazione inversa.
 \end{proof}
+
+\begin{exercise}[3.10]
+Se $A = LDL^{T}$ allora $A$ \`e sdp.
+\end{exercise}
+\begin{proof}
+Devo dimostrare che $A$ soddisfa la definizione sdp:
+\begin{itemize}
+\item $A = LDL^{T} = (L^{T})^{T}DL^{T} = LDL^{T} = A^{T}$, quindi $A$ \`e
+simmetrica.
+\item $\forall \vect{x} \in \mathbb{R}^{n}, \vect{x} \not = \vect{0}$ allora
+deve valere:
+\begin{displaymath}
+\vect{x}^{T}A\vect{x} = \vect{x}^{T}LDL^{T}\vect{x} > 0
+\end{displaymath}
+Costruisco il vettore $\vect{y} = L^{T}\vect{x}$, di conseguenza $\vect{y}^{T}
+= \vect{x}^{T}(L^{T})^{T} = \vect{x}^{T}L$. Quindi posso riscrivere
+$\vect{y}^{T}D\vect{y} > 0$. Rappresento il prodotto $\vect{y}^{T}(D\vect{y})$:
+\begin{displaymath}
+\vect{y}^{T}(D\vect{y}) = 
+\begin{bmatrix}
+y_{1} & \cdots & y_{n}
+\end{bmatrix}
+\begin{bmatrix}
+d_{11} \\
+ & d_{22} \\
+ & 		& \ddots \\
+ & 		&		& \ddots\\
+ &  	&  		&		& d_{nn}
+\end{bmatrix}
+\begin{bmatrix}
+y_{1}\\
+\vdots \\
+y_{n}
+\end{bmatrix} = 
+\begin{bmatrix}
+y_{1} & \cdots & y_{n}
+\end{bmatrix}
+\begin{bmatrix}
+y_{1}d_{11}\\
+\vdots \\
+y_{n}d_{nn}
+\end{bmatrix} =
+\sum_{i = 1}^{n}{y_{i}d_{ii}} \geq 0
+\end{displaymath} 
+In quanto per ipotesi $d_{ii} > 0$. Per avere la somma uguale a 0, si dovrebbe
+avere $\vect{y} = \vect{0}$. Ma questo non \`e possibile in quanto $\vect{y}  
+= L^{T}\vect{x}$ con $L$ non singolare e $\vect{x} \not = \vect{0}$ per
+definizione di sdp. Quindi si ha:
+\begin{displaymath}
+\sum_{i = 1}^{n}{y_{i}d_{ii}} > 0
+\end{displaymath} 
+questo \`e quanto richiesta dalla definizione di sdp, quindi $A$ \`e sdp e
+questo termina la prova.
+\end{itemize}
+\end{proof}
