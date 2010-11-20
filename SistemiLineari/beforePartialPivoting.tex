@@ -103,3 +103,45 @@ questo \`e quanto richiesta dalla definizione di sdp, quindi $A$ \`e sdp e
 questo termina la prova.
 \end{itemize}
 \end{proof}
+
+\begin{exercise}[3.11]
+Se $A$ \`e non singolare allora $A^{T}A$ e $AA^{T}$ sono sdp.
+\end{exercise}
+\begin{proof}
+Devo verifica che $B = A^{T}A$ sia sdp quindi:
+\begin{itemize}
+  \item $B = A^{T}A = A^{T}(A^{T})^{T} = A^{T}A = B^{T}$, quindi $B$ \`e
+  simmetrica
+  \item $\forall \vect{x} \in \mathbb{R}^{n}, \vect{x} \not = \vect{0}$ allora
+deve valere:
+\begin{displaymath}
+\vect{x}^{T}B\vect{x} = \vect{x}^{T}A^{T}A\vect{x} > 0
+\end{displaymath}
+Costruisco il vettore $\vect{y} = A\vect{x}$, di conseguenza $\vect{y}^{T}
+= \vect{x}^{T}A^{T}$. Quindi posso riscrivere
+$\vect{y}^{T}\vect{y} > 0$ e rappresento:
+\begin{displaymath}
+\vect{y}^{T}\vect{y} = 
+\begin{bmatrix}
+y_{1} & \cdots & y_{n}
+\end{bmatrix}
+\begin{bmatrix}
+y_{1}\\
+\vdots \\
+y_{n}
+\end{bmatrix} =
+\sum_{i = 1}^{n}{y_{i}^{2}} \geq 0
+\end{displaymath} 
+Per avere la somma uguale a 0, si dovrebbe
+avere $\vect{y} = \vect{0}$. Ma questo non \`e possibile in quanto $\vect{y}  
+= A\vect{x}$ con $A$ non singolare, quindi $A$ non \`e la matrice nulla, e
+$\vect{x} \not = \vect{0}$ per definizione di sdp. Quindi si ha:
+\begin{displaymath}
+\sum_{i = 1}^{n}{y_{i}^{2}} > 0
+\end{displaymath} 
+questo \`e quanto richiesta dalla definizione di sdp, quindi $B$ \`e sdp.
+
+Dato che ho dimostrato che $B$ \`e simmetrica allora anche $B^{T}$ \`e sdp e
+questo termina la prova.
+\end{itemize}
+\end{proof}
