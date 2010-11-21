@@ -6,11 +6,28 @@ Per il testo dell'esercizio consultare il libro di testo.
 \begin{proof}
 Il numero di operazioni che compio \`e dato da:
 \begin{displaymath}
-\sum_{i = 1}^{n - i}{\left( (n-i) + 2(n-i) \right)} =
-\sum_{k = 1}^{n - 1}{\left( k + 2k^{2} \right)} = \frac{n(n-1)}{2} +
-\frac{2(n-1)n(2n-1)}{6} \approx \frac{2}{3}n^{3}
+\sum_{i = 1}^{n}{\left( (n-i) + 2(n-i)^{2} \right)} =
+\sum_{k = 0}^{n - 1}{\left( k + 2k^{2} \right)} = 
+\sum_{k = 0}^{n - 1}{k } + 2\sum_{k = 0}^{n - 1}{k^{2}} 
 \end{displaymath}
+Con la prima somma si sommano i primi $n-1$ numeri naturali (escludendo lo
+zero), per la seconda somma posso applicare il suggerimento del testo 
+$\sum_{i = 0}^{n-1}{i^{2}} = \frac{n(n-1)(2n-1)}{6}$, ottengo quindi:
+\begin{displaymath}
+\begin{split}
+\sum_{k = 0}^{n - 1}{k } + 2\sum_{k = 0}^{n - 1}{k^{2}} &= \frac{n(n-1)}{2} +
+\frac{2n(n-1)(2n-1)}{6} = n(n-1)\left( \frac{1}{2} + \frac{2n-1}{3}\right ) = \\
+&= n(n-1) \frac{4n+1}{6} = (n^{2}-n) \frac{4n+1}{6} = \frac{4n^{3} -3n^{2}-n}{6}
+\approx \frac{2}{3}n^{3}
+\end{split}
+\end{displaymath}
+Considerando per l'ultima approssimazione solo il termine di grado massimo.
 \end{proof}
+
+\begin{exercise}[3.7, 3.8]
+Per i testi degli esercizi consultare il libro di testo.
+\end{exercise}
+Vedere il codice \nameref{subsection:LUmethod}.
 
 \begin{exercise}[3.9, Lemma 3.4]
 Se $A$ \`e diagonale dominante per righe allora lo sono anche tutte le sue
@@ -269,3 +286,75 @@ a_{n1} & \cdots & \cdots &\cdots & a_{nn}
 In generale vale $a'_{ij} = a_{ij} + a_{ji} + a_{ij} - a_{ji} = 2a_{ij}$.
 L'uguaglianza \`e verificata e questo termina la prova.
 \end{proof}
+
+\begin{exercise}[3.16, 3.17]
+Per i testi degli esercizi consultare il libro di testo.
+\end{exercise}
+Vedere il codice \nameref{subsection:LDLmethod}.
+
+\begin{exercise}[3.18]
+Per i testi degli esercizi consultare il libro di testo.
+\end{exercise}
+\begin{lstlisting}
+octave:43> A = [
+> 1 1 1 1
+> 1 2 2 2
+> 1 2 1 1
+> 1 2 1 2];
+octave:45> [L,U,xs] = LDLmethod(A, [1;1;1;1])
+error: A non sdp.
+\end{lstlisting}
+
+\begin{exercise}
+Usare le fattorizzazioni $LU, LDL^{T}$ alla matrice:
+\begin{displaymath}
+\begin{bmatrix}
+1 & -1 & 0 & 0 \\
+-1 & 2 & -1 & 0 \\
+0 & -1 & 2 & -1 \\
+0 & 0 & -1 & 2
+\end{bmatrix}
+\end{displaymath}
+\end{exercise}
+
+\begin{lstlisting}
+octave:49> A = [1 -1 0 0; -1 2 -1 0; 0 -1 2 -1; 0 0 -1 2]
+A =
+   1  -1   0   0
+  -1   2  -1   0
+   0  -1   2  -1
+   0   0  -1   2
+octave:50> [L,U,xs] = LUmethod(A, [1;1;1;1])
+L =
+   1   0   0   0
+  -1   1   0   0
+   0  -1   1   0
+   0   0  -1   1
+U =
+   1  -1   0   0
+   0   1  -1   0
+   0   0   1  -1
+   0   0   0   1
+xs =
+   10
+    9
+    7
+    4
+octave:51> [L,D,xs] = LDLmethod(A, [1;1;1;1])
+L =
+   1   0   0   0
+  -1   1   0   0
+   0  -1   1   0
+   0   0  -1   1
+D =
+   1   0   0   0
+   0   1   0   0
+   0   0   1   0
+   0   0   0   1
+xs =
+   10
+    9
+    7
+    4
+\end{lstlisting}
+
