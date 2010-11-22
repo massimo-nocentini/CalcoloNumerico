@@ -171,7 +171,8 @@ sdp.
 \begin{proof}
 Devo dimostrare che $B = A^{T}A$ \`e sdp.
 \begin{itemize}
-  \item $B$ \`e simmetrica per l'esercizio \ref{exercise:311}.
+  \item $B$ per la prova della simmetria dell'esercizio
+  \ref{exercise:311}.
   \item $\forall \vect{x} \in \mathbb{R}^{n}, \vect{x} \not = \vect{0}$ allora
   posso costruire un vettore (come fatto nell'esercizio precedente) $\vect{y} =
   A\vect{x}, \vect{y} \in \mathbb{R}^{m}$ ed il rispettivo $\vect{y}^{T} = 
@@ -189,6 +190,40 @@ Devo dimostrare che $B = A^{T}A$ \`e sdp.
   termina la prova.
 \end{itemize}
 \end{proof}
+
+\begin{exercise}
+Sia $S \in \mathbb{R}^{n \times n}$. Se $\det(S) \not = 0$ allora $A = SS^{T}$
+\`e sdp.
+\end{exercise}
+\begin{proof}
+Devo dimostrare che $A$ soddisfa le due richieste della definizione di
+matrice sdp.
+\begin{itemize}
+\item $A = SS^{T} = (S^{T})^{T}S^{T} = SS^{T} = A^{T}$, quindi $A$ \`e
+simmetrica.
+  \item $\forall \vect{x} \in \mathbb{R}^{n}, \vect{x} \not = \vect{0}$ allora
+  \begin{displaymath}
+\vect{x}^{T}A\vect{x} = \vect{x}^{T}SS^{T}\vect{x} > 0
+\end{displaymath}
+Costruisco il vettore $\vect{y} = S^{T}\vect{x}$, di conseguenza $\vect{y}^{T}
+= \vect{x}^{T}S$. Quindi posso riscrivere
+$\vect{y}^{T}\vect{y} > 0$.
+Svolgendo il prodotto riga-colonna vale:
+\begin{displaymath}
+  	\sum_{i = 1}^{n}{y_{i}^{2}} > 0
+  \end{displaymath}
+  Questa somma non pu\`o essere zero in quanto per come \`e costruito
+  $\vect{y}$, per ipotesi $S$ \`e non singolare e dato che $S = S^{T}$,  anche
+  $S^{T}$ \`e non singolare, quindi $S^{T}$ non annulla il prodotto. Rimane da
+  controllare il vettore $\vect{x}$, ma per costruzione $\vect{x} \not =
+  \vect{0}$,  quindi la somma \`e positiva e questo termina la prova che $A =
+  SS^{T}$ \`e sdp.
+  \end{itemize}
+\end{proof}
+\begin{oss}
+Posso utilizzare l'asserto del precedente esercizio per costruire una matrice
+sdp partendo da una matrice non singolare.
+\end{oss}
 
 \begin{exercise}[3.13]
 Se $A \in \mathbb{R}^{n \times n}$ allora $A = \frac{1}{2}(A + A^{T}) +
