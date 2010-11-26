@@ -225,9 +225,9 @@ Posso utilizzare l'asserto del precedente esercizio per costruire una matrice
 sdp partendo da una matrice non singolare.
 \end{oss}
 
-\begin{exercise}[3.13]
+\begin{exercise}[3.13a]
 Se $A \in \mathbb{R}^{n \times n}$ allora $A = \frac{1}{2}(A + A^{T}) +
-\frac{1}{2}(A - A^{T})$
+\frac{1}{2}(A - A^{T}) = A_{s} + A_{a}$
 \end{exercise}
 \begin{proof}
 \begin{displaymath}
@@ -320,6 +320,108 @@ a_{n1} & \cdots & \cdots &\cdots & a_{nn}
 \end{displaymath}
 In generale vale $a'_{ij} = a_{ij} + a_{ji} + a_{ij} - a_{ji} = 2a_{ij}$.
 L'uguaglianza \`e verificata e questo termina la prova.
+\end{proof}
+
+
+\begin{exercise}[3.13b]
+Se $A \in \mathbb{R}^{n \times n}$ e $\forall \vect{x} \in \mathbb{R}^{n}$
+allora $\vect{x}^{T}A\vect{x} = \vect{x}^{T}A_{s}\vect{x}$
+\end{exercise}
+\begin{proof}
+Per la parte $3.13a$ vale che $A = A_{s} + A_{a}$, quindi posso sostituire ed
+applicare la propriet\`a distributiva del prodotto:
+\begin{displaymath}
+\vect{x}^{T}A\vect{x} = \vect{x}^{T}(A_{s} + A_{a})\vect{x} =
+\vect{x}^{T}A_{s}\vect{x} + \vect{x}^{T}A_{a}\vect{x}
+\end{displaymath}
+Posso ridurre l'argomento che si vuole dimostrare ($\vect{x}^{T}A\vect{x} =
+\vect{x}^{T}A_{s}\vect{x}$), considerandolo vero, a dimostrare che
+necessariamente deve valere $0 = \vect{x}^{T}A_{a}\vect{x}$.
+
+Per definizione di $A_{a}$ vale $\frac{1}{2}(A - A^{T}) = A_{a}$, che posso
+rappresentare:
+\begin{displaymath}
+\frac{1}{2} 
+\begin{bmatrix}
+0 & a_{12} - a_{21} & \cdots &\cdots & a_{1n} - a_{n1} \\
+a_{21} - a_{12} & 0 &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} - a_{1n}& \cdots & \cdots &\cdots & 0
+\end{bmatrix} = A^{a}
+\end{displaymath}
+Fisso un vettore $\vect{x} \in \mathbb{R}^{n}$ e rappresento il prodotto
+$\vect{x}^{T}A_{a}\vect{x}$:
+\begin{displaymath}
+\begin{bmatrix}
+x_{1} & \cdots & x_{n}
+\end{bmatrix}
+\begin{bmatrix}
+0 & a_{12} - a_{21} & \cdots &\cdots & a_{1n} - a_{n1} \\
+a_{21} - a_{12} & 0 &		&		& \vdots\\
+\vdots &  		& \ddots & 		& \vdots\\
+\vdots & 		&		& \ddots & \vdots\\
+a_{n1} - a_{1n}& \cdots & \cdots &\cdots & 0
+\end{bmatrix} 
+\begin{bmatrix}
+x_{1} \\ 
+\vdots \\ 
+\vdots \\
+\vdots \\
+x_{n}
+\end{bmatrix}= 2 A^{a}
+\end{displaymath}
+Sviluppo il prodotto matrice-vettore colonna:
+\begin{displaymath}
+\begin{bmatrix}
+x_{1} & \cdots & x_{n}
+\end{bmatrix}
+\begin{bmatrix}
+0x_{1} + (a_{12} - a_{21})x_{2} + (a_{13} - a_{31})x_{3} + \cdots + (a_{1n} -
+a_{n1})x_{n} \\ 
+(a_{21} - a_{12})x_{1} + 0x_{2} + (a_{23} - a_{32})x_{3} + \cdots + (a_{2n} -
+a_{n2})x_{n} \\ 
+\vdots\\
+(a_{n1} - a_{1n})x_{1} + (a_{n2} - a_{2n})x_{2} + (a_{n3} - a_{3n})x_{3} +
+\cdots + 0x_{n}
+\end{bmatrix} = 2 A^{a}
+\end{displaymath}
+Sviluppo il prodotto vettore riga-vettore colonna ottenendo uno scalare:
+\begin{displaymath}
+\begin{array}{c}
+0x_{1}x_{1} + (a_{12} - a_{21})x_{2}x_{1} + (a_{13} - a_{31})x_{3}x_{1} + \cdots
++ (a_{1n} - a_{n1})x_{n}x_{1} +\\ 
++ (a_{21} - a_{12})x_{1}x_{2} + 0x_{2}x_{2} + (a_{23} - a_{32})x_{3}x_{2} +
+\cdots + (a_{2n} - a_{n2})x_{n}x_{2} + \\ 
+\vdots\\
++ (a_{n1} - a_{1n})x_{1}x_{n} + (a_{n2} - a_{2n})x_{2}x_{n} + (a_{n3} -
+a_{3n})x_{3}x_{n} + \cdots + 0x_{n}x_{n}
+\end{array} = 2 A^{a}
+\end{displaymath}
+Omettendo gli elementi che contengono i fattori $a x_{i} x_{i} = 0$ ottengo:
+\begin{displaymath}
+0 = \begin{array}{c}
+(a_{12} - a_{21})x_{2}x_{1} + (a_{13} - a_{31})x_{3}x_{1} + \cdots
++ (a_{1n} - a_{n1})x_{n}x_{1} +\\ 
++ (a_{21} - a_{12})x_{1}x_{2} + (a_{23} - a_{32})x_{3}x_{2} +
+\cdots + (a_{2n} - a_{n2})x_{n}x_{2} + \\ 
+\vdots\\
++ (a_{n1} - a_{1n})x_{1}x_{n} + (a_{n2} - a_{2n})x_{2}x_{n} + (a_{n3} -
+a_{3n})x_{3}x_{n} + \cdots + (a_{n,n-1} - a_{n-1,n})x_{n-1}x_{n} 
+\end{array} = 2 A^{a}
+\end{displaymath}
+Ma $(a_{ij} - a_{ji})x_{j}x_{i} = -(a_{ji}-a_{ij})x_{i}x_{j}$ quindi tutti gli
+elementi della somma precedente si eliminano a coppie. Per completezza dimostro
+che il numero di elementi della precedente somma \`e pari. 
+
+Gli elementi della penultima matrice (comprendendo anche i prodotti nulli) \`e
+pari al prodotto cartesiano $n^{2}$, sottraggo gli elementi nulli, ovvero la
+diagonale, quindi gli elementi non nulli sono $n^{2} - n$. Devo dimostrare
+quindi $n^{2} - n = 2k$, con $k \in \mathbb{N}$. Divido per 2 entrambi i membri
+ottenendo $\frac{n(n - 1)}{2} = k$. Il primo membro \`e la somma dei primi $n-1$
+numeri naturali, quindi $\sum_{i=1}^{n-1}{i} = k$. Ma dato che l'indice
+superiore della somma \`e finito ($n-1 <\infty$) allora la somma ammette un
+valore finito $k \in \mathbb{N}$, che \`e quello che si voleva dimostrare.
 \end{proof}
 
 \begin{exercise}[3.16, 3.17]

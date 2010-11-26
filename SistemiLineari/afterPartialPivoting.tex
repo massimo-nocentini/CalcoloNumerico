@@ -1,0 +1,169 @@
+\section{After Partial Pivoting}
+
+\begin{exercise}[3.24]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+\begin{lstlisting}
+octave:8> A = [eps 1; 1 0], b = [1; 1/4]A =
+   2.22044604925031e-16   1.00000000000000e+00
+   1.00000000000000e+00   0.00000000000000e+00
+b =
+   1.00000000000000e+00
+   2.50000000000000e-01
+octave:9> A\b
+ans =
+   2.50000000000000e-01
+   1.00000000000000e+00
+octave:10> L = [1 0; 1/eps 1], U = [eps 1; 0 -1/eps]
+L =
+   1.00000000000000e+00   0.00000000000000e+00
+   4.50359962737050e+15   1.00000000000000e+00
+U =
+   2.22044604925031e-16   1.00000000000000e+00
+   0.00000000000000e+00  -4.50359962737050e+15
+octave:11> (L*U) - A
+ans =
+   0.00000000000000e+00   0.00000000000000e+00
+   0.00000000000000e+00   0.00000000000000e+00
+octave:12> U\(L\b)
+ans =
+   0.00000000000000e+00
+   1.00000000000000e+00
+\end{lstlisting}
+La riga \emph{octave:9} restituisce la soluzione esatta del sistema, ovvero il
+vettore $\vect{x} = \bigl [ \begin{smallmatrix}
+.25 \\
+1
+\end{smallmatrix}\bigr ]$.
+
+La riga \emph{octave:11} dimostra che $A = LU$ quindi $0 = LU - A$, le matrici
+di fattorizzazione sono corrette.
+
+La riga \emph{octave:12} dimostra che il metodo di fattorizzazione $LU$ senza
+pivoting risulta essere mal condizionato, infatti la prima componente
+$\tilde{x}_{1} = 0 \not = .25 = x_{1}$.
+
+\begin{exercise}[3.25]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Per calcolare $k_{\infty}(A)$ \`e necessario calcolare l'inversa:
+\begin{displaymath}
+\begin{bmatrix}
+1 \\
+-100 & 1 \\ 
+100^{2} & -100 & 1\\ 
+-100^{4} & 100^{2} & -100 & 1\\
+\vdots & & & & \ddots \\
+-100^{16} & 100^{14} & -100^{12} & \cdots & \cdots &  1
+\end{bmatrix} = A^{-1}
+\end{displaymath}
+Questo l'output del codice:
+\begin{lstlisting}
+octave:35> cond(A,Inf)
+warning: inverse: matrix singular to machine precision, rcond = 9.80198e-21
+ans =  1.0202e+20
+\end{lstlisting}
+
+\begin{exercise}[3.26]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Questo il codice che verifica che i vettori $\vect{x}, \vect{y}$ sono soluzioni
+rispettivamente delle equazioni $A\vect{x} = \vect{b}, A\vect{y} = \vect{c}$:
+\begin{lstlisting}
+octave:41> A
+A =
+
+     1     0     0     0     0     0     0     0     0     0
+   100     1     0     0     0     0     0     0     0     0
+     0   100     1     0     0     0     0     0     0     0
+     0     0   100     1     0     0     0     0     0     0
+     0     0     0   100     1     0     0     0     0     0
+     0     0     0     0   100     1     0     0     0     0
+     0     0     0     0     0   100     1     0     0     0
+     0     0     0     0     0     0   100     1     0     0
+     0     0     0     0     0     0     0   100     1     0
+     0     0     0     0     0     0     0     0   100     1
+
+octave:42> b = [1;101;101;101;101;101;101;101;101;101];
+octave:43> x = [1;1;1;1;1;1;1;1;1;1];
+octave:44> A*x - b
+ans =
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+octave:45> c = .1*b;
+octave:46> y = [.1;.1;.1;.1;.1;.1;.1;.1;.1;.1];
+octave:47> A*y - c
+ans =
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+\end{lstlisting}
+Implemento le istruzioni:
+\begin{lstlisting}
+octave:50> b = [1 101*ones(1,9)]';
+octave:51> x(1) = b(1);
+octave:52> for i=2:10, x(i) = b(i) - 100*x(i-1); end
+octave:53> x = x(:)
+x =
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+octave:54> c = .1*[1 101*ones(1,9)]';
+octave:55> y(1) = c(1);
+octave:56> for i=2:10, y(i) = c(i) - 100*y(i-1); end
+octave:57> y = y(:)
+y =
+    0.100000
+    0.100000
+    0.100000
+    0.100000
+    0.100000
+    0.100000
+    0.099986
+    0.101407
+   -0.040702
+   14.170153
+octave:62> (y-yexact) ./ yexact  
+ans =
+     0.00000
+     0.00000
+    -0.00000
+     0.00000
+    -0.00000
+     0.00000
+    -0.00014
+     0.01407
+    -1.40702
+   140.70153
+\end{lstlisting}
+Si osserva che il vettore $\vect{y}$, soluzione esatta del secondo sistema, non
+\`e uguale al vettore approssimato dal secondo set di istruzioni: il comando
+\emph{octave:62} calcola il vettore degli errori relativi che si commettono e si
+nota che per l'ultima componente si ha un errore molto significativo. Questo \`e
+dovuto dal fatto che le componenti del vettore dei termini noti $\vect{c}$ non
+\`e possibile rappresentarle correttamente in macchina (0.1 ha rappresentazione
+infinita periodica in binario). Questi errori di rappresentazione si sommano
+nelle 9 iterazioni che vengono fatte dal ciclo for, risultando significative per
+la decima componente.
