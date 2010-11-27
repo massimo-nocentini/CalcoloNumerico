@@ -1,10 +1,145 @@
 \section{After Partial Pivoting}
 
+\begin{exercise}[3.21, 3.22]
+Per i testi degli esercizi consultare il libro di testo.
+\end{exercise}
+Vedere il codice \nameref{subsection:PALUmethod}.
+
+\begin{exercise}[3.23]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+\begin{itemize}
+  \item applicazione al sistema dell'esercizio \ref{exercise:324}: si
+osserva che usando il pivoting vengono trovate le soluzioni esatte.
+\begin{lstlisting}
+octave:25> A
+A =
+   2.22044604925031e-16   1.00000000000000e+00
+   1.00000000000000e+00   0.00000000000000e+00
+octave:26> b
+b =
+   1.00000000000000e+00
+   2.50000000000000e-01
+octave:27> [L, U, p, unknowns] = PALUmethod(A, b)
+L =
+   1.00000000000000e+00   0.00000000000000e+00
+   2.22044604925031e-16   1.00000000000000e+00
+U =
+   1.00000000000000e+00   0.00000000000000e+00
+   0.00000000000000e+00   1.00000000000000e+00
+p =
+   2.00000000000000e+00   1.00000000000000e+00
+unknowns =
+   2.50000000000000e-01
+   1.00000000000000e+00
+\end{lstlisting}
+
+\item applicazione al primo sistema dell'esercizio \ref{exercise:324}:
+\begin{lstlisting}
+octave:42> A = [ 
+1 0 0 0 0 0 0 0 0 0; 
+100 1 0 0 0 0 0 0 0 0; 
+0 100 1 0 0 0 0 0 0 0; 
+0 0 100 1 0 0 0 0 0 0; 
+0 0 0 100 1 0 0 0 0 0; 
+0 0 0 0 100 1 0 0 0 0; 
+0 0 0 0 0 100 1 0 0 0; 
+0 0 0 0 0 0 100 1 0 0; 
+0 0 0 0 0 0 0 100 1 0; 
+0 0 0 0 0 0 0 0 100 1];
+octave:43> x = [1 101*ones(1,9)]';
+octave:45> [L, U, p, unknowns] = PALUmethod(A, x);
+octave:46> format
+octave:47> p
+p =
+    2    3    4    5    6    7    8    9   10    1
+octave:50> format long e
+octave:51> unknowns'
+ans =
+ Columns 1 through 4:
+   1.00000000000000e+00   1.00000000000000e+00   9.99999999999925e-01   1.00000000000755e+00
+ Columns 5 through 8:
+   9.99999999245411e-01   1.00000007545890e+00   9.99992454110141e-01   1.00075458898588e+00
+ Columns 9 and 10:
+   9.24541101412386e-01   8.54588985876136e+00
+\end{lstlisting}
+
+\item applicazione al secondo sistema dell'esercizio \ref{exercise:324}:
+\begin{lstlisting}
+octave:42> A = [ 
+1 0 0 0 0 0 0 0 0 0; 
+100 1 0 0 0 0 0 0 0 0; 
+0 100 1 0 0 0 0 0 0 0; 
+0 0 100 1 0 0 0 0 0 0; 
+0 0 0 100 1 0 0 0 0 0; 
+0 0 0 0 100 1 0 0 0 0; 
+0 0 0 0 0 100 1 0 0 0; 
+0 0 0 0 0 0 100 1 0 0; 
+0 0 0 0 0 0 0 100 1 0; 
+0 0 0 0 0 0 0 0 100 1];
+octave:43> x = [1 101*ones(1,9)]';
+octave:54> y = .1*x;
+octave:55> [L, U, p, unknowns] = PALUmethod(A, y);
+octave:56> format
+octave:57> p
+p =
+    2    3    4    5    6    7    8    9   10    1
+octave:58> format long e
+octave:59> unknowns'
+ans =
+ Columns 1 through 4:
+   1.00000000000000e-01   1.00000000000001e-01   9.99999999998550e-02   1.00000000014504e-01
+ Columns 5 through 8:
+   9.99999985496383e-02   1.00000145036173e-01   9.99854963826791e-02   1.01450361732092e-01
+ Columns 9 and 10:
+  -4.50361732092139e-02   1.46036173209214e+01
+\end{lstlisting} 
+\item applicazione al sistema $B\vect{x} = \vect{f}$:
+\begin{lstlisting}
+octave:59> format 
+octave:60> B = [0 1 1; 1 0 1; 2 3 4]
+B =
+   0   1   1
+   1   0   1
+   2   3   4
+octave:61> f = [1;0;3];
+octave:62> [L, U, p, unknowns] = PALUmethod(B, f);
+octave:63> L
+L =
+
+   1.00000000000000e+00   0.00000000000000e+00   0.00000000000000e+00
+   5.00000000000000e-01   1.00000000000000e+00   0.00000000000000e+00
+   0.00000000000000e+00  -6.66666666666667e-01   1.00000000000000e+00
+
+octave:64> U
+U =
+   2.00000000000000e+00   3.00000000000000e+00   4.00000000000000e+00
+   0.00000000000000e+00  -1.50000000000000e+00  -1.00000000000000e+00
+   0.00000000000000e+00   0.00000000000000e+00   3.33333333333333e-01
+octave:66> p
+p =
+   3   2   1
+octave:67> format long e
+octave:68> unknowns 
+unknowns =
+   0.00000000000000e+00
+   1.00000000000000e+00
+   0.00000000000000e+00
+octave:72> B*unknowns - f
+ans =
+   0
+   0
+   0
+\end{lstlisting}
+\end{itemize}
+
 \begin{exercise}[3.24]
+\label{exercise:324}
 Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
 \begin{lstlisting}
-octave:8> A = [eps 1; 1 0], b = [1; 1/4]A =
+octave:8> A = [eps 1; 1 0], b = [1; 1/4]
+A =
    2.22044604925031e-16   1.00000000000000e+00
    1.00000000000000e+00   0.00000000000000e+00
 b =
@@ -65,6 +200,7 @@ ans =  1.0202e+20
 \end{lstlisting}
 
 \begin{exercise}[3.26]
+\label{exercise:326}
 Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
 Questo il codice che verifica che i vettori $\vect{x}, \vect{y}$ sono soluzioni
