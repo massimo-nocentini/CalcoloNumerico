@@ -6,8 +6,8 @@ endfunction
 
 
 function [ normalized ] = normalizeLowerTriangular (B, setUnaryDiagonal)
-	n = length(B);
-	normalized = B;
+	n = columns(B);
+	normalized = B(1:n, 1:n);
 	for i = 1:n
 		for j = 1:n
 			if i < j
@@ -24,8 +24,8 @@ function [ normalized ] = normalizeLowerTriangular (B, setUnaryDiagonal)
 endfunction
 
 function [ normalized ] = normalizeUpperTriangular (B, setUnaryDiagonal)
-	n = length(B);
-	normalized = B;
+	n = columns(B);
+	normalized = B(1:n, 1:n);
 	for i = 1:n
 		for j = 1:n
 			if i > j

@@ -303,3 +303,192 @@ dovuto dal fatto che le componenti del vettore dei termini noti $\vect{c}$ non
 infinita periodica in binario). Questi errori di rappresentazione si sommano
 nelle 9 iterazioni che vengono fatte dal ciclo for, risultando significative per
 la decima componente.
+
+\begin{exercise}[3.28]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+\begin{proof}
+Si vuole dimostrare:
+\begin{displaymath}
+\beta = -\frac{v_{1}}{\alpha} = \frac{2}{\hat{\vect{v}}^{T}\hat{\vect{v}}},
+\quad
+\text{con} \quad \hat{\vect{v}} = \frac{\vect{v}}{v_{1}}
+\end{displaymath} 
+\begin{itemize}
+  \item Verifico la concordanza dei segni:
+  \begin{displaymath}
+    \frac{2}{\hat{\vect{v}}^{T}\hat{\vect{v}}} > 0
+  \end{displaymath}
+  $\hat{\vect{v}}^{T}\hat{\vect{v}} > 0$ per definizione di norma euclidea.
+  Deve quindi valere:
+  \begin{displaymath}
+  \frac{v_{1}}{\alpha} < 0
+  \end{displaymath}
+  posso sostituire $v_{1} = z_{1} - \alpha$ e $\alpha =
+  -sign(z_{1})||\vect{z}||_{2}$ e $sign(a) = \left \{ \begin{array}{ll} 1 & if
+  \quad a \geq 0 \\ -1 & if \quad a
+  < 0 \end{array} \right .$ ottenendo:
+  \begin{displaymath}
+  \frac{z_{1}}{\alpha} - 1 < 0 \Rightarrow \frac{z_{1}}{\alpha} < 1 \Rightarrow
+  \frac{sign(z_{1})|z_{1}|}{-sign(z_{1})||\vect{z}||_{2}} < 1 \Rightarrow
+  \frac{|z_{1}|}{||\vect{z}||_{2}} > -1
+  \end{displaymath}
+  Ma questo \`e vero in quanto $|z_{1}| > 0$ per definizione di $|\cdot|$ e
+  $||\vect{z}||_{2} > 0$ per definizione di norma euclidea, quindi
+  $\frac{|z_{1}|}{||\vect{z}||_{2}} > 0 > -1$. I segni concordano.
+  
+  \item dimostro l'uguaglianza dei due membri:
+  
+  Per il primo membro vale:
+  \begin{displaymath}
+  	-\frac{v_{1}}{\alpha} = 
+  	- \frac{sign(z_{1})|z_{1}| -
+  	(-sign(z_{1})||\vect{z}||_{2})}{-sign(z_{1})||\vect{z}||_{2}} = -
+  	\frac{sign(z_{1})(|z_{1}| + ||\vect{z}||_{2})}{-sign(z_{1})||\vect{z}||_{2}}
+  	= \frac{|z_{1}| + ||\vect{z}||_{2}}{||\vect{z}||_{2}}
+  \end{displaymath} 
+  Per il secondo membro vale:
+  \begin{displaymath}
+  \begin{split}   
+  	\hat{\vect{v}}^{T}\hat{\vect{v}} &= \frac{\vect{v}^{T}\vect{v}}{v_{1}^{2}} =
+  	\frac{(\vect{z}^{T} - \alpha \vect{e}_{i}^{T})(\vect{z} -\alpha
+  	\vect{e}_{i})}{v_{1}^{2}} = 
+  	\frac{\vect{z}^{T}\vect{z} -\alpha \vect{z}^{T}\vect{e}_{i} - \alpha
+  	\vect{e}_{i}^{T}\vect{z}
+  	+\alpha^{2}\vect{e}_{i}^{T}\vect{e}_{i}}{v_{1}^{2}} = \\
+  	&= \frac{\alpha^{2} -\alpha z_{1} - \alpha
+  	z_{1}+\alpha^{2}}{v_{1}^{2}} = \frac{2||\vect{z}||_{2}^{2} -2\alpha
+  	z_{1}}{v_{1}^{2}} = \frac{2||\vect{z}||_{2}^{2}
+  	-2(-sign(z_{1})||\vect{z}||_{2} sign(z_{1})|z_{1}|)}{v_{1}^{2}} = \\
+  	&= \frac{2||\vect{z}||_{2}^{2}
+  	+2||\vect{z}||_{2}|z_{1}|}{v_{1}^{2}} =
+  	\frac{2||\vect{z}||_{2}(||\vect{z}||_{2} +|z_{1}|)}{v_{1}^{2}}
+  \end{split}
+  \end{displaymath}
+  Ma vale che $v_{1} = z_{1} - \alpha = sign(z_{1}) -
+  (-sign(z_{1})||\vect{z}||_{2}) = sign(z_{1})(|z_{1}| + ||\vect{z}||_{2})$, per
+  cui vale \\$v_{1}^{2} = (|z_{1}| + ||\vect{z}||_{2})^{2}$, quindi posso
+  sostituire e semplificare ottenendo:
+  \begin{displaymath}
+  	\hat{\vect{v}}^{T}\hat{\vect{v}} = \frac{2||\vect{z}||_{2}}{||\vect{z}||_{2}+|z_{1}|}
+  \end{displaymath}
+  Posso invertire potendo riscrivere il secondo membro come:
+  \begin{displaymath}
+  \frac{2}{\hat{\vect{v}}^{T}\hat{\vect{v}}} =
+  \frac{||\vect{z}||_{2}+|z_{1}|}{||\vect{z}||_{2}} = -\frac{v_{1}}{\alpha} = \beta 
+  \end{displaymath}
+  e questo termina la prova.
+\end{itemize}
+\end{proof}
+
+\begin{exercise}[3.29, 3.30]
+Per i testi degli esercizi consultare il libro di testo.
+\end{exercise}
+Vedere il codice \nameref{subsection:QRmethod}.
+
+\begin{exercise}[3.31]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Questa l'implementazione:
+\begin{lstlisting}
+octave:37> A = [3 2 1; 1 2 3; 1 2 1; 2 1 2]
+A =
+   3   2   1
+   1   2   3
+   1   2   1
+   2   1   2
+octave:38> b = [10*ones(1,4)]'
+b =
+   10
+   10
+   10
+   10
+octave:39> [houseHolderVectors, Rhat, R, Q, g1, g2, unknowns, residue] =
+QRmethod(A,b) houseHolderVectors =
+   1.00000   0.00000   0.00000
+   0.14550   1.00000   0.00000
+   0.14550   0.40559   1.00000
+   0.29099  -0.15589  -0.47436
+Rhat =
+  -3.87298  -3.09839  -2.84019
+   0.00000  -1.84391  -1.73544
+   0.00000   0.00000   1.98030
+   0.00000   0.00000   0.00000
+R =
+  -3.87298  -3.09839  -2.84019
+   0.00000  -1.84391  -1.73544
+   0.00000   0.00000   1.98030
+Q =
+  -0.77460   0.21693  -0.41586  -0.42426
+  -0.25820  -0.65079   0.57429  -0.42426
+  -0.25820  -0.65079  -0.43566   0.56569
+  -0.51640   0.32540   0.55448   0.56569
+g1 =
+  -18.0739
+   -7.5926
+    2.7724
+g2 =  2.8284
+unknowns =
+   1.4000
+   2.8000
+   1.4000
+residue =
+   1.2000
+   1.2000
+  -1.6000
+  -1.6000
+octave:40> R*unknowns -g1 
+ans =
+   0.0000e+00
+  -8.8818e-16
+   0.0000e+00
+octave:41> norm(R*unknowns -g1 )^2 + norm(g2 )^2
+ans =  8.0000
+octave:42> r = Q*Rhat*unknowns - b
+r =
+   1.2000
+   1.2000
+  -1.6000
+  -1.6000
+octave:43> norm(r)^2
+ans =  8.0000
+octave:44> Q*Rhat
+ans =
+   3.00000   2.00000   1.00000
+   1.00000   2.00000   3.00000
+   1.00000   2.00000   1.00000
+   2.00000   1.00000   2.00000
+octave:45> r/norm(r)
+ans =
+   0.42426
+   0.42426
+  -0.56569
+  -0.56569
+\end{lstlisting}
+ 
+\begin{exercise}[3.32]
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise}
+Implemento lanciando la funzione \nameref{subsection:functionExercise332}:
+\begin{lstlisting}
+octave:7> [unknowns] = functionExercise332(0)
+unknowns =
+ Columns 1 through 7:
+   9.6323   9.9632   9.9816   9.9963   9.9982   9.9996   9.9998
+   6.8386   5.1839   5.0919   5.0184   5.0092   5.0018   5.0009
+ Column 8:
+  10.0000
+   5.0002
+\end{lstlisting}
+\begin{center}
+\input{SistemiLineari/exer332gamma10.tex}
+\end{center}
+\begin{center}
+\input{SistemiLineari/exer332gamma5e-1.tex}
+\end{center}
+\begin{center}
+\input{SistemiLineari/exer332gammae-1.tex}
+\end{center}
+\begin{center}
+\input{SistemiLineari/exer332gammae-3.tex}
+\end{center}
