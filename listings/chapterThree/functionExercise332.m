@@ -29,22 +29,22 @@ if printPlots == 1
 	unknownsRows = rows(unknownsMatrix);
 	
 	gammaIndex = 1;
-	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), x, givenResidueMatrix(1:residueRows, gammaIndex), "r+", unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+", givenUnknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(givenUnknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "g+");
+	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), x, givenResidueMatrix(1:residueRows, gammaIndex), "r", unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+", givenUnknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(givenUnknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "g+");
 	axis([-1, 11, -20, 120]);
 	print 'exer332gamma10.tex' '-dTex' '-S800, 600';
 	
 	gammaIndex = 3;
-	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+");
+	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), x, givenResidueMatrix(1:residueRows, gammaIndex), "r", unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+", givenUnknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(givenUnknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "g+");
 	axis([-1, 11, -20, 120]);
 	print 'exer332gamma5e-1.tex' '-dTex' '-S800, 600';
 	
 	gammaIndex = 4;
-	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+");
+	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), x, givenResidueMatrix(1:residueRows, gammaIndex), "r", unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+", givenUnknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(givenUnknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "g+");
 	axis([-1, 11, -20, 120]);
 	print 'exer332gammae-1.tex' '-dTex' '-S800, 600';
 	
 	gammaIndex = 8;
-	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+");
+	plot(x, evaluatingFunction(x, gamma(gammaIndex)), "c", x, residueMatrix(1:residueRows, gammaIndex), x, givenResidueMatrix(1:residueRows, gammaIndex), "r", unknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(unknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "b+", givenUnknownsMatrix(1:unknownsRows,gammaIndex), evaluatingFunction(givenUnknownsMatrix(1:unknownsRows,gammaIndex), gamma(gammaIndex)), "g+");
 	axis([-1, 11, -20, 120]);
 	print 'exer332gammae-3.tex' '-dTex' '-S800, 600';
 end

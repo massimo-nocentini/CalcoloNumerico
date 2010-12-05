@@ -469,26 +469,51 @@ ans =
 \begin{exercise}[3.32]
 Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
-Implemento lanciando la funzione \nameref{subsection:functionExercise332}:
+Implemento lanciando la funzione \nameref{subsection:functionExercise332}: 
 \begin{lstlisting}
-octave:7> [unknowns] = functionExercise332(0)
+octave:13> [unknowns, givenUnknowns] = functionExercise332(0)
 unknowns =
- Columns 1 through 7:
-   9.6323   9.9632   9.9816   9.9963   9.9982   9.9996   9.9998
-   6.8386   5.1839   5.0919   5.0184   5.0092   5.0018   5.0009
- Column 8:
-  10.0000
-   5.0002
+ Columns 1 through 3:
+   9.63228005156231e+00   9.96322800515623e+00   9.98161400257811e+00
+   6.83859974218842e+00   5.18385997421884e+00   5.09192998710942e+00
+ Columns 4 through 6:
+   9.99632280051562e+00   9.99816140025781e+00   9.99963228005156e+00
+   5.01838599742188e+00   5.00919299871094e+00   5.00183859974219e+00
+ Columns 7 and 8:
+   9.99981614002578e+00   9.99996322800516e+00
+   5.00091929987110e+00   5.00018385997422e+00
+
+givenUnknowns =
+ Columns 1 through 3:
+   9.63228005156232e+00   9.96322800515623e+00   9.98161400257811e+00
+   6.83859974218843e+00   5.18385997421885e+00   5.09192998710943e+00
+ Columns 4 through 6:
+   9.99632280051562e+00   9.99816140025781e+00   9.99963228005156e+00
+   5.01838599742189e+00   5.00919299871094e+00   5.00183859974219e+00
+ Columns 7 and 8:
+   9.99981614002578e+00   9.99996322800515e+00
+   5.00091929987110e+00   5.00018385997422e+00
 \end{lstlisting}
+Riporto quattro grafici relativi a quattro diversi valori di $gamma$.
+I grafici in blu sono relativi alla soluzione calcolata con l'implementazione
+\nameref{subsection:QRmethod}, mentre i grafici verdi (a obiettivo) e rossi sono
+invece relativi al codice dato nell'esercizio. 
+\\\\
+$gamma = 10$:
 \begin{center}
 \input{SistemiLineari/exer332gamma10.tex}
 \end{center}
+$gamma = 5e-1$: 
 \begin{center}
 \input{SistemiLineari/exer332gamma5e-1.tex}
 \end{center}
+$gamma = 1e-1$:
 \begin{center}
 \input{SistemiLineari/exer332gammae-1.tex}
 \end{center}
+$gamma = 1e-3$:
 \begin{center}
 \input{SistemiLineari/exer332gammae-3.tex}
 \end{center}
+Per $gamma \rightarrow \infty$ si raggiunge la soluzione ottima del sistema
+$A\vect{x} = \vect{b} + \vect{r}$ con $\vect{r} = \vect{0}$.
