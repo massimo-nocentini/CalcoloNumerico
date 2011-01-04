@@ -316,7 +316,7 @@ Devo dimostrare che $\det(A_{k}) \not = 0, \forall k \in \lbrace 1,\ldots, n
 Prova per induzione completa su $k$.
 \begin{description}
 \item[base] per $k = 1$ ottengo $\det{A_{1}} = a_{11}$. Per ipotesi $A$ \`e
-triangolare quindi $a_{11} \not = 0$, la base \`e dimostrata.
+non singolare quindi $\det{A_{1}} = a_{11} \not = 0$, la base \`e dimostrata.
 \item[ipotesi induttiva] suppongo vero $\det(A_{j}) \not = 0, \forall j \in
 \lbrace 1,\ldots, k-1 \rbrace$.
 \item[passo induttivo] devo dimostrare che $\det(A_{k}) \not = 0$.
@@ -336,24 +336,29 @@ alla riga (e anche alle colonne) rispetto a cui viene calcolato. Ottengo:
 \begin{displaymath}
 \det(A_{k}) = a_{11}A_{k_{11}} + \ldots + a_{1n}A_{k_{1n}}
 \end{displaymath}
-Per ipotesi $A$ \`e triangolare quindi $a_{ij} = 0$ per $i < j$, quindi:
+Per ipotesi $A$ \`e triangolare (suppongo sia triangolare inferiore) quindi
+$a_{ij} = 0$ per $i < j$, quindi:
 \begin{displaymath}
 \det(A_{k}) = a_{11}A_{k_{11}}
 \end{displaymath}
 Ancora usando l'ipotesi che $A$ \`e triangolare, la struttura di triangolare
 viene preservata da ogni sua sotto-matrice principale, ovvero $A_{o}$ \`e
 tringolare $\forall o \in {1,\ldots,n}$, quindi anche $A_{k}$ \`e tringolare.
-Per questo motivo il calcolo di $A_{k_{11}} = (-1)^{1+1}M_{11}(A_{k})$. Dato che
-devo calcolare il determinante della nuova matrice $A'$ ottenuta da $A_{k}$ non
-considerando la prima riga e la prima colonna, devo calcolare il determinante di
-una nuova matrice triangolare. Calcolandolo sempre $\det(A')$ sulla prima riga
+Dato che devo calcolare il determinante della nuova matrice $A'$ ottenuta da 
+$A_{k}$ non considerando la prima riga e la prima colonna ($A_{k_{11}} =
+(-1)^{1+1}M_{11}(A_{k})$), devo calcolare il determinante di una nuova matrice 
+triangolare. Calcolandolo sempre $\det(A')$ sulla prima riga
 ottengo $det(A') = a_{22}A'_{22}$. Ripetendo il ragionamento fino ad arrivare
 alla sotto-matrice degenere ad un elemento $A^{k-1} = a_{kk}$, ottengo che: 
 \begin{displaymath}
 \det(A_{k}) = a_{11}\cdots a_{kk}
 \end{displaymath}
-Dato che $\det(A) = a_{11} \cdots a_{nn} \not = 0$ per
-ipotesi, allora anche $\det(A_{k}) \not = 0$ e questo completa il passo induttivo.
+Per ipotesi $\det(A) = a_{11} \cdots a_{nn} \not = 0$ \footnote{\`E importante
+studiare l'\emph{osservazione 3.1} del testo, in quanto fa notare che in genere
+non \`e vero che se $\det(A) = a_{11} \cdots a_{nn} \not = 0$ allora anche i
+minori principali sono non singolari. In questo caso posso utilizzare l'ipotesi
+in quanto sto supponendo che $A$ sia triangolare per ipotesi.} , allora anche
+$\det(A_{k}) \not = 0$ e questo completa il passo induttivo.
 \end{proof}
 
 \begin{proof}[Proof of $\Leftarrow$]
