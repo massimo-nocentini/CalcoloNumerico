@@ -29,6 +29,44 @@ Per i testi degli esercizi consultare il libro di testo.
 \end{exercise}
 Vedere il codice \nameref{subsection:LUmethod}.
 
+\begin{oss}
+Posso vedere il $k$-esimo vettore di Gauss e la relativa matrice elementare come 
+delle funzioni:
+\begin{displaymath}
+\begin{split}
+\vect{g}_{k} = g_{k}(\vect{v}) &= \frac{1}{v_{kk}} 
+\begin{bmatrix}
+0 \\ \vdots \\ 0 \\ v_{k + 1} \\ \vdots \\ v_{n}
+\end{bmatrix} \quad , g_{k}: \mathbb{R}^{n} \rightarrow
+\mathbb{R}^{n} \\
+L = L(\vect{v}) &= I - g_{k}(\vect{v})\vect{e}_{k}^{T}  \quad , L:
+\mathbb{R}^{n \times n} \rightarrow \mathbb{R}^{n \times n}
+\end{split}
+\end{displaymath}
+Inoltre al passo $i$-esimo non si modifica la riga $i$: si modificano gli
+elementi sotto $a_{ii}$ e tutta la sottomatrice $A(i + 1:n, i + 1:n)$ (scritta
+in notazione Octave).
+\\\\
+L'equazione del testo 3.22 scrive:
+\begin{displaymath}
+L = I + \vect{g}_{1}\vect{e}_{1}^{T} + \cdot + \vect{g}_{n-1}\vect{e}_{n-1}^{T}
+= \begin{bmatrix}
+1 \\
+g_{21} & 1 \\
+\vdots & \ddots		& \ddots \\
+g_{n1} & \cdots		&	g_{n,n-1}	& 1
+\end{bmatrix}
+\end{displaymath}
+con 
+\begin{displaymath}
+g_{ik} = \vect{e}_{i}^{T} g_{k}(A^{(k)}\vect{e}_{k}) = 
+\vect{e}_{i}^{T} \left ( \frac{1}{a_{kk}^{(k)}}
+\begin{bmatrix}
+0 \\ \vdots \\ 0 \\ a_{k + 1, k}^{(k)} \\ \vdots \\ a_{n k}^{(k)}
+\end{bmatrix} \right )
+\end{displaymath}
+\end{oss}
+
 \begin{exercise}[3.9, Lemma 3.4]
 Se $A$ \`e diagonale dominante per righe allora lo sono anche tutte le sue
 sotto-matrici principali.
