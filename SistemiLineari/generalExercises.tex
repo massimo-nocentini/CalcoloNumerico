@@ -141,7 +141,7 @@ b_{n1} & \cdots & \cdots &\cdots & b_{nn}
 \end{displaymath}
 Studio come si ottiene la prima riga della matrice identit\`a:
 \begin{displaymath}
-\vect{e}_{i}^{T} I = 
+\vect{e}_{1}^{T} I = 
 \begin{bmatrix}
 1 & 0 & \ldots & 0
 \end{bmatrix} = 
@@ -165,13 +165,10 @@ a_{11}
 	b_{11} & \ldots & b_{1n}
 	\end{bmatrix} 
 \end{displaymath}
-Per ipotesi di assurdo $B = A^{-1}$, quindi $b_{11} = \frac{1}{a_{11}}$, e dato
-che $A$ \`e triangolare inferiore, allore $a_{11}$ rendendo sensata la
-divisione.
 
-Per ipotesi di assurdo $B$ non \`e triangolare inferiore, quindi $\exists k:
-b_{1k} \not = 0$ e quindi anche $a_{11}b_{1k} \not = 0$. Ma questo \`e assurdo
-perch\`e deve valere 
+Per ipotesi di assurdo $B$ non \`e triangolare inferiore, quindi $\exists k
+\not = 1: b_{1k} \not = 0$ e quindi anche $a_{11}b_{1k} \not = 0$. Ma questo \`e
+assurdo perch\`e deve valere 
 \begin{displaymath}
 \begin{split}
 \begin{bmatrix}
@@ -193,8 +190,8 @@ triangolare inferiore a diagonale unitaria.
 \end{exercise}
 \begin{proof}
 Per ipotesi $A$ \`e triangolare inferiore, per l'esercizio \ref{exercise:341},
-anche $A^{-1}$ \`e triangolare inferiore. Rimane da dimostrare che $b_{ii} = 1$
-con $b_{ij} \in B = A^{-1}$.
+anche $A^{-1}$ \`e triangolare inferiore. Rimane da dimostrare che
+$\forall i: b_{ii} = 1$ con $b_{kj} \in B = A^{-1}$.
 
 Per definizione di matrice inversa, chiamo $B = A^{-1}$, vale:
 \begin{displaymath}
@@ -220,8 +217,8 @@ b_{n1} & \cdots & \cdots &\cdots & b_{nn}
  &  	&  		&		& 1
 \end{bmatrix}
 \end{displaymath}
-Prova per assurdo. Suppongo che $B$ non sia a diagonale unitaria, quindi
-$b_{ii} \not = 1$.
+Prova per assurdo. Suppongo che $B$ non sia a diagonale unitaria, supponiamo
+$b_{11} \not = 1$.
 Studio come si ottiene la prima riga della matrice identit\`a:
 \begin{displaymath}
 \vect{e}_{i}^{T} I = 

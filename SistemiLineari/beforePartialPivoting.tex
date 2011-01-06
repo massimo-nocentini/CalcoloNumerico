@@ -121,7 +121,7 @@ Costruisco il vettore $\vect{y} = L^{T}\vect{x}$, di conseguenza $\vect{y}^{T}
 = \vect{x}^{T}(L^{T})^{T} = \vect{x}^{T}L$. Quindi posso riscrivere
 $\vect{y}^{T}D\vect{y} > 0$. Rappresento il prodotto $\vect{y}^{T}(D\vect{y})$:
 \begin{displaymath}
-\vect{y}^{T}(D\vect{y}) = 
+\vect{y}^{T} D \vect{y} = 
 \begin{bmatrix}
 y_{1} & \cdots & y_{n}
 \end{bmatrix}
@@ -145,16 +145,16 @@ y_{1}d_{11}\\
 \vdots \\
 y_{n}d_{nn}
 \end{bmatrix} =
-\sum_{i = 1}^{n}{y_{i}d_{ii}} \geq 0
+\sum_{i = 1}^{n}{y_{i}^{2}d_{ii}} \geq 0
 \end{displaymath} 
 In quanto per ipotesi $d_{ii} > 0$. Per avere la somma uguale a 0, si dovrebbe
 avere $\vect{y} = \vect{0}$. Ma questo non \`e possibile in quanto $\vect{y}  
 = L^{T}\vect{x}$ con $L$ non singolare e $\vect{x} \not = \vect{0}$ per
 definizione di sdp. Quindi si ha:
 \begin{displaymath}
-\sum_{i = 1}^{n}{y_{i}d_{ii}} > 0
+\vect{y}^{T} D \vect{y} = \sum_{i = 1}^{n}{y_{i}^{2}d_{ii}} > 0
 \end{displaymath} 
-questo \`e quanto richiesta dalla definizione di sdp, quindi $A$ \`e sdp e
+questo \`e quanto richiesto dalla definizione di sdp, quindi $A$ \`e sdp e
 questo termina la prova.
 \end{itemize}
 \end{proof}
@@ -209,7 +209,7 @@ sdp.
 \begin{proof}
 Devo dimostrare che $B = A^{T}A$ \`e sdp.
 \begin{itemize}
-  \item $B$ per la prova della simmetria dell'esercizio
+  \item $B$ \`e simmetrica per la prova della simmetria dell'esercizio
   \ref{exercise:311}.
   \item $\forall \vect{x} \in \mathbb{R}^{n}, \vect{x} \not = \vect{0}$ allora
   posso costruire un vettore (come fatto nell'esercizio precedente) $\vect{y} =
@@ -459,7 +459,8 @@ quindi $n^{2} - n = 2k$, con $k \in \mathbb{N}$. Divido per 2 entrambi i membri
 ottenendo $\frac{n(n - 1)}{2} = k$. Il primo membro \`e la somma dei primi $n-1$
 numeri naturali, quindi $\sum_{i=1}^{n-1}{i} = k$. Ma dato che l'indice
 superiore della somma \`e finito ($n-1 <\infty$) allora la somma ammette un
-valore finito $k \in \mathbb{N}$, che \`e quello che si voleva dimostrare.
+valore finito $k \in \mathbb{N}$, l'uguaglianza \`e verificata e questo conclude
+la prova.
 \end{proof}
 
 \begin{exercise}[3.16, 3.17]
