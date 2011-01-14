@@ -55,20 +55,18 @@ for i = 1:n
 	# 	la restante parte della matrice, ovvero le colonne con indice j > i.
 	# = A(i:m, i+1:n) parto dalle informazioni presenti nella matrice memorizzate
 	# fino al passo (i-1)
-	A(i:m, i+1:n) = A(i:m, i+1:n) ...
-		
+	A(i:m, i+1:n) = A(i:m, i+1:n) - (beta * [1; A(i+1:m, i)]) * ([1, A(i+1:m, i)'] * A(i:m, i+1:n));
 		# moltiplico il coefficiente beta per il vettore di Householder, il quale
 		# lo costruisco con [1; A(i+1:m, i)], perche essendo normalizzato, la sua
 		# prima componente e' per costruzione 1 (oss: se considerassi A(i:m, i)
 		# come vettore caratteristico commetterei un errore perche A(i,i) = alpha
 		# per l'assegnazione fatta precedentemente.
-		- (beta * [1; A(i+1:m, i)]) ...
-		
+		 
 		# finisco di effettuare il prodotto tra il vettore caratteristico trasposto
 		# e il vettore che voglio manipolare (azzerando tutte le componenti tranne la
 		# prima). Questo vettore e' A(i:m, i+1:n), infatti si usa come primo indice
 		# A(i:...) invece di A(i+1:...) come invece si usa per il vettore caratteristico.
-		* ([1, A(i+1:m, i)'] * A(i:m, i+1:n)); 
+		
 end
 B = A;
 houseHolderVectors = A;
