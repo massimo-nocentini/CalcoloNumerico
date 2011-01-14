@@ -58,8 +58,55 @@ Queste sono le idee alla base del metodo:
 \end{itemize}
 \end{oss}
 
-\begin{oss}[Sulla struttura delle matrici di eliminazione $H^{i}$]
-
+\begin{oss}[Sulla struttura delle matrici di eliminazione $H_{k}$]
+Ragionando a blocchi sulla struttura delle matrici di eliminazione vale:
+\begin{displaymath}
+H_{i+1} = \left [ \begin{array}{c|c}
+I_{i} 		& 	\vect{0}^{T} \\
+\hline
+\vect{0}	&	H^{(i+1)}
+\end{array} \right ]
+\end{displaymath}
+con $H^{(i+1)}$ elementare di Householder relativa alla colonna $i+1$ di
+$A^{(i)}$:
+\begin{displaymath}
+A^{(i)}\vect{e}_{i+1} = \begin{bmatrix}
+a_{i+1, i+1}^{(i)} \\
+\vdots \\
+a_{m, i+1}^{(i)}
+\end{bmatrix}
+\end{displaymath}
+Il precedente vettore \`e il vettore che si vuole rendere uguale a
+$\alpha\vect{e}_{i+1}$.
+\\\\
+Al passo $i$-esimo ottengo:
+\begin{displaymath}
+\begin{split}
+A^{(i)} &= H_{i}A^{(i-1)} = H_{i} \cdots H_{1}A  =
+\begin{bmatrix}
+a_{11}^{(1)} & a_{12}^{(1)} & \cdots & a_{1i}^{(1)}	& \cdots & \cdots &
+a_{1n}^{(1)} \\ 
+	& a_{22}^{(2)} & \cdots	& a_{2i}^{(2)} & \cdots & \cdots & a_{2n}^{(2)} \\
+	&	&	\ddots	& \vdots &	&	& \vdots \\
+	&	&	& a_{i-1,i-1}^{(i-1)}	& a_{i-1,i}^{(i-1)} & \cdots & a_{i-1,n}^{(i-1)}  \\
+	&	&	& 	&  \\
+ 	& 	&	&	&  & H^{(i)}A^{(i-1)} &  \\
+	& 	&	&	& 	&		&  
+\end{bmatrix} = \\ 
+& = \begin{bmatrix}
+a_{11}^{(1)} & a_{12}^{(1)} & \cdots & a_{1i}^{(1)}	& \cdots & \cdots &
+a_{1n}^{(1)} \\ 
+	& a_{22}^{(2)} & \cdots	& a_{2i}^{(2)} & \cdots & \cdots & a_{2n}^{(2)} \\
+	&	&	\ddots	& \vdots &	&	& \vdots \\
+	&	&	& a_{ii}^{(i)}	& a_{i,i+1}^{(i)} & \cdots & a_{in}^{(i)}  \\
+	&	&	& 	& a_{i+1,i+1}^{(i)} & \cdots & a_{i+1,n}^{(i)}  \\
+ 	& 	&	&	& \vdots & \ddots & \vdots \\
+	& 	&	&	& a_{m, i+1}^{(i)}	&	\cdots	& a_{m, n}^{(i)} 
+\end{bmatrix}
+\end{split}
+\end{displaymath}
+Attenzione: al primo passo $a_{11}^{(1)}$ viene aggiornato differentemente per
+quanto avviene per la fattorizzazione LU senza pivoting.
 \end{oss}
 
 \begin{oss}[Forma matriciale del passo di aggiornamento]
@@ -74,12 +121,16 @@ a_{i+1, j}^{(i)} \\
 \vdots \\
 a_{m, j}^{(i)}
 \end{bmatrix} - \frac{2}{(\vect{z}^{(i+1)})^{T} \vect{z}^{(i+1)}} %times
+\vect{z}^{(i+1)} %times 
 \left ( (\vect{z}^{(i+1)})^{T} \begin{bmatrix}
 a_{i+1, j}^{(i+1)} \\
 \vdots \\
 a_{m, j}^{(i+1)} 
-\end{bmatrix} \right )\vect{z}^{(i+1)}
+\end{bmatrix} \right )
 \end{displaymath}
+La precedente uguaglianza rappresenta in forma matriciale l'istruzione
+\emph{Octave} per l'aggiornamento della matrice (e implicitamente la
+costruzione della matrice triangolare superiore $R$ (no $\hat{R}$)).
 \end{oss}
 
 \lstinputlisting{listings/chapterThree/QRmethod.m}
