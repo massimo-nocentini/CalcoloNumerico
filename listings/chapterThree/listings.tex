@@ -19,6 +19,69 @@
 
 \subsection{QRmethod}
 \label{subsection:QRmethod}
+\begin{oss}[Sull'uso e costruzione delle matrici di eliminazione $H$]
+Durante il metodo non vengono create e sviluppate in modo esplicito le matrici
+di eliminazione $H^{i}$ per effettuare i prodotti $H^{i}\vect{v}$: vengono
+invece costruite in modo implicito, ovvero la computazione che viene effettuata
+dal metodo \`e direttamente la trasformazione ortogonale 
+\begin{displaymath}
+H\vect{v} \rightarrow \vect{v} -
+\frac{2}{\vect{z}^{T}\vect{z}}\vect{z}(\vect{z}^{T}\vect{v})
+\end{displaymath}
+\end{oss}
+
+\begin{oss}[Sul costo del prodotto scalare]
+Dati due vettori $\vect{a}, \vect{b} \in \mathbb{R}^{k}$, il prodotto scalare
+costa $2k - 1$ operazioni, di cui $k$ per i prodotti $\forall i \in
+\{1, \ldots , k \} [a_{i}b_{i}]$, e $k-1$ somme dei $k$ prodotti.
+\end{oss}
+
+\begin{oss}[Idee alla base del metodo]
+Queste sono le idee alla base del metodo:
+\begin{itemize}
+  \item $H(\beta \vect{z}) = H(\vect{z}), \forall \beta \in \mathbb{R}$, ovvero
+  la matrice di eliminazione non varia per multipli del vettore caratteristico
+  $\vect{z}$ di Householder (permette quindi di scegliere $\beta$ in modo
+  da avere il vettore caratteristico con una struttura particolare, $z_{1} =
+  1$).
+  
+  \item la seguente ugualianza permette di evitare il calcolo del prodotto
+  scalare, risparmiando $2m$ operazioni:
+  	\begin{displaymath}
+  		-\frac{z_{1}}{\alpha} =
+  		\frac{2}{\vect{z}^{T}\vect{z}}
+  	\end{displaymath}
+  vedi esercizio \ref{exercise:exercise328}.
+  
+  \item $v_{1} = A(i, i) - \alpha$ con $\alpha A(i, i) < 0$, permette di
+  evitare il fenomeno della cancellazione numerica.
+\end{itemize}
+\end{oss}
+
+\begin{oss}[Sulla struttura delle matrici di eliminazione $H^{i}$]
+
+\end{oss}
+
+\begin{oss}[Forma matriciale del passo di aggiornamento]
+\begin{displaymath}
+\begin{bmatrix}
+a_{i+1, j}^{(i+1)} \\
+\vdots \\
+a_{m, j}^{(i+1)}
+\end{bmatrix} = 
+\begin{bmatrix}
+a_{i+1, j}^{(i)} \\
+\vdots \\
+a_{m, j}^{(i)}
+\end{bmatrix} - \frac{2}{(\vect{z}^{(i+1)})^{T} \vect{z}^{(i+1)}} %times
+\left ( (\vect{z}^{(i+1)})^{T} \begin{bmatrix}
+a_{i+1, j}^{(i+1)} \\
+\vdots \\
+a_{m, j}^{(i+1)} 
+\end{bmatrix} \right )\vect{z}^{(i+1)}
+\end{displaymath}
+\end{oss}
+
 \lstinputlisting{listings/chapterThree/QRmethod.m}
 
 \subsection{functionExercise332}
