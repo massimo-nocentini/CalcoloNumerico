@@ -11,10 +11,54 @@
 
 \subsection{LDLmethod}
 \label{subsection:LDLmethod}
+\begin{oss}[Struttura matriciale degli aggiornamenti del metodo all'$j$-esimo
+passo di iterazione]
+\begin{displaymath}
+\begin{bmatrix}
+\Xi \\
+ &  \ddots \\
+ & &  \Xi \\
+\Theta & \cdots & \Theta & a_{ii}^{*} &  &  &    
+	 \\ \Gamma & \cdots & \Gamma & \Delta^{*}
+	 \\ \vdots & \vdots &  & \vdots
+	 \\ \Gamma & \cdots & \Gamma & \Delta^{*}
+\end{bmatrix}
+\end{displaymath}
+Con $\Delta$ ho indicato elementi appartenti al vettore caratteristico,  con
+$\Gamma$ gli elementi della matrice che vengono letti per calcolare $l_{ij}, i
+\geq j$; con $\Theta$ gli elementi che uso per costruire il vettore di elementi 
+$l_{jk}, k \in \{1, \ldots, j-1 \}$; con $\Xi$ gli elementi che leggo 
+per costruire il vettore $d_{k}, k \in \{1, \ldots, j-1 \}$ (il prodotto
+componente a componente $\vect{\Xi}.*\vect{\Theta} = \vect{v}$ (usando notazione
+Octave), $\vect{v}$ \`e il vettore che viene costruito nel codice nell'errata
+corrige; con * indico gli elementi che vengono aggiornati ad ogni passo del
+metodo.
+\end{oss}
 \lstinputlisting{listings/chapterThree/LDLmethod.m}
 
 \subsection{PALUmethod}
 \label{subsection:PALUmethod}
+\begin{oss}[Struttura matriciale degli aggiornamenti del metodo all'$i$-esimo
+passo di iterazione]
+\begin{displaymath}
+\left [
+\begin{array}{cccccc}
+\\
+\\
+& & a_{ii}^{*} & \Theta & \cdots & \Theta   
+	 \\ & & \Delta^{*} & \Gamma^{*} & \cdots & \Gamma^{*}
+	 \\ & & \vdots & \vdots &  & \vdots
+	 \\ & & \Delta^{*} & \Gamma^{*} & \cdots & \Gamma^{*}
+\end{array}
+\right ]
+\end{displaymath}
+Con $\Delta$ ho indicato elementi appartenti al vettore caratteristico di
+Gauss, con $\Gamma$ elementi della matrice che vengono modificati dal
+passo di aggiornamento del metodo, con $\Theta$ gli elementi che uso per
+costruire la matrice da sottrarre a $I\vect{v}_{i}$ ($\vect{v}_{i}$ il vettore 
+colonna che voglio annullare secondo il metodo) e con * indico gli elementi che
+vengono aggiornati ad ogni passo del metodo.
+\end{oss}
 \lstinputlisting{listings/chapterThree/PALUmethod.m}
 
 \subsection{QRmethod}
@@ -132,6 +176,27 @@ La precedente uguaglianza rappresenta in forma matriciale l'istruzione
 \emph{Octave} per l'aggiornamento della matrice (e implicitamente la
 costruzione della matrice triangolare superiore $R$ (no $\hat{R}$)).
 \end{oss}
+
+\begin{oss}[Struttura matriciale degli aggiornamenti del metodo all'$i$-esimo
+passo di iterazione]
+\begin{displaymath}
+\left [
+\begin{array}{cccccc}
+\\
+\\
+& & a_{ii}^{*} & \Gamma^{*} & \cdots & \Gamma^{*}   
+	 \\ & & \Delta^{*} & \Gamma^{*} & \cdots & \Gamma^{*}
+	 \\ & & \vdots & \vdots &  & \vdots
+	 \\ & & \Delta^{*} & \Gamma^{*} & \cdots & \Gamma^{*}
+\end{array}
+\right ]
+\end{displaymath}
+Con $\Delta$ ho indicato elementi appartenti al vettore caratteristico di
+Householder, con $\Gamma$ elementi della matrice che vengono modificati dal
+passo di aggiornamento del metodo e con * indico gli elementi che vengono
+aggiornati ad ogni passo del metodo.
+\end{oss}
+
 
 \lstinputlisting{listings/chapterThree/QRmethod.m}
 
