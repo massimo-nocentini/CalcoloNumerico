@@ -11,17 +11,17 @@
 
 \subsection{LDLmethod}
 \label{subsection:LDLmethod}
-\begin{oss}[Struttura matriciale degli aggiornamenti del metodo all'$j$-esimo
+\begin{oss}[Struttura matriciale degli aggiornamenti del metodo al $j$-esimo
 passo di iterazione]
 \begin{displaymath}
 \begin{bmatrix}
 \Xi \\
  &  \ddots \\
  & &  \Xi \\
-\Theta & \cdots & \Theta & a_{ii}^{*} &  &  &    
-	 \\ \Gamma & \cdots & \Gamma & \Delta^{*}
+\Theta & \cdots & \Theta & a_{jj}^{*} &  &  &    
+	 \\ \gamma & \cdots & \gamma & \Delta^{*}
 	 \\ \vdots & \vdots &  & \vdots
-	 \\ \Gamma & \cdots & \Gamma & \Delta^{*}
+	 \\ \gamma & \cdots & \gamma & \Delta^{*}
 \end{bmatrix}
 \end{displaymath}
 Con $\Delta$ ho indicato elementi appartenti al vettore caratteristico,  con
@@ -33,6 +33,20 @@ componente a componente $\vect{\Xi}.*\vect{\Theta} = \vect{v}$ (usando notazione
 Octave), $\vect{v}$ \`e il vettore che viene costruito nel codice nell'errata
 corrige; con * indico gli elementi che vengono aggiornati ad ogni passo del
 metodo.
+\\ \\
+Risolvo in quest'ordine:
+\begin{enumerate}
+  \item $\vect{v} \leftarrow \vect{\Xi}.*\vect{\Theta}$
+  \item $a_{jj} \leftarrow a_{jj} - \vect{\Theta}^{T} * \vect{v}$
+  \item nella prossima equazione $\gamma \in \Gamma \in \mathbb{R}^{k \times
+  k}$:
+  \begin{displaymath}
+	  \vect{\Delta} \leftarrow \frac{\vect{\Delta} - \Gamma *
+	  \vect{v}}{a_{jj}^{*}}
+  \end{displaymath}
+\end{enumerate}
+Tutti i vettori sono da intendersi vettori colonna e la relazione $\leftarrow$,
+$(a, b) \in \leftarrow$, significa assegno $b$ ad $a$.
 \end{oss}
 \lstinputlisting{listings/chapterThree/LDLmethod.m}
 
@@ -58,6 +72,24 @@ passo di aggiornamento del metodo, con $\Theta$ gli elementi che uso per
 costruire la matrice da sottrarre a $I\vect{v}_{i}$ ($\vect{v}_{i}$ il vettore 
 colonna che voglio annullare secondo il metodo) e con * indico gli elementi che
 vengono aggiornati ad ogni passo del metodo.
+\\ \\
+Risolvo in quest'ordine:
+\begin{enumerate}
+  \item trovo l'elemento pivot e eventualmente scambio le righe, questo produce
+  	un eventuale aggiornamento di $a_{ii}$
+  \item normalizzo il vettore di Gauss:
+  	\begin{displaymath}\vect{\Delta} \leftarrow
+  		\frac{\vect{\Delta}}{a_{ii}^{*}}
+	\end{displaymath}
+  \item $a_{jj} \leftarrow a_{jj} - \vect{\Theta}^{T} * \vect{v}$
+  \item nella prossima equazione $\gamma \in \Gamma \in \mathbb{R}^{k \times
+  k}$:
+  \begin{displaymath}
+	  \Gamma \leftarrow \Gamma - \vect{\Delta}^{*} * \vect{\Theta}^{T}
+  \end{displaymath}
+\end{enumerate}
+Tutti i vettori sono da intendersi vettori colonna e la relazione $\leftarrow$,
+$(a, b) \in \leftarrow$, significa assegno $b$ ad $a$.
 \end{oss}
 \lstinputlisting{listings/chapterThree/PALUmethod.m}
 
@@ -180,21 +212,48 @@ costruzione della matrice triangolare superiore $R$ (no $\hat{R}$)).
 \begin{oss}[Struttura matriciale degli aggiornamenti del metodo all'$i$-esimo
 passo di iterazione]
 \begin{displaymath}
-\left [
-\begin{array}{cccccc}
+\begin{bmatrix}
 \\
 \\
 & & a_{ii}^{*} & \Gamma^{*} & \cdots & \Gamma^{*}   
 	 \\ & & \Delta^{*} & \Gamma^{*} & \cdots & \Gamma^{*}
 	 \\ & & \vdots & \vdots &  & \vdots
 	 \\ & & \Delta^{*} & \Gamma^{*} & \cdots & \Gamma^{*}
-\end{array}
-\right ]
+\end{bmatrix}
 \end{displaymath}
 Con $\Delta$ ho indicato elementi appartenti al vettore caratteristico di
 Householder, con $\Gamma$ elementi della matrice che vengono modificati dal
 passo di aggiornamento del metodo e con * indico gli elementi che vengono
 aggiornati ad ogni passo del metodo.
+\\ \\
+Risolvo in quest'ordine:
+\begin{enumerate}
+  \item calcolo la norma $\alpha$ ed eventualmente cambio segno per evitare
+  	il fenomeno della cancellazione numerica nel calcolo di $v_{1}$, in modo da 
+  	avere $A(i, i)\alpha < 0$
+  \item $v_{1} \leftarrow A(i, i) - \alpha$
+  \item $A(i, i) \leftarrow \alpha$
+  \item normalizzo il vettore di Householder:
+  	\begin{displaymath}\vect{\Delta} \leftarrow
+  		\frac{\vect{\Delta}}{v_{1}}
+	\end{displaymath}
+  \item $\beta \leftarrow -\frac{v_{1}}{\alpha}$
+  \item nella prossima equazione $\gamma \in \Gamma \in \mathbb{R}^{k \times
+  k}$:
+  \begin{displaymath}
+	  \Gamma \leftarrow \Gamma - \beta %times
+	  \begin{bmatrix}
+	  	1 \\
+	  	\vect{\Delta}^{*}
+	  \end{bmatrix} %times
+	   \begin{bmatrix}
+	  	1 &
+	  	(\vect{\Delta}^{*})^{T}
+	  \end{bmatrix} \Gamma
+  \end{displaymath}
+\end{enumerate}
+Tutti i vettori sono da intendersi vettori colonna e la relazione $\leftarrow$,
+$(a, b) \in \leftarrow$, significa assegno $b$ ad $a$.
 \end{oss}
 
 
