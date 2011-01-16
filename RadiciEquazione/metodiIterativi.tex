@@ -109,3 +109,44 @@ qui discusso con la caratterizzazione di $a = 2$:
 \begin{displaymath}
 x_{i + 1} = \frac{2 + x_{i}x_{i-1}}{x_{i} + x_{i-1}}
 \end{displaymath}
+
+\begin{oss}[Sul teorema di punto fisso]
+Se parto da due punti nell'intervallo $x, y \in I = (x^{*} - \delta, x^{*} +
+\delta)$, allora applicando il metodo iterativo $\phi$ ai due punti ottengo una
+nuova coppia $\phi(x) = x_{1}, \phi(y) = y_{2}$, la cui distanza $|x_{1} - y_{1}|$
+\`e strettamente minore della distanza dei punti di partenza in quanto $L < 1$
+per ipotesi del teorema: ottengo quindi $|x_{1} - y_{1}| < |x - y|$. In questo
+modo sono riuscito ad ottenere una nuova coppia di punti pi\`u vicina.
+
+Questo \`e quello che avrei voluto in quanto una volta applicato il metodo ad
+una coppia, ottengo una coppia di punti pi\`u vicina: se riesco ad applicare
+nuovamente il metodo alla coppia appena costruita riuscirei ad ottenere una
+nuova coppia di punti pi\`u vicini rispetto alla ultima coppia generata.
+Ripetendo un numero sufficiente di volte il metodo $\phi$ riesco a diminuire la
+distanza tra i punti delle coppie, fino a far degenerare una coppia di punti
+distinti allo stesso punto $(x_{k}, x_{k})$, ovvero al punto fisso del metodo,
+e quindi convergere alla soluzione.
+
+Importante quindi \`e partire da una coppia di punti che appartengono
+all'intervallo $I$ per poter applicare almeno una volta il metodo.
+
+Posso commentare le implicazioni del teorema:
+\begin{enumerate}
+  \item $x^{*}$ \`e l'unico punto fisso di $\phi$ in $I$: questo permette al
+  metodo di non oscillare tra due punti fissi (soluzioni) e inoltre di non
+  creare non determinismo nella scelta della soluzione a cui converge il metodo
+  \item se $x_{0} \in I \Rightarrow \phi(x_{i-1}) = x_{i} \in I, \forall i =
+  \{2, 3, \ldots\}$: questo \`e molto importante perch\`e assicura che ogni
+  punto generato dal metodo $\phi$ appartiene all'intervallo se il punto di
+  innesco $x_{0} \in I$. In questo modo, tornando a ragionare per coppie come
+  fatto nei paragrafi precedenti di questa osservazione, se il punto di innesco
+  appartiene all'intervallo $I$ allora tutti i nuovi punti che posso costruire
+  con il metodo $\phi$ apparterranno anch'essi all'intervallo e quindi posso 
+  ragionare a coppie $(x_{i-1}, x_{i})$ e applicare il teorema ad ogni coppia
+  per $i \in \{ 1, 2,\ldots \}$, ottenendo quindi che i punti della coppia
+  $(x_{i}, x_{i+1})$ saranno pi\`u vicini dei punti della coppia $(x_{i-1},
+  x_{i})$.
+  \item $\lim_{i \rightarrow \infty}{x_{i}} = x^{*}$, ovvero il metodo converge
+  alla soluzione $x^{*}$ punto fisso di $\phi$ per la condizione necessaria.
+\end{enumerate}
+\end{oss}
