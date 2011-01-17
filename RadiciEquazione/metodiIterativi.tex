@@ -150,3 +150,69 @@ Posso commentare le implicazioni del teorema:
   alla soluzione $x^{*}$ punto fisso di $\phi$ per la condizione necessaria.
 \end{enumerate}
 \end{oss}
+
+\begin{exercise}
+ Dire se il seguente metodo iterativo \`e convergente e se si a quale punto
+ converge.
+ \begin{displaymath}
+ 	x_{k+1} = \sqrt{x_{k} + 1}
+ \end{displaymath}
+\end{exercise}
+Formalizzo il metodo con la funzione $\phi$:
+\begin{displaymath}
+ 	\phi(x) = \sqrt{x + 1}
+ \end{displaymath}
+Se il metodo converge, per la condizione necessaria, converge al suo punto
+fisso, quindi lo determino:
+\begin{displaymath}
+ \begin{split}
+ 	x &= \phi(x) = \sqrt{x + 1} \\
+ 	x^{2} &= x + 1 	
+ \end{split}
+\end{displaymath}
+Implica che le due soluzioni sono $x_{1,2} = \frac{1 \pm \sqrt{5}}{2}$.
+
+Non ho dimostrato che il metodo converge, ho solo trovato il punto di
+convergenza se il metodo converge. Dimostro adesso la convergenza controllando
+che siano vere le ipotesi del teorema di punto fisso:
+\begin{displaymath}
+ \begin{split}
+ 	\exists \delta > 0 \exists l, 0 \leq l < 1 &: \forall x, y \in I = (x^{*} -
+ 	\delta, x^{*} +	\delta): \\
+ 	|\phi(x) - \phi(y)| &< l|x - y|
+ \end{split}
+\end{displaymath}
+Dato che $\phi$ \`e derivabile allora sviluppo $\phi(y)$ in $x$ con resto al
+primo ordine, per applicare il metodo due volte nello stesso punto:
+\begin{displaymath}
+ \begin{split}
+ 	T_{\phi(y)}(x) = \phi(x) + \phi'(\xi)(y - x), \quad \xi \in [x, y]
+ 	(\Rightarrow \xi \in I)
+ \end{split}
+\end{displaymath}
+Posso sostituire nella precedente disuguaglianza:
+\begin{displaymath}
+ \begin{split}
+ 	|\phi(x) - \phi(x) + \phi'(\xi)(y - x)| &< l|x - y| \\
+ 	|\phi'(\xi)(y - x)| &< l|x - y| \\
+ 	|\phi'(\xi)||x - y| &< l|x - y| \\
+ 	|\phi'(\xi)| &< l < 1
+ \end{split}
+\end{displaymath}
+Devo quindi verificare:
+\begin{displaymath}
+ \begin{split}
+ 	|\phi'(\xi)| &< 1 \\
+ 	\phi'(x) &= \frac{1}{2\sqrt{x + 1}} \\
+ 	\frac{1}{2\sqrt{x + 1}} &< 1 \\
+ 	1 &< 2\sqrt{x + 1}, \forall x \geq 0
+ \end{split}
+\end{displaymath}
+Sono nelle ipotesi del teorema di punto fisso \footnote{l'unica cosa che rimane
+da trovare \`e $l$} quindi per l'implicazione del teorema valgono
+\begin{itemize}
+  \item $x = \frac{1 \pm \sqrt{5}}{2}$ \`e l'unico punto fisso di $\phi$ in $I$
+  \item tutti i punti $x_{i}$ generati dal metodo appartengono all'intervallo
+  $I$
+  \item il metodo converge a $x = \frac{1 \pm \sqrt{5}}{2}$.
+\end{itemize}
