@@ -28,7 +28,8 @@ locale, cio\`e in un intorno di $x_{0}$.
 \end{exercise}
 Ottengo:
 \begin{displaymath}
-	\varepsilon_{x} = \frac{\tilde{x}-x}{x} = \frac{3.1415-3.14159265358979}{3.14159265358979}
+	\varepsilon_{x} = \frac{\tilde{x}-x}{x} = \frac{3.1415-3.14159265358979}
+	{3.14159265358979}
 \end{displaymath}
 \begin{lstlisting}
 octave:19> (3.1415-pi)/pi
@@ -58,7 +59,7 @@ Dato che cerco un'approssimazione del numero di cifre decimali a partire dall'
 errore relativo, imposto due disequazioni per trovare un intervallo in cui $r$
 pu\`o variare.
 
-Scrivo in forma normalizzata il valore esatto $x$ e la sua appossimazione 
+Scrivo in forma normalizzata il valore esatto $x$ e la sua approssimazione 
 $\tilde{x}$, fissando $\beta = 10$ e $M \not = m$ perch\`e sto approssimando:
 \begin{equation*}
 	\begin{split}
@@ -119,7 +120,8 @@ $-\log_{10}{|\varepsilon_{x}|} > r-1$ dalla seconda per avere l'intervallo di va
 		\end{split}
 	\end{equation*}
 \end{exercise}
-Per entrambe considero gli sviluppi di Taylor di $f(x_{0}+h)$ e $f(x_{0}-h)$: 
+Per entrambe considero gli sviluppi di Taylor di $f(x_{0}+h)$ e $f(x_{0}-h)$ in
+$x_{0}$:
 \begin{equation*}
 	\begin{split}
 		T(x_{0} + h)& = f(x_{0}) + f'(x_{0})h + \frac{f''(x_{0})h^{2}}{2} + 
@@ -136,7 +138,7 @@ centrare lo sviluppo, e non nell'argomento della funzione}:
 	\item nel primo sviluppo, la combinazione lineare ammette tutti segni 
 	positivi in quanto il passo di discretizzazione \`e positivo, ovvero si cerca
 	di approssimare con valori $ > x_{0}$.
-	\item nel secondo invece, il fattore $((x - x_{0}) (=h))^{k} < 0, 
+	\item nel secondo invece, il fattore $((x_{0} - h - x_{0} =h))^{k} < 0, 
 	\forall{k=2n+1, n \in \mathbb{N}}$ fa si che i termini dello sviluppo di 
 	grado dispari siano negativi, in quanto si sta discretizzando con un valore 
 	minore a $x_{0}$, di conseguenza $x - x_{0} < 0$.

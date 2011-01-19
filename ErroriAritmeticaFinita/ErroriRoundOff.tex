@@ -18,7 +18,7 @@ Scrivo le rappresentazioni in formato stringa:
 \end{displaymath}
 Ad ogni passo incremento di uno, questo comporta che incrementando la rappresentazione
 di $32767$ si riporta sul bit del segno $\alpha_{0}$. Per la definizione della funzione di 
-valutazione ottengo $val(1\underbrace{0\ldots0}_{15}) = -2^{16} = -32768$.
+valutazione ottengo $val(1\underbrace{0\ldots0}_{15}) = -2^{15} = -32768$.
 
 \begin{exercise}[1.6]
 $\mathcal{M}$ ha un numero finito di elementi.
@@ -34,8 +34,8 @@ Considerare la rappresentazione in formato stringa
 $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s}$, $\forall x \in \mathcal{M}$.
 
 Per ogni rappresentazione costruisco una nuova rappresentazione che astrae da $\alpha$ e $\beta$, 
-ovvero $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s} = \delta_{0} \ldots 
-\delta_{m + s} = x'$
+ovvero \\$x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s} =
+\delta_{0} \ldots \delta_{m + s} = x'$
 con $\alpha_{0} = \delta_{0}, \ldots, \alpha_{m} = \delta_{m}, \beta_{1} = \delta_{m + 1}, \ldots, 
 \beta_{s} = \delta_{m + s}$.
 
@@ -66,7 +66,7 @@ $r_{1} = b^{-\nu} \wedge r_{2} = (1 - b^{-m})b^{\varphi}$, con $\varphi = b^{s} 
 Suppongo che $x$ sia normalizzato.
 \begin{itemize}
 \item La configurazione che rappresenta il minimo
-numero in valore assoluto (non considero il simbolo $\alpha_{0}$) \`e:
+numero in valore assoluto (non considero il simbolo $\alpha_{0}$ del segno) \`e:
 \begin{displaymath}
 	r_{1} = \alpha_{1}.\alpha_{2} \ldots \alpha_{m} \beta_{1} \ldots \beta_{s} = 
 		1.\underbrace{0 \ldots 0}_{m - 1} \underbrace{0 \ldots 0}_{s}
@@ -74,7 +74,7 @@ numero in valore assoluto (non considero il simbolo $\alpha_{0}$) \`e:
 A cui corrisponde la valutazione $val(r_{1}) = b^{-\nu}$.
 
 \item La configurazione che rappresenta il massimo numero in valore assoluto
-(non considero il simbolo $\alpha_{0}$) \`e:
+(non considero il simbolo $\alpha_{0}$ del segno) \`e:
 \begin{displaymath}
 	r_{2} = \alpha_{1}.\alpha_{2} \ldots \alpha_{m} \beta_{1} \ldots \beta_{s} =
 		(b - 1).\underbrace{(b - 1)}_{m - 1}\underbrace{(b - 1)}_{s}

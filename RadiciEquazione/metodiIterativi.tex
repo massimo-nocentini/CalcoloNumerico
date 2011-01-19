@@ -146,8 +146,31 @@ Posso commentare le implicazioni del teorema:
   per $i \in \{ 1, 2,\ldots \}$, ottenendo quindi che i punti della coppia
   $(x_{i}, x_{i+1})$ saranno pi\`u vicini dei punti della coppia $(x_{i-1},
   x_{i})$.
+  \begin{proof}
+  	Per induzione su $i$: 
+  	\begin{description}
+  	  \item[Base] se $x_{0} \not \in I$ allora la tesi \`e vera (vacously true)
+  	  \item[Hp induttiva] suppungo vero che $x_{k} = \phi(x_{k-1})\in I, \forall
+  	  k \in \{1, \ldots i\}$
+  	  \item[Passo induttivo] dimostro per $k = i + 1$:
+  	  \begin{displaymath}
+  	  	|x_{k+1} - x^{*} | = |\phi(x_{k}) - \phi(x^{*} ) | \leq l |x_{k} - x^{*} | 
+  	  \end{displaymath}
+  	  Per ipotesi induttiva $x_{k}, x^{*} \in I$ questo implica che $l |x_{k} -
+  	  x^{*}| < \delta$. Per la propriet\`a transitiva della relazione $\leq$ vale
+  	  $|x_{k+1} - x^{*} | < \delta$, ovvero $x_{k+1} \in I$ e questo termina il
+  	  passo induttivo.
+  	\end{description}
+  \end{proof}
+  
   \item $\lim_{i \rightarrow \infty}{x_{i}} = x^{*}$, ovvero il metodo converge
   alla soluzione $x^{*}$ punto fisso di $\phi$ per la condizione necessaria.
+  
+  Nella prova riportata nel libro la regoletta per impostare l'indice del
+  termine $l$ \`e questa: 
+  \begin{displaymath}
+  	l^{k}|x_{j } - x^{*}|, j = i - a \quad \Rightarrow \quad k = i - j
+  \end{displaymath}
 \end{enumerate}
 \end{oss}
 
