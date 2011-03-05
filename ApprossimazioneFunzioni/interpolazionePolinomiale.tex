@@ -11,3 +11,32 @@ sua esecuzione lanciare lo script \nameref{subsec:scriptForExercise41}.
 \end{center}
 In cyan \`e reppresentata la curva della funzione $f$, mentre con i simboli
 $+$ sono rappresentati i punti interpolati dal polinomio $p$.
+
+\begin{exercise}[4.2] 
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+\begin{proof}
+L'algoritmo riportato implementa questo schema (utilizzo gli indici nella
+notazione usata nella formulazione matematica, quindi sono zero-based):
+\begin{displaymath}
+\begin{split}
+	p^{(0)}(x) &= a_{n} \\
+	p^{(i+1)}(x) &= p^{(i)}x + a_{n-i} 
+\end{split}
+\end{displaymath}
+con $p^{(i)}$ indico il valore di $p$ all'$i$-esimo passo dei esecuzione. 
+Se considero il valore di $p$ ad un generico passo $i$ di esecuzione si
+osserva che ha questa struttura:
+\begin{displaymath}
+\begin{split}
+	p^{(i)}(x) &= (a_{n}x^{i-1} + a_{n-1}x^{i-2} + \ldots + a_{n-i+1})x + a_{n-i}\\
+	&= a_{n}x^{i} + a_{n-1}x^{i-1} + \ldots + a_{n-i+1}x + a_{n-i}
+\end{split}
+\end{displaymath}
+Il polinomio $p^{(i)}$ \`e di grado $i$, quindi saturando l'indice $i$ arrivando
+a calcolare $p^{n}$, si ottiene il polinomio:
+\begin{displaymath}
+	p(x) = p^{(n)}(x) = a_{n}x^{n} + a_{n-1}x^{n-1} + \ldots + a_{1}x + a_{0}
+\end{displaymath}
+Ovvero quello che si chiede nel problema.
+\end{proof}
