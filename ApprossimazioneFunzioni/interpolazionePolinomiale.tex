@@ -174,3 +174,331 @@ Dimostro i punti del \emph{Lemma 4.2}:
   $\alpha_{0} = \ldots = \alpha_{k} = 0$ e il verso risulta dimostrato.
  \end{enumerate}
 \end{proof}
+
+\begin{exercise}[4.5] 
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+\begin{proof} Dimostro i punti del teorema in ordine di come vengono richiesti
+dall'\emph{esercizio 4.5}:
+\begin{enumerate}
+  \item chiamo $w(x) = \alpha f(x) + \beta g(x)$, posso riscrivere:
+  \begin{displaymath}
+  \begin{split}
+  	w(x)[x_{0}, \ldots, x_{r}] &= \sum_{j = 0}^{r}{
+  		\frac{w(x_{j})}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}} = 
+  		\sum_{j = 0}^{r}{
+  		\frac{\alpha f(x_{j}) + \beta g(x_{j})}{\prod_{l = 0;l \not = j}^{r}{(x_{j}
+  		- x_{l})}}} =\\
+  	&= \sum_{j = 0}^{r}{
+  		\frac{\alpha f(x_{j})}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}} +
+  		\sum_{j = 0}^{r}{
+  		\frac{\beta g(x_{j})}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}} = \\
+  	&=	\alpha \sum_{j = 0}^{r}{
+  		\frac{ f(x_{j})}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}} +
+  		\beta \sum_{j = 0}^{r}{
+  		\frac{ g(x_{j})}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}} = \\
+  	&=	\alpha f(x)[x_{0}, \ldots, x_{r}] + \beta g(x)[x_{0}, \ldots, x_{r}]
+  \end{split}
+  \end{displaymath}
+  
+  \item esiste una matrice di permutazione $P \in \mathbb{R}^{(r+1) \times
+  (r+1)}$ tale che permette di costruire un vettore $\vect{i}$:
+  \begin{displaymath}
+  	\vect{i} = \begin{bmatrix}
+  		i_{0} \\ 
+  		\vdots \\
+  		i_{r}
+  	\end{bmatrix} = P\begin{bmatrix}
+  		0 \\ 
+  		\vdots \\
+  		r
+  	\end{bmatrix}
+  \end{displaymath}
+  in modo, usando la simmetria dell'operatore $\sum$ e dell'operatore $\prod$, 
+  da verificare $f(x)[x_{0}, \ldots, x_{r}] = f(x)[x_{i_{0}}, \ldots,
+  x_{i_{r}}]$
+  
+  \item sia $f \in \prod_{k}$ la funzione da approssimare e si assuma che
+  questa sia definita con il seguente polinomio:
+  \begin{displaymath}
+  	f(x) = \sum_{i = 0}^{k}{a_{k}x^{k}}
+  \end{displaymath}
+  Analizzo $f[x_{0}, \ldots, x_{r}]$ distinguendo due casi:
+  \begin{itemize}
+    \item se $k = r$ allora 
+    \begin{displaymath}
+    	f[x_{0}, \ldots, x_{r}] = f[x_{0}, \ldots, x_{k}] = 
+    	\sum_{j = 0}^{k}{
+  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{k}{(x_{j} - x_{l})}}}
+    \end{displaymath}
+    Sia $p_{r}\in \prod_{r}$ il polinomio interpolante la funzione
+    $f$. Per ipotesi del problema, $f$ \`e un polinomio e stiamo analizzando
+    per $k = r$, quindi $p_{k = r}$ e $f$ hanno lo stesso grado. Inoltre, per
+    l'unicit\`a del polinomio interpolante, \`e vero che i coefficienti dei
+    termini $x^{i}$ devono coincidere, di conseguenza vale quanto detto anche
+    per il termine principale:
+    \begin{displaymath}
+    	f[x_{0}, \ldots, x_{k}] x^{k} = 
+    	%\sum_{j = 0}^{k}{
+  		%\frac{f_{j}}{\prod_{l = 0;l \not = j}^{k}{(x_{j} - x_{l})}}} x^{k} = 
+  		a_{k}x^{k} \Rightarrow f[x_{0}, \ldots, x_{k}] = a_{k} 
+    \end{displaymath}
+    
+    \item se $k < r$: 
+    sia $p_{r}\in \prod_{r}$ il polinomio interpolante la funzione $f$.
+    Per ipotesi del problema, $f$ \`e un polinomio e stiamo analizzando
+    per $k < r$, quindi $p_{r}$ ha un grado maggiore di $f$. 
+    Per l'unicit\`a del polinomio interpolante, essendo $f$ un
+    polinomio (interpolante se stesso), allora $p_{r}$ deve coincidere con il 
+    polinomio $f$. Per definizione, $p_{r}$ ha questa forma:
+    \begin{displaymath}
+    	p_{r}(x) = \sum_{j = 0}^{r}{f[x_{0}, \ldots, x_{j}] \omega_{j}(x)}
+    \end{displaymath}
+    ma tutti i termini $f[x_{0}, \ldots, x_{i}] \omega_{i}(x) = 0, k < i \leq r$
+    devono annullarsi in ordine di avere $p_{k}$ coincidente con $f$. Affinch\`e
+    si annullino \`e strettamente necessario che si annulli $f[x_{0}, \ldots,
+    x_{i}] = 0$ in quanto $\omega_{i} \in \prod_{r}$ non pu\`o annullarsi
+    perch\`e \`e un vettore della base di $\prod_{r}$. Se fosse vero che
+    $\omega_{i}(x) = 0$ allora si produrrebbe un assurdo in quanto per ipotesi 
+    $p_{k} \in \prod_{r}$ ma questo spazio non sarebbe di grado $r$ (ma di grado pi\`u
+    basso).
+  \end{itemize}
+  
+  \item devo dimostrare che se $f \in \mathcal{C}^{(r)}$ allora $\exists \xi
+  \in \{\min_{i}{x_{i}}, \ldots, \max_{i}{x_{i}}\}$ tale che:
+  \begin{displaymath}
+  	f[x_{0}, \ldots, x_{r}] = \frac{f^{(r)}(\xi)}{r!}
+  \end{displaymath}
+  
+  Sia $p_{r} \in \prod_{r}$ il polinomio interpolante, chiamo $e(x) = f(x) -
+  p_{r}(x)$, con $e \in \mathcal{C}^{(r)}$. Si osserva che per costruzione del
+  polinomio $e$, vale $e(x_{i}) = 0, \forall x_{i} \in \{x_{0}, \ldots, x_{r}\}$
+  insieme delle ascisse di interpolazione.
+  
+  Per il teorema di Rolle $\exists \xi_{0}^{(1)}: e'(\xi_{0}^{(1)}) = 0$.
+  Astraendo ottengo:
+  \begin{displaymath}
+ 	x_{0} < \xi_{0}^{(1)} < x_{1} < \xi_{1}^{(1)} < x_{2} < \ldots < x_{r-1} <
+ 	\xi_{r-1}^{(1)} < x_{r} \quad \wedge \quad \forall i \in \{ 0, \ldots, r-1\}:
+ 	e'(\xi_{i}^{(1)}) = 0
+  \end{displaymath}
+  % questo implica che e ha punti di massimo o minimo in \xi_{i}^{(1)}
+  Posso derivare $r$ volte perch\`e $e \in \mathcal{C}^{(r)}$ ottenendo:
+  \begin{displaymath}
+  \begin{split}
+ 	\forall i \in \{ 0, \ldots, r-1\}&:	e^{(1)}(\xi_{i}^{(1)}) = 0 \\
+ 	\forall i \in \{ 0, \ldots, r-1\}&:	e^{(2)}(\xi_{i}^{(2)}) = 0 \\
+ 	& \vdots \\
+ 	\forall i \in \{ 0, \ldots, r-1\}&:	e^{(r)}(\xi_{i}^{(r)}) = 0
+  \end{split}
+  \end{displaymath}
+  Posso astrarre sui $\xi_{i}^{(k)}$ sia sull'indice $i$ della posizione, sia
+  suul'indice $k$ dell'ordine della derivata (in quanto in tutti la derivata
+  $r$-esima di $e$ si annulla) e considerare un generico $\xi$.
+  
+  Derivo $r$ volte l'equazione $e(x) = f(x) - p_{r}(x)$ ottenendo 
+  $e^{(r)}(x) = f^{(r)}(x) -  p_{r}^{(r)}(x)$ e valuto in $\xi$:
+  \begin{displaymath}
+  	0 = e^{(r)}(\xi) = f^{(r)}(\xi) -  p_{r}^{(r)}(\xi)
+  \end{displaymath}
+  Per definizione $p_{r}$ ha questa struttura:
+  \begin{displaymath}
+  	p_{r}(x) = f[x_{0}] \omega_{0}(x) + f[x_{0}, x_{1}] \omega_{1}(x) + \ldots + 
+  		f[x_{0}, \ldots, x_{k}]\omega_{k}(x) + \ldots + 
+  		f[x_{0}, \ldots, x_{r}]\omega_{r}(x) \quad, k < r
+  \end{displaymath}
+  Se derivo $r$ volte, ottengo che i termini $f[x_{0}, \ldots,
+  x_{k}]\omega_{k}^{(r)}(x)$ con $k < r$ si annullano per definizione
+  dell'operatore derivata. Rimane solo il termine $f[x_{0}, \ldots,
+  x_{r}]\omega_{r}(x)$. Ma anche per questo termine possiamo applicare lo stesso
+  ragionamento, ovvero se si considera i termini generati da 
+  $\omega_{r}(x) = x^{r} + \alpha_{r-1}x^{r-1} + \ldots + \alpha_{1}x +
+  \alpha_{0}$, quando si deriva $r$ volte si ottiene: 
+  \begin{displaymath}
+  \begin{split}
+  	\omega_{r}^{(r)} = \frac{\vartheta^{(r)}(x^{r})}{\vartheta x} + 
+  		\frac{\vartheta^{(r)}(\alpha_{r-1}x^{r-1})}{\vartheta x} + \ldots &+ 
+  		\frac{\vartheta^{(r)}(\alpha_{i}x^{i})}{\vartheta x} + \ldots +
+  		\frac{\vartheta^{(r)}(\alpha_{1}x)}{\vartheta x} + 
+  		\frac{\vartheta^{(r)}(\alpha_{0})}{\vartheta x} = 
+  		\frac{\vartheta^{(r)}(x^{r})}{\vartheta x} = r! \\
+  	\text{con } i < r &\Rightarrow
+  	\frac{\vartheta^{(r)}(\alpha_{i}x^{i})}{\vartheta x} = 0
+  \end{split}
+  \end{displaymath}
+  Quindi rimane l'unico termine $\alpha_{r} x^{r}$, che derivato $r$ volte
+  produce $\frac{\vartheta^{(r)}(x^{r})}{\vartheta x} = r!$. Osservazione: dato
+  che $\omega_{r}$ produce un polinomio monico, e si considera solo il termine
+  principale, allora $\alpha_{r} = 1$. Riassumendo:
+  \begin{displaymath}
+  \begin{split}
+  	0 = f^{(r)}(\xi) -  p_{r}^{(r)}(\xi) &= f^{(r)}(\xi) - 
+  	f[x_{0}, \ldots, x_{r}] r! \\
+  	f[x_{0}, \ldots, x_{r}] &= \frac{f^{(r)}(\xi)}{r!}
+  \end{split}
+  \end{displaymath}
+  
+  \item Prova per induzione su $r$.
+  \begin{itemize}
+    \item \emph{Base}:
+    \begin{displaymath}
+    	f[x_{0}, x_{1}] = \frac{f_{0}}{x_{0} - x_{1}} + \frac{f_{1}}{x_{1} - x_{0}}
+    	= \frac{f_{1} - f_{0}}{x_{1} - x_{0}} = \frac{f[x_{1}] - f[x_{0}]}{x_{1} -
+    	x_{0}}
+    \end{displaymath}
+  
+  \item \emph{Induction hypothesis}: suppongo vero l'asserto per $r$ e dimostro
+  per $r+1$
+  \item \emph{Induction step}:
+  	\begin{equation}
+  	\label{eq:inductionStepExer45}
+    	f[x_{0},\ldots, x_{r+1}] = 
+    	\frac{ f[x_{1},\ldots, x_{r+1}] - f[x_{0},\ldots, x_{r}]}{x_{r+1} - x_{0}}
+    \end{equation}
+    Studio i termini che compaiono al numeratore:
+    \begin{displaymath}
+    	\sum_{j = 1}^{r+1}{
+  		\frac{f_{j}}{\prod_{l = 1;l \not = j}^{r+1}{(x_{j} - x_{l})}}} - 
+  		\sum_{j = 0}^{r}{
+  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}} = 
+  	\end{displaymath}
+  	Metto in evidenza la sommatoria, con indice $j \in \{1,\ldots,r\} = J$;
+  	l'insieme $J$ \`e l'intersezione degli insiemi sui cui ``corrono'' gli indici
+  	delle due sommatorie che sto fattorizzando:
+  	\begin{equation}
+  	\label{eq:tripleAddendSumExer45}
+     	= \sum_{j = 1}^{r}{
+  		f_{j} \left ( \frac{1}{\prod_{l = 1;l \not = j}^{r+1}{(x_{j} - x_{l})}} -
+  		\frac{1}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}
+  		\right)} + 
+  		% non posso lasciare 
+  		% \frac{1}{\prod_{l = 1;l \not = j}^{r+1}{(x_{j} - x_{l})}} in quanto 
+  		% l'indice j non sarebbe definito
+  		\frac{f_{r+1}}{\prod_{l = 1}^{r}{(x_{r+1} - x_{l})}} -
+  		\frac{f_{0}}{\prod_{l = 1}^{r}{(x_{0} - x_{l})}}
+  	\end{equation}
+  	Studio il primo addendo della \ref{eq:tripleAddendSumExer45}:
+  	\begin{displaymath}
+  	\begin{split}
+     	& \sum_{j = 1}^{r}{
+  		f_{j} \left ( \frac{1}{\prod_{l = 1;l \not = j}^{r+1}{(x_{j} - x_{l})}} -
+  		\frac{1}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}
+  		\right)} = 
+  		\sum_{j = 1}^{r}{
+  		\frac{f_{j}}{\prod_{l = 1;l \not = j}^{r}{(x_{j} - x_{l})}} 
+  		\left (
+  		\frac{1}{x_{j} - x_{r+1}} -
+  		\frac{1}{x_{j} - x_{0}}
+  		\right)} \\
+  		&= \sum_{j = 1}^{r}{
+  		\frac{f_{j}}{\prod_{l = 1;l \not = j}^{r}{(x_{j} - x_{l})}} 
+  		\left (
+  		\frac{(x_{j} - x_{0})-(x_{j} - x_{r+1})}{(x_{j} - x_{r+1})(x_{j} - x_{0})}
+  		\right)} = 
+  		\sum_{j = 1}^{r}{
+  		\frac{f_{j}(x_{r+1} - x_{0})}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+  		x_{l})}}}
+  	\end{split}
+  	\end{displaymath}
+  	Come si nota nella \ref{eq:inductionStepExer45}, 
+  	questa quantit\`a deve essere raggruppata per $x_{r+1} - x_{0}$, quindi:
+  	\begin{displaymath}
+  	\begin{split} 
+  		\sum_{j = 1}^{r}{
+  		\frac{f_{j}(x_{r+1} - x_{0})}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+  		x_{l})}}} \left(\frac{1}{x_{r+1} - x_{0}}\right ) = 
+  		\sum_{j = 1}^{r}{
+  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+  		x_{l})}}}
+  	\end{split}
+  	\end{displaymath}
+  	Componendo questi passi si ottiene:
+  	\begin{equation}
+  	\label{eq:firstIntermediateResultExer45}
+  	\begin{split} 
+  		\sum_{j = 1}^{r}{
+  		f_{j} \left ( \frac{1}{\prod_{l = 1;l \not = j}^{r+1}{(x_{j} - x_{l})}} -
+  		\frac{1}{\prod_{l = 0;l \not = j}^{r}{(x_{j} - x_{l})}}
+  		\right)} \left(\frac{1}{x_{r+1} - x_{0}}\right) = 
+  		\sum_{j = 1}^{r}{
+  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+  		x_{l})}}}
+  	\end{split}
+  	\end{equation}
+  	Studio il secondo addendo della \ref{eq:tripleAddendSumExer45} applicando il
+  	raggruppamento $x_{r+1} - x_{0}$ come primo passo; come secondo passo
+  	``sincronizzo'' l'indice della produttoria per essere ``compatibile'' 
+  	con l'indice della produttoria che appare nel denomitore della
+  	\ref{eq:firstIntermediateResultExer45}:
+  	\begin{displaymath}
+  	\frac{f_{r+1}}{\prod_{l = 1}^{r}{(x_{r+1} - x_{l})}}  \left(\frac{1}{x_{r+1}
+  	- x_{0}}\right) = \frac{f_{r+1}}{\prod_{l = 0}^{r}{(x_{r+1} - x_{l})}} = 
+  	\frac{f_{r+1}}{\prod_{l = 0;l \not = r+1}^{r+1}{(x_{r+1} - x_{l})}}
+  	\end{displaymath}
+  	Ho ottenuto il $(r+1)$-esimo termine della sommatoria principale, quindi
+  	sommo questo risultato alla \ref{eq:firstIntermediateResultExer45}:
+  	\begin{equation}
+  	\label{eq:secondIntermediateResultExer45}
+  	\sum_{j = 1}^{r}{
+  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+  		x_{l})}}} + 
+  	\frac{f_{r+1}}{\prod_{l = 0;l \not = r+1}^{r+1}{(x_{r+1} - x_{l})}} =
+  	\sum_{j = 1}^{r+1}{
+  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+  		x_{l})}}} 
+  	\end{equation}
+  	
+  	Studio il terzo addendo della \ref{eq:tripleAddendSumExer45} applicando il
+  	raggruppamento $x_{r+1} - x_{0}$: 
+  	\begin{displaymath}
+  	\frac{f_{0}}{\prod_{l = 1}^{r}{(x_{0} - x_{l})}}  \left(\frac{1}{x_{r+1}
+  	- x_{0}}\right)
+  	\end{displaymath}
+  	e sommo algebricamente alla \ref{eq:secondIntermediateResultExer45}:
+  	\begin{displaymath}
+  	\begin{split}
+	  	\sum_{j = 1}^{r+1}{
+	  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+	  		x_{l})}}} -
+	  	\frac{f_{0}}{\prod_{l = 1}^{r}{(x_{0} - x_{l})}}  \left(\frac{1}{x_{r+1}
+	  	- x_{0}}\right) =	  	\\
+	  	= \sum_{j = 1}^{r+1}{
+	  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+	  		x_{l})}}} +
+	  	\frac{f_{0}}{\prod_{l = 1}^{r}{(x_{0} - x_{l})}}  \left(\frac{1}{x_{0}
+	  	- x_{r+1}}\right) = 
+  	\end{split}
+  	\end{displaymath}
+  	``sincronizzo'' l'indice della produttoria per essere ``compatibile'' 
+  	con l'indice della produttoria che appare nel denomitore del primo termine:
+  	\begin{displaymath}
+	  	= \sum_{j = 1}^{r+1}{
+	  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+	  		x_{l})}}} +
+	  	\frac{f_{0}}{\prod_{l = 0;l\not = 0}^{r+1}{(x_{0} - x_{l})}} = 
+  	\end{displaymath}
+  	Con il secondo termine ho ottenuto lo $(0)$-esimo termine della sommatoria
+  	principale, quindi posso includerlo nella sommatoria principale
+  	modificando il range su cui ``corre'' l'indice $j$:
+  	\begin{equation}
+  	\label{eq:thirdIntermediateResultExer45} 
+  		= \sum_{j = 0}^{r+1}{
+	  		\frac{f_{j}}{\prod_{l = 0;l \not = j}^{r+1}{(x_{j} -
+	  		x_{l})}}} = f[x_{0}, \ldots, x_{r+1}]
+	\end{equation}
+  	questo completa il passo induttivo.
+  \end{itemize}
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
