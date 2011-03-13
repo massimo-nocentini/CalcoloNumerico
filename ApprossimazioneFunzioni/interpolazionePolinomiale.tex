@@ -533,6 +533,37 @@ sulle ascisse $x \in linspace(-3, 3,30)$:
 \input{ApprossimazioneFunzioni/exercise47-DifferenzeDivisePlotOutput.tex}
 \end{center}
 
+Dimostro che l'algoritmo  \nameref{subsec:HornerGeneralizzato} valuta il
+polinomio interpolante nella forma di Newton $p_{r}(x) \in \prod_{r}$ in un
+punto di ascissa $x$:
+\begin{proof}
+L'algoritmo riportato implementa questo schema (utilizzo gli indici nella
+notazione usata nella formulazione matematica, quindi sono zero-based):
+\begin{displaymath}
+\begin{split}
+	p^{(0)}(x) &= f[x_{0},\ldots, x_{r}] \\
+	p^{(i+1)}(x) &= p^{(i)}(x - x_{r-i})  + f[x_{0}, \ldots, x_{r-i}]  
+\end{split}
+\end{displaymath}
+con $p^{(i)}$ indico il valore di $p$ all'$i$-esimo passo dei esecuzione. 
+Se considero il valore di $p$ ad un generico passo $i$ di esecuzione si
+osserva che ha questa struttura:
+\begin{displaymath}
+\begin{split}
+	p^{(i)}(x) &= \big(f[x_{0},\ldots, x_{r}](x - x_{r-1})\cdots(x - x_{r-i+1}) +
+	f[x_{0},\ldots, x_{r-1}](x - x_{r-2})\cdots(x - x_{r-i+1}) + \ldots +\\
+	&+ f[x_{0},\ldots, x_{r-i+1}](x - x_{r-i+1})\big)(x-x_{r-i}) + f[x_{0},\ldots,
+	x_{r-i}]
+\end{split}
+\end{displaymath}
+Il polinomio $p^{(i)}$ \`e di grado $i$, quindi saturando l'indice $i$ arrivando
+a calcolare $p^{r}$, si ottiene il polinomio:
+\begin{displaymath}
+	p_{r}(x) = p^{(r)}(x) = f[x_{0},\ldots,	x_{r}]\omega_{r}(x) + 
+		f[x_{0},\ldots,	x_{r-1}]\omega_{r-1}(x) + \ldots + f[x_{0}] 
+\end{displaymath}
+Ovvero quello che si chiede nel problema.
+\end{proof}
 
 
 
