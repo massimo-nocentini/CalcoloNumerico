@@ -491,7 +491,47 @@ dall'\emph{esercizio 4.5}:
 \end{enumerate}
 \end{proof}
 
+\begin{exercise}[4.6]
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+Vedi il codice \nameref{subsec:differenzeDiviseEngineCode}.
 
+\begin{exercise}[4.7]
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+Vedi il codice \nameref{subsec:HornerGeneralizzato}. Per generare i risultati
+che sto per descrivere, lanciare la funzione definita in
+\nameref{subsec:exercise47testing}.
+
+Ho considerato la funzione:
+\begin{displaymath}
+ f(x) = \frac{1}{1 + x^{2}}
+\end{displaymath}
+fissando come ascisse di intepolazione $x \in linspace(-3, 3,30) = \mathcal{x}$,
+con $linspace$ intendo la funzione di \emph{Octave}.
+
+Il seguente grafico mostra l'interpolazione della funzione $f$ utilizzando
+l'algoritmo di \emph{Horner generalizzato} (implementato in
+\nameref{subsec:HornerGeneralizzato}) in ascisse $\hat{x} \in linspace(-2,
+2,80)$. Si nota che $\forall \hat{x} \in \mathcal{x}$ e l'interpolazione fornita
+\`e soddisfacente.
+\begin{center} 
+\input{ApprossimazioneFunzioni/exercise47-CorrectPlotOutput.tex}
+\end{center}
+Nel seguente grafico invece considero ascisse $x_{\square} \in linspace(-3.005, 3.005,130)$.
+Si nota che $\exists x_{\square} \not \in \mathcal{x}$: in questo caso
+l'approssimazione si allontana molto dalla curva reale della $f$. Inoltre basta
+allontanarsi poco dagli estremi $-3, 3$ per avere una forte differenza (non ho
+riportato qui i grafici ma con $x_{\square} = -4$ si ottiene
+$p_{Horner}(x_{\square}) \approx 2e^{49}$)
+\begin{center} 
+\input{ApprossimazioneFunzioni/exercise47-InCorrectPlotOutput.tex}
+\end{center}
+Riporto per completezza la curva che modella le differenze divise calcolate
+sulle ascisse $x \in linspace(-3, 3,30)$:
+\begin{center} 
+\input{ApprossimazioneFunzioni/exercise47-DifferenzeDivisePlotOutput.tex}
+\end{center}
 
 
 
