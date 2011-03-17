@@ -1,5 +1,5 @@
-function [] = exercise47()
-    toInterpolateAscisseVector = linspace(-4.5, 4.5,80)';
+function [] = exercise411()
+    toInterpolateAscisseVector = linspace(-1, 1, 30)';
 
     interpolationOrdinateVector = toInterpolateAscisseVector;
     for i=1:length(toInterpolateAscisseVector)
@@ -8,19 +8,19 @@ function [] = exercise47()
 
     # linspace return a row vector, so I transpose in order to obtain a column 
     # vector
-    interpolationAscisseVector1 = -5:0.5:5;
+    interpolationAscisseVector1 = linspace(-1, 1, 15)';
     interpolatedFunctionValuesVector1 = exercise_Internal(...
         interpolationAscisseVector1, toInterpolateAscisseVector);
 
     # linspace return a row vector, so I transpose in order to obtain a column 
     # vector
-    interpolationAscisseVector2 = -5:1:5;
+    interpolationAscisseVector2 = linspace(-1, 1, 10)';
     interpolatedFunctionValuesVector2 = exercise_Internal(...
         interpolationAscisseVector2, toInterpolateAscisseVector);
 
     # linspace return a row vector, so I transpose in order to obtain a column 
     # vector
-    interpolationAscisseVector3 = -5:2:5;
+    interpolationAscisseVector3 = linspace(-1, 1, 5)';
     interpolatedFunctionValuesVector3 = exercise_Internal(...
         interpolationAscisseVector3, toInterpolateAscisseVector);
 
@@ -41,7 +41,7 @@ function [] = exercise47()
          toInterpolateAscisseVector, interpolatedFunctionValuesVector2, "g", ...
            toInterpolateAscisseVector, interpolatedFunctionValuesVector3, "r");
     grid;
-    print 'exercise47-CorrectPlotOutput.tex' '-dTex' '-S800, 600';
+    print 'exercise411-CorrectPlotOutput.tex' '-dTex' '-S800, 600';
 
 endfunction
 
@@ -61,5 +61,5 @@ function [interpolatedFunctionValuesVector] = exercise_Internal(...
 endfunction
 
 function [y] = realFunction(x)
-    y = 1 / (1 + x^(2));
+    y = abs(x);
 endfunction

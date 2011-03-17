@@ -512,25 +512,11 @@ con $linspace$ intendo la funzione di \emph{Octave}.
 
 Il seguente grafico mostra l'interpolazione della funzione $f$ utilizzando
 l'algoritmo di \emph{Horner generalizzato} (implementato in
-\nameref{subsec:HornerGeneralizzato}) in ascisse $\hat{x} \in linspace(-2,
-2,80)$. Si nota che $\forall \hat{x} \in \mathcal{x}$ e l'interpolazione fornita
-\`e soddisfacente.
+\nameref{subsec:HornerGeneralizzato}) in ascisse $\hat{x} \in [-5:0.5:5],
+[-5:1:5], [-5:2:5]$, corrispondenti rispettivamente alle curve cyan, verde,
+rosso. In blu la funzione reale $f$.
 \begin{center} 
 \input{ApprossimazioneFunzioni/exercise47-CorrectPlotOutput.tex}
-\end{center}
-Nel seguente grafico invece considero ascisse $x_{\square} \in linspace(-3.005, 3.005,130)$.
-Si nota che $\exists x_{\square} \not \in \mathcal{x}$: in questo caso
-l'approssimazione si allontana molto dalla curva reale della $f$. Inoltre basta
-allontanarsi poco dagli estremi $-3, 3$ per avere una forte differenza (non ho
-riportato qui i grafici ma con $x_{\square} = -4$ si ottiene
-$p_{Horner}(x_{\square}) \approx 2e^{49}$)
-\begin{center} 
-\input{ApprossimazioneFunzioni/exercise47-InCorrectPlotOutput.tex}
-\end{center}
-Riporto per completezza la curva che modella le differenze divise calcolate
-sulle ascisse $x \in linspace(-3, 3,30)$:
-\begin{center} 
-\input{ApprossimazioneFunzioni/exercise47-DifferenzeDivisePlotOutput.tex}
 \end{center}
 
 Dimostro che l'algoritmo  \nameref{subsec:HornerGeneralizzato} valuta il
@@ -584,6 +570,15 @@ che sto per descrivere, lanciare la funzione definita in
 \end{center}
 \begin{center} 
 \input{ApprossimazioneFunzioni/exercise49-DifferenzeDivisePlotOutput.tex}
+\end{center}
+
+\begin{exercise}[4.11]
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+Completo l'\emph{esercizio 4.9} aggiungendo la rappresentazione della funzione
+di \emph{Bernstein}: 
+\begin{center}  
+\input{ApprossimazioneFunzioni/exercise411-CorrectPlotOutput.tex}
 \end{center}
 
 
