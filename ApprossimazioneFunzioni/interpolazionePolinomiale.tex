@@ -565,17 +565,32 @@ Per l'implementazione del metodo di \emph{Hermite} vedere il codice
 Per generare i risultati
 che sto per descrivere, lanciare la funzione definita in
 \nameref{subsec:exercise49}. 
+Nei prossimi grafici le curve in colore \emph{rosso} sono custruite usando un
+polinomio interpolante nella forma di \emph{Hermite}, mentre quelle in
+\emph{blu} sono custruite usando un polinomio interpolante nella forma di
+\emph{Newton}.
+
+In questo primo plot mostro l'interpolazione della curva reale (in
+\emph{verde}), la quale \`e totalmente nascosta dalla curva ottenuta con
+polinomio interpolante nella forma di \emph{Hermite}:
 \begin{center} 
 \input{ApprossimazioneFunzioni/exercise49-normalPlotOutput.tex}
 \end{center}
+
+Il prossimo plot rappresenta le differenze divise calcolate per costruire i
+polinomi interpolanti:
 \begin{center} 
 \input{ApprossimazioneFunzioni/exercise49-DifferenzeDivisePlotOutput.tex}
 \end{center}
 
+Il prossimo plot mostra gli errori che si commette nelle due approssimazioni,
+usando entrambi gli assi con scala lineare:
 \begin{center} 
 \input{ApprossimazioneFunzioni/exercise49-errorsPlotOutput.tex}
 \end{center}
 
+Il prossimo plot mostra gli errori che si commette nelle due approssimazioni,
+usando l'asse delle ordinate con scala logaritmica:
 \begin{center} 
 \input{ApprossimazioneFunzioni/exercise49-errorsSemilogYPlotOutput.tex}
 \end{center}
@@ -588,12 +603,13 @@ risultati vedere \nameref{subsec:exercise411}.
 
 Nei seguenti grafici in
 \emph{rosso} \`e rappresentata la funzione di \emph{Bernstein}, mentre in \emph{blu} \`e rappresentata la funzione di
-\emph{Runge}. Questo primo grafico ha entrambi gli assi lineari:
+\emph{Runge}. Questo primo grafico ha l'asse delle ordinate costruito in
+modo logaritmico:
 \begin{center}   
 \input{ApprossimazioneFunzioni/exercise411-ErrorsSemilogYPlotOutput.tex}
 \end{center}
-Riporto lo stesso dataset di errori per le due curve, costruendo l'asse delle
-ordinate in modo logaritmico:
+Riporto lo stesso dataset di errori per le due curve, costruendo entrambi gli
+assi in modo logaritmico:
 \begin{center}  
 \input{ApprossimazioneFunzioni/exercise411-ErrorsLoglogPlotOutput.tex}
 \end{center}
