@@ -634,7 +634,8 @@ Per il testo dell'esercizio consulare il libro di testo.
 	\end{displaymath}
 	supponendo senza perdere di generalit\`a $a \leq b$:
 	\begin{itemize}
-	  \item $(\Rightarrow)$
+	  \item $(\Rightarrow)$ Quello che voglio utilizzare \`e $\tilde{x} =
+	  \tilde{x}(x)$
 		\begin{itemize}
 	  		\item se $x = -1$:
 	  		\begin{displaymath}
@@ -667,7 +668,26 @@ Per il testo dell'esercizio consulare il libro di testo.
 	  		Quindi $\tilde{x}(x) \in [a,b]$.
 		\end{itemize}  
 		
-	 \item $(\Leftarrow)$ TODO
+	 \item $(\Leftarrow)$ Quello che voglio utilizzare \`e $x =
+	  x(\tilde{x})$. Dalle ipotesi segue che:
+	 \begin{displaymath}
+	 \begin{split}
+	 	\tilde{x} &= \frac{a+b}{2} + \frac{b-a}{2}x \\
+	 	2\tilde{x} &= a + b + (b-a) x \\
+	 	2\tilde{x} &= a + (b -a) +a +(b-a)x \\
+	 	2(\tilde{x} -a) &= (b-a)(x+1) \\
+	 	\frac{2(\tilde{x} -a)}{b-a} &= x+1 \\
+	 	\frac{2(\tilde{x} -a)}{b-a} -1 &= x
+	 \end{split}
+	 \end{displaymath}
+	 
+	 Se $\tilde{x} = \min\{[a,b]\} = a \Rightarrow x = -1$.
+	 
+	 Se $\tilde{x} = \max\{[a,b]\} = a \Rightarrow x = \frac{2(b-a)}{(b-a)}-1 = 1$
+	 
+	 $x(\tilde{x}) = 0$ per $2\tilde{x} -2a + a -b = 0$ quindi per $\tilde{x} =
+	 \frac{b+a}{2}$. Inoltre $x'(\tilde{x}) = \frac{2}{b-a}$, la derivata prima \`e
+	 costante, non ci sono punti di min o max locali. Quindi $x \in [-1,1]$.
 	\end{itemize}
 \end{proof}
 
