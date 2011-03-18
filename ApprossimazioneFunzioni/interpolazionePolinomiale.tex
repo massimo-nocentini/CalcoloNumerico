@@ -575,12 +575,25 @@ che sto per descrivere, lanciare la funzione definita in
 \begin{exercise}[4.11]
 Per il testo dell'esercizio consulare il libro di testo.
 \end{exercise}
-Completo l'\emph{esercizio 4.9} aggiungendo la rappresentazione della funzione
-di \emph{Bernstein}: 
+Nei seguenti grafici in \emph{rosso} \`e rappresentata la funzione di
+\emph{Bernstein}, mentre in \emph{blu} \`e rappresentata la funzione di
+\emph{Runge}. Questo primo grafico ha entrambi gli assi lineari:
 \begin{center}  
-\input{ApprossimazioneFunzioni/exercise411-CorrectPlotOutput.tex}
+\input{ApprossimazioneFunzioni/exercise411-ErrorsSemilogYPlotOutput.tex}
 \end{center}
+Riporto lo stesso dataset di errori per le due curve, costruendo l'asse delle
+ordinate in modo logaritmico:
+\begin{center}  
+\input{ApprossimazioneFunzioni/exercise411-ErrorsLoglogPlotOutput.tex}
+\end{center}
+Per entrambi i grafici, le valutazioni della rispettiva funzione, del polinomio
+interpolante e la costruzione del polinomio interpolante sono riferiti ai
+rispettivi dominii $[a,b]$ definiti nel testo dell'esercizio.
 
+Possiamo notare che l'errore diverge all'aumentare del numero di ascisse di
+interpolazione e, confrontando gli errori ottenuti per le due funzioni, possiamo
+dire il problema di interpolare la funzione di \emph{Bernstein} \`e maggiormente
+malcondizionato del problema di interpolare la funzione di \emph{Runge}.
 
 
 
