@@ -622,7 +622,54 @@ interpolazione e, confrontando gli errori ottenuti per le due funzioni, possiamo
 dire il problema di interpolare la funzione di \emph{Bernstein} \`e maggiormente
 malcondizionato del problema di interpolare la funzione di \emph{Runge}.
 
-
+\begin{exercise}[4.12]
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+\begin{proof}
+	Dimostro i due versi distinti di:
+	\begin{displaymath}
+	x \in [-1,1] \Leftrightarrow \tilde{x} = \tilde{x}(x) \in
+	[a, b] \quad \text{con } \tilde{x} = \tilde{x}(x) = \frac{a + b}{2} +
+	\frac{b-a}{2}x
+	\end{displaymath}
+	supponendo senza perdere di generalit\`a $a \leq b$:
+	\begin{itemize}
+	  \item $(\Rightarrow)$
+		\begin{itemize}
+	  		\item se $x = -1$:
+	  		\begin{displaymath}
+	  			\tilde{x}(x) = \frac{a + b}{2} - \frac{b-a}{2} = 
+	  			\frac{a + b - b +a}{2} = a \in [a,b]
+	  		\end{displaymath}
+	  		vero perch\`e $a \leq b$ per ipotesi.
+	  		\item se $x = 1$:
+	  		\begin{displaymath}
+	  			\tilde{x}(x) = \frac{a + b}{2} + \frac{b-a}{2} = 
+	  			\frac{a + b + b -a}{2} = b \in [a,b]
+	  		\end{displaymath}
+	  		vero perch\`e $a \leq b$ per ipotesi.
+	  		\item se $x = 0$:
+	  		\begin{displaymath}
+	  			\tilde{x}(x) = \frac{a + b}{2} 
+	  		\end{displaymath}
+	  		per ipotesi $a \leq b$ allora $\exists \epsilon \geq 0: b = a + \epsilon$,
+	  		quindi ottengo:
+	  		\begin{displaymath}
+	  			\tilde{x}(x) = \frac{a + b}{2} = \frac{2a + \epsilon}{2} =
+	  				a + \frac{\epsilon}{2}   
+	  		\end{displaymath}
+	  		Ma $a + \frac{\epsilon}{2} \geq a$ perch\`e $\frac{\epsilon}{2} \geq 0$ 
+	  		in quanto $\epsilon \geq 0$ per ipotesi.
+	  		
+	  		Ma $a + \frac{\epsilon}{2} \leq b$ perch\`e $b = a + \epsilon$ implica
+	  		$a + \frac{\epsilon}{2} \leq a + \epsilon$, vero perch\`e
+	  		$\frac{\epsilon}{2} \leq \epsilon$ in quanto $\epsilon \geq 0$ per ipotesi.
+	  		Quindi $\tilde{x}(x) \in [a,b]$.
+		\end{itemize}  
+		
+	 \item $(\Leftarrow)$ TODO
+	\end{itemize}
+\end{proof}
 
 
 
