@@ -1,16 +1,20 @@
-function [doubledAscisseVector, differenzeDiviseVector] = hermiteDifferenzeDiviseEngine(ascisseVector, ...
-    functionValuesVector)
+function [doubledAscisseVector, differenzeDiviseVector] = ...
+    hermiteDifferenzeDiviseEngine(ascisseVector, ...
+        functionValuesVector, firstDerivateValuesVector)
     
-    # build two column for doubling input
-    doubledAscisseVector = ones(length(ascisseVector),1);
-    doubledFunctionValuesVector = ones(length(functionValuesVector),1);
+    # build two column vector, doubling the dimension of the original ones,
+    # passed as parameters.
+    doubledAscisseVector = ones(length(ascisseVector)*2, 1);
+    doubledFunctionValuesVector = ones(length(functionValuesVector)*2, 1);
 
+    # setting up the vectors, doubling information and setting the first derivate
+    # values when needed
     for i = 1:length(functionValuesVector)
         doubledAscisseVector(2*(i-1)+1) = ascisseVector(i);
         doubledAscisseVector(2*(i-1)+2) = ascisseVector(i);
 
         doubledFunctionValuesVector(2*(i-1)+1) = functionValuesVector(i);
-        doubledFunctionValuesVector(2*(i-1)+2) = functionValuesVector(i);
+        doubledFunctionValuesVector(2*(i-1)+2) = firstDerivateValuesVector(i);
     end
 
     differenzeDiviseVector = hermiteDifferenzeDiviseEngineInternal(...
