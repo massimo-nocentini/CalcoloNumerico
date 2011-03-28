@@ -260,8 +260,8 @@ dall'\emph{esercizio 4.5}:
     x_{i}] = 0$ in quanto $\omega_{i} \in \prod_{r}$ non pu\`o annullarsi
     perch\`e \`e un vettore della base di $\prod_{r}$. Se fosse vero che
     $\omega_{i}(x) = 0$ allora si produrrebbe un assurdo in quanto per ipotesi 
-    $p_{k} \in \prod_{r}$ ma questo spazio non sarebbe di grado $r$ (ma di grado pi\`u
-    basso).
+    $p_{k} \in \prod_{r}$ ma questo spazio non sarebbe di grado $r$ (ma di grado
+    pi\`u basso).
   \end{itemize}
   
   \item devo dimostrare che se $f \in \mathcal{C}^{(r)}$ allora $\exists \xi
@@ -590,12 +590,15 @@ usando entrambi gli assi con scala lineare:
 \end{center}
 
 Il prossimo plot mostra gli errori che si commette nelle due approssimazioni,
-usando l'asse delle ordinate con scala logaritmica:
+usando l'asse delle ordinate con scala logaritmica, in modo da evidenziare che
+anche usando lo schema di \emph{Hermite} si commettono errori, molto piccoli,
+ma che non era possibile apprezzarli nel plot precedente:
 \begin{center} 
 \input{ApprossimazioneFunzioni/exercise49-errorsSemilogYPlotOutput.tex}
 \end{center}
 
 \begin{exercise}[4.11]
+\label{exercise:exercise411}
 Per il testo dell'esercizio consulare il libro di testo.
 \end{exercise}
 Per il codice che implementa le richieste dell'esercizio e produce i seguenti
@@ -623,6 +626,7 @@ dire il problema di interpolare la funzione di \emph{Bernstein} \`e maggiormente
 malcondizionato del problema di interpolare la funzione di \emph{Runge}.
 
 \begin{exercise}[4.12]
+\label{exercise:exercise412}
 Per il testo dell'esercizio consulare il libro di testo.
 \end{exercise}
 \begin{proof}
@@ -691,6 +695,287 @@ Per il testo dell'esercizio consulare il libro di testo.
 	\end{itemize}
 \end{proof}
 
+\begin{exercise}
+Sia $f \in \mathcal{C}^{(1)}([a,b])$ una funzione \emph{Lipschtziana}. Allora $L
+= ||f^{(1)}||$.
+\end{exercise}
+\begin{proof}
+Per ipotesi $f$ \`e \emph{Lipschtziana}, quindi vale $|f(x) - f(y)| \leq
+L|x-y|, \forall L < \infty, \forall x,y \in [a,b]$. Inoltre $f \in
+\mathcal{C}^{(1)}([a,b])$, allora posso scrivere un suo sviluppo di Taylor
+$T_{f_{y}}(x)$ centrato in $y$ del termine $f(x)$, con resto al secondo ordine: 
+$f(x) = T_{f_{y}}(x) = f(y) + f^{(1)}(y)(x-y) +
+\frac{f^{(2)}(\xi)}{2}(x-y)^{2}$, con $\xi \in [x,y]$. Quindi posso utilizzare
+questo sviluppo nella propriet\`a di $f$ di essere  \emph{Lipschtziana}:
+\begin{displaymath}
+\begin{split}
+	|f(x) - f(y)| &\leq L|x-y| \\
+	|T_{f_{y}}(x) - f(y)| &\leq L|x-y| \\
+	|f(y) + f^{(1)}(y)(x-y) - f(y)| &\leq L|x-y| \quad \text{ ho approssimato non
+	considerando il resto} \\
+	|f^{(1)}(y)(x-y)| &\leq L|x-y| \\
+	|f^{(1)}(y)| |x-y| &\leq L|x-y| \\
+	|f^{(1)}(y)| &\leq L \\
+	||f^{(1)}|| = \max_{y \in [a,b]}{|f^{(1)}(y)|} &= L 
+\end{split}
+\end{displaymath}
+Nell'ultimo passaggio ho cambiato la relazione $\leq$ in $=$, in quanto
+considerando la norma cerco il valore massimo.
+\end{proof}
 
+\begin{exercise}
+Sia $f \in \mathcal{C}^{(1)}([a,b])$ una funzione \emph{Lipschtziana}. Allora 
+$w(f;h) \leq Lh$, con $h>0$.
+\end{exercise}
+\begin{proof}
+Dalla definizione di $f$ \emph{Lipschtziana} segue che 
+\begin{displaymath}
+\begin{split}
+	|f(x) - f(y)| &\leq L|x-y| \\
+	\max_{x,y \in [a,b]}\{|f(x) - f(y)|\} &\leq \max_{x,y \in [a,b]}\{L|x-y|\}
+	\quad \text{ho applicato la funzione $\max$ ad entrambi i membri}\\
+	\max_{x,y \in [a,b]}\{|f(x) - f(y)|\} &\leq L \max_{x,y \in [a,b]}\{|x-y|\} \\
+	\max_{x,y \in [a,b]}\{|f(x) - f(y)|:|x-y| < h\} &\leq L \max_{x,y \in
+	[a,b]}\{|x-y|:|x-y| < h\} \quad \text{impongo vincolo sulla distanza $|x-y|$}\\
+	w(f;h) \leq Lh
+\end{split}
+\end{displaymath}
+\end{proof}
 
+\begin{exercise}
+Dimostrare che al crescere di $n$ il termine $w(f;\frac{b-a}{n}) \rightarrow 0$.
+\end{exercise}
+\begin{proof}
+Per ipotesi segue che $h = \frac{b-a}{n} \rightarrow 0$. 
+\\Posso usare le definizione di $w(f;h) = \sup\{|f(x) - f(y)|:\exists h > 0:
+|x-y| < h\}$. 
+\\Istanzio per il nostro caso di $h \rightarrow 0$ ottenendo $w(f;h) = 
+\sup\{|f(x) - f(y)|:h \rightarrow 0\}$.
+\\ Supponendo $f$ continua allora vale $ \lim_{x \rightarrow y}{f(x) = f(y)}$.
+\\ Compongo questi risultati:
+\begin{displaymath}
+\lim_{h \rightarrow 0}{w(f;h)} = \lim_{h \rightarrow 0}{\sup\{|f(x) -
+f(y)|:|x-y| = h\}} = \lim_{x \rightarrow y}{\sup\{|f(x) - f(y)|\}} = \lim_{x
+\rightarrow y}{\sup\{|f(y) - f(y)|\}} = 0
+\end{displaymath}
+\end{proof}
 
+\begin{exercise}
+\label{exercise:ChebyshevPolyProperties}
+Dimostrare le propriet\`a dei polinomi di \emph{Chebishev} di pagina 92.
+\end{exercise}
+\begin{proof}
+Dimostro per punti:
+\begin{enumerate}
+  \item $T_{k}(x)$ ha grado esatto $k$
+  
+  \paragraph{Proof} Prova per induzione su $k$.
+  \begin{description}
+  \item[Base] per $k = 0$ si ha per la definizione dei polinomi di
+  \emph{Chebishev}, $T_{0}(x) = 1$, essendo una costante implica $\deg(T_{0}(x))
+  = 0$, la base \`e vera.
+  \item[Induction HP] suppongo vero che $\deg(T_{k-1}(x)) = k-1$ e
+  $\deg(T_{k-2}(x)) = k-2$
+  \item[Induction step] dimostro per $k$:
+  \\ dalla definizione del $k$-esimo polinomio: $T_{k}(x) = 2 x T_{k-1}(x) -
+  T_{k-2}(x)$
+  \\ Applico la funzione $\deg$ ad entrambi i membri: $\deg(T_{k}(x)) = \deg(2 x
+  T_{k-1}(x) - T_{k-2}(x))$
+  \\ La funzione $\deg$ applicata ad una somma di polinomi produce: 
+   \begin{displaymath}
+   \begin{split}
+   \deg(2 x  T_{k-1}(x) - T_{k-2}(x)) &= \max\{\deg(2 x
+   T_{k-1}(x)), \deg(T_{k-2}(x))\} = \\
+    &= \max\{\deg(2x) + \deg(T_{k-1}(x)),
+   \deg(T_{k-2}(x)) = \}
+	\end{split}
+	\end{displaymath}
+ Ma per ipotesi induttiva: $\deg(T_{k-1}(x)) = k-1 > k-2 = \deg(T_{k-2}(x))$,
+ quindi:
+ \begin{displaymath}
+   \begin{split}
+   	\max\{\deg(2x) + \deg(T_{k-1}(x)), \deg(T_{k-2}(x)) \} &= \deg(2x) +
+   	\deg(T_{k-1}(x)) = 1 + (k-1) = k
+	\end{split}
+	\end{displaymath}
+	
+	
+  \end{description}
+  
+  \item Il coefficiente principale di $T_{k}(x)$, in simboli $cp(T_{k}(x))$,
+  soddisfa $cp(T_{k}(x)) = 2^{k-1}, k \geq 1$
+  
+  \paragraph{Proof} Prova per induzione su $k$.
+  \begin{description}
+  \item[Base] per $k = 1$ si ha per la definizione dei polinomi di
+  \emph{Chebishev}, $T_{1}(x) = x$, quindi $cp(x) = 1 = 2^{1-1} = 1$,  la base
+  \`e vera.
+  \item[Induction HP] suppongo vero che $cp(T_{k-1}(x)) = 2^{k-2}$,
+  $cp(T_{k-2}(x)) = 2^{k-3}$
+  \item[Induction step] dimostro per $k$:
+  \\ dalla definizione del $k$-esimo polinomio: $T_{k}(x) = 2 x T_{k-1}(x) -
+  T_{k-2}(x)$
+  \\ Applico la funzione $cp$ ad entrambi i membri: $cp(T_{k}(x)) = cp(2 x
+  T_{k-1}(x) - T_{k-2}(x))$
+  \\ La funzione $cp$ applicata ad una somma di polinomi produce: 
+   \begin{displaymath}
+   \begin{split}
+   cp(2 x  T_{k-1}(x) - T_{k-2}(x)) &= \max\{cp(2 x
+   T_{k-1}(x)), cp(T_{k-2}(x))\}
+	\end{split}
+	\end{displaymath}
+ Ma per ipotesi induttiva: $\deg(T_{k-1}(x)) = k-1 > k-2 = \deg(T_{k-2}(x))$,
+ quindi:
+ \begin{displaymath}
+   \begin{split}
+   \max\{cp(2 x T_{k-1}(x)), cp(T_{k-2}(x))\} &= cp(2 x T_{k-1}(x)) =
+   cp(2x)cp(T_{k-1}(x)) = 2 \cdot 2^{k-2} = 2^{k-1}
+	\end{split}
+ \end{displaymath}
+  \end{description}
+ 
+  \item la famiglia di polinomi costruita con questo schema ricorsivo
+  $$\hat{T}_{0}(x) = T_{0}(x) = 1 \quad \hat{T}_{1}(x) = T_{1}(x) = x \quad
+  \hat{T}_{k}(x) = 2^{1-k}T_{k}(x)$$
+  \`e una famiglia di polinomi monici.
+  \paragraph{Proof} Usando il precedente punto di questo esercizio vale che per
+  il $k$-esimo polinomio $T_{k}(x)$ si ha $cp(T_{k}(x)) = 2^{k-1}$.
+  \\ Dalla definizione dei polinomi di questa nuova famiglia
+  $$cp(\hat{T}_{k}(x)) = 2^{1-k}cp(T_{k}(x)) = 2^{1-k} \cdot 2^{k-1} = 1$$ e
+  quindi i $\hat{T}_{k}(x)$ sono polinomi monici.
+  
+  \item ponendo $x = \cos\theta$ con $\theta \in [0, \pi]$,  si ottiene
+  $T_{k}(x) = T_{k}(\cos\theta) = \cos k\theta$ con $k = 0,1,\ldots$
+  
+  \paragraph{Proof} Prova per induzione su $k$.
+  \begin{description}
+  \item[Base] per $k = 0$ si ha per la definizione  dei polinomi $T_{0}(x) = 1$,
+  mentre usando la sostituzione $x = \cos\theta$, si ha
+  $T_{0}(x) = T_{0}(\cos\theta) = \cos 0\cdot \theta = 1$, la base \`e vera.
+  \item[Induction HP] suppongo vero che $T_{k}(x) = T_{k}(\cos\theta) = \cos
+  k\theta$ e\\ $T_{k-1}(x) = T_{k-1}(\cos\theta) = \cos
+  (k-1)\theta = \cos(k\theta - \theta)$
+  \item[Induction step] dimostro per $k+1$:
+  \\ dalla definizione del $k+1$-esimo polinomio: $T_{k+1}(x) = 2 x T_{k}(x) -
+  T_{k-1}(x)$
+  \\ utilizzo l'ipotesi induttiva per il secondo membro e ottengo: 
+   \begin{displaymath}
+   \begin{split}
+   T_{k+1}(x) &= 2 x T_{k}(x) - T_{k-1}(x) = 2\cos\theta \cos k \theta -
+   \cos(k\theta - \theta) = \\
+   &=2\cos\theta\cos k\theta - (\cos k\theta \cos \theta + \sin k\theta
+   \sin\theta) \\
+   &= \cos\theta\cos k\theta - \sin\theta \sin k\theta= \cos(k+1)\theta
+	\end{split}
+	\end{displaymath}
+	\end{description}
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}[4.13]
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+\begin{proof}
+Dimostro per punti:
+\begin{itemize}
+  \item gli zeri di $T_{k}(x)$ sono tra loro tutti distinti e sono dati da:
+  \begin{displaymath}
+  x_{i}^{(k)} = \cos\left(\frac{(2i+1)\pi}{2k}\right)
+  \end{displaymath}
+  \paragraph{Proof} Sto cercando gli zeri in $[-1,1]$ di conseguenza 
+  $\theta \in [0, \pi]$. 
+  \\Usando le quarta propriet\`a dell'esercizio 
+  \ref{exercise:ChebyshevPolyProperties} posso studiare $T_{k}(\cos\theta) = 0$.
+  \\ Questo implica studiare $\cos k\theta = 0$, vero quando $k\theta =
+  \frac{\pi}{2} + j\pi$ con $j \geq 0$
+  \\ Devo porre vincoli sul precedente indice $j$, in quanto sto supponendo che
+  $\theta \in [0, \pi]$. Quindi $j = 0,\ldots,k-1$. Questa scelta di valori
+  implica che si avranno $k$ zeri ed inoltre tutti distinti tra loro in quanto
+  non si effettua pi\`u di un ``giro'' sulla circonferenza unitaria.
+  
+  \item i valori estremi di $T_{k}(x)$ sono assunti nei punti
+  \begin{displaymath}
+  \xi_{i}^{(k)} = \cos\left(\frac{i}{k}\pi\right) \quad i = 0,\ldots,k
+  \end{displaymath} 
+  \paragraph{Proof} Sto cercando i punti estremi in $[-1,1]$ di conseguenza 
+  $\theta \in [0, \pi]$. 
+  \\Usando le quarta propriet\`a dell'esercizio 
+  \ref{exercise:ChebyshevPolyProperties} posso studiare $T_{k}(\cos\theta) =
+  \cos k\theta$. 
+  \\ Questo implica studiare $\cos k\theta = \pm 1$, vero quando
+  $k\theta = j\pi$ con $j = 0, \ldots, k$, manipolando $\theta =
+  \frac{j}{k}\pi$.
+  \\ Dato che abbiamo usato la sostituzione $x = \cos\theta$ si ottiene,
+  cambiando variabile solo per chiarezza e non usare $x$ sia per gli zeri che
+  per gli estremi, $\xi_{j}^{(k)} = \cos\left(\frac{j}{k}\pi\right)$.
+  \\Valutando il polinomio $T_{k}(x)$ nei punti $\xi_{i}^{(k)}$, si ottiene:
+  \begin{displaymath}
+  T_{k}(\xi_{i}^{(k)}) = T_{k}\left(\cos\left(\frac{i}{k}\pi\right)\right) =
+   \cos\left(k \frac{i}{k}\pi\right) = \cos\left(i\pi\right) = (-1)^{i} \quad i
+   = 0,\ldots,k
+  \end{displaymath} 
+  Inoltre, dalla precedente equazione si osserva che $||T_{k}|| = 1$
+  
+  \item Per $k = 0, 1, \ldots$ vale 
+  \begin{displaymath}
+  ||\hat{T}_{k}|| = \min_{p\in \prod_{n}}{||p||}
+  \end{displaymath}
+  \paragraph{Proof} Supponiamo per assurdo che esiste un polinomio monico $p
+  \in \prod_{k}$ di grado $k$ tale che $||p|| = \delta < 2^{1-k} =
+  ||\hat{T}_{k}||$ (per il punto precedente vale $||T_{k}|| = 1$), in parole:
+  abbiamo supposto che $\hat{T}_{k}(x)$ non sia di minima norma. 
+  \\ Considero la funzione $(\hat{T}_{k} - p)(x)$. Osserviamo che
+  $\deg((\hat{T}_{k} - p)(x)) = k-1$, in quanto sia $\hat{T}_{k}(x)$ che $p$
+  sono monici, annullando cos\`i il coefficiente del termine principale.
+  \\Considero i punti in cui $T_{k}(x)$ assume valori massimo, ovvero per 
+  $\xi_{i}^{(k)} = \cos\left(\frac{i}{k}\pi\right)$, con $i = 0,\ldots,k$.
+  \\Studiando il segno dei polinomi $T_{k}$ e $\hat{T}_{k}$ nei punti
+  $\xi_{i}^{(k)}$ si ottiene: $$sign(\hat{T}_{k}(\xi_{i}^{(k)})) =
+  sign(T_{k}(\xi_{i}^{(k)})) = (-1)^{i} \quad i = 0,\ldots,k$$
+  Ma anche $(\hat{T}_{k} - p)(\xi_{i}^{(k)}) = (-1)^{i}$, ovvero $(\hat{T}_{k} -
+  p)$ cambia di segno $k$ volte. 
+  \\ Ogni radice di $(\hat{T}_{k} - p)$ \`e tra due
+  ascisse $\xi_{i}^{(k)}, \xi_{j}^{(k)}$ distinte. 
+  \\ Dato che abbiamo $k+1$ ascisse $\xi_{i}^{(k)}$, allora la funzione
+  $(\hat{T}_{k} - p)$ si annuller\`a $k$ volte. 
+  \\ Ma affinch\`e questo sia vero, e da come abbiamo trovato, $(\hat{T}_{k} -
+  p) \in \prod_{k-1}$, deve valere che $(\hat{T}_{k} - p) = \vect{0}$, ovvero 
+  sia il vettore identicamente nullo.\\ 
+  Ma questo contraddice le ipotesi che sia
+  $\hat{T}_{k}, p \in \prod_{k}$.
+\end{itemize}
+
+\begin{exercise}[4.14]
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+Per utilizzare lo schema di \emph{Chebyshev} in un intervallo generico $[a,b]$
+si utilizzano le riscritture date nell'esercizio \ref{exercise:exercise412}. 
+
+\end{proof}
+
+\begin{exercise}[4.15]
+Per il testo dell'esercizio consulare il libro di testo.
+\end{exercise}
+Per il codice che implementa le richieste dell'esercizio e produce i seguenti
+risultati vedere \nameref{subsec:exercise415}.
+
+Nei seguenti grafici in
+\emph{rosso} \`e rappresentata la funzione di \emph{Bernstein}, mentre in 
+\emph{blu} \`e rappresentata la funzione di \emph{Runge}. Questo primo grafico
+ha l'asse delle ordinate costruito in modo logaritmico:
+\begin{center}   
+\input{ApprossimazioneFunzioni/exercise415-ErrorsSemilogYPlotOutput.tex}
+\end{center}
+Riporto lo stesso dataset di errori per le due curve, costruendo entrambi gli
+assi in modo logaritmico:
+\begin{center}  
+\input{ApprossimazioneFunzioni/exercise415-ErrorsLoglogPlotOutput.tex}
+\end{center}
+Per entrambi i grafici, le valutazioni della rispettiva funzione, del polinomio
+interpolante e la costruzione del polinomio interpolante sono riferiti ai
+rispettivi dominii $[a,b]$ definiti nel testo dell'esercizio. 
+
+Possiamo notare che l'errore diverge all'aumentare del numero di ascisse di
+interpolazione, ma con un rate molto pi\`u basso rispetto ai plot riportati
+nell'esercizio \ref{exercise:exercise411}. Inoltre si vede che la curva
+che modella l'errore effettua un effetto ``jo-jo'' al crescere di $n$.
