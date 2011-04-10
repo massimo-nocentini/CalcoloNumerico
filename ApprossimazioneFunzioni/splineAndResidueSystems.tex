@@ -1,0 +1,169 @@
+\section{Spline e Minimi quadrati}
+
+\begin{exercise}[4.16] 
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise} 
+Stiamo costruendo un polinomietto della spline cubica relativo all'$i$-esimo
+intervallo $[x_{i-1}, x_{i}]$. Il sistema che otteniamo utilizzando lo schema 
+\emph{naturale} usa queste condizioni:
+\begin{displaymath}
+	\forall i \in \{1,\ldots, n-1\}[m_{i} = s_{3}^{(3)}(x_{i})] \wedge m_{0} = 0
+	\wedge m_{n} = 0
+\end{displaymath}
+Rappresentiamo in forma matriciale il modello che ci permette di ricavare le
+incognite $m_{k}$:
+\begin{displaymath}
+\begin{split}
+	\begin{bmatrix}
+		2 & \xi_{1} \\
+		\varphi_{2} & 2 & \xi_{2} \\
+			&	\ddots &	\ddots & \ddots \\
+			&	&	\varphi_{n-2} & 2 & \xi_{n-2} \\
+			&	&	& \varphi_{n-1} & 2
+	\end{bmatrix} %times
+	\begin{bmatrix}
+		m_{1} \\
+		m_{2} \\
+		\vdots \\
+		m_{n-2} \\
+		m_{n-1}
+	\end{bmatrix} = 6 %times
+	\begin{bmatrix}
+		f[x_{0}, x_{1}, x_{2}] \\
+		f[x_{1}, x_{2}, x_{3}] \\
+		\vdots \\
+		f[x_{n-3}, x_{n-2}, x_{n-1}] \\
+		f[x_{n-2}, x_{n-1}, x_{n}]
+	\end{bmatrix} 
+\end{split}
+\end{displaymath}
+Posso fattorizzare la matrice dei coefficienti in questo modo:
+\begin{displaymath}
+\begin{split}
+	L = \begin{bmatrix}
+		1 \\
+		l_{2} & 1  \\
+			&	\ddots &	\ddots \\
+			&	&	l_{n-2} & 1 \\
+			&	&	& l_{n-1} & 1
+	\end{bmatrix} \quad \quad
+	U = \begin{bmatrix}
+		u_{1} & \xi_{1}\\
+		 & u_{2} & \xi_{2} \\
+			&	&	\ddots	& \ddots \\
+			&	&	& u_{n-2}	& \xi_{n-2} \\
+			&	&	&  & u_{n-1}
+	\end{bmatrix} 
+\end{split}
+\end{displaymath}
+Adesso considero il prodotto dell'$i$-esima riga di $L$ con la $(i-1)$-esima
+colonna di $U$:
+\begin{displaymath}
+\begin{split}
+	\begin{matrix}
+		& & i-2 & i-1 & i  \\
+		& & \downarrow & \downarrow & \downarrow \\
+		\vect{e}_{i}^{T}L = [& & 0 & l_{i} & 1 & & &]
+	\end{matrix}
+	\quad & \quad
+	U \vect{e}_{i-1} = \begin{bmatrix}
+		\\ 
+		\\ 
+		\xi_{i-2} \\ 
+		u_{i-1} \\
+		0 \\
+	 	\\
+	 	\\
+	\end{bmatrix} 
+	\begin{matrix}
+		\\ 
+		\\ 
+		\leftarrow i-2 \\ 
+		\leftarrow i-1 \\
+		\leftarrow i \\
+	 	\\
+	 	\\
+	\end{matrix} \\
+	(\vect{e}_{i}^{T}L )(U \vect{e}_{i-1}) &= l_{i} u_{i-1}
+\end{split}
+\end{displaymath}
+Ma dato che la matrice dei coefficienti \`e diagonale dominante, allora \`e
+fattorizzabile $LU$, quindi deve valere:
+\begin{displaymath}
+	(\vect{e}_{i}^{T} A \vect{e}_{i-1}) = \varphi_{i} = l_{i} u_{i-1}
+\end{displaymath}
+Adesso considero il prodotto dell'$i$-esima riga di $L$ con la $i$-esima
+colonna di $U$:
+\begin{displaymath}
+\begin{split}
+	\begin{matrix}
+		& & i-1 & i  \\
+		& & \downarrow & \downarrow \\
+		\vect{e}_{i}^{T}L = [& & l_{i} & 1 & & &]
+	\end{matrix}
+	\quad & \quad
+	U \vect{e}_{i} = \begin{bmatrix}
+		\\ 
+		\\ 
+		\xi_{i-1} \\ 
+		u_{i} \\
+	 	\\
+	 	\\
+	\end{bmatrix} 
+	\begin{matrix}
+		\\ 
+		\\  
+		\leftarrow i-1 \\
+		\leftarrow i \\
+	 	\\
+	 	\\
+	\end{matrix} \\
+	(\vect{e}_{i}^{T}L )(U \vect{e}_{i}) &= l_{i} \xi_{i-1} + u_{i} 
+\end{split}
+\end{displaymath}
+Usando ancora la propriet\`a di diagonale dominanza deve valere:
+\begin{displaymath}
+	(\vect{e}_{i}^{T} A \vect{e}_{i}) = 2 = l_{i} \xi_{i-1} + u_{i}
+\end{displaymath}
+Rimane da far vedere che la matrice dei coefficienti (la chiamo $A$) \`e
+diagonale dominante. \begin{proof} Dimostro che sia per righe che per colonne
+vale l'asserto.
+	\begin{itemize}
+	  \item \emph{per righe} Per definizione vale $\varphi_{i} + \xi_{i} = 1$.\\ 
+	  Osservando la struttura della matrice vediamo che le righe $r_{k} =
+	  \vect{e}_{k}^{T}A, \forall k \in \{2, \ldots, n-2\}$ contengono esattamente
+	  tre elementi, mentre la riga $\vect{e}_{1}^{T}A$ e la riga
+	  $\vect{e}_{n-1}^{T}A$ ne contengono esattamente due. \\
+	  Ma questo insieme di elementi che
+	  consideriamo contiene l'elemento diagonale, e i vari $\varphi_{k},
+	  \xi_{k}$. Posso impostare:
+	  \begin{displaymath}
+	  	\forall i \in \{ 1, \ldots, n-1\}:
+	  	\begin{bmatrix} 
+	  		A_{ii} = 2 > \sum_{j = 1, j \not = i}^{n-1}{|A_{ij}|} = \varphi_{i} + 
+	  		\xi_{i} = 1
+	  	\end{bmatrix}
+	  \end{displaymath}
+	  e la condizione di diagonale dominanza per righe viene soddisfatta.
+	  \item \emph{per colonne} Per definizione vale $\varphi_{i} + \xi_{i} = 1$.\\ 
+	  Osservando la struttura della matrice vediamo che le colonne $c_{k} =
+	  A\vect{e}_{k}, \forall k \in \{2, \ldots, n-2\}$ contengono esattamente
+	  tre elementi, mentre la colonna $A\vect{e}_{1}$ e la colonna
+	  $A\vect{e}_{n-1}$ ne contengono esattamente due. \\
+	  Ma questo insieme di elementi che
+	  consideriamo contiene l'elemento diagonale, e i vari $\varphi_{k},
+	  \xi_{k}$. Posso impostare:
+	  \begin{displaymath}
+	  	\forall j \in \{ 1, \ldots, n-1\}:
+	  	\begin{bmatrix} 
+	  		A_{jj} = 2 > \sum_{i = 1, i \not = j}^{n-1}{|A_{ij}|} = 
+	  		\xi_{i} + \varphi_{i+2}= 1
+	  	\end{bmatrix}
+	  \end{displaymath}
+	  e la condizione di diagonale dominanza per colonne viene soddisfatta.
+	\end{itemize}
+\end{proof}
+
+
+
+
