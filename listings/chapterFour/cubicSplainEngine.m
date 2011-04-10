@@ -1,15 +1,15 @@
 function [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
     upperBiadiagonalMatrix, diffDiviseVector, mis, interpolatedValues] = ...
         cubicSplainEngine(interpolationAscisseVector, functionValuesVector, ...
-        splainScheme, splainSchemeMisStrategyName, domain)
+        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, domain)
     
     # build the vectors    
     [hVector, varPhiVector, xiVector] = ...
         hVarphiXiVectorsBuilder(interpolationAscisseVector);
 
     # build the matrix to factor, this costruction process depend on the parameter
-    # splainScheme
-    matrixToFactor = feval(splainScheme, varPhiVector, xiVector);
+    # splainSchemeMatrixToFactorStrategyName
+    matrixToFactor = feval(splainSchemeMatrixToFactorStrategyName, varPhiVector, xiVector);
 
     # factor the matrix
     [lVector, uVector] = tridiagonaleLUFactor(matrixToFactor);
@@ -31,25 +31,27 @@ function [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMat
         "lowerSolveEngine"), "upperSolveEngine");
 
     # manage the results
-    mis = feval(splainSchemeMisStrategyName, mis);
+    mis = feval(splainSchemeMisStrategyName, mis, diffDiviseVector);
 
     # initialization of the interpolated values vactor
     interpolatedValues = zeros(length(domain), 1);
 
     for i = 1:length(domain)
         for index = 2:length(interpolationAscisseVector)
-            if x >= interpolationAscisseVector(index-1) and ...
+            x = domain(i);
+            if x >= interpolationAscisseVector(index-1) && ...
                 x <= interpolationAscisseVector(index)
                 
                 ri = internal_RiComputer(index, mis, interpolationAscisseVector, ...
                     functionValuesVector, hVector);
 
                 qi = internal_QiComputer(index, mis, interpolationAscisseVector, ...
-                    functionValuesVector, hVector)
+                    functionValuesVector, hVector);
 
-                interpolatedValues(i) = internal_Eval(domain(i), index, ...
+                interpolatedValues(i) = internal_Eval(x, index, ...
                     interpolationAscisseVector, mis, ri, qi, hVector(index-1));
-                     
+                
+                break;
             end
         end
     end
@@ -107,7 +109,7 @@ function [matrix] = normalSplainScheme_BuildMatrixToFactor(...
 
 endfunction
 
-function [mis] = normalSplainScheme_BuildMisVector(vector)
+function [mis] = normalSplainScheme_BuildMisVector(vector, diffDivise)
 
     # We have to add two conditions to the n-1 already present
     mis = zeros(length(vector) + 2, 1);
@@ -118,32 +120,74 @@ function [mis] = normalSplainScheme_BuildMisVector(vector)
 
 endfunction
 
+function [matrix] = notAKnotSplainScheme_BuildMatrixToFactor(...
+    varPhiVector, xiVector)
+    
+    dimension = length(varPhiVector) + 1;
+    matrix = zeros(dimension);
+
+    for i = 2:(dimension-1) # or length(xiVector) is the same
+        matrix(i, i) = varPhiVector(i);
+
+        # the following check is necessary to protect the access on the position
+        # i on the two vectors xiVector and varPhiVector.
+        if(i < dimension -1)
+            matrix(i, i+1) = 2;
+            matrix(i, i+2) = xiVector(i);
+        end
+    end
+
+    # setting the first row
+    matrix(1,1) = varPhiVector(1);
+    matrix(1,2) = 2 - varPhiVector(1);
+    matrix(1,3) = xiVector(1) - varPhiVector(1);
+
+    # setting the last row
+    matrix(dimension, dimension - 2)  = varPhiVector(length(varPhiVector)) - ...
+        xiVector(length(xiVector));
+    matrix(dimension, dimension - 1)  = 2 - xiVector(length(xiVector));
+    matrix(dimension, dimension) = xiVector(length(xiVector));
+
+endfunction
+
+function [mis] = notAKnotSplainScheme_BuildMisVector(vector, diffDivise)
+
+    # We have to add two conditions to the n-1 already present
+    mis = zeros(length(vector) + 2, 1);
+
+    for i = 1:length(vector)
+        mis(i+1) = vector(i);
+    end
+
+    # now we have to set the first and the last element
+    mis(1) = diffDivise(1) - mis(2) - mis(3);
+    mis(length(mis)) = diffDivise(length(diffDivise)) - ...
+        mis(length(mis)-1) - mis(length(mis)-2);
+endfunction
+
 function [value] = internal_RiComputer(index, mis, interpolationAscisseVector, ...
     functionValuesVector, hVector)
 
-    value = functionValuesVector(index-1) - ((hVector(i)^(2))/6)*mis(index-1);
+    value = functionValuesVector(index-1) - ((hVector(index-1)^(2))/6)*mis(index-1);
 endfunction
 
 function [value] = internal_QiComputer(index, mis, interpolationAscisseVector, ...
     functionValuesVector, hVector)
 
-    value = ((functionValuesVector(index) - functionValuesVector(index-1))/hVector(index))...
-        - (hVector(i)/6)*(mis(index) - mis(index-1));
+    value = ((functionValuesVector(index) - functionValuesVector(index-1))/hVector(index-1))...
+        - (hVector(index-1)/6)*(mis(index) - mis(index-1));
 endfunction
 
 function [value] = internal_Eval(ascissa, index, ...
     interpolationAscisseVector, mis, ri, qi, hi)
 
-    value = ((...
-                (mis(index)*((ascissa - interpolationAscisseVector(index -1))^(3))) + ...
-                (mis(index-1)*((interpolationAscisseVector(index) - ascissa)^(3))))/(6*hi^(2))) + ...
-                ((ascissa - interpolationAscisseVector(index-1))*qi) + ri;
+    a = (ascissa - interpolationAscisseVector(index -1))^(3);
+    b = (interpolationAscisseVector(index) - ascissa)^(3);
+    c = (a * mis(index)) + (b * mis(index-1));
+    d = c / (6*hi);
+    e = ascissa - interpolationAscisseVector(index-1);
+    value = d + (e * qi) + ri;
 endfunction
 
-da finire:
-- cambiare il nome al parametro 'splainScheme' per dare una semantica piu' parlante per la 
-    costruzione della matrice da fattorizzare LU.
-- fare le implementazioni per lo schema 'not-a-knot'
-- aggiungere i parametri e i valori di ritorno alle attuali invocazioni e costruire
-    uno script che permette di invocare in modo automatico le due modalita' e ne esegue il
-    collect di tutti i risultati.
+%da finire:
+%- fare le implementazioni per lo schema 'not-a-knot'
