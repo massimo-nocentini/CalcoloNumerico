@@ -164,15 +164,45 @@ vale l'asserto.
 	\end{itemize}
 \end{proof}
 
+\begin{exercise} 
+Provare ad interpolare la seguente funzione, in una partizione composta da 12
+ascisse di interpolazione:
+\begin{displaymath}
+f(x) = \left \lbrace 
+\begin{matrix}
+	(x+5)(x+1)e^{x} & \text{se } x \leq -1 \\
+	\sqrt{1 - x^{2}} & \text{se } -1 < x \leq 1 \\
+	\frac{x-1}{x^{2}} & \text{se } 1 < x
+\end{matrix} 
+\right. 
+\end{displaymath}
+\end{exercise}
+Per l'implementazione del codice di questo esercizio vedere il codice
+\nameref{subsec:splineStress}.
+Nel seguente plot rappresento due interpolazioni con spline cubiche, in verde
+utilizzando lo schema \emph{not-a-knot}, mentre in rosso lo schema
+\emph{naturale}.
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-interpolationPlotOutput.tex}
+\end{center}
+Nel seguente plot rappresento il modello degli errori delle precedenti
+interpolazioni con spline cubiche, in rosso riferito allo
+schema \emph{not-a-knot}, mentre in blu riferito allo schema \emph{naturale}.
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-errorsPlotOutput.tex}
+\end{center}
+
+
 \begin{exercise}[4.19] 
-Per il testo dell'esercizio consultare il libro di testo.
+Per il testo dell'esercizio consultare il libro di testo. 
+\end{exercise}
 \begin{center}   
 \input{ApprossimazioneFunzioni/exercise419-interpolationPlotOutput.tex}
 \end{center}
 \begin{center}   
 \input{ApprossimazioneFunzioni/exercise419-errorsPlotOutput.tex}
 \end{center}
-\end{exercise}
+
 
 
 

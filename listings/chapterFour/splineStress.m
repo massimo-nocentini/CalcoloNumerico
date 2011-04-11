@@ -1,4 +1,4 @@
-function [] = exercise419()
+function [] = splineStress()
 
     intervalMagnitude = 5;
     # build the partition vector and its associated vector of interpolation conditions
@@ -34,12 +34,12 @@ function [] = exercise419()
         domain, notAKnotInterpolatedValues, "g", ...
         interpolationAscisseVector, functionValuesVector, "+");
     grid;
-    print 'exercise419-interpolationPlotOutput.tex' '-dTex' '-S800, 600';
+    print 'splineStress-interpolationPlotOutput.tex' '-dTex' '-S800, 600';
 
     semilogy(domain, abs(realFunctionValuesVector - normalInterpolatedValues), "b", ...
         domain, abs(realFunctionValuesVector - notAKnotInterpolatedValues), "r");
     grid;
-    print 'exercise419-errorsPlotOutput.tex' '-dTex' '-S800, 600';
+    print 'splineStress-errorsPlotOutput.tex' '-dTex' '-S800, 600';
 
 
 endfunction
