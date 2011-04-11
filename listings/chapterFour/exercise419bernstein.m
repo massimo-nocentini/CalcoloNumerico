@@ -1,24 +1,24 @@
-function [] = exercise419runge()
+function [] = exercise419bernstein()
 
     # build the vectors for valuate the interpolation and study the error.
     evaluateSetDimension = 300;
-    rungeIntervalMagnitude = 5;
-    rungeEvaluationInterval = linspace(-rungeIntervalMagnitude, ...
-        rungeIntervalMagnitude, evaluateSetDimension)';
+    bernsteinIntervalMagnitude = 1;
+    bernsteinEvaluationInterval = linspace(-bernsteinIntervalMagnitude, ...
+        bernsteinIntervalMagnitude, evaluateSetDimension)';
 
     # have the same dimension
-    rungeEvaluatedFunctionValuesVector = rungeEvaluationInterval;
+    bernsteinEvaluatedFunctionValuesVector = bernsteinEvaluationInterval;
     
      # build the real functions values for evaluate real functions
     for i=1:evaluateSetDimension
-        rungeEvaluatedFunctionValuesVector(i) = rungeRealFunction(...
-            rungeEvaluationInterval(i));
+        bernsteinEvaluatedFunctionValuesVector(i) = bernsteinRealFunction(...
+            bernsteinEvaluationInterval(i));
     end 
 
     # build the partition vector and its associated vector of interpolation conditions
-    interpolationAscisseVector = linspace(-rungeIntervalMagnitude, rungeIntervalMagnitude, 10)';
+    interpolationAscisseVector = linspace(-bernsteinIntervalMagnitude, bernsteinIntervalMagnitude, 10)';
     for i=1:length(interpolationAscisseVector)
-        functionValuesVector(i) = rungeRealFunction(...
+        functionValuesVector(i) = bernsteinRealFunction(...
             interpolationAscisseVector(i));
     end    
 
@@ -30,7 +30,7 @@ function [] = exercise419runge()
     [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
         upperBiadiagonalMatrix, diffDiviseVector, mis, normalInterpolatedValues] = ...
         cubicSplainEngine(interpolationAscisseVector, functionValuesVector, ...
-        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, rungeEvaluationInterval);
+        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, bernsteinEvaluationInterval);
 
     # setting up the parameter to drive the cubic splain engine.
     splainSchemeMatrixToFactorStrategyName = 'notAKnotSplainScheme_BuildMatrixToFactor';
@@ -39,19 +39,19 @@ function [] = exercise419runge()
     [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
         upperBiadiagonalMatrix, diffDiviseVector, mis, notAKnotInterpolatedValues] = ...
         cubicSplainEngine(interpolationAscisseVector, functionValuesVector, ...
-        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, rungeEvaluationInterval);
+        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, bernsteinEvaluationInterval);
 
-    plot(rungeEvaluationInterval, rungeEvaluatedFunctionValuesVector, "b", ...
-        rungeEvaluationInterval, normalInterpolatedValues, "r", ...
-        rungeEvaluationInterval, notAKnotInterpolatedValues, "g", ...
+    plot(bernsteinEvaluationInterval, bernsteinEvaluatedFunctionValuesVector, "b", ...
+        bernsteinEvaluationInterval, normalInterpolatedValues, "r", ...
+        bernsteinEvaluationInterval, notAKnotInterpolatedValues, "g", ...
         interpolationAscisseVector, functionValuesVector, "+");
     grid;
-    print 'exercise419-rungeInterpolationPlotOutput.tex' '-dTex' '-S800, 600';
+    print 'exercise419-bernsteinInterpolationPlotOutput.tex' '-dTex' '-S800, 600';
     
 endfunction
 
 endfunction
 
-function [y] = rungeRealFunction(x)
-    y = 1/(1 + x^(2));
+function [y] = bernsteinRealFunction(x)
+    y = abs(x);
 endfunction
