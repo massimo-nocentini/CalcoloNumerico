@@ -1,60 +1,53 @@
 function [] = exercise419()
 
-    intervalMagnitude = 5;
-    # build the partition vector and its associated vector of interpolation conditions
-    interpolationAscisseVector = linspace(-intervalMagnitude, intervalMagnitude, 12)';
-    functionValuesVector = realFunction(interpolationAscisseVector, intervalMagnitude);
+    evaluateSetDimension = 300;
 
-    # build the domain vectors containing the range where we want to interpolate
-    # the real function.
-    domain = linspace(-intervalMagnitude, intervalMagnitude, 200)';
-    realFunctionValuesVector = realFunction(domain, intervalMagnitude);
+    # build the error vector
+    errorVector = [10:10:50];
+    errorVectorDimension = length(errorVector);
 
-    # setting up the parameter to drive the cubic splain engine.
-    splainSchemeMatrixToFactorStrategyName = 'normalSplainScheme_BuildMatrixToFactor';
-    splainSchemeMisStrategyName = 'normalSplainScheme_BuildMisVector';
+    normalRungeErrorVector = ones(errorVectorDimension,1);
+    notAKnotRungeErrorVector = ones(errorVectorDimension,1);
 
-    # go!
-    [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
-        upperBiadiagonalMatrix, diffDiviseVector, mis, normalInterpolatedValues] = ...
-        cubicSplainEngine(interpolationAscisseVector, functionValuesVector, ...
-        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, domain);
+    normalBernsteinErrorVector = ones(errorVectorDimension,1);
+    notAKnotBernsteinErrorVector = ones(errorVectorDimension,1);
+    
+    # start from 1 to have at least one ascisse for Bernstein interval domain.
+    for n=1:errorVectorDimension
 
-    # setting up the parameter to drive the cubic splain engine.
-    splainSchemeMatrixToFactorStrategyName = 'notAKnotSplainScheme_BuildMatrixToFactor';
-    splainSchemeMisStrategyName = 'notAKnotSplainScheme_BuildMisVector';
+        [rungeEvaluationInterval, rungeEvaluatedFunctionValuesVector,...
+        rungeInterpolationAscisseVector, rungeFunctionValuesVector,...
+        rungeNormalInterpolatedValues, rungeNotAKnotInterpolatedValues] = ...
+            exercise419runge(evaluateSetDimension, errorVector(n));
 
-    [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
-        upperBiadiagonalMatrix, diffDiviseVector, mis, notAKnotInterpolatedValues] = ...
-        cubicSplainEngine(interpolationAscisseVector, functionValuesVector, ...
-        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, domain);
+        [bernsteinEvaluationInterval, bernsteinEvaluatedFunctionValuesVector,...
+        bernsteinInterpolationAscisseVector, bernsteinFunctionValuesVector,...
+        bernsteinNormalInterpolatedValues, bernsteinNotAKnotInterpolatedValues] =...
+            exercise419bernstein(evaluateSetDimension, errorVector(n));
 
-    plot(domain, realFunctionValuesVector, "b", ...
-        domain, normalInterpolatedValues, "r", ...
-        domain, notAKnotInterpolatedValues, "g", ...
-        interpolationAscisseVector, functionValuesVector, "+");
-    grid;
-    print 'exercise419-interpolationPlotOutput.tex' '-dTex' '-S800, 600';
+        # calculate the error
+        normalRungeErrorVector(n) = max(abs(rungeEvaluatedFunctionValuesVector ...
+             - rungeNormalInterpolatedValues));
 
-    semilogy(domain, abs(realFunctionValuesVector - normalInterpolatedValues), "b", ...
-        domain, abs(realFunctionValuesVector - notAKnotInterpolatedValues), "r");
-    grid;
-    print 'exercise419-errorsPlotOutput.tex' '-dTex' '-S800, 600';
+        notAKnotRungeErrorVector(n) = max(abs(rungeEvaluatedFunctionValuesVector ...
+             - rungeNotAKnotInterpolatedValues));
 
+        normalBernsteinErrorVector(n) = max(abs(bernsteinEvaluatedFunctionValuesVector ...
+             - bernsteinNormalInterpolatedValues));
 
-endfunction
+        notAKnotBernsteinErrorVector(n) = max(abs(bernsteinEvaluatedFunctionValuesVector ...
+             - bernsteinNotAKnotInterpolatedValues));
 
-# capture the real model of the function
-function [value] = realFunction(ascissa, intervalMagnitude)
-    value = zeros(length(ascissa),1);
-    for i = 1:length(ascissa)
-        if ascissa(i) < -1
-            value(i) = (ascissa(i) + intervalMagnitude)*(ascissa(i) ...
-                +1)*exp(ascissa(i));
-        elseif ascissa(i) <= 1
-            value(i) = sqrt(1 - ascissa(i)^(2));
-        else
-            value(i) = (ascissa(i) -1)*1/(ascissa(i)^2);
-        end
     end
+
+    semilogy(errorVector, normalRungeErrorVector, "b", ...
+        errorVector, notAKnotRungeErrorVector, "r");
+    grid;
+    print 'exercise419-rungeErrorsPlotOutput.tex' '-dTex' '-S800, 600';
+    
+    semilogy(errorVector, normalBernsteinErrorVector, "b", ...
+        errorVector, notAKnotBernsteinErrorVector, "r");
+    grid;
+    print 'exercise419-bernsteinErrorsPlotOutput.tex' '-dTex' '-S800, 600';
+
 endfunction
