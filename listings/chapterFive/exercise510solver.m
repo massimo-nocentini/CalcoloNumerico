@@ -27,20 +27,20 @@ function [trapeziAdaptiveResultTable, simpsonAdaptiveResultTable] = ...
       
     ## save the desired computed points to show them in a plot selecting at which
     ## tol we want to capture the points
-    if i == 1
+    if i == 3
       lastTrapeziPoints = points;
     end
     
     ######################### for simpson method #########################
     ## fix: infinite recursion :(
-    #[i2, points, err] = adaptiveSimpson(a, b, functionName, tols(i));
+    [i2, points, err] = adaptiveSimpson(a, b, functionName, tols(i));
     
     simpsonAdaptiveResultTable = [simpsonAdaptiveResultTable; ...
       tols(i) err length(points)];
       
     ## save the desired computed points to show them in a plot selecting at which
     ## tol we want to capture the points
-    if i == 5
+    if i == 4
       lastSimpsonPoints = points;
     end
   end

@@ -208,34 +208,36 @@ Per i testi degli esercizi consultare il libro di testo.
 \end{exercise}
 Il seguente output \`e generato usando il codice
 \nameref{subsec:exercise510solver}.
-% \begin{lstlisting}
-% [trapeziCompositeResultTable, simpsonCompositeResultTable] = exercise59solver
-% trapeziCompositeResultTable =
-% 
-%    1.0000e+03   6.6401e-01  -1.7771e+00
-%    2.0000e+03   7.3077e-01  -4.4427e-01
-%    3.0000e+03   7.4507e-01  -1.9745e-01
-%    4.0000e+03   7.5020e-01  -1.1107e-01
-%    5.0000e+03   7.5260e-01  -7.1083e-02
-%    6.0000e+03   7.5391e-01  -4.9363e-02
-%    7.0000e+03   7.5470e-01  -3.6267e-02
-%    8.0000e+03   7.5522e-01  -2.7767e-02
-%    9.0000e+03   7.5557e-01  -2.1939e-02
-%    1.0000e+04   7.5582e-01  -1.7771e-02
-% 
-% simpsonCompositeResultTable =
-% 
-%    1.0000e+03   7.0132e-01  -1.3618e-01
-%    2.0000e+03   7.5303e-01  -8.5114e-03
-%    3.0000e+03   7.5617e-01  -1.6813e-03
-%    4.0000e+03   7.5668e-01  -5.3196e-04
-%    5.0000e+03   7.5681e-01  -2.1789e-04
-%    6.0000e+03   7.5686e-01  -1.0508e-04
-%    7.0000e+03   7.5688e-01  -5.6719e-05
-%    8.0000e+03   7.5689e-01  -3.3248e-05
-%    9.0000e+03   7.5689e-01  -2.0756e-05
-%    1.0000e+04   7.5690e-01  -1.3618e-05
-% \end{lstlisting}
+\begin{lstlisting}
+octave:2> [trapeziAdaptiveResultTable, simpsonAdaptiveResultTable] = exercise510solver
+trapeziAdaptiveResultTable =
+
+   1.0000e-01   5.8198e-03   1.5900e+02
+   1.0000e-02   1.1881e-03   4.7100e+02
+   1.0000e-03   2.9774e-04   1.5670e+03
+   1.0000e-04   5.8566e-05   4.8510e+03
+   1.0000e-05   5.5259e-06   1.4823e+04
+
+simpsonAdaptiveResultTable =
+
+   1.0000e-01   5.4037e-04   4.9000e+01
+   1.0000e-02   2.1963e-04   6.5000e+01
+   1.0000e-03   4.8899e-05   9.3000e+01
+   1.0000e-04   1.2482e-05   1.8100e+02
+   1.0000e-05   3.3642e-06   3.0900e+02
+\end{lstlisting}
 nelle precedenti matrici si ha valorizzato nella prima colonna la tollerenza
 richiesta, nella seconda l'errore che si commette e nella terza il numero di
 punti necessari per raggiungere la precisione richiesta.
+
+Rappresento i punti sulla funzione integranda utilizzati dal metodo adattivo di
+Simpson per raggiungere una precisione di $10^{-4}$:
+\begin{center}   
+\input{FormuleQuadratura/exercise510-SimpsonAdaptivePlotOutput.tex}
+\end{center}
+
+Rappresento i punti sulla funzione integranda utilizzati dal metodo adattivo dei
+Trapezi per raggiungere una precisione di $10^{-3}$:
+\begin{center}   
+\input{FormuleQuadratura/exercise510-TrapeziAdaptivePlotOutput.tex}
+\end{center}
