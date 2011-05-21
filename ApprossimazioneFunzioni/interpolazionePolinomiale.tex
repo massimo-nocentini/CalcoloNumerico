@@ -761,7 +761,7 @@ f(y)|:|x-y| = h\}} = \lim_{x \rightarrow y}{\sup\{|f(x) - f(y)|\}} = \lim_{x
 
 \begin{exercise}
 \label{exercise:ChebyshevPolyProperties}
-Dimostrare le propriet\`a dei polinomi di \emph{Chebishev} di pagina 92.
+Dimostrare le propriet\`a dei polinomi di \emph{Chebyshev} di pagina 92.
 \end{exercise}
 \begin{proof}
 Dimostro per punti:
@@ -771,7 +771,7 @@ Dimostro per punti:
   \paragraph{Proof} Prova per induzione su $k$.
   \begin{description}
   \item[Base] per $k = 0$ si ha per la definizione dei polinomi di
-  \emph{Chebishev}, $T_{0}(x) = 1$, essendo una costante implica $\deg(T_{0}(x))
+  \emph{Chebyshev}, $T_{0}(x) = 1$, essendo una costante implica $\deg(T_{0}(x))
   = 0$, la base \`e vera.
   \item[Induction HP] suppongo vero che $\deg(T_{k-1}(x)) = k-1$ e
   $\deg(T_{k-2}(x)) = k-2$
@@ -786,7 +786,7 @@ Dimostro per punti:
    \deg(2 x  T_{k-1}(x) - T_{k-2}(x)) &= \max\{\deg(2 x
    T_{k-1}(x)), \deg(T_{k-2}(x))\} = \\
     &= \max\{\deg(2x) + \deg(T_{k-1}(x)),
-   \deg(T_{k-2}(x)) = \}
+   \deg(T_{k-2}(x)) \}
 	\end{split}
 	\end{displaymath}
  Ma per ipotesi induttiva: $\deg(T_{k-1}(x)) = k-1 > k-2 = \deg(T_{k-2}(x))$,
@@ -807,7 +807,7 @@ Dimostro per punti:
   \paragraph{Proof} Prova per induzione su $k$.
   \begin{description}
   \item[Base] per $k = 1$ si ha per la definizione dei polinomi di
-  \emph{Chebishev}, $T_{1}(x) = x$, quindi $cp(x) = 1 = 2^{1-1} = 1$,  la base
+  \emph{Chebyshev}, $T_{1}(x) = x$, quindi $cp(x) = 1 = 2^{1-1} = 1$,  la base
   \`e vera.
   \item[Induction HP] suppongo vero che $cp(T_{k-1}(x)) = 2^{k-2}$,
   $cp(T_{k-2}(x)) = 2^{k-3}$
@@ -888,9 +888,15 @@ Dimostro per punti:
   \\ Questo implica studiare $\cos k\theta = 0$, vero quando $k\theta =
   \frac{\pi}{2} + j\pi$ con $j \geq 0$
   \\ Devo porre vincoli sul precedente indice $j$, in quanto sto supponendo che
-  $\theta \in [0, \pi]$. Quindi $j = 0,\ldots,k-1$. Questa scelta di valori
-  implica che si avranno $k$ zeri ed inoltre tutti distinti tra loro in quanto
-  non si effettua pi\`u di un ``giro'' sulla circonferenza unitaria.
+  $\theta \in [0, \pi]$. Quindi $j = 0,\ldots,k-1$ (se si includesse anche $k$
+  allora, per $j = k$, si avrebbe $\theta =\frac{\pi}{2k} + \frac{k}{k}\pi =
+  \frac{\pi}{2k} + \pi$ e si avrebbe $\theta \in [0, \frac{\pi}{2k} + \pi]
+  \supset [0,\pi]$ contro le nostre richieste). 
+  
+  Questa scelta di valori implica che si
+  avranno $k$ zeri ed inoltre tutti distinti tra loro in quanto non si effettua 
+  pi\`u di un ``giro'' sulla circonferenza unitaria (in quanto il termine 
+  $\frac{j}{k}\pi < \pi$ per ogni $j$ scelto precedentemente).
   
   \item i valori estremi di $T_{k}(x)$ sono assunti nei punti
   \begin{displaymath}
@@ -922,7 +928,7 @@ Dimostro per punti:
   \paragraph{Proof} Supponiamo per assurdo che esiste un polinomio monico $p
   \in \prod_{k}$ di grado $k$ tale che $||p|| = \delta < 2^{1-k} =
   ||\hat{T}_{k}||$ (per il punto precedente vale $||T_{k}|| = 1$), in parole:
-  abbiamo supposto che $\hat{T}_{k}(x)$ non sia di minima norma. 
+  abbiamo supposto (per assurdo) che $\hat{T}_{k}(x)$ non sia di minima norma. 
   \\ Considero la funzione $(\hat{T}_{k} - p)(x)$. Osserviamo che
   $\deg((\hat{T}_{k} - p)(x)) = k-1$, in quanto sia $\hat{T}_{k}(x)$ che $p$
   sono monici, annullando cos\`i il coefficiente del termine principale.
@@ -939,18 +945,62 @@ Dimostro per punti:
   $(\hat{T}_{k} - p)$ si annuller\`a $k$ volte. 
   \\ Ma affinch\`e questo sia vero, e da come abbiamo trovato, $(\hat{T}_{k} -
   p) \in \prod_{k-1}$, deve valere che $(\hat{T}_{k} - p) = \vect{0}$, ovvero 
-  sia il vettore identicamente nullo.\\ 
-  Ma questo contraddice le ipotesi che sia
+  sia il vettore identicamente nullo, in quanto $\vect{0}$ si annulla in $k$
+  radici, qualunque sia $k$: questo contraddice le ipotesi che sia 
   $\hat{T}_{k}, p \in \prod_{k}$.
+  
+  Se $(\hat{T}_{k} - p)$ non fosse un polinomio
+  identicamente nullo allora avrebbe almeno \emph{un} e al massimo $k-2$ termini
+  della forma $a_{u}x^{u}$: $u < k$ perch\`e il grado massimo \`e al massimo
+  $k-1$, e avrebbe al massimo $k-2$ termini contenenti $x_{u}$, escludendo il
+  termine $a_{y}x^{0} = a_{y}$. Ma dato che abbiamo al massimo $k-2$ termini non
+  \`e possibile annullare il polinomio in $k$ radici.
 \end{itemize}
+\end{proof}
+
+\begin{oss}[Obiettivo delle ascisse di Chebyshev]
+Posso riassumere in poche righe l'obiettivo delle ascisse di \emph{Chebyshev}.
+Sappiamo che l'errore di approssimazione viene maggiorato seguento questa
+disuguaglianza:
+\begin{displaymath}
+||e|| \leq \alpha (1 + \Lambda_{n}) w(f:h)
+\end{displaymath}
+in cui dobbiamo controllare l'andamento dei due termini $\Lambda_{n}, w(f:h)$:
+\begin{itemize}
+  \item per quanto riguarda $\Lambda_{n}$ sappiamo che ha due comportamenti:
+  $$\Lambda_{n} \sim \frac{2^{n+1}}{\log{n}}$$ dove il numeratore diverge pi\`u
+  velocemente del denominatore, facendo divergere $\Lambda_{n}$.
+  
+  \`E anche vero che $$\Lambda_{n} \sim \log{n} \Rightarrow \lim_{n \rightarrow
+  \infty}{\frac{\log{n}}{n}} = 0$$ e questo \`e il caso a cui vogliamo
+  ricondurci, scegliendo in modo opportuno le ascisse di interpolazione 
+  (escludendo il modo equidistante, in quanto abbiamo gi\`a visto che implica 
+  la divergenza).
+  
+  Usando le ascisse di \emph{Chebyshev} si ottiene $\Lambda_{n} \sim
+  \frac{2}{\pi}\log{n}$, dello stesso ordine di quello che vorremmo avere.
+  \item se si assume la $f \in \mathcal{C}^{(n+1)}$ sufficientemente regolare
+  allora $$||e|| \leq \frac{||f^{(n+1)}||}{(n+1)!}||w_{n+1}||$$
+  L'unico termine
+  che pu\`o dare problemi \`e $||w_{n+1}||$, in quanto dipendente dalle ascisse
+  di interpolazione (con ascisse equidistanti produce una successione
+  $\{\Lambda_{n}\}$ che diverge in modo esponenziale). Per questo motivo si
+  vogliono scegliere delle ascisse che minimizzano $||w_{n+1}||$.
+  
+  Usando le ascisse di \emph{Chebyshev} si ottiene $w_{n+1}(x) =
+  \hat{T}_{n+1}(x)$ e $||w_{n+1}|| = 2^{-n}$, minimizzata in quanto
+  $$||w_{n+1}|| = ||\hat{T}_{k}|| = \min_{\gamma \in \prod_{k}'}{||\gamma||} =
+  2^{1-(n+1)} = 2^{-n}$$
+  con $\hat{T}_{k}$ il polinomio con minima norma come enunciato nel
+  \emph{teorema 4.9} del libro di testo.
+\end{itemize}
+\end{oss}
 
 \begin{exercise}[4.14]
 Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
 Per utilizzare lo schema di \emph{Chebyshev} in un intervallo generico $[a,b]$
 si utilizzano le riscritture date nell'esercizio \ref{exercise:exercise412}. 
-
-\end{proof}
 
 \begin{exercise}[4.15]
 Per il testo dell'esercizio consultare il libro di testo.
