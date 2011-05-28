@@ -929,25 +929,36 @@ Dimostro per punti:
   \in \prod_{k}$ di grado $k$ tale che $||p|| = \delta < 2^{1-k} =
   ||\hat{T}_{k}||$ (per il punto precedente vale $||T_{k}|| = 1$), in parole:
   abbiamo supposto (per assurdo) che $\hat{T}_{k}(x)$ non sia di minima norma. 
-  \\ Considero la funzione $(\hat{T}_{k} - p)(x)$. Osserviamo che
+  \\ Considero un nuovo polinomio $(\hat{T}_{k} - p)(x)$. Osserviamo che
   $\deg((\hat{T}_{k} - p)(x)) = k-1$, in quanto sia $\hat{T}_{k}(x)$ che $p$
-  sono monici, annullando cos\`i il coefficiente del termine principale.
-  \\Considero i punti in cui $T_{k}(x)$ assume valori massimo, ovvero per 
+  sono monici e dello stesso grado $k$, annullando cos\`i il coefficiente del
+  termine principale. \\
+  Considero i punti in cui $T_{k}(x)$ assume valori massimo, ovvero per 
   $\xi_{i}^{(k)} = \cos\left(\frac{i}{k}\pi\right)$, con $i = 0,\ldots,k$.
   \\Studiando il segno dei polinomi $T_{k}$ e $\hat{T}_{k}$ nei punti
   $\xi_{i}^{(k)}$ si ottiene: $$sign(\hat{T}_{k}(\xi_{i}^{(k)})) =
   sign(T_{k}(\xi_{i}^{(k)})) = (-1)^{i} \quad i = 0,\ldots,k$$
   Ma anche $(\hat{T}_{k} - p)(\xi_{i}^{(k)}) = (-1)^{i}$, ovvero $(\hat{T}_{k} -
-  p)$ cambia di segno $k$ volte. 
-  \\ Ogni radice di $(\hat{T}_{k} - p)$ \`e tra due
-  ascisse $\xi_{i}^{(k)}, \xi_{j}^{(k)}$ distinte. 
-  \\ Dato che abbiamo $k+1$ ascisse $\xi_{i}^{(k)}$, allora la funzione
-  $(\hat{T}_{k} - p)$ si annuller\`a $k$ volte. 
-  \\ Ma affinch\`e questo sia vero, e da come abbiamo trovato, $(\hat{T}_{k} -
-  p) \in \prod_{k-1}$, deve valere che $(\hat{T}_{k} - p) = \vect{0}$, ovvero 
-  sia il vettore identicamente nullo, in quanto $\vect{0}$ si annulla in $k$
-  radici, qualunque sia $k$: questo contraddice le ipotesi che sia 
-  $\hat{T}_{k}, p \in \prod_{k}$.
+  p)$ cambia di segno $k + 1$ volte. Dato che $(\hat{T}_{k} - p)$ \`e una
+  funzione continua, allora considerando due ascisse di massimo
+  consecutive $\xi_{i}^{(k)} = (-1)^{i} \not = (-1)^{i+1} = \xi_{i+1}^{(k)}$,
+  ovvero il polinomio assume segno discorde tra due ascisse consecutive di
+  massimo. Per questo motivo per ogni coppia di ascisse di massimo distinte 
+  esister\`a una radice (quindi si avranno $k$ radici). \\ 
+  Dato che abbiamo $k+1$ ascisse $\xi_{i}^{(k)}$, allora la funzione 
+  $(\hat{T}_{k} - p)$ si annuller\`a $k$ volte. \\ Ma affinch\`e questo sia 
+  vero, e da come abbiamo trovato, $(\hat{T}_{k} - p) \in \prod_{k-1}$,  deve
+  valere che $(\hat{T}_{k} - p) = \vect{0}$, ovvero sia il vettore 
+  identicamente nullo. Ma per costruzione abbiamo che $\hat{T}_{k}(x) =
+  2xT_{k-1}(x)-T_{k-2}(x)$, considerando il caso base $k = 0$ implica
+  $\hat{T}_{0}(x) = 1$. Ma per ipotesi di assurdo deve valere $||p|| <
+  ||\hat{T}_{0}|| = 1$, quindi il polinomio  $(\hat{T}_{k} - p)$ non pu\`o
+  essere il polinomio nullo e questo produce una contraddizione.
+  Abbiamo quindi dimostrato che $\hat{T}_{k}$ \`e di minima norma.
+  % la seguente conclusione di prova non mi convince molto:
+  %, in quanto $\vect{0}$ si annulla in $k$ radici,  qualunque
+  %sia $k$: questo contraddice le ipotesi che sia $\hat{T}_{k}, p \in
+  %\prod_{k}$.
   
   Se $(\hat{T}_{k} - p)$ non fosse un polinomio
   identicamente nullo allora avrebbe almeno \emph{un} e al massimo $k-2$ termini

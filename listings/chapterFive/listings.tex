@@ -38,6 +38,19 @@ met\`a dei termini della derivata quarta.
 
 \subsection{Adaptive Simpson}
 \label{subsec:adaptiveSimpson}
+Per la seguente implementazione ho cercato di riusare il valore della variabile
+\textsf{i1} per il calcolo della variabile \textsf{i2}. Spiego qua il motivo
+per cui si deve sottrarre il termine \textsf{-(2/12)*h*fmiddle}:
+\begin{displaymath}
+\begin{split}
+i_{1} &= \frac{1}{6}h(f_{a} + f_{b}) + \frac{4}{6}hf_{middle}\\
+i_{2} &= \frac{4}{12}h(f_{left} + f_{right}) + \frac{2}{12}hf_{middle} +
+\frac{1}{12}h(f_{a} + f_{b}) = \frac{4}{12}h(f_{left} + f_{right}) +
+\frac{1}{2}i_{1} + c\\
+\text{con } & \frac{2}{12}hf_{middle} + \frac{1}{12}h(f_{a} + f_{b}) =
+\frac{1}{2}i_{1} + c \Leftrightarrow c = -\frac{2}{12}hf_{middle}
+\end{split}
+\end{displaymath}
 \lstinputlisting{listings/chapterFive/adaptiveSimpson.m}
 
 \subsection{Solver exercise 5.10 on textbook}
