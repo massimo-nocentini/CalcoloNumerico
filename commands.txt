@@ -1,4 +1,6 @@
 # programma da eseguire all'interno della cartella "Elaborato"
+# Ho aggiunto il Makefile quindi non dovrebbe essere piu' necessario
+# utilizzare questo comando
 > latex Elaborato.tex && dvips -t a4 -Ppdf Elaborato.dvi 
 
 # programma Octave per stampare l'output su di un file
