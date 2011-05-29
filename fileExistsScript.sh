@@ -1,13 +1,20 @@
 #!/bin/bash
 
-dest="${PWD}/listings/chapterFive/QRmethod.m"
+dest="${PWD}/listings/chapterFour/normalizationEngine.m"
+if [ ! -f "$dest" ] 
+then 
+  src="${PWD}/listings/chapterThree/normalizationEngine.m"
+  ln -s "$src" "$dest"
+fi
+
+dest="${PWD}/listings/chapterFour/QRmethod.m"
 if [ ! -f "$dest" ] 
 then 
   src="${PWD}/listings/chapterThree/QRmethod.m"
   ln -s "$src" "$dest"
 fi
 
-dest="${PWD}/listings/chapterFive/triangularSystemSolver.m"
+dest="${PWD}/listings/chapterFour/triangularSystemSolver.m"
 if [ ! -f "$dest" ] 
 then 
   src="${PWD}/listings/chapterThree/triangularSystemSolver.m"
