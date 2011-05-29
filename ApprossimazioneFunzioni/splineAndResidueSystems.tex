@@ -235,9 +235,39 @@ Per il testo dell'esercizio consultare il libro di testo.
 \end{exercise}
 Per il codice che implementa l'esercizio vedere \nameref{subsec:exercise421}.
 Il seguente plot renderizza in rosso la curva originale, mentre in blu la retta
-ai minimi quadrati con equazione $f(x) = 9.9081x + 5.4596$:
+ai minimi quadrati con equazione $f(x) = 9.9081x + 5.4596$, con la variabile
+\textsf{gamma = 2.5}:
 \begin{center}   
 \input{ApprossimazioneFunzioni/exercise421-PlotOutput.tex}
+\end{center}
+
+\begin{exercise}[4.22] 
+Per il testo dell'esercizio consultare il libro di testo. 
+\end{exercise}
+Trasformo il modello esponenziale in una polinomiale con i seguenti passaggi
+(l'idea \`e quella di passare ai logaritmi entrambi i membri e successivamente
+fare dei cambi di variabile):
+\begin{displaymath}
+\begin{split}
+y &= \alpha e^{-\lambda t}\\
+\log{y} &= \log{\alpha e^{-\lambda t}}\\
+\log{y} &= \log{\alpha} +  \log{e^{-\lambda t}}\\
+\log{y} &= \log{\alpha} -\lambda t\\
+\rho &= \beta -\lambda t \quad \text{ se } \rho = \log{y} \wedge \beta =
+\log{\alpha}
+\end{split}
+\end{displaymath}
+Adesso che ci siamo riportati ad un modello polinomiale posso implementare
+il codice \nameref{subsec:exercise422}. 
+
+La retta ai minimi quadrati per il modello polinomiale ricavata ha equazione
+$\rho = -0.095896x + 1.609602$, pertanto passando agli esponenti entrambi i
+membri (per annullare il cambio di variabile $y \rightarrow \rho$) si ottiene il
+seguente plot, dove gli obiettivi in rosso rappresentano i dati sperimentali, 
+mentre la curva in blu \`e la curva ai minimi quadrati che possiamo ottenere  su
+una partizione generata con \textsf{linspace(-1, 11, 200)'}:
+\begin{center}
+\input{ApprossimazioneFunzioni/exercise422-PlotOutput.tex}
 \end{center}
 
 

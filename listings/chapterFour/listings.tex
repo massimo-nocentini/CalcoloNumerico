@@ -101,3 +101,15 @@ Il costo di questo algoritmo \`e $3n \in O(n)$.
 \subsection{Exercise 4.21 on textbook}
 \label{subsec:exercise421}
 \lstinputlisting{listings/chapterFour/exercise421solver.m}
+
+\subsection{Exercise 4.22 on textbook}
+\label{subsec:exercise422}
+\`E interessante in questo esercizio la potenza di riportarci ad un modello
+polinomiale, in quanto questo ci permette di costruire la matrice $A$ di tipo
+\emph{VanderMonde} e la sua costruzione (molto semplice come si vede nel
+codice) dipende solo dalle ascisse relative ai valori sperimentali. Questo ci
+permette quindi da astrarre dalla forma (e dai segni) del modello polinomiale,
+in quanto di questo ci interessa solo un eventuale cambio di variabile
+eventualmente sulle ascisse (non il caso di questo esercizio) sia sulle ordinate
+(come nel caso di questo esercizio):
+\lstinputlisting{listings/chapterFour/exercise422solver.m}
