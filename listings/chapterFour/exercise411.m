@@ -1,7 +1,9 @@
 function [] = exercise411()
 
-    [domain, rungeErrorVector, bernsteinErrorVector] = exercises411415CommonFactor(...
-        [1:1:100], "linspace");
+    [domain, rungeErrorVector, bernsteinErrorVector] = ...
+      # the factored code allow me to specify the function that produce the
+      # array of interpolation ascisse
+      exercises411415CommonFactor([1:1:100], "linspace");
 
     # plot the errors
     semilogy(domain, rungeErrorVector, "b", ...

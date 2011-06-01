@@ -3,6 +3,12 @@ function [] = splineStress()
     intervalMagnitude = 5;
     # build the partition vector and its associated vector of interpolation conditions
     interpolationAscisseVector = linspace(-intervalMagnitude, intervalMagnitude, 12)';
+    
+    # the following lines allow to add points in which we want to study the 
+    # non-regularity of the function
+    interpolationAscisseVector = [interpolationAscisseVector; -1; 0; 1];
+    interpolationAscisseVector = sort(interpolationAscisseVector);
+    
     functionValuesVector = realFunction(interpolationAscisseVector, intervalMagnitude);
 
     # build the domain vectors containing the range where we want to interpolate
@@ -40,6 +46,11 @@ function [] = splineStress()
         domain, abs(realFunctionValuesVector - notAKnotInterpolatedValues), "r");
     grid;
     print 'splineStress-errorsPlotOutput.tex' '-dTex' '-S800, 600';
+    
+    plot(domain, abs(realFunctionValuesVector - normalInterpolatedValues), "b", ...
+        domain, abs(realFunctionValuesVector - notAKnotInterpolatedValues), "r");
+    grid;
+    print 'splineStress-linearErrorsPlotOutput.tex' '-dTex' '-S800, 600';
 
 
 endfunction

@@ -7,8 +7,8 @@ Stiamo costruendo un polinomietto della spline cubica relativo all'$i$-esimo
 intervallo $[x_{i-1}, x_{i}]$. Il sistema che otteniamo utilizzando lo schema 
 \emph{naturale} usa queste condizioni:
 \begin{displaymath}
-	\forall i \in \{1,\ldots, n-1\}[m_{i} = s_{3}^{(3)}(x_{i})] \wedge m_{0} = 0
-	\wedge m_{n} = 0
+	\big (\forall i \in \{1,\ldots, n-1\}[m_{i} = s_{3}^{(2)}(x_{i})]\big ) \wedge
+	m_{0} = 0 \wedge m_{n} = 0
 \end{displaymath}
 Rappresentiamo in forma matriciale il modello che ci permette di ricavare le
 incognite $m_{k}$:
@@ -190,6 +190,18 @@ interpolazioni con spline cubiche, in rosso riferito allo
 schema \emph{not-a-knot}, mentre in blu riferito allo schema \emph{naturale}.
 \begin{center}   
 \input{ApprossimazioneFunzioni/splineStress-errorsPlotOutput.tex}
+\end{center}
+Nei precedenti plot non venivano inseriti i punti $-1, 0, 1$ di irregolarit\`a,
+nei seguenti invece li includo:
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-interpolationAddingPointsPlotOutput.tex}
+\end{center}
+Nel seguente plot rappresento il modello degli errori (in assi lineari) delle
+precedenti interpolazioni con spline cubiche, in rosso riferito allo
+schema \emph{not-a-knot}, mentre in blu riferito allo schema \emph{naturale},
+con la richiesta di interpolazione nei punti di irregolarit\`a.
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-linearErrorsPlotOutput.tex}
 \end{center}
 
 \begin{exercise}[4.19] 

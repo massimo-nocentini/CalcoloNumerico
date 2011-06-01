@@ -1,7 +1,9 @@
 function [chebyshevAscisse] = exercise415()
 
-    [domain, rungeErrorVector, bernsteinErrorVector] = exercises411415CommonFactor(...
-        [2:2:100], "buildChebyshevAscisse");
+    [domain, rungeErrorVector, bernsteinErrorVector] = ...
+      # the factored code allow me to specify the function that produce the
+      # array of interpolation ascisse
+      exercises411415CommonFactor([2:2:100], "buildChebyshevAscisse");
     
     # plot the errors
     semilogy(domain, rungeErrorVector, "b", ...
