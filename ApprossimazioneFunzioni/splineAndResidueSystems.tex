@@ -164,6 +164,141 @@ vale l'asserto.
 	\end{itemize}
 \end{proof}
 
+\begin{exercise}[4.17] 
+Per il testo dell'esercizio consultare il libro di testo.
+\end{exercise} 
+Riporto la forma matriciale \emph{(4.59)} del libro di testo che ci permette di
+ricavare le incognite $m_{k}$:
+\begin{displaymath}
+\begin{split}
+	\begin{bmatrix}
+		1 & 0\\
+		\varphi_{1} & 2- \varphi_{1} & \xi_{1} - \varphi_{1} \\
+		&\varphi_{2} & 2 & \xi_{2} \\
+		&	&	\ddots &	\ddots & \ddots \\
+		&	&	&	\varphi_{n-2} & 2 & \xi_{n-2} \\
+		&	&	&	& \varphi_{n-1} - \xi_{n-1} & 2 - \xi_{n-1}& \xi_{n-1}\\
+		&	&	&	& 	&	0	& 1
+	\end{bmatrix} %times
+	\begin{bmatrix}
+		m_{0} + m_{1} + m_{2} \\
+		m_{1} \\
+		m_{2} \\
+		\vdots \\
+		m_{n-2} \\
+		m_{n-1} \\
+		m_{n-2} + m_{n-1} + m_{n}
+	\end{bmatrix} = 6 %times
+	\begin{bmatrix}
+		f[x_{0}, x_{1}, x_{2}] \\
+		f[x_{0}, x_{1}, x_{2}] \\
+		f[x_{1}, x_{2}, x_{3}] \\
+		\vdots \\
+		f[x_{n-3}, x_{n-2}, x_{n-1}] \\
+		f[x_{n-2}, x_{n-1}, x_{n}] \\
+		f[x_{n-2}, x_{n-1}, x_{n}]
+	\end{bmatrix} 
+\end{split}
+\end{displaymath}
+Posso fattorizzare la matrice dei coefficienti in questo modo:
+\begin{displaymath}
+\begin{split}
+	L = \begin{bmatrix}
+		1 \\
+		l_{2} & 1  \\
+			&	\ddots &	\ddots \\
+			&	&	l_{n} & 1 \\
+			&	&	& l_{n+1} & 1
+	\end{bmatrix} \quad \quad
+	U = \begin{bmatrix}
+		u_{1} & 0\\
+		 & u_{2} & \xi_{1} \\
+		 & & u_{3} & \xi_{2} \\
+		&	&	&	\ddots	& \ddots \\
+		&	&	&	& u_{n}	& \xi_{n-1} \\
+		&	&	&	&  & u_{n+1}
+	\end{bmatrix} 
+\end{split}
+\end{displaymath}
+Adesso considero il prodotto dell'$i$-esima riga di $L$ con la $(i-1)$-esima
+colonna di $U$:
+\begin{displaymath}
+\begin{split}
+	\begin{matrix}
+		& & i-2 & i-1 & i  \\
+		& & \downarrow & \downarrow & \downarrow \\
+		\vect{e}_{i}^{T}L = [& & 0 & l_{i} & 1 & & &]
+	\end{matrix}
+	\quad & \quad
+	U \vect{e}_{i-1} = \begin{bmatrix}
+		\\ 
+		\\ 
+		\xi_{i-3} \\ 
+		u_{i-1} \\
+		0 \\
+	 	\\
+	 	\\
+	\end{bmatrix} 
+	\begin{matrix}
+		\\ 
+		\\ 
+		\leftarrow i-2 \\ 
+		\leftarrow i-1 \\
+		\leftarrow i \\
+	 	\\
+	 	\\
+	\end{matrix} \\
+	(\vect{e}_{i}^{T}L )(U \vect{e}_{i-1}) &= l_{i} u_{i-1}
+\end{split}
+\end{displaymath}
+Ma dato che la matrice dei coefficienti \`e diagonale dominante, allora \`e
+fattorizzabile $LU$, quindi deve valere:
+\begin{displaymath}
+	(\vect{e}_{i}^{T} A \vect{e}_{i-1}) = \varphi_{i-1} = l_{i} u_{i-1}
+\end{displaymath}
+Adesso considero il prodotto dell'$i$-esima riga di $L$ con la $i$-esima
+colonna di $U$:
+\begin{displaymath}
+\begin{split}
+	\begin{matrix}
+		& & i-1 & i  \\
+		& & \downarrow & \downarrow \\
+		\vect{e}_{i}^{T}L = [& & l_{i} & 1 & & &]
+	\end{matrix}
+	\quad & \quad
+	U \vect{e}_{i} = \begin{bmatrix}
+		\\ 
+		\\ 
+		\xi_{i-1} \\ 
+		u_{i} \\
+	 	\\
+	 	\\
+	\end{bmatrix} 
+	\begin{matrix}
+		\\ 
+		\\  
+		\leftarrow i-1 \\
+		\leftarrow i \\
+	 	\\
+	 	\\
+	\end{matrix} \\
+	(\vect{e}_{i}^{T}L )(U \vect{e}_{i}) &= l_{i} \xi_{i-1} + u_{i} 
+\end{split}
+\end{displaymath}
+Usando ancora la propriet\`a di diagonale dominanza deve valere:
+\begin{displaymath}
+	(\vect{e}_{i}^{T} A \vect{e}_{i}) = 2 = l_{i} \xi_{i-1} + u_{i}
+\end{displaymath}
+prestando attenzione per la prima, seconda, penultima e ultima riga.
+Una volta calcolati $m_{i}, i \in {1, \ldots, n-1}$ sar\`a possibile calcolare
+anche $m_{0}, m_{n}$ risolvendo rispettivamente:
+\begin{displaymath}
+\begin{split}
+m_{0} + m_{1} + m_{2} &= 6f[x_{0}, x_{1}, x_{2}]\\
+m_{n-2} + m_{n-1} + m_{n} &= 6f[x_{n-2}, x_{n-1}, x_{n}]
+\end{split}
+\end{displaymath}
+
 \begin{exercise} 
 Provare ad interpolare la seguente funzione, in una partizione composta da 12
 ascisse di interpolazione:
