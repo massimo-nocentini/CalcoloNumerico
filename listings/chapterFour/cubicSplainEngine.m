@@ -1,33 +1,37 @@
 function [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
     upperBiadiagonalMatrix, diffDiviseVector, mis, interpolatedValues] = ...
-        cubicSplainEngine(interpolationAscisseVector, functionValuesVector, ...
-        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, domain)
+      cubicSplainEngine(interpolationAscisseVector, functionValuesVector, ...
+        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, ...
+        diffDiviseStrategyName, domain)
     
-    # build the vectors    
+    # build the vectors - check passed
     [hVector, varPhiVector, xiVector] = ...
         hVarphiXiVectorsBuilder(interpolationAscisseVector);
 
     # build the matrix to factor, this costruction process depend on the parameter
-    # splainSchemeMatrixToFactorStrategyName
+    # splainSchemeMatrixToFactorStrategyName - check passed
     matrixToFactor = feval(splainSchemeMatrixToFactorStrategyName, varPhiVector, xiVector);
 
-    # factor the matrix
-    [lVector, uVector] = tridiagonaleLUFactor(matrixToFactor);
+    # factor the matrix - works only with natural scheme - check half passed
+    #[lVector, uVector] = tridiagonaleLUFactor(matrixToFactor);
 
-    # build the diagonal vector and build the lower trian. matrix
-    lowerDiagonalVector = ones(length(lVector), 1);
-    lowerBiadiagonalMatrix = triangularBidiagonalMatrixBuilder(...
-        lowerDiagonalVector, lVector, 'internal_LowerBidiagonalMatrix');
+    # build the diagonal vector and build the lower trian. matrix - check passed
+    #lowerDiagonalVector = ones(length(lVector), 1);
+    #lowerBiadiagonalMatrix = triangularBidiagonalMatrixBuilder(...
+    #    lowerDiagonalVector, lVector, 'internal_LowerBidiagonalMatrix');
 
-    # build the upper trian. matrix
-    upperBiadiagonalMatrix = triangularBidiagonalMatrixBuilder(...
-        uVector, xiVector, 'internal_UpperBidiagonalMatrix');
+    # build the upper trian. matrix - check passed
+    #upperBiadiagonalMatrix = triangularBidiagonalMatrixBuilder(...
+    #    uVector, xiVector, 'internal_UpperBidiagonalMatrix');
 
-    # build the differenze divise vector and solve the system
-    diffDiviseVector = internal_BuildThreeDifferenzeDiviseVector(...
+    # build the differenze divise vector and solve the system - check passed
+    diffDiviseVector = feval(diffDiviseStrategyName, ...
         interpolationAscisseVector, functionValuesVector);
-    mis = triangularSystemSolver(upperBiadiagonalMatrix, ...
-        triangularSystemSolver(lowerBiadiagonalMatrix, diffDiviseVector, ...
+        
+    [L, U, p, unknowns] = PALUmethod (matrixToFactor, diffDiviseVector);
+        
+    mis = triangularSystemSolver(U, ...
+        triangularSystemSolver(L, diffDiviseVector, ...
         "lowerSolveEngine"), "upperSolveEngine");
 
     # manage the results
@@ -58,7 +62,7 @@ function [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMat
 
 endfunction
 
-function [diffDiviseVector] = internal_BuildThreeDifferenzeDiviseVector(...
+function [diffDiviseVector] = internal_naturalBuildThreeDifferenzeDiviseVector(...
     interpolationAscisseVector, functionValuesVector)
     
     # compute the dimension of the returning vector
@@ -83,7 +87,20 @@ function [diffDiviseVector] = internal_BuildThreeDifferenzeDiviseVector(...
             ) / ...
             (interpolationAscisseVector(i+2) - interpolationAscisseVector(i+0));
     end
+    diffDiviseVector = 6*diffDiviseVector;
+  #diffDiviseVector
+  #error('check the divided differences')
 
+endfunction
+
+function [diffDiviseVector] = internal_notAKnotBuildThreeDifferenzeDiviseVector(...
+    interpolationAscisseVector, functionValuesVector)
+    
+    [diffDiviseVector] = internal_naturalBuildThreeDifferenzeDiviseVector(...
+      interpolationAscisseVector, functionValuesVector);
+      
+    diffDiviseVector = [0; diffDiviseVector; 0];
+      
 endfunction
 
 function [value] = internal_BuildDiffDivisaBetweenTwoAscisse(xi, fi, xi_1, fi_1)
@@ -93,20 +110,28 @@ end
 function [matrix] = normalSplainScheme_BuildMatrixToFactor(...
     varPhiVector, xiVector)
     
-    dimension = length(varPhiVector) + 1;
+    dimension = length(varPhiVector);
     matrix = zeros(dimension);
 
-    for i = 1:dimension # or length(xiVector) is the same
+    for i = 1:dimension
+        
+        # on the left (column) of the diagonal item
+        if (i-1) > 0
+          matrix(i, i-1) = varPhiVector(i);
+        end
+
+        # diagonal item, always fixed to 2    
         matrix(i, i) = 2;
 
-        # the following check is necessary to protect the access on the position
-        # i on the two vectors xiVector and varPhiVector.
-        if(i < dimension)
-            matrix(i, i+1) = xiVector(i);
-            matrix(i+1, i) = varPhiVector(i);
+        # on the right (column) of the diagonal item
+        if (i+1) < (dimension + 1)
+          matrix(i, i+1) = xiVector(i);
         end
+
     end
 
+#    matrix
+#    error('check the matrix')
 endfunction
 
 function [mis] = normalSplainScheme_BuildMisVector(vector, diffDivise)
@@ -114,55 +139,60 @@ function [mis] = normalSplainScheme_BuildMisVector(vector, diffDivise)
     # We have to add two conditions to the n-1 already present
     mis = zeros(length(vector) + 2, 1);
 
-    for i = 1:length(vector)
-        mis(i+1) = vector(i);
+    for i = 2:(length(mis)-1)
+        mis(i) = vector(i-1);
     end
-
+#vector
+#mis
+#  error('check the mis')
 endfunction
 
 function [matrix] = notAKnotSplainScheme_BuildMatrixToFactor(...
     varPhiVector, xiVector)
     
-    dimension = length(varPhiVector) + 1;
+    dimension = length(varPhiVector) + 2;
     matrix = zeros(dimension);
 
-    for i = 2:(dimension-1) # or length(xiVector) is the same
-        matrix(i, i) = varPhiVector(i);
+    # now we complete the setup according to (4.59) of textbook
+    # setting the first row
+    matrix(1,1) = xiVector(1);
+    matrix(1,2) = -1;
+    matrix(1,3) = varPhiVector(1);
 
-        # the following check is necessary to protect the access on the position
-        # i on the two vectors xiVector and varPhiVector.
-        if(i < dimension -1)
-            matrix(i, i+1) = 2;
-            matrix(i, i+2) = xiVector(i);
-        end
+    # we stop at dimension-2 for allow a post completion of the matrix on the
+    # last two rows, starting from the third row, because the first two rows
+    # are managed outside the loop
+    for i = 2:(dimension - 1)
+        # inside this loop we are free to check the index boundaries
+        # because we are modifying a submatrix that doesn't share both the first
+        # row and the first column.
+        
+        # on the left (column) of the diagonal item
+        matrix(i, i-1) = varPhiVector(i-1);
+        
+        # diagonal item, always fixed to 2    
+        matrix(i, i) = 2;
+
+        # on the right (column) of the diagonal item
+        matrix(i, i+1) = xiVector(i-1);
+        
     end
 
-    # setting the first row
-    matrix(1,1) = varPhiVector(1);
-    matrix(1,2) = 2 - varPhiVector(1);
-    matrix(1,3) = xiVector(1) - varPhiVector(1);
+    varXiVectorLength = length(varPhiVector);
 
     # setting the last row
-    matrix(dimension, dimension - 2)  = varPhiVector(length(varPhiVector)) - ...
-        xiVector(length(xiVector));
-    matrix(dimension, dimension - 1)  = 2 - xiVector(length(xiVector));
-    matrix(dimension, dimension) = xiVector(length(xiVector));
-
+    matrix(dimension, dimension - 2) = xiVector(varXiVectorLength);
+    matrix(dimension, dimension - 1) = -1;
+    matrix(dimension, dimension) = varPhiVector(varXiVectorLength);
+    
+ #   matrix
+ #   error('check the matrix')
 endfunction
 
 function [mis] = notAKnotSplainScheme_BuildMisVector(vector, diffDivise)
 
-    # We have to add two conditions to the n-1 already present
-    mis = zeros(length(vector) + 2, 1);
-
-    for i = 1:length(vector)
-        mis(i+1) = vector(i);
-    end
-
-    # now we have to set the first and the last element
-    mis(1) = diffDivise(1) - mis(2) - mis(3);
-    mis(length(mis)) = diffDivise(length(diffDivise)) - ...
-        mis(length(mis)-1) - mis(length(mis)-2);
+    mis = vector;
+    
 endfunction
 
 function [value] = internal_RiComputer(index, mis, interpolationAscisseVector, ...

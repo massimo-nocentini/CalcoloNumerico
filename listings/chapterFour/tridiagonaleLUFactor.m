@@ -9,11 +9,15 @@ function [lVector, uVector] = tridiagonaleLUFactor(matrix)
 
     # initializing the firsts' elements
     uVector(1) = 2;
-    lVector(dimension) = 0; # Does this assignment is right?
+    lVector(1) = 0; # Does this assignment is right?
 
     for i=2:dimension
-        lVector(i-1) = matrix(i, i-1) / uVector(i-1);
+        lVector(i) = matrix(i, i-1) / uVector(i-1);
         uVector(i) = 2- (matrix(i-1, i) * lVector(i));
     end
+
+    #lVector
+    #uVector
+    #error('check the vectors')
 
 endfunction

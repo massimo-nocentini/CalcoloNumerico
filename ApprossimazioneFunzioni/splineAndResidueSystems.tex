@@ -179,30 +179,51 @@ f(x) = \left \lbrace
 \end{exercise}
 Per l'implementazione del codice di questo esercizio vedere il codice
 \nameref{subsec:splineStress}.
-Nel seguente plot rappresento due interpolazioni con spline cubiche, in verde
-utilizzando lo schema \emph{not-a-knot}, mentre in rosso lo schema
-\emph{naturale}.
+Il motore \emph{Octave} crea la seguente spline (in rosso):
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-octaveInterpolationPlotOutput.tex}
+\end{center}
+
+Nel seguente plot invece riporto il mio output, rappresentando due
+interpolazioni con spline cubiche, in verde utilizzando lo schema
+\emph{not-a-knot}, mentre in rosso lo schema \emph{naturale}.
 \begin{center}   
 \input{ApprossimazioneFunzioni/splineStress-interpolationPlotOutput.tex}
 \end{center}
 Nel seguente plot rappresento il modello degli errori delle precedenti
 interpolazioni con spline cubiche, in rosso riferito allo
-schema \emph{not-a-knot}, mentre in blu riferito allo schema \emph{naturale}.
-\begin{center}   
-\input{ApprossimazioneFunzioni/splineStress-errorsPlotOutput.tex}
-\end{center}
-Nei precedenti plot non venivano inseriti i punti $-1, 0, 1$ di irregolarit\`a,
-nei seguenti invece li includo:
-\begin{center}   
-\input{ApprossimazioneFunzioni/splineStress-interpolationAddingPointsPlotOutput.tex}
-\end{center}
-Nel seguente plot rappresento il modello degli errori (in assi lineari) delle
-precedenti interpolazioni con spline cubiche, in rosso riferito allo
-schema \emph{not-a-knot}, mentre in blu riferito allo schema \emph{naturale},
-con la richiesta di interpolazione nei punti di irregolarit\`a.
-\begin{center}   
+schema \emph{not-a-knot}, mentre in blu riferito allo schema \emph{naturale}:
+% \begin{center}   
+% \input{ApprossimazioneFunzioni/splineStress-errorsPlotOutput.tex}
+% \end{center}
+\begin{center}
 \input{ApprossimazioneFunzioni/splineStress-linearErrorsPlotOutput.tex}
 \end{center}
+
+Riporto uno zoom per ognuno dei punti di irregolarit\`a:
+In $x = -1$:
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-zoomMinusOneInterpolationPlotOutput.tex}
+\end{center}
+In $x = 0$:
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-zoomZeroInterpolationPlotOutput.tex}
+\end{center}
+In $x = 1$:
+\begin{center}   
+\input{ApprossimazioneFunzioni/splineStress-zoomOneInterpolationPlotOutput.tex}
+\end{center}
+
+% Nei precedenti plot non venivano inseriti i punti $-1, 0, 1$ di irregolarit\`a,
+% nei seguenti invece li includo:
+% \begin{center}   
+% \input{ApprossimazioneFunzioni/splineStress-interpolationAddingPointsPlotOutput.tex}
+% \end{center}
+% Nel seguente plot rappresento il modello degli errori (in assi lineari) delle
+% precedenti interpolazioni con spline cubiche, in rosso riferito allo
+% schema \emph{not-a-knot}, mentre in blu riferito allo schema \emph{naturale},
+% con la richiesta di interpolazione nei punti di irregolarit\`a.
+
 
 \begin{exercise}[4.19] 
 Per il testo dell'esercizio consultare il libro di testo. 

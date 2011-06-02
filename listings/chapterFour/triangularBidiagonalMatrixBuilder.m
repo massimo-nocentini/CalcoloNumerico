@@ -17,11 +17,16 @@ function [matrix] = internal_LowerBidiagonalMatrix(diagonalVector, bidiagonalVec
     for i = 1:dimension
         matrix(i, i) = diagonalVector(i);
 
-        if i < dimension
-            # for the upper type we set the bottom-adiacent item
-            matrix(i+1, i) = bidiagonalVector(i);
+        if (i-1) > 0
+            # set the left hand side (column) of the diagonal item
+            matrix(i, i-1) = bidiagonalVector(i);
         end
     end
+    
+    #diagonalVector
+    #bidiagonalVector
+    #matrix
+    #error('check the vectors')
 endfunction
 
 function [matrix] = internal_UpperBidiagonalMatrix(diagonalVector, bidiagonalVector)
@@ -34,9 +39,13 @@ function [matrix] = internal_UpperBidiagonalMatrix(diagonalVector, bidiagonalVec
     for i = 1:dimension
         matrix(i, i) = diagonalVector(i);
 
-        if i < dimension
+        if (i+1) < (dimension + 1)
             # for the upper type we set the right-adiacent item
             matrix(i, i + 1) = bidiagonalVector(i);
         end
     end
+    #diagonalVector
+    #bidiagonalVector
+    #matrix
+    #error('check the vectors')
 endfunction

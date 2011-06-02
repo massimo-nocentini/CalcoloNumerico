@@ -7,6 +7,13 @@ then
   ln -s "$src" "$dest"
 fi
 
+dest="${PWD}/listings/chapterFour/PALUmethod.m"
+if [ ! -f "$dest" ] 
+then 
+  src="${PWD}/listings/chapterThree/PALUmethod.m"
+  ln -s "$src" "$dest"
+fi
+
 dest="${PWD}/listings/chapterFour/QRmethod.m"
 if [ ! -f "$dest" ] 
 then 
