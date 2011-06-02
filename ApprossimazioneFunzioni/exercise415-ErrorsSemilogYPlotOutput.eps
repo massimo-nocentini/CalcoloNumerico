@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
 %%Title: exercise415-ErrorsSemilogYPlotOutput.tex
-%%Creator: gnuplot 4.2 patchlevel 6 
-%%CreationDate: Mon Mar 28 18:16:48 2011
+%%Creator: gnuplot 4.4 patchlevel 2
+%%CreationDate: Thu Jun  2 08:20:37 2011
 %%DocumentFonts: 
 %%BoundingBox: 50 50 434 338
 %%EndComments
@@ -9,8 +9,8 @@
 /gnudict 256 dict def
 gnudict begin
 %
-% The following 6 true/false flags may be edited by hand if required
-% The unit line width may also be changed
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
 %
 /Color true def
 /Blacktext true def
@@ -19,9 +19,11 @@ gnudict begin
 /Landscape false def
 /Level1 false def
 /Rounded false def
+/ClipToBoundingBox false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
+/Gamma 1.0 def
 %
 /vshift -73 def
 /dl1 {
@@ -44,16 +46,24 @@ systemdict /pdfmark known not {
 SDict begin [
   /Title (exercise415-ErrorsSemilogYPlotOutput.tex)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 4.2 patchlevel 6 )
-  /Author (Massimo Nocentini,,,)
+  /Creator (gnuplot 4.4 patchlevel 2)
+  /Author (massimo)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Mon Mar 28 18:16:48 2011)
+  /CreationDate (Thu Jun  2 08:20:37 2011)
   /DOCINFO pdfmark
 end
 } ifelse
+/doclip {
+  ClipToBoundingBox {
+    newpath 50 50 moveto 434 50 lineto 434 338 lineto 50 338 lineto closepath
+    clip
+  } if
+} def
 %
-% Gnuplot Prolog Version 4.2 (August 2006)
+% Gnuplot Prolog Version 4.4 (August 2010)
+%
+%/SuppressPDFMark true def
 %
 /M {moveto} bind def
 /L {lineto} bind def
@@ -63,6 +73,8 @@ end
 /Z {closepath} bind def
 /C {setrgbcolor} bind def
 /f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
@@ -83,6 +95,7 @@ end
 	dup 1 lt {pop 1} if 10 mul /udl exch def} def
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
 % Default Line colors
 /LCw {1 1 1} def
 /LCb {0 0 0} def
@@ -424,6 +437,7 @@ end
 %%EndProlog
 gnudict begin
 gsave
+doclip
 50 50 translate
 0.050 0.050 scale
 0 setgray
@@ -489,7 +503,7 @@ gsave % colour palette begin
   0 0 ] def
 /pm3dround {maxcolors 0 gt {dup 1 ge
 	{pop 1} {maxcolors mul floor maxcolors 1 sub div} ifelse} if} def
-/pm3dGamma 1.0 1.5 div def
+/pm3dGamma 1.0 1.5 Gamma mul div def
 /ColorSpace (RGB) def
 Color InterpolatedColor or { % COLOUR vs. GRAY map
   InterpolatedColor { %% Interpolation vs. RGB-Formula
@@ -508,15 +522,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-998 634 M
-5952 0 V
+998 633 M
+5951 0 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-998 634 M
+998 633 M
 88 0 V
-5864 0 R
+5863 0 R
 -88 0 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -525,15 +539,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-998 1573 M
-5952 0 V
+998 1806 M
+5951 0 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-998 1573 M
+998 1806 M
 88 0 V
-5864 0 R
+5863 0 R
 -88 0 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -542,15 +556,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-998 2511 M
-5952 0 V
+998 2980 M
+5951 0 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-998 2511 M
+998 2980 M
 88 0 V
-5864 0 R
+5863 0 R
 -88 0 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -559,32 +573,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-998 3450 M
-5952 0 V
+998 4154 M
+5951 0 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-998 3450 M
+998 4154 M
 88 0 V
-5864 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 0.500 UL
-LTb
-LCb setrgbcolor
-1.000 UL
-LTa
-LCa setrgbcolor
-998 4388 M
-5952 0 V
-stroke
-0.500 UL
-LTb
-LCb setrgbcolor
-998 4388 M
-88 0 V
-5864 0 R
+5863 0 R
 -88 0 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -594,14 +591,14 @@ LCb setrgbcolor
 LTa
 LCa setrgbcolor
 998 5327 M
-5952 0 V
+5951 0 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
 998 5327 M
 88 0 V
-5864 0 R
+5863 0 R
 -88 0 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -610,15 +607,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-998 634 M
-0 4693 V
+998 633 M
+0 4694 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-998 634 M
+998 633 M
 0 88 V
-0 4605 R
+0 4606 R
 0 -88 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -627,15 +624,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-2188 634 M
-0 4693 V
+2188 633 M
+0 4694 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-2188 634 M
+2188 633 M
 0 88 V
-0 4605 R
+0 4606 R
 0 -88 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -644,15 +641,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-3379 634 M
-0 4693 V
+3378 633 M
+0 4694 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-3379 634 M
+3378 633 M
 0 88 V
-0 4605 R
+0 4606 R
 0 -88 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -661,15 +658,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-4569 634 M
-0 4693 V
+4569 633 M
+0 4694 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-4569 634 M
+4569 633 M
 0 88 V
-0 4605 R
+0 4606 R
 0 -88 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -678,15 +675,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-5760 634 M
-0 4693 V
+5759 633 M
+0 4694 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-5760 634 M
+5759 633 M
 0 88 V
-0 4605 R
+0 4606 R
 0 -88 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -695,15 +692,15 @@ LCb setrgbcolor
 1.000 UL
 LTa
 LCa setrgbcolor
-6950 634 M
-0 4693 V
+6949 633 M
+0 4694 V
 stroke
 0.500 UL
 LTb
 LCb setrgbcolor
-6950 634 M
+6949 633 M
 0 88 V
-0 4605 R
+0 4606 R
 0 -88 V
 stroke
 0.00 0.00 0.00 C 0.500 UL
@@ -712,10 +709,10 @@ LCb setrgbcolor
 0.500 UL
 LTb
 998 5327 N
-998 634 L
-5952 0 V
-0 4693 V
--5952 0 V
+998 633 L
+5951 0 V
+0 4694 V
+-5951 0 V
 Z stroke
 1.000 UP
 0.500 UL
@@ -723,209 +720,59 @@ LTb
 0.500 UL
 LT0
 LC0 setrgbcolor
-0.00 0.00 1.00 C 1058 1573 M
-59 58 V
-60 -58 V
-59 98 V
-60 -98 V
-59 115 V
-60 -115 V
-59 122 V
-60 -122 V
-59 121 V
-60 -121 V
-59 115 V
-60 -115 V
-59 106 V
-60 -106 V
-59 94 V
-60 -94 V
-59 80 V
-60 -80 V
-59 64 V
-60 -64 V
-59 46 V
-60 -46 V
-59 28 V
-60 -28 V
-60 8 V
-59 -8 V
-60 -13 V
-59 13 V
-60 -35 V
-59 35 V
-60 -57 V
-59 57 V
-60 -80 V
-59 80 V
-60 -103 V
-59 103 V
-60 -127 V
-59 127 V
-60 -151 V
-59 151 V
-60 -176 V
-59 176 V
-60 -201 V
-59 201 V
-60 -226 V
-59 226 V
-60 -252 V
-59 252 V
-60 -283 V
-60 283 V
-59 -295 V
-60 295 V
-59 -326 V
-60 326 V
-59 -172 V
-60 172 V
-59 -221 V
-60 221 V
-59 -89 V
-60 89 V
-59 66 V
-60 -66 V
-59 27 V
-60 -27 V
-59 261 V
-60 -261 V
-59 448 V
-60 -448 V
-59 484 V
-60 -484 V
-59 687 V
-60 -687 V
-59 726 V
-60 -726 V
-60 709 V
-59 -709 V
-60 866 V
-59 -866 V
-60 1044 V
-59 -1044 V
-60 1186 V
-59 -1186 V
-60 1218 V
-59 -1218 V
-60 1474 V
-59 -1474 V
-60 1593 V
-59 -1593 V
-60 1732 V
-59 -1732 V
-60 2015 V
-59 -2015 V
-60 2012 V
-59 -2012 V
-60 2494 V
-59 -2494 V
-60 2437 V
-59 -2437 V
-60 2763 V
+0.00 0.00 1.00 C 1236 5181 M
+238 -153 V
+238 -179 V
+238 -191 V
+238 -197 V
+238 -200 V
+238 -202 V
+238 -202 V
+238 -202 V
+238 -203 V
+238 -202 V
+238 -203 V
+239 -202 V
+238 -203 V
+238 -202 V
+238 -203 V
+238 -202 V
+238 -203 V
+238 -203 V
+238 -202 V
+238 -203 V
+238 -202 V
+238 190 V
+238 943 V
+238 250 V
 stroke
 LT1
 LC1 setrgbcolor
-1.00 0.00 0.00 C 1058 1573 M
-59 56 V
-60 -56 V
-59 28 V
-60 -28 V
-59 24 V
-60 -24 V
-59 22 V
-60 -22 V
-59 21 V
-60 -21 V
-59 20 V
-60 -20 V
-59 20 V
-60 -20 V
-59 20 V
-60 -20 V
-59 20 V
-60 -20 V
-59 20 V
-60 -20 V
-59 20 V
-60 -20 V
-59 20 V
-60 -20 V
-60 20 V
-59 -20 V
-60 20 V
-59 -20 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 19 V
-59 -19 V
-60 24 V
-60 -24 V
-59 12 V
-60 -12 V
-59 7 V
-60 -7 V
-59 25 V
-60 -25 V
-59 239 V
-60 -239 V
-59 393 V
-60 -393 V
-59 546 V
-60 -546 V
-59 440 V
-60 -440 V
-59 731 V
-60 -731 V
-59 775 V
-60 -775 V
-59 972 V
-60 -972 V
-59 1173 V
-60 -1173 V
-59 1224 V
-60 -1224 V
-60 1393 V
-59 -1393 V
-60 1567 V
-59 -1567 V
-60 1615 V
-59 -1615 V
-60 1831 V
-59 -1831 V
-60 1829 V
-59 -1829 V
-60 2048 V
-59 -2048 V
-60 2077 V
-59 -2077 V
-60 2201 V
-59 -2201 V
-60 2252 V
-59 -2252 V
-60 2409 V
-59 -2409 V
-60 2655 V
-59 -2655 V
-60 2791 V
-59 -2791 V
-60 2966 V
+1.00 0.00 0.00 C 1236 4659 M
+238 -230 V
+238 -156 V
+238 -118 V
+238 -96 V
+238 -81 V
+238 -70 V
+238 -61 V
+238 -55 V
+238 -50 V
+238 -46 V
+238 -42 V
+239 -39 V
+238 -36 V
+238 -34 V
+238 -32 V
+238 -30 V
+238 -29 V
+238 -27 V
+238 -26 V
+238 -25 V
+238 -24 V
+238 -22 V
+238 -22 V
+238 898 V
 1.000 UP
 stroke
 LTb

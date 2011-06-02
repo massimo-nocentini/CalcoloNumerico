@@ -603,6 +603,12 @@ Per il testo dell'esercizio consultare il libro di testo.
 Per il codice che implementa le richieste dell'esercizio e produce i seguenti
 risultati vedere \nameref{subsec:exercise411}.
 
+Riporto il plot delle approssimazioni ottenute considerando il massimo numero di
+ascisse a disposizione:
+\begin{center}  
+\input{ApprossimazioneFunzioni/exercise411-currentApproximationPlotOutput.tex}
+\end{center}
+
 Nei seguenti grafici in
 \emph{rosso} \`e rappresentata la funzione di \emph{Bernstein}, mentre in \emph{blu} \`e rappresentata la funzione di
 \emph{Runge}. Questo primo grafico ha l'asse delle ordinate costruito in
@@ -1038,7 +1044,19 @@ Per il testo dell'esercizio consultare il libro di testo.
 Per il codice che implementa le richieste dell'esercizio e produce i seguenti
 risultati vedere \nameref{subsec:exercise415}.
 
-Nei seguenti grafici in
+Riporto il plot delle approssimazioni ottenute considerando il massimo numero di
+ascisse a disposizione:
+\begin{center}  
+\input{ApprossimazioneFunzioni/exercise415-currentApproximationPlotOutput.tex}
+\end{center}
+Rispetto al plot dell'esercizio \nameref{exercise:exercise411} utilizzando le
+ascisse di Chebyshev siamo riusciti ad avere una rappresentazione delle due
+curve, cosa che nell'altro plot non \`e possibile apprezzare. In particolare
+vicino agli estremi dei rispettivi intervalli (dove si commette il maggior
+errore) con questa scelta di ascisse \`e invece possibile avere una buona
+approssimazione.
+
+Nei seguenti grafici riporto il plot degli errori: in
 \emph{rosso} \`e rappresentata la funzione di \emph{Bernstein}, mentre in 
 \emph{blu} \`e rappresentata la funzione di \emph{Runge}. Questo primo grafico
 ha l'asse delle ordinate costruito in modo logaritmico:
@@ -1054,7 +1072,7 @@ Per entrambi i grafici, le valutazioni della rispettiva funzione, del polinomio
 interpolante e la costruzione del polinomio interpolante sono riferiti ai
 rispettivi dominii $[a,b]$ definiti nel testo dell'esercizio. 
 
-Possiamo notare che l'errore diverge all'aumentare del numero di ascisse di
-interpolazione, ma con un rate molto pi\`u basso rispetto ai plot riportati
-nell'esercizio \ref{exercise:exercise411}. Inoltre si vede che la curva
-che modella l'errore effettua un effetto ``jo-jo'' al crescere di $n$.
+Possiamo notare che gli errori iniziare a crescere dal momento che si utilizza
+un numero di ascisse superiore a 20, questo include anche errori di
+rappresentazione (soprattutto nel calcolo delle differenze divise vi possono
+essere fenomi di cancellazione numerica).
