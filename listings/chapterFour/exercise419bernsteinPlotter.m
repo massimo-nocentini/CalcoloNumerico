@@ -1,6 +1,6 @@
 function [] = exercise419bernsteinPlotter()
 
-    evaluateSetDimension = 300;
+    evaluateSetDimension = 10^(4);
 
     [bernsteinEvaluationInterval, bernsteinEvaluatedFunctionValuesVector,...
     bernsteinInterpolationAscisseVector, bernsteinFunctionValuesVector,...

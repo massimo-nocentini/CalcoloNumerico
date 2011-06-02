@@ -29,21 +29,25 @@ function [bernsteinEvaluationInterval, bernsteinEvaluatedFunctionValuesVector,..
     # setting up the parameter to drive the cubic splain engine.
     splainSchemeMatrixToFactorStrategyName = 'normalSplainScheme_BuildMatrixToFactor';
     splainSchemeMisStrategyName = 'normalSplainScheme_BuildMisVector';
+    diffDiviseStrategyName = 'internal_naturalBuildThreeDifferenzeDiviseVector';
 
     # go!
     [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
         upperBiadiagonalMatrix, diffDiviseVector, mis, bernsteinNormalInterpolatedValues] = ...
         cubicSplainEngine(bernsteinInterpolationAscisseVector, bernsteinFunctionValuesVector, ...
-        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, bernsteinEvaluationInterval);
+        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName,...
+        diffDiviseStrategyName, bernsteinEvaluationInterval);
 
     # setting up the parameter to drive the cubic splain engine.
     splainSchemeMatrixToFactorStrategyName = 'notAKnotSplainScheme_BuildMatrixToFactor';
     splainSchemeMisStrategyName = 'notAKnotSplainScheme_BuildMisVector';
+    diffDiviseStrategyName = 'internal_notAKnotBuildThreeDifferenzeDiviseVector';
 
     [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMatrix, ...
         upperBiadiagonalMatrix, diffDiviseVector, mis, bernsteinNotAKnotInterpolatedValues] = ...
         cubicSplainEngine(bernsteinInterpolationAscisseVector, bernsteinFunctionValuesVector, ...
-        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, bernsteinEvaluationInterval);
+        splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName,...
+        diffDiviseStrategyName, bernsteinEvaluationInterval);
     
 endfunction
 

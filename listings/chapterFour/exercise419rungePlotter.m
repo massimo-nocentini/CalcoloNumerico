@@ -1,6 +1,6 @@
 function [] = exercise419rungePlotter()
 
-    evaluateSetDimension = 300;
+    evaluateSetDimension = 10^(4);
 
     [rungeEvaluationInterval, rungeEvaluatedFunctionValuesVector,...
     rungeInterpolationAscisseVector, rungeFunctionValuesVector,...

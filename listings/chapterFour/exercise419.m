@@ -1,6 +1,6 @@
 function [] = exercise419()
 
-    evaluateSetDimension = 300;
+    evaluateSetDimension = 10^(4);
 
     # build the error vector
     errorVector = [10:10:50];
