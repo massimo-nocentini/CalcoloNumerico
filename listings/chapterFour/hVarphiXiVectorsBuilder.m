@@ -1,10 +1,6 @@
 function [hVector, varPhiVector, xiVector] = ...
     hVarphiXiVectorsBuilder(interpolationAscisseVector)
 
-    #interpolationAscisseVector
-#    interpolationAscisseVector_length = length(interpolationAscisseVector)
-    
-
     # compute the dimension of the new vectors to be built
     dimension = length(interpolationAscisseVector) - 1;
 
@@ -29,10 +25,5 @@ function [hVector, varPhiVector, xiVector] = ...
         varPhiVector(i) = hVector(i) / (hVector(i) + hVector(i+1));
         xiVector(i) = hVector(i+1) / (hVector(i) + hVector(i+1));
     end
-    
-    #varPhiVector + xiVector
-    #length(varPhiVector + xiVector)
-    
-    #error('check the ascisse')
 
 endfunction

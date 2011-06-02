@@ -16,8 +16,4 @@ function [lVector, uVector] = tridiagonaleLUFactor(matrix)
         uVector(i) = 2- (matrix(i-1, i) * lVector(i));
     end
 
-    #lVector
-    #uVector
-    #error('check the vectors')
-
 endfunction

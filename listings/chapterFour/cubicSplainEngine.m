@@ -4,18 +4,18 @@ function [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMat
         splainSchemeMatrixToFactorStrategyName, splainSchemeMisStrategyName, ...
         diffDiviseStrategyName, domain)
     
-    # build the vectors - check passed
+    # build the vectors
     [hVector, varPhiVector, xiVector] = ...
         hVarphiXiVectorsBuilder(interpolationAscisseVector);
 
     # build the matrix to factor, this costruction process depend on the parameter
-    # splainSchemeMatrixToFactorStrategyName - check passed
+    # splainSchemeMatrixToFactorStrategyName
     matrixToFactor = feval(splainSchemeMatrixToFactorStrategyName, varPhiVector, xiVector);
 
-    # factor the matrix - works only with natural scheme - check half passed
+    # factor the matrix - works only with natural scheme
     #[lVector, uVector] = tridiagonaleLUFactor(matrixToFactor);
 
-    # build the diagonal vector and build the lower trian. matrix - check passed
+    # build the diagonal vector and build the lower trian. matrix
     #lowerDiagonalVector = ones(length(lVector), 1);
     #lowerBiadiagonalMatrix = triangularBidiagonalMatrixBuilder(...
     #    lowerDiagonalVector, lVector, 'internal_LowerBidiagonalMatrix');
@@ -24,33 +24,50 @@ function [hVector, varPhiVector, xiVector, lVector, uVector, lowerBiadiagonalMat
     #upperBiadiagonalMatrix = triangularBidiagonalMatrixBuilder(...
     #    uVector, xiVector, 'internal_UpperBidiagonalMatrix');
 
-    # build the differenze divise vector and solve the system - check passed
+    # build the differenze divise vector and solve the system
+    # invoking polymorphically the strategy to build the differenze divise vector
     diffDiviseVector = feval(diffDiviseStrategyName, ...
         interpolationAscisseVector, functionValuesVector);
         
+    # factor LU - todo: use a more efficient factorization like above
     [L, U, p, unknowns] = PALUmethod (matrixToFactor, diffDiviseVector);
         
+    # solve the system and find the mis
     mis = triangularSystemSolver(U, ...
         triangularSystemSolver(L, diffDiviseVector, ...
         "lowerSolveEngine"), "upperSolveEngine");
 
-    # manage the results
+    # manage the results, adjusting the mis vector
     mis = feval(splainSchemeMisStrategyName, mis, diffDiviseVector);
 
     # initialization of the interpolated values vactor
     interpolatedValues = zeros(length(domain), 1);
 
+    # caching the values of qi and ri, initialized with a dummy row
+    chaceMatrix = [-1 -1];
+    for index = 2:length(interpolationAscisseVector)
+            
+      ri = internal_RiComputer(index, mis, interpolationAscisseVector, ...
+          functionValuesVector, hVector);
+
+      qi = internal_QiComputer(index, mis, interpolationAscisseVector, ...
+          functionValuesVector, hVector);
+
+      chaceMatrix = [chaceMatrix; ri qi];            
+    end
+    
+    # cleaning up the first dummy row
+    chaceMatrix = chaceMatrix(2:rows(chaceMatrix), :);
+    
     for i = 1:length(domain)
         for index = 2:length(interpolationAscisseVector)
             x = domain(i);
             if x >= interpolationAscisseVector(index-1) && ...
                 x <= interpolationAscisseVector(index)
                 
-                ri = internal_RiComputer(index, mis, interpolationAscisseVector, ...
-                    functionValuesVector, hVector);
+                ri = chaceMatrix(index-1, 1);
 
-                qi = internal_QiComputer(index, mis, interpolationAscisseVector, ...
-                    functionValuesVector, hVector);
+                qi = chaceMatrix(index-1, 2);
 
                 interpolatedValues(i) = internal_Eval(x, index, ...
                     interpolationAscisseVector, mis, ri, qi, hVector(index-1));
@@ -88,8 +105,6 @@ function [diffDiviseVector] = internal_naturalBuildThreeDifferenzeDiviseVector(.
             (interpolationAscisseVector(i+2) - interpolationAscisseVector(i+0));
     end
     diffDiviseVector = 6*diffDiviseVector;
-  #diffDiviseVector
-  #error('check the divided differences')
 
 endfunction
 
@@ -99,6 +114,7 @@ function [diffDiviseVector] = internal_notAKnotBuildThreeDifferenzeDiviseVector(
     [diffDiviseVector] = internal_naturalBuildThreeDifferenzeDiviseVector(...
       interpolationAscisseVector, functionValuesVector);
       
+    # adjusting the vector according to linear system on page 99
     diffDiviseVector = [0; diffDiviseVector; 0];
       
 endfunction
@@ -129,9 +145,7 @@ function [matrix] = normalSplainScheme_BuildMatrixToFactor(...
         end
 
     end
-
-#    matrix
-#    error('check the matrix')
+    
 endfunction
 
 function [mis] = normalSplainScheme_BuildMisVector(vector, diffDivise)
@@ -142,9 +156,7 @@ function [mis] = normalSplainScheme_BuildMisVector(vector, diffDivise)
     for i = 2:(length(mis)-1)
         mis(i) = vector(i-1);
     end
-#vector
-#mis
-#  error('check the mis')
+    
 endfunction
 
 function [matrix] = notAKnotSplainScheme_BuildMatrixToFactor(...
@@ -185,12 +197,11 @@ function [matrix] = notAKnotSplainScheme_BuildMatrixToFactor(...
     matrix(dimension, dimension - 1) = -1;
     matrix(dimension, dimension) = varPhiVector(varXiVectorLength);
     
- #   matrix
- #   error('check the matrix')
 endfunction
 
 function [mis] = notAKnotSplainScheme_BuildMisVector(vector, diffDivise)
 
+    # nothign to adjust here, the vector that resolve the system is already okey.
     mis = vector;
     
 endfunction
@@ -218,6 +229,3 @@ function [value] = internal_Eval(ascissa, index, ...
     e = ascissa - interpolationAscisseVector(index-1);
     value = d + (e * qi) + ri;
 endfunction
-
-%da finire:
-%- fare le implementazioni per lo schema 'not-a-knot'

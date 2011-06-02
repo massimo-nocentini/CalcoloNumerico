@@ -22,11 +22,6 @@ function [matrix] = internal_LowerBidiagonalMatrix(diagonalVector, bidiagonalVec
             matrix(i, i-1) = bidiagonalVector(i);
         end
     end
-    
-    #diagonalVector
-    #bidiagonalVector
-    #matrix
-    #error('check the vectors')
 endfunction
 
 function [matrix] = internal_UpperBidiagonalMatrix(diagonalVector, bidiagonalVector)
@@ -44,8 +39,4 @@ function [matrix] = internal_UpperBidiagonalMatrix(diagonalVector, bidiagonalVec
             matrix(i, i + 1) = bidiagonalVector(i);
         end
     end
-    #diagonalVector
-    #bidiagonalVector
-    #matrix
-    #error('check the vectors')
 endfunction
