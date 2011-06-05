@@ -28,7 +28,7 @@ Per far vedere che $\mathcal{M}$ ha un numero finito di elementi posso far \\
 vedere che vale
 $equinumerous(\mathcal{M}, \lbrace 1, \ldots, n\rbrace)$, con $n \in \mathbb{N}$.
 Per la definizione della relazione $equinumerous$ posso costruire una funzione $f$
-\emph{one-to-one} tale che $f: \mathcal{M} \rightarrow \mathbb{N}$.
+\emph{one-to-one, onto} tale che $f: \mathcal{M} \rightarrow \mathbb{N}$.
 
 Considerare la rappresentazione in formato stringa 
 $x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s}$, $\forall x \in \mathcal{M}$.
@@ -39,24 +39,35 @@ ovvero \\$x = \alpha_{0}\alpha_{1}\ldots\alpha_{m}\beta_{1}\ldots\beta_{s} =
 con $\alpha_{0} = \delta_{0}, \ldots, \alpha_{m} = \delta_{m}, \beta_{1} = \delta_{m + 1}, \ldots, 
 \beta_{s} = \delta_{m + s}$.
 
-Adesso posso costruire la funzione:
-\begin{displaymath}
-f(\delta_{0} \ldots \delta_{m + s}) = \sum_{i = 0}^{m + s}{\delta{i} * b^{m + s - i}}
-\end{displaymath}
-In questo modo ho costruito una biezione tra le rappresentazioni ed un sottoinsieme 
-dei numeri naturali. \\\\
-Adesso devo far vedere che $|\mathcal{M}| = n$ con $n \in \mathbb{N}$.
+Questa rappresentazione usa $m+s+1$ simboli, quindi scelta una base $b$ si
+possono avere al massimo $b^{m+s+1}$ configurazioni. Per la definizione di
+$\mathcal{M}$ in cui si aggiunge anche lo zero si nota che con la costruzione
+data in questa prova lo zero \`e gia considerato (considerando la
+rappresentazione con tutti i simboli $\delta_{i}=0$).
 
-Ragiono per assurdo. Suppongo che $\not \exists n \in \mathbb{N}: |\mathcal{M}| = n$.
-Considero la rappresentazione con massimo valore della funzione $f$ costruita in precedenza,
-ovvero sia $x = \delta_{0} \ldots \delta_{m + s} = \underbrace{1 \ldots 1}_{m+s+1}$.
-Per le ipotesi di assurdo, allora posso trovare una rappresentazione $x':f(x') \geq f(x)$.
-Quindi la rappresentazione di $x'$ dovr\`a essere della forma $x' = \delta_{0}' \delta_{0} 
-\ldots \delta_{m + s}$,
-ovvero devo aggiungere un bit $\alpha_{0}'$ affinch\`e possa rappresentare 
-$x' = 1 \underbrace{0 \ldots 0}_{m+s+1}$. Ma \`e impossibile costruire una rappresentazione
-con $m+s+2$ simboli in quanto la dimensione delle rappresentazioni \`e fissata, uguale a $m+s+1$ 
-e questo termina la prova.
+% ************************************************************************
+% la seguente prova non \`e molto corretta in quanto per assurdo si suppone
+% che n non esista, mentre si cerca una configurazione per andare poi a
+% valutarla trovando proprio un n', supposto invece che non esista.
+% ************************************************************************
+% Adesso posso costruire la funzione:
+% \begin{displaymath}
+% f(\delta_{0} \ldots \delta_{m + s}) = \sum_{i = 0}^{m + s}{\delta{i} * b^{m + s - i}}
+% \end{displaymath}
+% In questo modo ho costruito una biezione tra le rappresentazioni ed un sottoinsieme 
+% dei numeri naturali. \\\\
+% Adesso devo far vedere che $|\mathcal{M}| = n$ con $n \in \mathbb{N}$.
+% 
+% Ragiono per assurdo. Suppongo che $\not \exists n \in \mathbb{N}: |\mathcal{M}| = n$.
+% Considero la rappresentazione con massimo valore della funzione $f$ costruita in precedenza,
+% ovvero sia $x = \delta_{0} \ldots \delta_{m + s} = \underbrace{1 \ldots 1}_{m+s+1}$.
+% Per le ipotesi di assurdo, allora posso trovare almeno una rappresentazione
+% $x':f(x') > f(x)$. Quindi la rappresentazione di $x'$ dovr\`a essere della forma $x' = \delta_{0}' \delta_{0} 
+% \ldots \delta_{m + s}$,
+% ovvero devo aggiungere un bit $\alpha_{0}'$ affinch\`e possa rappresentare 
+% $x' = 1 \underbrace{0 \ldots 0}_{m+s+1}$. Ma \`e impossibile costruire una rappresentazione
+% con $m+s+2$ simboli in quanto la dimensione delle rappresentazioni \`e fissata, uguale a $m+s+1$ 
+% e questo termina la prova.
 
 \end{proof}
 
@@ -108,17 +119,14 @@ Ricavo $r_{2}$:
 \end{itemize}
 
 \begin{exercise}
-Dimostrare che vale $|\mathcal{M}| = b^{m+1}(exp_{max} - exp_{min} + 1) + 1$.
+Dimostrare che vale $|\mathcal{M}| = b^{m}(exp_{max} - exp_{min} + 1) + 1$.
 \end{exercise}
 \begin{proof}
-Il fattore $b^{m+1}$ contiene $+1$ nell'esponente in quanto ho $m$ simboli per
-rappresentare una mantissa in valore assoluto, per\`o posso avere sia simboli positivi
-che simboli negativi, quindi devo aggiungere il simbolo del segno $\alpha_{0}$.
 Usando i risultati dell'esercizio precedente posso riscrivere:
 \begin{displaymath}
 \begin{split}
 	exp_{max} = b^{s} - 1 - \nu, \quad exp_{min} = -\nu \\
-	|\mathcal{M}| = b^{m+1}(b^{s} - 1 - \nu + \nu + 1) + 1 = b^{m+s+1} + 1
+	|\mathcal{M}| = b^{m}(b^{s} - 1 - \nu + \nu + 1) + 1 = b^{m+s} + 1
 \end{split}
 \end{displaymath}
 Cerco adesso di dare una spiegazione meno formale, fissando come parametri per
@@ -131,12 +139,13 @@ $$mantisse = \lbrace 1.00, 1.01, 1.10, 1.11 \rbrace$$
 
 Per quanto riguarda i possibili esponenti, ottenuti partendo da $exp_{min}$ sommando
 uno fino a $exp_{max}$ (sommo uno per la definizione dell'esponente per la rappresentazione
-di numeri reali $-\nu + \sum_{i = 1}^{s}{\beta_{i} b^{s - i}}$):
+di numeri reali $\eta = \sum_{i = 1}^{s}{\beta_{i} b^{s - i}} -\nu$):
 $$esponenti = \left \lbrace 2^{-2} = \frac{1}{4}, 2^{-1} = \frac{1}{2},
 		2^{0} = 1, 2^{1} = 2 \right \rbrace$$
 
 Per cui posso rappresentare $|mantisse \times esponenti| = 16$ numeri positivi, 
-a cui vanno aggiunti i $16$ opposti e lo zero, per un totale di $33 = 2^{5} + 1$.
+a cui vanno aggiunti i $16$ opposti e lo zero, per un totale di $33 = 2^{5} + 1
+= 2^{3}(1-(-2)+1)+1=2^{3+2}+1=|\mathcal{M}|$.
 \end{proof}
 
 \begin{exercise}[1.8]
@@ -349,8 +358,9 @@ verr\`a approfondito nelle osservazioni successive.
 Implementare i seguenti programmi:
 \begin{displaymath}
 \begin{split}
-	\left ( \left ( \frac{eps}{2} + 1 \right ) - 1 \right ) \left ( \frac{2}{frac} \right ) \\
-	\left ( \frac{eps}{2}  + \left ( 1 - 1 \right ) \right ) \left ( \frac{2}{frac} \right )
+	\left ( \left ( \frac{eps}{2} + 1 \right ) - 1 \right ) \left ( \frac{2}{eps}
+	\right ) \\ \left ( \frac{eps}{2}  + \left ( 1 - 1 \right ) \right ) \left (
+	\frac{2}{eps} \right )
 \end{split}
 \end{displaymath}
 \end{exercise}
@@ -539,7 +549,7 @@ lo sviluppo di $f$ al primo ordine centrato in $x$:
 	y\varepsilon_{y} & = f'(x)x\varepsilon_{x} + O(\varepsilon_{x}^{2})
 \end{split}
 \end{displaymath}
-Per le ipotesi del problema, usando per la sostituzione quanto detto ad inizio prova, vale:
+Per le ipotesi del problema, usando quanto detto ad inizio prova, vale:
 \begin{displaymath}
 f(x) = x^{\frac{1}{2}} \quad \quad f'(x) = \frac{1}{2}x^{-\frac{1}{2}} 
 = \frac{1}{2\sqrt{x}}
@@ -628,9 +638,10 @@ ans =  1.00000563385549e-12
 Eseguo lo studio sul condizionamento. Per il \emph{Teorema 1.4} il massimo errore
 che posso commettere usando il metodo di arrotondamento \`e $u = \frac{1}{2}b^{1-m}$.
 Lo standard IEEE754 fissa $b = 2, m = 53$, quindi $u = 2^{-53}$. Questo errore
-\`e comune per entrambi in quanto non devo applicare la funzione $fl$ ai due numeri $a, b$,
-quindi $\varepsilon_{max} = \varepsilon_{a} = \varepsilon_{b} = 2^{-53} = 
-1.11022302462516 \times 10^{-16}$.
+\`e comune per entrambi in quanto non devo applicare la funzione $fl$ ai due
+numeri $a, b$ (in quanto sono gi\`a rappresentati in macchina commento il
+massimo errore $u$), quindi $\varepsilon_{max} = \varepsilon_{a} =
+\varepsilon_{b} = 2^{-53} = 1.11022302462516  \times 10^{-16}$.
 
 Per l'equazione 1.23 vale:
 \begin{displaymath}

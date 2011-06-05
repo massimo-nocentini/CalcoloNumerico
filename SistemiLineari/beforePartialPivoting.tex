@@ -559,7 +559,7 @@ A_{i-1} & B \\
 Adesso posso applicare la funzione ad entrambi i membri pi\`u esterni
 dell'uguaglianza, ottengo quindi 
 \begin{displaymath}
-\det(A^{i+1}) = \det(A_{i-1})\det(C) -
+\det(A^{(i+1)}) = \det(A_{i-1})\det(C) -
 0\det(B) = \det(A_{i-1})\det(C)
 \end{displaymath}
 Dato che ho potuto raggiungere il passo $i$-esimo della fattorizzazione, allora
@@ -567,12 +567,12 @@ significa che $a_{k_{j} j} \not = 0$, con $j \in \lbrace 1, \ldots, i-1
 \rbrace$. Osservo che $A_{i-1}$ \`e tringolare inferiore quindi, per l'esercizio 
 \ref{exercise:triangularMatrixDet}, vale $\det(A_{i-1}) = a_{k_{1}1}^{(1)}
 \cdots a_{k_{i-1} i-1}^{(i-1)} \not = 0$. Ma per ipotesi $A$ \`e
-non singolare quindi vale $\det(A^{i+1}) \not = 0$, in quanto sono state $i$
+non singolare quindi vale $\det(A^{(i+1)}) \not = 0$, in quanto sono state $i$
 trasformazioni reversibili (basta considerare le $L^{-1}$), ovvero rendono le
 due matrici equivalenti. Per questo si ha necessariamente che $\det(C) \not =
 0$, ovvero lo colonne della matrice $C$ sono linearmente indipendenti e quindi
 \begin{displaymath}
-a_{k_{i}i}^{i} = \max_{k \geq i}{|a_{ki}^{(i)}|} \not = 0
+a_{k_{i}i}^{(i)} = \max_{k \geq i}{|a_{ki}^{(i)}|} \not = 0
 \end{displaymath}
 in altre parole la colonna $A^{(i+1)}\vect{e}_{i} \not = \vect{0}$.
 \end{proof}

@@ -20,7 +20,8 @@ Unendo le due uguaglianze sopra si ottiene:
 \end{split}
 \end{equation}
 La (\ref{equation:equalsToZeroRequirement}) mi da un vincolo per la ricerca
-della $f$. Posso adesso sfruttare la richiesta di convergenza:
+della $f$ (questo vale per qualsiasi $f$!). Posso adesso sfruttare la richiesta
+di convergenza:
 \begin{equation}
 \begin{split}
 	x &= \sqrt[m]{a} \\
@@ -136,7 +137,7 @@ Posso commentare le implicazioni del teorema:
   metodo di non oscillare tra due punti fissi (soluzioni) e inoltre di non
   creare non determinismo nella scelta della soluzione a cui converge il metodo
   \item se $x_{0} \in I \Rightarrow \phi(x_{i-1}) = x_{i} \in I, \forall i =
-  \{2, 3, \ldots\}$: questo \`e molto importante perch\`e assicura che ogni
+  \{1, 2, 3, \ldots\}$: questo \`e molto importante perch\`e assicura che ogni
   punto generato dal metodo $\phi$ appartiene all'intervallo se il punto di
   innesco $x_{0} \in I$. In questo modo, tornando a ragionare per coppie come
   fatto nei paragrafi precedenti di questa osservazione, se il punto di innesco
@@ -216,8 +217,8 @@ primo ordine, per applicare il metodo due volte nello stesso punto:
 Posso sostituire nella precedente disuguaglianza:
 \begin{displaymath}
  \begin{split}
- 	|\phi(x) - \phi(x) + \phi'(\xi)(y - x)| &< l|x - y| \\
- 	|\phi'(\xi)(y - x)| &< l|x - y| \\
+ 	|\phi(x) - \phi(x) - \phi'(\xi)(y - x)| &< l|x - y| \\
+ 	|\phi'(\xi)(x - y)| &< l|x - y| \\
  	|\phi'(\xi)||x - y| &< l|x - y| \\
  	|\phi'(\xi)| &< l < 1
  \end{split}

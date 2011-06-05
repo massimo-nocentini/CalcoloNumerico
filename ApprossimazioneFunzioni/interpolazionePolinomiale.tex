@@ -701,31 +701,27 @@ Per il testo dell'esercizio consultare il libro di testo.
 \end{proof}
 
 \begin{exercise}
-Sia $f \in \mathcal{C}^{(1)}([a,b])$ una funzione \emph{Lipschtziana}. Allora $L
-= ||f^{(1)}||$.
+Se $f \in \mathcal{C}^{(1)}([a,b])$ allora $f$ \`e \emph{Lipschtziana} con $L =
+||f^{(1)}||$.
 \end{exercise}
 \begin{proof}
-Per ipotesi $f$ \`e \emph{Lipschtziana}, quindi vale $|f(x) - f(y)| \leq
-L|x-y|, \forall L < \infty, \forall x,y \in [a,b]$. Inoltre $f \in
-\mathcal{C}^{(1)}([a,b])$, allora posso scrivere un suo sviluppo di Taylor
-$T_{f_{y}}(x)$ centrato in $y$ del termine $f(x)$, con resto al secondo ordine: 
-$f(x) = T_{f_{y}}(x) = f(y) + f^{(1)}(y)(x-y) +
-\frac{f^{(2)}(\xi)}{2}(x-y)^{2}$, con $\xi \in [x,y]$. Quindi posso utilizzare
-questo sviluppo nella propriet\`a di $f$ di essere  \emph{Lipschtziana}:
+Per ipotesi $f$ \`e continua e derivabile in $[a, b]$, quindi posso applicare il
+teorema di Lagrange ottenendo
 \begin{displaymath}
 \begin{split}
-	|f(x) - f(y)| &\leq L|x-y| \\
-	|T_{f_{y}}(x) - f(y)| &\leq L|x-y| \\
-	|f(y) + f^{(1)}(y)(x-y) - f(y)| &\leq L|x-y| \quad \text{ ho approssimato non
-	considerando il resto} \\
-	|f^{(1)}(y)(x-y)| &\leq L|x-y| \\
-	|f^{(1)}(y)| |x-y| &\leq L|x-y| \\
-	|f^{(1)}(y)| &\leq L \\
-	||f^{(1)}|| = \max_{y \in [a,b]}{|f^{(1)}(y)|} &= L 
+	\frac{f(b) - f(a)}{b-a} &= f'(\xi) \quad \xi \in [a, b] \\
+	\left|\frac{f(b) - f(a)}{b-a}\right| &= |f'(\xi)| \\
+	\frac{|f(b) - f(a)|}{|b-a|} &= |f'(\xi)| \\
+	|f(b) - f(a)| &= |f'(\xi)| \cdot |b-a| \\
+	\max_{x\in[a,b]}\{|f(b) - f(a)|\} &= \max_{x\in[a,b]}\{|f'(\xi)| \cdot
+	|b-a|\}\\
+	\max_{x\in[a,b]}\{|f(b) - f(a)|\} &\leq \max_{x\in[a,b]}\{|f'(\xi)|\}
+	\max_{x\in[a,b]}\{|b-a|\}\\ 
+	|f(b) - f(a)| &\leq \max_{x\in[a,b]}\{|f'(\xi)|\}  |b-a| \\
+	|f(b) - f(a)| &\leq ||f'||\cdot |b-a|
 \end{split}
 \end{displaymath}
-Nell'ultimo passaggio ho cambiato la relazione $\leq$ in $=$, in quanto
-considerando la norma cerco il valore massimo.
+ovvero la definizione di funzione Lipstichziana con $L = ||f'||$.
 \end{proof}
 
 \begin{exercise}
