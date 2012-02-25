@@ -15,6 +15,9 @@
    the pdf output is desired, otherwise `make ps` if the postscript
    output is desired. Of course the previous commands have to be typed
    at the root of the project after cloned the git repository.
+
+   Inside 'compiled-versions' folder there is an already compiled pdf
+   which is the latest version that is at least presentable.
 ** How to use the Octave sources
    In order to use the Octave sources is sufficient to run Octave
    inside the folder the desired source are contained in. To run some
