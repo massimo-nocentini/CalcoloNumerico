@@ -1,13 +1,22 @@
-* ManageFixedNumbers
-** no fixed numbers found
-   should return the root of the tree
+* Calcolo Numerico course notes
+  This document is a container of all the exercises that I did during
+  the course of Numerical Analisys at University of Florence.  The
+  professors that gave the lecture were Luigi Brugnano and Alessandra
+  Sestini.
 
-** fixed number found
-*** cases that interrupt computation
-**** cardinality of fixed numbers exceed the combo dimension
-**** fixed number not in mother
-**** fixed number that is resetted in mother
+  All the content of the document is written using the Italian
+  language, the Octave sources using the English language instead.
 
-*** handling the fixed number have effect on the tree
-**** traverse a death path
-**** traverse an alive path and can add elements
+** Goals
+   This document is a container of some exercises from the book
+   ``Calcolo Numerico'' by Luigi Brugnano and Alessandra Sestini.
+** How to compile the document
+   In order to compile the document is sufficient to run `make pdf` if
+   the pdf output is desired, otherwise `make ps` if the postscript
+   output is desired. Of course the previous commands have to be typed
+   at the root of the project after cloned the git repository.
+** How to use the Octave sources
+   In order to use the Octave sources is sufficient to run Octave
+   inside the folder the desired source are contained in. To run some
+   sources of the fourth chapter is necessary to run `make
+   symbolicLinksChecker`.
