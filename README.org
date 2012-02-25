@@ -18,7 +18,7 @@
    at the root of the project after cloned the git repository.  During
    my develop time I've used the full installation of the tex-live
    suite on a debian-powered system. It can be installed by running
-   'apt-get install texlive-full.
+   'apt-get install texlive-full'.
    
    However, inside 'compiled-versions' folder, there is an already
    compiled pdf which is the latest version that is at least
