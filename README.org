@@ -4,20 +4,26 @@
   professors that gave the lecture were Luigi Brugnano and Alessandra
   Sestini.
 
-  All the content of the document is written using the Italian
-  language, the Octave sources using the English language instead.
+  All the document content is written using the Italian language, the
+  Octave sources using the English language instead.
 
 ** Goals
    This document is a container of some exercises from the book
    ``Calcolo Numerico'' by Luigi Brugnano and Alessandra Sestini.
+   
 ** How to compile the document
    In order to compile the document is sufficient to run `make pdf` if
    the pdf output is desired, otherwise `make ps` if the postscript
    output is desired. Of course the previous commands have to be typed
-   at the root of the project after cloned the git repository.
-
-   Inside 'compiled-versions' folder there is an already compiled pdf
-   which is the latest version that is at least presentable.
+   at the root of the project after cloned the git repository.  During
+   my develop time I've used the full installation of the tex-live
+   suite on a debian-powered system. It can be installed by running
+   'apt-get install texlive-full.
+   
+   However, inside 'compiled-versions' folder, there is an already
+   compiled pdf which is the latest version that is at least
+   presentable.
+   
 ** How to use the Octave sources
    In order to use the Octave sources is sufficient to run Octave
    inside the folder the desired source are contained in. To run some
