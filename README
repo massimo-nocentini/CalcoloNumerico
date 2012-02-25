@@ -1,5 +1,13 @@
-This project contains my work for the course Calcolo Numerico at University of
-Florence. 
+* ManageFixedNumbers
+** no fixed numbers found
+   should return the root of the tree
 
-The content is in Italian, but I tried to write the sources English (comments and 
-programming objects' names).
+** fixed number found
+*** cases that interrupt computation
+**** cardinality of fixed numbers exceed the combo dimension
+**** fixed number not in mother
+**** fixed number that is resetted in mother
+
+*** handling the fixed number have effect on the tree
+**** traverse a death path
+**** traverse an alive path and can add elements
