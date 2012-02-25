@@ -1,9 +1,11 @@
-Elaborato.aux
-Elaborato.dvi
-Elaborato.log
-Elaborato.out
-Elaborato.ps
-Elaborato.toc
+*.aux
+*.dvi
+*.log
+*.out
+*.ps
+*.toc
+*.pdf
+*~
 listings/chapterFour/PALUmethod.m
 listings/chapterFour/QRmethod.m
 listings/chapterFour/normalizationEngine.m
